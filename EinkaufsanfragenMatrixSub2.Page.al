@@ -1,4 +1,3 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0424, AW0006 // ForNAV settings
 Page 50053 "Einkaufsanfragen Matrix Sub2"
 {
     // ***************************************************************
@@ -486,6 +485,7 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
         PurchaseLine.SetRange("Document Type", Rec."Document Type");
         PurchaseLine.SetRange("Document No.", Rec."No.");
         PurchaseLine.SetRange("Line No.", MatrixRecords[ColumnID]."Line No.");
+        PurchaseLine.SetRange(Type, PurchaseLine.Type::Item);
         if PurchaseLine.FindFirst then;
         MATRIX_CellData[ColumnID] := PurchaseLine.Amount;
 
