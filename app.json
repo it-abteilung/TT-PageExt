@@ -2,7 +2,7 @@
   "id": "b58e8bbd-706d-449c-b90c-51dd042d6491",
   "name": "PageExt",
   "publisher": "Dennis Appelt",
-  "version": "21.1.2023050201.2023050201",
+  "version": "22.2.2023090501.2023090501",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -15,23 +15,23 @@
       "id": "3c4d2308-e1f4-4510-b79f-8815e9ad205e",
       "name": "Tables",
       "publisher": "Dennis Appelt",
-      "version": "21.1.2023032701.2023032701"
+      "version": "21.1.2023033101.2023033101"
     },
     {
       "id": "2c6c94a6-b193-448e-a392-d366531e64f4",
       "name": "Codeunits",
       "publisher": "Dennis Appelt",
-      "version": "20.0.2022112301.2022112301"
+      "version": "21.1.2023041801.2023041801"
     },
     {
       "id": "9f945b82-8bd0-480e-ae2a-9756a24ff940",
       "name": "Reports",
       "publisher": "Dennis Appelt",
-      "version": "20.0.2022112001.2022112006"
+      "version": "21.5.2023033101.2023033102"
     }  ],
   "screenshots": [],
   "platform": "20.0.0.0",
-  "application": "20.0.0.0",
+  "application": "22.1.0.0",
   "idRanges": [
     {
       "from": 50000,
@@ -43,7 +43,7 @@
     "allowDownloadingSource": true,
     "includeSourceInSymbolFile": false
   },
-  "runtime": "9.0",
+  "runtime": "11.0",
   "features": ["TranslationFile",
                 "NoImplicitWith"]
 }

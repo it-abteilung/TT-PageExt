@@ -4,10 +4,11 @@ PageExtension 50011 pageextension50011 extends "Item List"
     {
         addafter(Description)
         {
-            field("Description 2"; Rec."Description 2")
-            {
-                ApplicationArea = Basic;
-            }
+            // Feld wurde mit v22.3.5.... in die Base-App aufgenommen 04.08.2023 CN 
+            // field("Description 2"; Rec."Description 2")
+            // {
+            //     ApplicationArea = Basic;
+            // }
             field("Description 3"; Rec."Description 3")
             {
                 ApplicationArea = Basic;

@@ -11,6 +11,27 @@ PageExtension 50006 pageextension50006 extends "Customer List"
                 Caption = 'Datev';
             }
         }
+        addafter("Post Code")
+        {
+            field(Address; Rec.Address)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Adresse';
+            }
+        }
+        addbefore("Post Code")
+        {
+            field(City; Rec.City)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Ort';
+            }
+        }
+        modify("Post Code")
+        {
+            ApplicationArea = Basic;
+            Visible = true;
+        }
     }
     actions
     {

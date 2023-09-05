@@ -3328,6 +3328,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50006 - Control DATEV - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 2890564379 - Control 3168444338 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2901867346">
+          <source>Adresse</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50006 - Control Address - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2890564379 - Control 714791889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2901867346">
+          <source>Ort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50006 - Control City - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 3528260996 - Action 3116722698 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4055858012">
           <source>Segmentierung</source>
           <note from="Developer" annotates="general" priority="2"></note>
