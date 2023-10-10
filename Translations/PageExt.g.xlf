@@ -843,6 +843,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Item Serial Subpage - Control Electricity_g - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1811497270 - Control 4096204597 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Letzte Prüfung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Serial Subpage - Control Last Exam_g - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1811497270 - Control 1384093748 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Hubhöhe</source>
           <note from="Developer" annotates="general" priority="2"></note>

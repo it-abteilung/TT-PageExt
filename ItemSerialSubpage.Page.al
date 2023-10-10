@@ -138,6 +138,16 @@ Page 50091 "Item Serial Subpage"
                         SetValue(80);
                     end;
                 }
+                field("Last Exam_g"; "Last Exam_g")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Letzte Prüfung';
+
+                    trigger OnValidate()
+                    begin
+                        SetValue(85);
+                    end;
+                }
                 field("Next Exam_g"; "Next Exam_g")
                 {
                     ApplicationArea = Basic;
@@ -230,6 +240,7 @@ Page 50091 "Item Serial Subpage"
         Electricity_g := '';
         Voltage_g := '';
         Power_g := '';
+        "Last Exam_g" := 0D;
         "Next Exam_g" := 0D;
         "Construction Year_g" := '';
         ZG_g := 0D;
@@ -257,6 +268,7 @@ Page 50091 "Item Serial Subpage"
             Electricity_g := ArtikelSeriennr_l.Strom;
             Voltage_g := ArtikelSeriennr_l.Spannung;
             Power_g := ArtikelSeriennr_l.Leistung;
+            "Last Exam_g" := ArtikelSeriennr_l."Letzte Prüfung";
             "Next Exam_g" := ArtikelSeriennr_l."Nächste Prüfung";
             "Construction Year_g" := ArtikelSeriennr_l.Baujahr;
             ZG_g := ArtikelSeriennr_l.ZG;
@@ -277,8 +289,8 @@ Page 50091 "Item Serial Subpage"
     var
         WarehouseEntry_g: Record "Warehouse Entry";
         BinCode_g: Code[20];
-        "Serial No. Description_g": Text[50];
-        "Serial No. Description 2_g": Text[50];
+        "Serial No. Description_g": Text[100];
+        "Serial No. Description 2_g": Text[500];
         Manufacturer_g: Text[50];
         "Manufacturer Type_g": Text[50];
         "Manufacturer Serial No._g": Text[50];
@@ -286,6 +298,7 @@ Page 50091 "Item Serial Subpage"
         Electricity_g: Text[50];
         Voltage_g: Text[50];
         Power_g: Text[50];
+        "Last Exam_g": Date;
         "Next Exam_g": Date;
         "Construction Year_g": Text[50];
         ZG_g: Date;
@@ -349,6 +362,8 @@ Page 50091 "Item Serial Subpage"
                     ArtikelSeriennr_l.Spannung := Voltage_g;
                 80:
                     ArtikelSeriennr_l.Leistung := Power_g;
+                85:
+                    ArtikelSeriennr_l."Letzte Prüfung" := "Last Exam_g";
                 90:
                     ArtikelSeriennr_l."Nächste Prüfung" := "Next Exam_g";
                 100:
