@@ -71,6 +71,26 @@ Page 50076 "Werkzeuganforderung Übersicht"
                     WerkzeuganforderungWerkzeug_l.RunModal();
                 end;
             }
+            action(Compare)
+            {
+                ApplicationArea = all;
+                Caption = 'Abgleich: Packstück';
+
+                trigger OnAction()
+                var
+                    PackageTreeListDlg: Page "Package Tree List Dlg";
+                    PackageTreeList: Page "Package Tree List";
+                    JobMap: List of [Dictionary of [Code[20], Integer]];
+                    Bin: Record Bin;
+                begin
+                    if PackageTreeListDlg.RunModal() = Action::OK then begin
+                        PackageTreeList.SetBinFilter(PackageTreeListDlg.GetFromBinCode() + '..' + PackageTreeListDlg.GetToBinCode());
+                        PackageTreeListDlg.GetJobMap(JobMap);
+                        PackageTreeList.SetJobMap(JobMap);
+                        PackageTreeList.Run();
+                    end;
+                end;
+            }
         }
     }
 
