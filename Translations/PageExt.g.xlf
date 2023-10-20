@@ -933,6 +933,51 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Item Seriennr Factbox - Control Serial No. Description 2 - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 1668352836 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job To Order Lookup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1668352836 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the sum of amounts on all the lines in the document. This will include invoice discounts.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Amount - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1668352836 - Control 636392376 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Betrag</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Amount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1668352836 - Control 72213351 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Bestellername field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Bestellername - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1668352836 - Control 2363328873 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Document Type field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Document Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1668352836 - Control 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the purchase document.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1668352836 - Control 2632124822 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date when the order was created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Order Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1668352836 - Control 3472859787 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the vendor sending the invoice.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Pay-to Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1668352836 - Control 3710982960 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date when the posting of the purchase document will be recorded.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Posting Date - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 3594614433 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Projekttyp</source>
           <note from="Developer" annotates="general" priority="2"></note>
