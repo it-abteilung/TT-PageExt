@@ -84,7 +84,10 @@ Page 50076 "Werkzeuganforderung Übersicht"
                     Bin: Record Bin;
                 begin
                     if PackageTreeListDlg.RunModal() = Action::OK then begin
-                        PackageTreeList.SetBinFilter(PackageTreeListDlg.GetFromBinCode() + '..' + PackageTreeListDlg.GetToBinCode());
+                        if PackageTreeListDlg.GetAllowStandardBinCode() then
+                            PackageTreeList.SetBinFilter(PackageTreeListDlg.GetStandardBinCode() + ' | ' + PackageTreeListDlg.GetFromBinCode() + '..' + PackageTreeListDlg.GetToBinCode())
+                        else
+                            PackageTreeList.SetBinFilter(PackageTreeListDlg.GetFromBinCode() + '..' + PackageTreeListDlg.GetToBinCode());
                         PackageTreeListDlg.GetJobMap(JobMap);
                         PackageTreeList.SetJobMap(JobMap);
                         PackageTreeList.Run();

@@ -25,25 +25,31 @@ Page 50043 "Package Tree List Dlg"
                 field(SelectPacketFilter; SelectPacketFilter)
                 {
                     ApplicationArea = all;
-                    Caption = 'Alle Paketstücke';
-                    ToolTip = 'Gibt an, ob alle Paketstücke berücksichtigt werden sollen.';
+                    Caption = 'Alle Packstücke';
+                    ToolTip = 'Gibt an, ob alle Packstücke berücksichtigt werden sollen.';
 
                     trigger OnValidate()
                     begin
                         CalcSelectedBins();
                     end;
                 }
+                field(AllowStandardBinCode; AllowStandardBinCode)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Mit Lagerplatz';
+                    ToolTip = 'Gibt an, ob der Lagerplatz auch in den Vergleich aufgenommen werden soll.';
+                }
             }
 
             group(Bounds)
             {
-                Caption = '';
+                Caption = 'Packstücke';
                 field(FromBinCode; FromBinCode)
                 {
                     ApplicationArea = All;
-                    Caption = 'Von Paketstück';
+                    Caption = 'Von Packstück';
                     Editable = NOT SelectPacketFilter;
-                    ToolTip = 'Gibt das erste Paketstück an.';
+                    ToolTip = 'Gibt das erste Packstück an.';
 
                     trigger OnValidate()
                     var
@@ -51,9 +57,9 @@ Page 50043 "Package Tree List Dlg"
                     begin
                         Bin.SetFilter(Code, '%1 & %2', FromBinCode, StandardBinCode + '-P*');
                         if Bin.IsEmpty() then
-                            Error('Paket $1 für %2 nicht gefunden', FromBinCode, StandardBinCode);
+                            Error('Paket %1 für %2 nicht gefunden', FromBinCode, StandardBinCode);
                         if FromBinCode > ToBinCode then
-                            Error('Das Feld "Von Paketstück" muss kleiner-gleich dem Feld "Bis Paketstück" sein.');
+                            Error('Das Feld "Von Packstück" muss kleiner-gleich dem Feld "Bis Packstück" sein.');
                     end;
 
                     trigger OnLookup(var Text: Text): Boolean
@@ -65,24 +71,24 @@ Page 50043 "Package Tree List Dlg"
                             FromBinCode := Bin.Code;
                         end;
                         if FromBinCode > ToBinCode then
-                            Error('Das Feld "Von Paketstück" muss kleiner-gleich dem Feld "Bis Paketstück" sein.');
+                            Error('Das Feld "Von Packstück" muss kleiner-gleich dem Feld "Bis Packstück" sein.');
                     end;
                 }
                 field(ToBinCode; ToBinCode)
                 {
                     ApplicationArea = all;
-                    Caption = 'Bis Paketstück';
+                    Caption = 'Bis Packstück';
                     Editable = NOT SelectPacketFilter;
-                    ToolTip = 'Gibt das letzte Paketstück an.';
+                    ToolTip = 'Gibt das letzte Packstück an.';
                     trigger OnValidate()
                     var
                         Bin: Record Bin;
                     begin
                         Bin.SetFilter(Code, '%1 & %2', ToBinCode, StandardBinCode + '-P*');
                         if Bin.IsEmpty() then
-                            Error('Paket $1 für %2 nicht gefunden', ToBinCode, StandardBinCode);
+                            Error('Paket %1 für %2 nicht gefunden', ToBinCode, StandardBinCode);
                         if FromBinCode > ToBinCode then
-                            Error('Das Feld "Von Paketstück" muss kleiner-gleich dem Feld "Bis Paketstück" sein.');
+                            Error('Das Feld "Von Packstück" muss kleiner-gleich dem Feld "Bis Packstück" sein.');
                     end;
 
                     trigger OnLookup(var Text: Text): Boolean
@@ -94,14 +100,14 @@ Page 50043 "Package Tree List Dlg"
                             ToBincode := Bin.Code;
                         end;
                         if FromBinCode > ToBinCode then
-                            Error('Das Feld "Von Paketstück" muss kleiner-gleich dem Feld "Bis Paketstück" sein.');
+                            Error('Das Feld "Von Packstück" muss kleiner-gleich dem Feld "Bis Packstück" sein.');
                     end;
                 }
 
             }
             group(Target)
             {
-                Caption = '';
+                Caption = 'Werkzeuganforderungen';
 
                 field(WerkzeugKopfText; WerkzeugKopfText)
                 {
@@ -139,6 +145,7 @@ Page 50043 "Package Tree List Dlg"
         FromBinCode: Code[20];
         ToBinCode: Code[20];
         SelectPacketFilter: Boolean;
+        AllowStandardBinCode: Boolean;
         WerkzeugKopfText: Text;
         JobMap: List of [Dictionary of [Code[20], Integer]];
 
@@ -187,6 +194,11 @@ Page 50043 "Package Tree List Dlg"
     procedure GetSelectPacketFilter(): Boolean;
     begin
         exit(SelectPacketFilter);
+    end;
+
+    procedure GetAllowStandardBinCode(): Boolean
+    begin
+        exit(AllowStandardBinCode);
     end;
 
     procedure SetJobMap(JobMap_L: List of [Dictionary of [Code[20], Integer]])

@@ -46,7 +46,7 @@ page 50044 "Package Tree List"
                 field(Bin; Rec.Bin)
                 {
                     ApplicationArea = All;
-                    Caption = 'Paketstück';
+                    Caption = 'Packstück';
                     HideValue = NOT HideValues;
                 }
                 field("Posting Date"; Rec."Posting Date")
