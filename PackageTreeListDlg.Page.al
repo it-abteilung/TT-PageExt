@@ -1,6 +1,6 @@
 Page 50043 "Package Tree List Dlg"
 {
-    Caption = 'Vergleiche Packstücke mit Werkzeuganforderungen';
+    Caption = 'Vergleiche Pakete mit Werkzeuganforderungen';
     PageType = StandardDialog;
 
     layout
@@ -13,20 +13,24 @@ Page 50043 "Package Tree List Dlg"
                 field(StandardBinCode; StandardBinCode)
                 {
                     ApplicationArea = All;
-                    Caption = 'Lagerplatz';
+                    Caption = 'Projekt-Nr.';
                     TableRelation = Bin.Code;
                     ToolTip = 'Gibt den Lagerplatz an.';
 
                     trigger OnValidate()
+                    var
+                        Dict: Dictionary of [Code[20], Integer];
                     begin
                         CalcSelectedBins();
+                        JobNo := StandardBinCode;
+                        AutoSetJob := true;
                     end;
                 }
                 field(SelectPacketFilter; SelectPacketFilter)
                 {
                     ApplicationArea = all;
-                    Caption = 'Alle Packstücke';
-                    ToolTip = 'Gibt an, ob alle Packstücke berücksichtigt werden sollen.';
+                    Caption = 'Alle Pakete';
+                    ToolTip = 'Gibt an, ob alle Pakete berücksichtigt werden sollen.';
 
                     trigger OnValidate()
                     begin
@@ -36,20 +40,20 @@ Page 50043 "Package Tree List Dlg"
                 field(AllowStandardBinCode; AllowStandardBinCode)
                 {
                     ApplicationArea = All;
-                    Caption = 'Mit Lagerplatz';
+                    Caption = 'Mit Projekt-Lagerplatz';
                     ToolTip = 'Gibt an, ob der Lagerplatz auch in den Vergleich aufgenommen werden soll.';
                 }
             }
 
             group(Bounds)
             {
-                Caption = 'Packstücke';
+                Caption = 'Pakete';
                 field(FromBinCode; FromBinCode)
                 {
                     ApplicationArea = All;
-                    Caption = 'Von Packstück';
+                    Caption = 'Von Paket';
                     Editable = NOT SelectPacketFilter;
-                    ToolTip = 'Gibt das erste Packstück an.';
+                    ToolTip = 'Gibt das erste Paket an.';
 
                     trigger OnValidate()
                     var
@@ -59,7 +63,7 @@ Page 50043 "Package Tree List Dlg"
                         if Bin.IsEmpty() then
                             Error('Paket %1 für %2 nicht gefunden', FromBinCode, StandardBinCode);
                         if FromBinCode > ToBinCode then
-                            Error('Das Feld "Von Packstück" muss kleiner-gleich dem Feld "Bis Packstück" sein.');
+                            Error('Das Feld "Von Paket" muss kleiner-gleich dem Feld "Bis Paket" sein.');
                     end;
 
                     trigger OnLookup(var Text: Text): Boolean
@@ -71,15 +75,15 @@ Page 50043 "Package Tree List Dlg"
                             FromBinCode := Bin.Code;
                         end;
                         if FromBinCode > ToBinCode then
-                            Error('Das Feld "Von Packstück" muss kleiner-gleich dem Feld "Bis Packstück" sein.');
+                            Error('Das Feld "Von Paket" muss kleiner-gleich dem Feld "Bis Paket" sein.');
                     end;
                 }
                 field(ToBinCode; ToBinCode)
                 {
                     ApplicationArea = all;
-                    Caption = 'Bis Packstück';
+                    Caption = 'Bis Paket';
                     Editable = NOT SelectPacketFilter;
-                    ToolTip = 'Gibt das letzte Packstück an.';
+                    ToolTip = 'Gibt das letzte Paket an.';
                     trigger OnValidate()
                     var
                         Bin: Record Bin;
@@ -88,7 +92,7 @@ Page 50043 "Package Tree List Dlg"
                         if Bin.IsEmpty() then
                             Error('Paket %1 für %2 nicht gefunden', ToBinCode, StandardBinCode);
                         if FromBinCode > ToBinCode then
-                            Error('Das Feld "Von Packstück" muss kleiner-gleich dem Feld "Bis Packstück" sein.');
+                            Error('Das Feld "Von Paket" muss kleiner-gleich dem Feld "Bis Paket" sein.');
                     end;
 
                     trigger OnLookup(var Text: Text): Boolean
@@ -100,7 +104,7 @@ Page 50043 "Package Tree List Dlg"
                             ToBincode := Bin.Code;
                         end;
                         if FromBinCode > ToBinCode then
-                            Error('Das Feld "Von Packstück" muss kleiner-gleich dem Feld "Bis Packstück" sein.');
+                            Error('Das Feld "Von Paket" muss kleiner-gleich dem Feld "Bis Paket" sein.');
                     end;
                 }
 
@@ -109,7 +113,7 @@ Page 50043 "Package Tree List Dlg"
             {
                 Caption = 'Werkzeuganforderungen';
 
-                field(WerkzeugKopfText; WerkzeugKopfText)
+                field(JobNo; JobNo)
                 {
                     ApplicationArea = All;
                     Caption = 'Filter';
@@ -131,7 +135,8 @@ Page 50043 "Package Tree List Dlg"
                                     JobMap.Add(Dict);
                                 until WerkzeugKopf.Next() = 0;
                             end;
-                            WerkzeugKopfText := WerkzeugKopf.GetFilters();
+                            JobNo := WerkzeugKopf.GetFilters();
+                            AutoSetJob := false;
                         end;
                     end;
 
@@ -146,12 +151,15 @@ Page 50043 "Package Tree List Dlg"
         ToBinCode: Code[20];
         SelectPacketFilter: Boolean;
         AllowStandardBinCode: Boolean;
-        WerkzeugKopfText: Text;
+        AutoSetJob: Boolean;
+        JobNo: Code[20];
         JobMap: List of [Dictionary of [Code[20], Integer]];
 
     trigger OnOpenPage()
     begin
         SelectPacketFilter := true;
+        AutoSetJob := false;
+        AllowStandardBinCode := true;
     end;
 
     procedure CalcSelectedBins()
@@ -171,7 +179,8 @@ Page 50043 "Package Tree List Dlg"
         end;
     end;
 
-    local procedure createDictEmpty() Result: Dictionary of [Code[20], Integer]
+
+    local procedure CreateDictEmpty() Result: Dictionary of [Code[20], Integer]
     begin
         exit(Result);
     end;
@@ -213,5 +222,15 @@ Page 50043 "Package Tree List Dlg"
         foreach Dict in JobMap do begin
             JobMap_L.Add(Dict);
         end;
+    end;
+
+    procedure IsAutoSetJob(): Boolean
+    begin
+        exit(AutoSetJob);
+    end;
+
+    procedure GetJobNo(): Code[20]
+    begin
+        exit(JobNo);
     end;
 }

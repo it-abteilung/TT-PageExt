@@ -933,51 +933,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Item Seriennr Factbox - Control Serial No. Description 2 - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 1668352836 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Job To Order Lookup</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 1668352836 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the sum of amounts on all the lines in the document. This will include invoice discounts.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Amount - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1668352836 - Control 636392376 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Betrag</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Amount - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 1668352836 - Control 72213351 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Bestellername field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Bestellername - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1668352836 - Control 2363328873 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Document Type field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Document Type - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1668352836 - Control 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the number of the purchase document.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control No. - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1668352836 - Control 2632124822 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the date when the order was created.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Order Date - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1668352836 - Control 3472859787 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the name of the vendor sending the invoice.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Pay-to Name - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1668352836 - Control 3710982960 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the date when the posting of the purchase document will be recorded.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Job To Order Lookup - Control Posting Date - Property ToolTip</note>
-        </trans-unit>
         <trans-unit id="Page 3594614433 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Projekttyp</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1384,12 +1339,12 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Job List - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 153317114 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Detailierter Vergleich</source>
+          <source>Vergleich - Pakete mit Werkzeuganforderungen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 153317114 - Control 400793991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Packstück</source>
+          <source>Paket-Nr.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Control Bin - Property Caption</note>
         </trans-unit>
@@ -1418,6 +1373,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Control Item No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 153317114 - Control 4138769196 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pakete und Mengen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Control Package List - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 153317114 - Control 2456541637 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Gepackte Menge</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1434,32 +1394,32 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Control Requested Quantity - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Vergleiche Packstücke mit Werkzeuganforderungen</source>
+          <source>Vergleiche Pakete mit Werkzeuganforderungen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Control 3503952323 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Packstücke</source>
+          <source>Pakete</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control Bounds - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Control 3563450250 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Gibt das erste Packstück an.</source>
+          <source>Gibt das erste Paket an.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control FromBinCode - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Control 3563450250 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Von Packstück</source>
+          <source>Von Paket</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control FromBinCode - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Control 3874434205 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Gibt das letzte Packstück an.</source>
+          <source>Gibt das letzte Paket an.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control ToBinCode - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Control 3874434205 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Bis Packstück</source>
+          <source>Bis Paket</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control ToBinCode - Property Caption</note>
         </trans-unit>
@@ -1474,17 +1434,17 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control AllowStandardBinCode - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Control 761739302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Mit Lagerplatz</source>
+          <source>Mit Projekt-Lagerplatz</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control AllowStandardBinCode - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Control 3912268364 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Gibt an, ob alle Packstücke berücksichtigt werden sollen.</source>
+          <source>Gibt an, ob alle Pakete berücksichtigt werden sollen.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control SelectPacketFilter - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Control 3912268364 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Alle Packstücke</source>
+          <source>Alle Pakete</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control SelectPacketFilter - Property Caption</note>
         </trans-unit>
@@ -1494,7 +1454,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control StandardBinCode - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3543178555 - Control 3381621005 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Lagerplatz</source>
+          <source>Projekt-Nr.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control StandardBinCode - Property Caption</note>
         </trans-unit>
@@ -1503,15 +1463,15 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control Target - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3543178555 - Control 1410813867 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3543178555 - Control 331903282 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Filter nach Werkzeuganforderungen</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control WerkzeugKopfText - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control JobNo - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3543178555 - Control 1410813867 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3543178555 - Control 331903282 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Filter</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control WerkzeugKopfText - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List Dlg - Control JobNo - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1749375606 - Control 1482540015 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Scannung</source>
@@ -3104,7 +3064,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Übersicht - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1124344531 - Action 3577097913 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Abgleich: Packstück</source>
+          <source>Abgleich mit Paketen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Übersicht - Action Compare - Property Caption</note>
         </trans-unit>

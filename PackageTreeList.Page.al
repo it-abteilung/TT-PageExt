@@ -1,6 +1,6 @@
 page 50044 "Package Tree List"
 {
-    Caption = 'Detailierter Vergleich';
+    Caption = 'Vergleich - Pakete mit Werkzeuganforderungen';
     Editable = false;
     PageType = List;
     SourceTable = "Package Tree Temp";
@@ -35,7 +35,6 @@ page 50044 "Package Tree List"
                     Caption = 'Artikel-Nr.';
                     HideValue = HideValues;
                     StyleExpr = StyleExpr;
-
                 }
                 field("Item Description"; Rec."Item Description")
                 {
@@ -46,7 +45,7 @@ page 50044 "Package Tree List"
                 field(Bin; Rec.Bin)
                 {
                     ApplicationArea = All;
-                    Caption = 'Packstück';
+                    Caption = 'Paket-Nr.';
                     HideValue = NOT HideValues;
                 }
                 field("Posting Date"; Rec."Posting Date")
@@ -84,18 +83,28 @@ page 50044 "Package Tree List"
                     ApplicationArea = All;
                     Caption = 'Differenz';
                     HideValue = HideValues;
+
+                    StyleExpr = StyleExprDelta;
+                }
+                field("Package List"; Rec."Package List")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Pakete und Mengen';
+                    HideValue = HideValues;
                 }
             }
         }
     }
 
     var
+        StyleExprDelta: Text;
         DeltaQuantitiy: Decimal;
         WerkzeugKopf_G: Record Werkzeuganforderungskopf;
         WerkzeugZeile_G: Record Werkzeuganforderungzeile;
         BinFilter: Text;
         HideValues: Boolean;
         StyleExpr: Text;
+        JobNo: Code[20];
         JobMap: List of [Dictionary of [Code[20], Integer]];
 
     trigger OnAfterGetRecord()
@@ -113,7 +122,13 @@ page 50044 "Package Tree List"
                     HideValues := true;
                 end;
         end;
-        DeltaQuantitiy := Rec."Requested Quantity" - Rec."Packed Quantity";
+        DeltaQuantitiy := Rec."Packed Quantity" - Rec."Requested Quantity";
+
+        StyleExprDelta := 'StandardAccent';
+        if DeltaQuantitiy < 0 then
+            StyleExprDelta := 'Unfavorable';
+        if DeltaQuantitiy > 0 then
+            StyleExprDelta := 'Favorable';
     end;
 
     trigger OnOpenPage()
@@ -141,16 +156,23 @@ page 50044 "Package Tree List"
 
         JobDict: Dictionary of [Code[20], Integer];
         JobKey: Code[20];
+        TextBuilderList: TextBuilder;
+
     begin
         EntryNoCounter := 0;
 
         WerkzeugKopf_L.Reset();
-        FOREACH JobDict IN JobMap do
-            foreach JobKey in JobDict.Keys() do
-                if WerkzeugKopf_L.Get(JobKey, JobDict.Get(JobKey)) then
-                    WerkzeugKopf_L.Mark(true);
 
-        WerkzeugKopf_L.MarkedOnly(true);
+        if JobNo <> '' then begin
+            WerkzeugKopf_L.SetRange("Projekt Nr", JobNo);
+        end else begin
+            FOREACH JobDict IN JobMap do
+                foreach JobKey in JobDict.Keys() do
+                    if WerkzeugKopf_L.Get(JobKey, JobDict.Get(JobKey)) then
+                        WerkzeugKopf_L.Mark(true);
+            WerkzeugKopf_L.MarkedOnly(true);
+        end;
+
         if WerkzeugKopf_L.FindSet() then begin
             WerkzeugZeile_L.Reset();
             WerkzeugZeile_L.ClearMarks();
@@ -166,8 +188,8 @@ page 50044 "Package Tree List"
             WerkzeugZeile_L.SetRange("Projekt Nr");
             WerkzeugZeile_L.SetRange("Lfd Nr");
             WerkzeugZeile_L.MarkedOnly(true);
-            WerkzeugZeile_L.SetCurrentKey("Artikel Nr");
-            WerkzeugZeile_L.SetAscending("Artikel Nr", true);
+            WerkzeugZeile_L.SetCurrentKey("Beschreibung");
+            WerkzeugZeile_L.SetAscending("Beschreibung", true);
             if WerkzeugZeile_L.FindSet() then begin
                 WerkzeugZeile_G.Copy(WerkzeugZeile_L);
                 ItemDict := createDictEmpty();
@@ -201,6 +223,7 @@ page 50044 "Package Tree List"
                     WarehouseEntry.SetRange("Item No.", ItemKey);
 
                     ReqQty := 0;
+                    TextBuilderList.Clear();
                     if WarehouseEntry.FindSet() then begin
                         BinDict := createDictEmpty();
                         repeat
@@ -221,11 +244,16 @@ page 50044 "Package Tree List"
                             Rec.Insert(true);
 
                             ReqQty += BinDict.Get(BinKey);
+
+                            if TextBuilderList.Length > 0 then
+                                TextBuilderList.Append(';');
+                            TextBuilderList.Append(BinKey + ';' + Format(BinDict.Get(BinKey)));
                         end;
                     end;
 
                     if Rec.Get(SaveEntryNoCounter) then begin
                         Rec."Packed Quantity" := ReqQty;
+                        Rec."Package List" := TextBuilderList.ToText();
                         Rec.Modify();
                     end;
                 end;
@@ -246,6 +274,11 @@ page 50044 "Package Tree List"
     procedure SetJobMap(JobMap_L: List of [Dictionary of [Code[20], Integer]])
     begin
         JobMap := JobMap_L;
+    end;
+
+    procedure SetJobNo(JobNo_L: Code[20])
+    begin
+        JobNo := JobNo_L;
     end;
 
 }

@@ -255,23 +255,6 @@ PageExtension 50151 ProjectListExt extends "Job List"
                     Page.RunModal(50015, Bildspeicherung);
                 end;
             }
-
-            action(Bestellliste)
-            {
-                ApplicationArea = Basic;
-                Image = OrderList;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                var
-                    JobToOrderLookup: Page "Job To Order Lookup";
-                begin
-                    JobToOrderLookup.SetJobNo(Rec."No.");
-                    JobToOrderLookup.RunModal();
-                end;
-            }
         }
     }
 

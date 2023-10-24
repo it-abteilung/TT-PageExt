@@ -17,6 +17,7 @@ Page 50076 "Werkzeuganforderung Übersicht"
         {
             repeater(Group)
             {
+
                 field("Projekt Nr"; Rec."Projekt Nr")
                 {
                     ApplicationArea = Basic;
@@ -41,6 +42,7 @@ Page 50076 "Werkzeuganforderung Übersicht"
                 {
                     ApplicationArea = Basic;
                 }
+
             }
         }
     }
@@ -74,7 +76,13 @@ Page 50076 "Werkzeuganforderung Übersicht"
             action(Compare)
             {
                 ApplicationArea = all;
-                Caption = 'Abgleich: Packstück';
+                Caption = 'Abgleich mit Paketen';
+                Image = ItemAvailability;
+
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 var
@@ -88,8 +96,12 @@ Page 50076 "Werkzeuganforderung Übersicht"
                             PackageTreeList.SetBinFilter(PackageTreeListDlg.GetStandardBinCode() + ' | ' + PackageTreeListDlg.GetFromBinCode() + '..' + PackageTreeListDlg.GetToBinCode())
                         else
                             PackageTreeList.SetBinFilter(PackageTreeListDlg.GetFromBinCode() + '..' + PackageTreeListDlg.GetToBinCode());
-                        PackageTreeListDlg.GetJobMap(JobMap);
-                        PackageTreeList.SetJobMap(JobMap);
+                        if PackageTreeListDlg.IsAutoSetJob() then begin
+                            PackageTreeList.SetJobNo(PackageTreeListDlg.GetJobNo());
+                        end else begin
+                            PackageTreeListDlg.GetJobMap(JobMap);
+                            PackageTreeList.SetJobMap(JobMap);
+                        end;
                         PackageTreeList.Run();
                     end;
                 end;
