@@ -1373,6 +1373,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Control Item No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 153317114 - Control 3597426212 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ob eine Werkzeuganforderung vorliegt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Control On Tool Request - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 153317114 - Control 3597426212 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Werkzeuanforderung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Control On Tool Request - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 153317114 - Control 4138769196 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Pakete und Mengen</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2724,7 +2734,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page TT Purchase List - Action Purchase Reservation Avail. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2935200617 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Stundenerfassung</source>
+          <source>Stundenerfassung (TT)</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page TT Stundenerfassung - Property Caption</note>
         </trans-unit>
@@ -2794,12 +2804,12 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page TT Stundenerfassung - Action Test Report - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2791355198 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Kreditor Segmentierung</source>
+          <source>TT Kreditor Segmentierung</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Vendor Segmentation - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4227736169 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Wareneingangskontrolle</source>
+          <source>TT Wareneingangskontrolle</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Wareneingangskontrolle - Property Caption</note>
         </trans-unit>
@@ -3059,7 +3069,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Subform - Action MultiLineAction1 - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1124344531 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Werkzeuganforderung</source>
+          <source>TT Werkzeuganforderung</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Übersicht - Property Caption</note>
         </trans-unit>

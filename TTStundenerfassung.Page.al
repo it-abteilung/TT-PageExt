@@ -1,7 +1,7 @@
 Page 50055 "TT Stundenerfassung"
 {
     AutoSplitKey = true;
-    Caption = 'Stundenerfassung';
+    Caption = 'Stundenerfassung (TT)';
     DataCaptionFields = "Journal Batch Name";
     UsageCategory = Tasks;
     ApplicationArea = All;

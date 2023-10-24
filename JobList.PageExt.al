@@ -132,11 +132,12 @@ PageExtension 50151 ProjectListExt extends "Job List"
                 ApplicationArea = Jobs;
                 SubPageLink = "No." = field("No.");
             }
-            part("Projektdetails - WIP/Umsatzrealisierung"; "Job WIP/Recognition FactBox")
-            {
-                ApplicationArea = Jobs;
-                SubPageLink = "No." = field("No."), "Resource Filter" = field("Resource Filter"), "Posting Date Filter" = field("Posting Date Filter"), "Resource Gr. Filter" = field("Resource Gr. Filter"), "Planning Date Filter" = field("Planning Date Filter");
-            }
+            // Der Part wird doppelt angezeigt, es werden auch die selben Informationen angezeigt.
+            // part("Projektdetails - WIP/Umsatzrealisierung"; "Job WIP/Recognition FactBox")
+            // {
+            //     ApplicationArea = Jobs;
+            //     SubPageLink = "No." = field("No."), "Resource Filter" = field("Resource Filter"), "Posting Date Filter" = field("Posting Date Filter"), "Resource Gr. Filter" = field("Resource Gr. Filter"), "Planning Date Filter" = field("Planning Date Filter");
+            // }
         }
     }
     actions

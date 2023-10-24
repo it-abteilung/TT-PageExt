@@ -7,7 +7,7 @@ Page 50076 "Werkzeuganforderung Übersicht"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = Werkzeuganforderungskopf;
-    Caption = 'Werkzeuganforderung';
+    Caption = 'TT Werkzeuganforderung';
     UsageCategory = Documents;
     ApplicationArea = All;
 

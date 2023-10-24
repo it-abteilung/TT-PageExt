@@ -3,7 +3,7 @@ Page 50017 Wareneingangskontrolle
 {
     PageType = Card;
     SourceTable = Wareneingangskontrolle;
-    Caption = 'Wareneingangskontrolle';
+    Caption = 'TT Wareneingangskontrolle';
     UsageCategory = Tasks;
     ApplicationArea = all;
 

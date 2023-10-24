@@ -188,8 +188,7 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
                     R50000: Report 50000;
                     ToFile2: Text[250];
                 begin
-                    // MailErstellen(true);
-                    Report.RunModal(50000, true);
+                    MailErstellen(true);
                 end;
             }
             action(Fax)

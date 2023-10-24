@@ -92,6 +92,12 @@ page 50044 "Package Tree List"
                     Caption = 'Pakete und Mengen';
                     HideValue = HideValues;
                 }
+                field("On Tool Request"; Rec."On Tool Request")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Werkzeuanforderung';
+                    ToolTip = 'Ob eine Werkzeuganforderung vorliegt.';
+                }
             }
         }
     }
@@ -158,11 +164,13 @@ page 50044 "Package Tree List"
         JobKey: Code[20];
         TextBuilderList: TextBuilder;
 
+        BinItemList: List of [Code[20]];
+
     begin
         EntryNoCounter := 0;
 
+        // GET WerkzeugKopf
         WerkzeugKopf_L.Reset();
-
         if JobNo <> '' then begin
             WerkzeugKopf_L.SetRange("Projekt Nr", JobNo);
         end else begin
@@ -172,8 +180,9 @@ page 50044 "Package Tree List"
                         WerkzeugKopf_L.Mark(true);
             WerkzeugKopf_L.MarkedOnly(true);
         end;
-
+        // GET ~ END
         if WerkzeugKopf_L.FindSet() then begin
+            // GET WerkzeugZeilen
             WerkzeugZeile_L.Reset();
             WerkzeugZeile_L.ClearMarks();
             repeat
@@ -190,16 +199,18 @@ page 50044 "Package Tree List"
             WerkzeugZeile_L.MarkedOnly(true);
             WerkzeugZeile_L.SetCurrentKey("Beschreibung");
             WerkzeugZeile_L.SetAscending("Beschreibung", true);
+            // GET ~ END
             if WerkzeugZeile_L.FindSet() then begin
                 WerkzeugZeile_G.Copy(WerkzeugZeile_L);
                 ItemDict := createDictEmpty();
+                // FIND WerkzeugZeile Quantity
                 repeat
                     if ItemDict.ContainsKey(WerkzeugZeile_L."Artikel Nr") then
                         ItemDict.Set(WerkzeugZeile_L."Artikel Nr", ItemDict.Get(WerkzeugZeile_L."Artikel Nr") + WerkzeugZeile_L.Menge)
                     else
                         ItemDict.Add(WerkzeugZeile_L."Artikel Nr", WerkzeugZeile_L.Menge);
                 until WerkzeugZeile_L.Next() = 0;
-
+                // FIND ~ END
                 foreach ItemKey in ItemDict.Keys() do begin
                     EntryNoCounter += 1;
                     SaveEntryNoCounter := EntryNoCounter;
@@ -214,12 +225,14 @@ page 50044 "Package Tree List"
                     Rec.Indentation := 0;
                     Rec."Item No." := ItemKey;
                     Rec."Item Description" := ItemDesc;
-                    Rec."Requested Quantity" := ItemDict.get(Itemkey);
+                    Rec."Requested Quantity" := ItemDict.Get(Itemkey);
+                    Rec."On Tool Request" := true;
                     Rec.Insert(true);
 
+
+                    // FIND Bin Quantity
                     WarehouseEntry.Reset();
-                    WarehouseEntry.Setfilter("Bin Code", BinFilter);
-                    WarehouseEntry.SetFilter(Quantity, '>%1', 0);
+                    WarehouseEntry.SetFilter("Bin Code", BinFilter);
                     WarehouseEntry.SetRange("Item No.", ItemKey);
 
                     ReqQty := 0;
@@ -234,20 +247,22 @@ page 50044 "Package Tree List"
                         until WarehouseEntry.Next() = 0;
 
                         foreach BinKey in BinDict.Keys() do begin
+                            if BinDict.Get(BinKey) > 0 then begin
 
-                            EntryNoCounter += 1;
-                            Rec.Init();
-                            Rec."Entry No." := EntryNoCounter;
-                            Rec.Indentation := 1;
-                            Rec."Packed Quantity" := BinDict.Get(BinKey);
-                            Rec.Bin := BinKey;
-                            Rec.Insert(true);
+                                EntryNoCounter += 1;
+                                Rec.Init();
+                                Rec."Entry No." := EntryNoCounter;
+                                Rec.Indentation := 1;
+                                Rec."Packed Quantity" := BinDict.Get(BinKey);
+                                Rec.Bin := BinKey;
+                                Rec.Insert(true);
 
-                            ReqQty += BinDict.Get(BinKey);
+                                ReqQty += BinDict.Get(BinKey);
 
-                            if TextBuilderList.Length > 0 then
-                                TextBuilderList.Append(';');
-                            TextBuilderList.Append(BinKey + ';' + Format(BinDict.Get(BinKey)));
+                                if TextBuilderList.Length > 0 then
+                                    TextBuilderList.Append(';');
+                                TextBuilderList.Append(BinKey + ';' + Format(BinDict.Get(BinKey)));
+                            end;
                         end;
                     end;
 
@@ -255,6 +270,78 @@ page 50044 "Package Tree List"
                         Rec."Packed Quantity" := ReqQty;
                         Rec."Package List" := TextBuilderList.ToText();
                         Rec.Modify();
+                    end;
+                end;
+
+                WarehouseEntry.Reset();
+                WarehouseEntry.SetFilter("Bin Code", BinFilter);
+                WarehouseEntry.SetCurrentKey(Description);
+                WarehouseEntry.SetAscending(Description, true);
+                if WarehouseEntry.FindSet() then
+                    repeat
+                        if NOT BinItemList.Contains(WarehouseEntry."Item No.") then
+                            BinItemList.Add(WarehouseEntry."Item No.");
+                    until WarehouseEntry.Next() = 0;
+
+                foreach ItemKey in BinItemList do begin
+                    if NOT ItemDict.ContainsKey(ItemKey) then begin
+                        EntryNoCounter += 1;
+                        SaveEntryNoCounter := EntryNoCounter;
+                        Item.Reset();
+                        ItemDesc := '';
+                        if Item.Get(ItemKey) then
+                            ItemDesc := Item.Description;
+
+                        Rec.Init();
+                        Rec."Entry No." := EntryNoCounter;
+                        Rec.Indentation := 0;
+                        Rec."Item No." := ItemKey;
+                        Rec."Item Description" := ItemDesc;
+                        Rec."Requested Quantity" := 0;
+                        Rec."On Tool Request" := false;
+                        Rec.Insert(true);
+
+                        WarehouseEntry.Reset();
+                        WarehouseEntry.SetFilter("Bin Code", BinFilter);
+                        WarehouseEntry.SetRange("Item No.", ItemKey);
+
+                        ReqQty := 0;
+                        TextBuilderList.Clear();
+                        if WarehouseEntry.FindSet() then begin
+                            BinDict := createDictEmpty();
+                            repeat
+                                if BinDict.ContainsKey(WarehouseEntry."Bin Code") then
+                                    BinDict.Set(WarehouseEntry."Bin Code", BinDict.Get(WarehouseEntry."Bin Code") + WarehouseEntry.Quantity)
+                                else
+                                    BinDict.Add(WarehouseEntry."Bin Code", WarehouseEntry.Quantity)
+                            until WarehouseEntry.Next() = 0;
+
+                            foreach BinKey in BinDict.Keys() do begin
+                                if BinDict.Get(BinKey) > 0 then begin
+
+                                    EntryNoCounter += 1;
+                                    Rec.Init();
+                                    Rec."Entry No." := EntryNoCounter;
+                                    Rec.Indentation := 1;
+                                    Rec."Packed Quantity" := BinDict.Get(BinKey);
+                                    Rec.Bin := BinKey;
+                                    Rec.Insert(true);
+
+                                    ReqQty += BinDict.Get(BinKey);
+
+                                    if TextBuilderList.Length > 0 then
+                                        TextBuilderList.Append(';');
+                                    TextBuilderList.Append(BinKey + ';' + Format(BinDict.Get(BinKey)));
+                                end;
+                            end;
+                        end;
+
+                        if Rec.Get(SaveEntryNoCounter) then begin
+                            Rec."Packed Quantity" := ReqQty;
+                            Rec."Package List" := TextBuilderList.ToText();
+                            Rec.Modify();
+                        end;
+
                     end;
                 end;
             end;

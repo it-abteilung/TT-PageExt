@@ -1,6 +1,6 @@
 Page 50070 "Vendor Segmentation"
 {
-    Caption = 'Kreditor Segmentierung';
+    Caption = 'TT Kreditor Segmentierung';
     PageType = List;
     SourceTable = "Vendor Segmentation";
 
