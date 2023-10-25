@@ -4,6 +4,7 @@ page 50044 "Package Tree List"
     Editable = false;
     PageType = List;
     SourceTable = "Package Tree Temp";
+    SourceTableView = sorting("Item Description", Indentation, Bin);
 
     layout
     {
@@ -96,6 +97,7 @@ page 50044 "Package Tree List"
                 {
                     ApplicationArea = All;
                     Caption = 'Werkzeuanforderung';
+                    HideValue = HideValues;
                     ToolTip = 'Ob eine Werkzeuganforderung vorliegt.';
                 }
             }
@@ -253,8 +255,11 @@ page 50044 "Package Tree List"
                                 Rec.Init();
                                 Rec."Entry No." := EntryNoCounter;
                                 Rec.Indentation := 1;
+                                Rec."Item No." := ItemKey;
+                                Rec."Item Description" := ItemDesc;
                                 Rec."Packed Quantity" := BinDict.Get(BinKey);
                                 Rec.Bin := BinKey;
+                                Rec."On Tool Request" := true;
                                 Rec.Insert(true);
 
                                 ReqQty += BinDict.Get(BinKey);
@@ -323,8 +328,11 @@ page 50044 "Package Tree List"
                                     Rec.Init();
                                     Rec."Entry No." := EntryNoCounter;
                                     Rec.Indentation := 1;
+                                    Rec."Item No." := ItemKey;
+                                    Rec."Item Description" := ItemDesc;
                                     Rec."Packed Quantity" := BinDict.Get(BinKey);
                                     Rec.Bin := BinKey;
+                                    Rec."On Tool Request" := false;
                                     Rec.Insert(true);
 
                                     ReqQty += BinDict.Get(BinKey);
