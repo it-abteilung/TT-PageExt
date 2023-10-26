@@ -1403,6 +1403,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Control Requested Quantity - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 153317114 - Action 2931753212 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Drucken</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Package Tree List - Action Print_Report - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3543178555 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Vergleiche Pakete mit Werkzeuganforderungen</source>
           <note from="Developer" annotates="general" priority="2"></note>

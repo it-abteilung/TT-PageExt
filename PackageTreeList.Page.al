@@ -102,6 +102,34 @@ page 50044 "Package Tree List"
                 }
             }
         }
+
+    }
+    actions
+    {
+        area(Promoted)
+        {
+            actionref(PrintReport; Print_Report) { }
+        }
+        area(Processing)
+        {
+            action(Print_Report)
+            {
+                ApplicationArea = all;
+                Caption = 'Drucken';
+                Image = Print;
+
+                trigger OnAction()
+                var
+                    PackageTreeListReport: Report "Package Tree List";
+                begin
+                    PackageTreeListReport.SetJobNo(JobNo);
+                    PackageTreeListReport.SetJobMap(JobMap);
+                    PackageTreeListReport.SetBinFilter(BinFilter);
+                    PackageTreeListReport.UseRequestPage(false);
+                    PackageTreeListReport.RunModal();
+                end;
+            }
+        }
     }
 
     var
