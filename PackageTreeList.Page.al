@@ -115,33 +115,43 @@ page 50044 "Package Tree List"
             action(Print_Report)
             {
                 ApplicationArea = all;
-                Caption = 'Drucken';
+                Caption = 'PDF erstellen';
                 Image = Print;
 
                 trigger OnAction()
                 var
+                    TempBlob: Codeunit "Temp Blob";
+                    FileManagement: Codeunit "File Management";
+                    OStream: OutStream;
                     PackageTreeListReport: Report "Package Tree List";
                 begin
-                    PackageTreeListReport.SetJobNo(JobNo);
-                    PackageTreeListReport.SetJobMap(JobMap);
-                    PackageTreeListReport.SetBinFilter(BinFilter);
-                    PackageTreeListReport.UseRequestPage(false);
-                    PackageTreeListReport.RunModal();
+                    TempBlob.CreateOutStream(OStream);
+                    PackageTreeListReport.SaveAs('<?xml version="1.0" standalone="yes"?><ReportParameters name="Package Tree List" id="50073"><Options><Field name="JobNo">' + JobNo + '</Field><Field name="BinFilter">' + BinFilter + '</Field></Options><DataItems><DataItem name="Info">VERSION(1) SORTING(Field1)</DataItem><DataItem name="Integer">VERSION(1) SORTING(Field1)</DataItem></DataItems></ReportParameters>', ReportFormat::Pdf, OStream);
+                    FileManagement.BLOBExport(TempBlob, Format(JobNo) + '_Vergleich_Pakete_mit_Werkzeuganforderungen' + '.pdf', true);
                 end;
             }
         }
     }
 
     var
-        StyleExprDelta: Text;
-        DeltaQuantitiy: Decimal;
-        WerkzeugKopf_G: Record Werkzeuganforderungskopf;
-        WerkzeugZeile_G: Record Werkzeuganforderungzeile;
-        BinFilter: Text;
-        HideValues: Boolean;
-        StyleExpr: Text;
-        JobNo: Code[20];
-        JobMap: List of [Dictionary of [Code[20], Integer]];
+        StyleExprDelta:
+            Text;
+        DeltaQuantitiy:
+                            Decimal;
+        WerkzeugKopf_G:
+                            Record Werkzeuganforderungskopf;
+        WerkzeugZeile_G:
+                            Record Werkzeuganforderungzeile;
+        BinFilter:
+                            Text;
+        HideValues:
+                            Boolean;
+        StyleExpr:
+                            Text;
+        JobNo:
+                            Code[20];
+        JobMap:
+                            List of [Dictionary of [Code[20], Integer]];
 
     trigger OnAfterGetRecord()
     var
@@ -258,7 +268,6 @@ page 50044 "Package Tree List"
                     Rec."Requested Quantity" := ItemDict.Get(Itemkey);
                     Rec."On Tool Request" := true;
                     Rec.Insert(true);
-
 
                     // FIND Bin Quantity
                     WarehouseEntry.Reset();
