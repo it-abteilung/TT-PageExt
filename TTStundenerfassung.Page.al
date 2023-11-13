@@ -298,7 +298,7 @@ Page 50055 "TT Stundenerfassung"
     var
         JobJnlManagement: Codeunit JobJnlManagement;
         ReportPrint: Codeunit "Test Report-Print";
-        JobDescription: Text[50];
+        JobDescription: Text[100];
         AccName: Text[50];
         CurrentJnlBatchName: Code[10];
         ShortcutDimCode: array[8] of Code[20];
