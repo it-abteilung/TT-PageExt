@@ -49,6 +49,7 @@ Page 50031 "Artikel-Seriennr-SubPage"
                 field("Nächste Prüfung"; Rec."Nächste Prüfung")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field(Baujahr; Rec.Baujahr)
                 {

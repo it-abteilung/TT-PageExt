@@ -142,6 +142,7 @@ Page 50091 "Item Serial Subpage"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Letzte Prüfung';
+                    Editable = false;
 
                     trigger OnValidate()
                     begin
@@ -152,6 +153,7 @@ Page 50091 "Item Serial Subpage"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Nächste Prüfung';
+                    Editable = false;
 
                     trigger OnValidate()
                     begin

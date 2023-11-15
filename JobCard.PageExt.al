@@ -3,6 +3,57 @@ PageExtension 50150 JobCardExt extends "Job Card"
     Caption = 'Job Card';
     layout
     {
+        modify("No.")
+        {
+            trigger OnBeforeValidate()
+            var
+                NewJobFlag: Boolean;
+                NewJobNo: Code[20];
+                Pattern: Text;
+                Regex: Codeunit Regex;
+            begin
+                message('1');
+                NewJobFlag := false;
+                if Rec."Job Type" <> '' then begin
+                    Pattern := '^[0-9]{2}\-[0-9]{3}\.[0-9]{1}$';
+                    if Regex.IsMatch(Rec."No.", Pattern, 0) then begin
+                        NewJobNo := Format(Rec."No.").Substring(1, 6);
+                        NewJobFlag := true;
+                    end else begin
+                        Pattern := '^[0-9]{2}\-[0-9]{3}$';
+                        if Regex.IsMatch(Rec."No.", Pattern, 0) then begin
+                            NewJobNo := Rec."No.";
+                            NewJobFlag := true;
+                        end;
+                    end;
+
+                    if NewJobFlag then
+                        case Rec."Job Type" of
+                            '10000':
+                                NewJobNo += '.1';
+                            '20000':
+                                NewJobNo += '.2';
+                            '30000':
+                                NewJobNo += '.3';
+                            '40000':
+                                NewJobNo += '.4';
+                            '50000':
+                                NewJobNo += '.5';
+                            '60000':
+                                NewJobNo += '.6';
+                            '70000':
+                                NewJobNo += '.7';
+                            '80000':
+                                NewJobNo += '.8';
+                            '90000':
+                                NewJobNo += '.9';
+                        end;
+                    Rec."No." := NewJobNo;
+                end
+            end;
+
+
+        }
         modify("Search Description")
         {
             Visible = false;
@@ -145,6 +196,53 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 Importance = Promoted;
                 NotBlank = true;
                 ShowMandatory = true;
+
+                trigger OnValidate()
+                var
+                    NewJobFlag: Boolean;
+                    NewJobNo: Code[20];
+                    Pattern: Text;
+                    Regex: Codeunit Regex;
+                begin
+                    NewJobFlag := false;
+                    if Rec."Job Type" <> xRec."Job Type" then begin
+                        Pattern := '^[0-9]{2}\-[0-9]{3}\.[0-9]{1}$';
+                        if Regex.IsMatch(Rec."No.", Pattern, 0) then begin
+                            NewJobNo := Format(Rec."No.").Substring(1, 6);
+                            NewJobFlag := true;
+                        end else begin
+                            Pattern := '^[0-9]{2}\-[0-9]{3}$';
+                            if Regex.IsMatch(Rec."No.", Pattern, 0) then begin
+                                Rec."No." := Rec."No.";
+                                NewJobFlag := true;
+                            end;
+                        end;
+
+                        if NewJobFlag then
+                            case Rec."Job Type" of
+                                '10000':
+                                    NewJobNo += '.1';
+                                '20000':
+                                    NewJobNo += '.2';
+                                '30000':
+                                    NewJobNo += '.3';
+                                '40000':
+                                    NewJobNo += '.4';
+                                '50000':
+                                    NewJobNo += '.5';
+                                '60000':
+                                    NewJobNo += '.6';
+                                '70000':
+                                    NewJobNo += '.7';
+                                '80000':
+                                    NewJobNo += '.8';
+                                '90000':
+                                    NewJobNo += '.9';
+                            end;
+                        Rec."No." := NewJobNo;
+                        CurrPage.Update();
+                    end
+                end;
             }
             field("Object"; Rec.Object)
             {
