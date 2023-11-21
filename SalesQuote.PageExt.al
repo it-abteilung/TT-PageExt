@@ -2,11 +2,25 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
 {
     layout
     {
+        modify("Sell-to Customer No.")
+        {
+            trigger OnAfterValidate()
+            var
+                Customer: Record Customer;
+            begin
+                if Customer.Get(Rec."Sell-to Customer No.") then
+                    HasAddressOnCustomer := Customer."Name 2" <> '';
+            end;
+        }
         addafter("Sell-to Customer Name")
         {
+
             field("Sell-to Customer Name 2"; Rec."Sell-to Customer Name 2")
             {
                 ApplicationArea = Basic;
+                Editable = NOT HasAddressOnCustomer;
+
+                ToolTip = 'Der Wert wird nicht auf dem Bericht gedruckt.';
             }
             field(Salutation; Rec.Salutation)
             {
@@ -64,5 +78,8 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
             }
         }
     }
+
+    var
+        HasAddressOnCustomer: Boolean;
 }
 

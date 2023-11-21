@@ -3568,6 +3568,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action Print TP - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 126734238 - Control 2958825091 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
+          <source>Der Wert wird nicht auf dem Bericht gedruckt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Control Sell-to Customer Name 2 - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="PageExtension 126734238 - Control 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
           <source>Projektnr.</source>
           <note from="Developer" annotates="general" priority="2"></note>

@@ -2,7 +2,7 @@
   "id": "b58e8bbd-706d-449c-b90c-51dd042d6491",
   "name": "PageExt",
   "publisher": "Dennis Appelt",
-  "version": "22.5.2023111201.2023111301",
+  "version": "22.5.2023112001.2023112001",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -28,7 +28,8 @@
       "name": "Reports",
       "publisher": "Dennis Appelt",
       "version": "21.5.2023033101.2023033102"
-    }  ],
+    }
+  ],
   "screenshots": [],
   "platform": "20.0.0.0",
   "application": "22.1.0.0",
@@ -44,6 +45,8 @@
     "includeSourceInSymbolFile": false
   },
   "runtime": "11.0",
-  "features": ["TranslationFile",
-                "NoImplicitWith"]
+  "features": [
+    "TranslationFile",
+    "NoImplicitWith"
+  ]
 }
