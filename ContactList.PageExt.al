@@ -80,6 +80,23 @@ PageExtension 50049 pageextension50049 extends "Contact List"
         {
             Visible = false;
         }
+        addlast(processing)
+        {
+            action(Special_Contact_List)
+            {
+                ApplicationArea = All;
+                Caption = 'Spezielle Kontaktliste';
+                Image = ContactPerson;
+
+                trigger OnAction()
+                var
+                    Contact: Record Contact;
+                begin
+                    Page.Run(Page::"Special Contact List");
+                end;
+
+            }
+        }
     }
 
     var
@@ -89,7 +106,6 @@ PageExtension 50049 pageextension50049 extends "Contact List"
         CRMCouplingManagement: Codeunit "CRM Coupling Management";
 
     trigger OnOpenPage()
-
     begin
         // G-ERP+
         CASE rec.Type OF

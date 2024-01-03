@@ -53,7 +53,7 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
             field(Preisstellung; Rec.Preisstellung)
             {
                 ApplicationArea = Basic;
-            }
+            } 
         }
     }
     actions

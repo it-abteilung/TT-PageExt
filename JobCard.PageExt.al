@@ -7,6 +7,10 @@ PageExtension 50150 JobCardExt extends "Job Card"
         {
             AssistEdit = false;
         }
+        modify("Description")
+        {
+            ShowMandatory = true;
+        }
         modify("Search Description")
         {
             Visible = false;
@@ -134,6 +138,14 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 Caption = 'Rechnungsempfänger';
             }
         }
+        modify("Starting Date")
+        {
+            ShowMandatory = true;
+        }
+        modify("Ending Date")
+        {
+            ShowMandatory = true;
+        }
         addafter("Bill-to Contact")
         {
             fixed(Allgemein)
@@ -166,7 +178,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         end else begin
                             Pattern := '^[0-9]{2}\-[0-9]{3}$';
                             if Regex.IsMatch(Rec."No.", Pattern, 0) then begin
-                                Rec."No." := Rec."No.";
+                                NewJobNo := Rec."No.";
                                 NewJobFlag := true;
                             end;
                         end;
@@ -201,6 +213,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
             {
                 ApplicationArea = Basic;
                 Caption = 'Objekt';
+                ShowMandatory = true;
             }
             field(Objektname; Rec.Objektname)
             {
@@ -528,6 +541,101 @@ PageExtension 50150 JobCardExt extends "Job Card"
         }
         addafter("Ledger E&ntries")
         {
+
+            // TODO activate
+            // action("New Job")
+            // {
+            //     ApplicationArea = None;
+            //     Caption = 'Neue Kopie ohne Debitor';
+            //     Image = Add;
+
+            //     trigger OnAction()
+            //     var
+            //         Job: Record Job;
+            //         JobCard: Page "Job Card";
+            //         NoSeriesManagement: Codeunit NoSeriesManagement;
+            //         NewJobNo: Code[20];
+            //     begin
+            //         Job.Init();
+            //         NewJobNo := NoSeriesManagement.GetNextNo('PROJEKT', Today, true);
+
+            //         case Rec."Job Type" of
+            //             '10000':
+            //                 NewJobNo += '.1';
+            //             '20000':
+            //                 NewJobNo += '.2';
+            //             '30000':
+            //                 NewJobNo += '.3';
+            //             '40000':
+            //                 NewJobNo += '.4';
+            //             '50000':
+            //                 NewJobNo += '.5';
+            //             '60000':
+            //                 NewJobNo += '.6';
+            //             '70000':
+            //                 NewJobNo += '.7';
+            //             '80000':
+            //                 NewJobNo += '.8';
+            //             '90000':
+            //                 NewJobNo += '.9';
+            //         end;
+
+            //         Job."No." := NewJobNo;
+            //         Job."No. Series" := 'PROJEKT';
+            //         Job."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
+            //         Job."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
+            //         Job.Insert();
+
+            //         Job.Validate("Job Type", Rec."Job Type");
+            //         Job.Validate(Description, Rec.Description);
+            //         Job.Validate("Description 2", Rec."Description 2");
+            //         Job.Validate("Person Responsible", Rec."Person Responsible");
+            //         Job.Validate("Job Posting Group", Rec."Job Posting Group");
+            //         Job.Validate("Language Code", Rec."Language Code");
+            //         Job.Validate("Scheduled Res. Gr. Qty.", Rec."Scheduled Res. Gr. Qty.");
+            //         Job.Validate("Resource Filter", Rec."Resource Filter");
+            //         Job.Validate(Reserve, Rec.Reserve);
+            //         Job.Validate(Image, Rec.Image);
+            //         Job.Validate("Currency Code", Rec."Currency Code");
+            //         Job.Validate("Invoice Currency Code", Rec."Invoice Currency Code");
+            //         Job.Validate("Exch. Calculation (Cost)", Rec."Exch. Calculation (Cost)");
+            //         Job.Validate("Exch. Calculation (Price)", Rec."Exch. Calculation (Price)");
+            //         Job.Validate("Allow Schedule/Contract Lines", Rec."Allow Schedule/Contract Lines");
+            //         Job.Validate("Project Manager", Rec."Project Manager");
+            //         Job.Validate("Payment Method Code", Rec."Payment Method Code");
+            //         Job.Validate("Your Reference", Rec."Your Reference");
+            //         Job.Validate("Price Calculation Method", Rec."Price Calculation Method");
+            //         Job.Validate("Cost Calculation Method", Rec."Cost Calculation Method");
+            //         Job.Validate(Object, Rec.Object);
+            //         Job.Validate("Anfrage von", Rec."Anfrage von");
+            //         Job.Validate("Anfrage per", Rec."Anfrage per");
+            //         Job.Validate("Angebotsabgabe durch", Rec."Angebotsabgabe durch");
+            //         Job.Validate(Reparaturort, Rec.Reparaturort);
+            //         Job.Validate(Agentur, Rec.Agentur);
+            //         Job.Validate(Agenturperson, Rec.Agenturperson);
+            //         Job.Validate("Letzte Notiz", Rec."Letzte Notiz");
+            //         Job.Validate(Verfasser, Rec.Verfasser);
+            //         Job.Validate(Reparaturleiter, Rec.Reparaturleiter);
+            //         Job.Validate("Betriebsstätte Rotterdam", Rec."Betriebsstätte Rotterdam");
+            //         Job.Validate("Contact Company No.", Rec."Contact Company No.");
+            //         Job.Validate("Your Order No.", Rec."Your Order No.");
+            //         Job.Validate(ASME, Rec.ASME);
+            //         Job.Validate("Parts for", Rec."Parts for");
+            //         Job.Validate(Maker, Rec.Maker);
+            //         Job.Validate(Type, Rec.Type);
+            //         Job.Validate("We Quote for", Rec."We Quote for");
+            //         Job.Validate("Serial Number", Rec."Serial Number");
+            //         Job.Validate(Specification, Rec.Specification);
+            //         Job.Validate("Ship Owner", Rec."Ship Owner");
+            //         Job.Validate("Bareboat Charterer", Rec."Bareboat Charterer");
+            //         Job.Validate(Preisstellung, Rec.Preisstellung);
+            //         Job.Validate("Validity (DAYS)", Rec."Validity (DAYS)");
+            //         Job.Validate("Ship Owner Bearbeiter", Rec."Ship Owner Bearbeiter");
+            //         Job.Modify();
+            //         JobCard.SetRecord(Job);
+            //         JobCard.Run();
+            //     end;
+            // }
             action(Bilder)
             {
                 ApplicationArea = Basic;
@@ -924,6 +1032,27 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 RunPageLink = "Job No." = field("No.");
                 Caption = 'Projektplanungszeilen';
             }
+            action(CustomerChange)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Debitorenwechsel';
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    CustomerChangeDlg: Page "Job Customer Change Dlg";
+                    Customer: Record Customer;
+                begin
+                    CustomerChangeDlg.SetCustomerNo(Rec."Sell-to Customer No.");
+                    if CustomerChangeDlg.RunModal() = Action::OK then begin
+                        if Customer.Get(CustomerChangeDlg.GetCustomerNo()) then begin
+                            Rec.Validate("Sell-to Customer No.", Customer."No.");
+                            Rec.Validate("Bill-to Customer No.", Customer."No.");
+                        end;
+                    end;
+                end;
+            }
         }
     }
 
@@ -938,8 +1067,6 @@ PageExtension 50150 JobCardExt extends "Job Card"
         AnfrageUeber: Text;
         MontageGrp: Text;
         ProjektNotizen: Record 50001;
-
-
 
     trigger OnAfterGetRecord()
     begin
