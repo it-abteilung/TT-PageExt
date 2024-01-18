@@ -6,6 +6,8 @@ Page 50077 "Werkzeuganforderung Kopf"
     SourceTable = Werkzeuganforderungskopf;
     Caption = 'Werkzeuganforderung Kopf';
 
+
+
     layout
     {
         area(content)

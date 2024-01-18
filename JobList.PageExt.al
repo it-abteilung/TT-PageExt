@@ -124,6 +124,18 @@ PageExtension 50151 ProjectListExt extends "Job List"
                 Caption = 'Total Price including Discount';
                 Visible = false;
             }
+            field("Prev. Status"; Rec."Prev. Status")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Vorheriger Status';
+                Visible = false;
+            }
+            field("Status Modify Date"; Rec."Status Modify Date")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Status geändert am';
+                Visible = false;
+            }
         }
         addafter(Control1902018507)
         {

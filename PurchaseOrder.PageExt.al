@@ -314,16 +314,15 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
             tmpBlob.CreateInStream(InStr);
             txtB64 := cnv64.ToBase64(InStr, true);
         end;
-        Message('%1 - %2', name, txtB64);
+        // Message('%1 - %2', name, txtB64);
 
         if Report.SaveAs(Report::"Email Body Text PurchQuote", '', format::Html, OutStrMailBody, recRef) then begin
             tmpBlob.CreateInStream(InStrMailBody, TextEncoding::Windows);
             InStrMailBody.ReadText(Body);
         end;
 
-
         l_Cont.Get(rec."Buy-from Contact No.");
-        if l_PurchaseHeader."Language Code" = 'ENU' then
+        if Rec."Language Code" = 'ENU' then
             MailMsg.Create(l_Cont."E-Mail", 'Our Order ' + Rec."Job No." + '/' + Rec."No.", Body, true)
         else
             MailMsg.Create(l_Cont."E-Mail", 'Unsere Bestellung ' + Rec."Job No." + '/' + Rec."No.", Body, true);

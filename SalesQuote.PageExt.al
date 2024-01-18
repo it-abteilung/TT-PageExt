@@ -33,14 +33,36 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
             {
                 ApplicationArea = Basic;
                 Caption = 'Projektnr.';
+
+                trigger OnValidate()
+                var
+                    Job: Record Job;
+                begin
+                    if Job.Get(Rec."Job No.") then begin
+                        Rec."External Document No." := Job."External Document No.";
+                        Rec."Your Reference" := Job."Your Reference";
+                    end;
+                end;
             }
             field(Unterschriftscode; Rec.Unterschriftscode)
             {
                 ApplicationArea = Basic;
             }
+            field("Status Approval 1"; Rec."Status Approval 1")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Genehmigt';
+                Editable = false;
+            }
             field("Unterschriftscode 2"; Rec."Unterschriftscode 2")
             {
                 ApplicationArea = Basic;
+            }
+            field("Status Approval 2"; Rec."Status Approval 2")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Genehmigt 2';
+                Editable = false;
             }
             field("Validity (DAYS)"; Rec."Validity (DAYS)")
             {
@@ -53,11 +75,19 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
             field(Preisstellung; Rec.Preisstellung)
             {
                 ApplicationArea = Basic;
-            } 
+            }
         }
     }
     actions
     {
+        modify(SendApprovalRequest)
+        {
+            trigger OnBeforeAction()
+            begin
+                Rec."Status Approval 1" := false;
+                Rec."Status Approval 2" := false;
+            end;
+        }
         addafter(Print)
         {
             action("Print TP")
@@ -77,9 +107,85 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
                 end;
             }
         }
+
+        addfirst(Category_New)
+        {
+            actionref(NewCopyHeader; "New Copy Header") { }
+            actionref(NewCopyHeaderLines; "New Copy Header Lines") { }
+        }
+        addfirst(navigation)
+        {
+            action("New Copy Header")
+            {
+                ApplicationArea = All;
+                Caption = 'Neue Kopie - Kopf';
+                Visible = true;
+                Enabled = true;
+                Image = Add;
+
+                trigger OnAction()
+                var
+                    SalesHeader: Record "Sales Header";
+                    SalesQuotePage: Page "Sales Quote";
+                    CopyDocumentMgt: Codeunit "Copy Document Mgt.";
+                    SalesSetup: Record "Sales & Receivables Setup";
+                    SalesLine: Record "Sales Line";
+                begin
+                    SalesSetup.Get();
+                    CopyDocumentMgt.SetProperties(true, false, false, true, false, SalesSetup."Exact Cost Reversing Mandatory", false);
+                    CopyDocumentMgt.CopySalesDoc("Sales Document Type From"::Quote, Rec."No.", SalesHeader);
+
+                    SalesLine.SetRange("Document No.", SalesHeader."No.");
+                    if SalesLine.FindSet() then SalesLine.DeleteAll();
+
+                    SalesQuotePage.SetRecord(SalesHeader);
+                    SalesQuotePage.Run();
+                end;
+            }
+            action("New Copy Header Lines")
+            {
+                ApplicationArea = All;
+                Caption = 'Neue Kopie - Kopf und Zeilen';
+                Visible = true;
+                Enabled = true;
+                Image = Add;
+
+                trigger OnAction()
+                var
+                    SalesHeader: Record "Sales Header";
+                    SalesQuotePage: Page "Sales Quote";
+                    CopyDocumentMgt: Codeunit "Copy Document Mgt.";
+                    SalesSetup: Record "Sales & Receivables Setup";
+                begin
+                    SalesSetup.Get();
+                    CopyDocumentMgt.SetProperties(true, false, false, true, false, SalesSetup."Exact Cost Reversing Mandatory", false);
+                    CopyDocumentMgt.CopySalesDoc("Sales Document Type From"::Quote, Rec."No.", SalesHeader);
+
+                    SalesQuotePage.SetRecord(SalesHeader);
+                    SalesQuotePage.Run();
+                end;
+            }
+        }
     }
 
     var
         HasAddressOnCustomer: Boolean;
+
+    // trigger OnOpenPage()
+    // var
+    //     TenantMedia: Record "Tenant Media";
+    //     EmployeeSignStore: Record "Employee Sign Store";
+    // begin
+    //     if NOT Rec."Status Approval 1" then begin
+    //         EmployeeSignStore.SetRange("User Name", UserId);
+    //         if EmployeeSignStore.FindFirst() then begin
+    //             if TenantMedia.Get(EmployeeSignStore.Signature.MediaId) then begin
+    //                 TenantMedia.CalcFields(Content);
+
+    //             end;
+    //         end
+    //     end;
+    // end;
+
 }
 

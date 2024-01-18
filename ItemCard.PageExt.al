@@ -141,6 +141,7 @@ PageExtension 50010 pageextension50010 extends "Item Card"
                 Image = Resource;
             }
         }
+
     }
 
     var

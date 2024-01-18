@@ -127,9 +127,9 @@ Page 50054 "Einkaufsanfragen Matrix2"
     var
         MatrixRecRef: RecordRef;
         MatrixRecord: Record "Purchase Line";
-        MatrixRecords: array[32] of Record "Purchase Line";
+        MatrixRecords: array[64] of Record "Purchase Line";
         MatrixMgt: Codeunit "Matrix Management";
-        Matrix_ColumnCaptions: array[32] of Text[1024];
+        Matrix_ColumnCaptions: array[64] of Text[1024];
         SetWanted: Option Initial,Previous,Same,Next,PreviousColumn,NextColumn;
         CaptionFieldNo: Integer;
         PKFirstRecInSet: Text;
@@ -175,7 +175,7 @@ Page 50054 "Einkaufsanfragen Matrix2"
             else
                 //G-ERP.AG 2021-07-22 -
                 MatrixRecord.SetRange("Document No.", Rec."No.");
-            MatrixRecord.SetRange(Type, MatrixRecord.Type::Item);
+            MatrixRecord.SetFilter(Type, '%1 | %2', MatrixRecord.Type::Item, MatrixRecord.Type::"Charge (Item)");
 
             MatrixRecRef.GetTable(MatrixRecord);
             MatrixRecRef.SetTable(MatrixRecord);
@@ -195,7 +195,7 @@ Page 50054 "Einkaufsanfragen Matrix2"
                 PurchaseLine.SetRange("Document No.", Rec."No.");
 
             //G-ERP.AG 2021-07-22 + Anfrage#2312362
-            PurchaseLine.SetRange(Type, PurchaseLine.Type::Item);
+            PurchaseLine.SetFilter(Type, '%1 | %2', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)");
 
             for i := 1 to ArrayLen(Matrix_ColumnCaptions) do begin
                 if Matrix_ColumnCaptions[i] <> '' then begin

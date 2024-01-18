@@ -13,6 +13,11 @@ PageExtension 50011 pageextension50011 extends "Item List"
             {
                 ApplicationArea = Basic;
             }
+            field("Description 2 Test"; D2Test)
+            {
+                ApplicationArea = Basic;
+                Visible = false;
+            }
         }
         addafter("Default Deferral Template Code")
         {
@@ -88,6 +93,7 @@ PageExtension 50011 pageextension50011 extends "Item List"
                     //ACFunctions.CreateItemFromTemplate;
                 end;
             }
+
         }
         addafter(CopyItem)
         {
@@ -125,7 +131,13 @@ PageExtension 50011 pageextension50011 extends "Item List"
         }
     }
 
+    trigger OnAfterGetRecord()
+    begin
+        D2Test := Rec."Description 2";
+    end;
+
     var
         TempFilteredItem: Record Item temporary;
+        D2Test: Text;
 }
 

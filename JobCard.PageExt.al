@@ -7,6 +7,22 @@ PageExtension 50150 JobCardExt extends "Job Card"
         {
             AssistEdit = false;
         }
+        modify("Bill-to Customer No.")
+        {
+            trigger OnBeforeValidate()
+            begin
+                if NOT ((Rec.Status = Rec.Status::Open) OR (Rec.Status = Rec.Status::Quote)) then
+                    Error('Der aktive Status erlaubt keinen Debitorenwechsel.');
+            end;
+        }
+        modify("Sell-to Customer No.")
+        {
+            trigger OnBeforeValidate()
+            begin
+                if NOT ((Rec.Status = Rec.Status::Open) OR (Rec.Status = Rec.Status::Quote)) then
+                    Error('Der aktive Status erlaubt keinen Debitorenwechsel.');
+            end;
+        }
         modify("Description")
         {
             ShowMandatory = true;
@@ -146,6 +162,13 @@ PageExtension 50150 JobCardExt extends "Job Card"
         {
             ShowMandatory = true;
         }
+        modify(Status)
+        {
+            trigger OnAfterValidate()
+            begin
+                CurrPage.Update();
+            end;
+        }
         addafter("Bill-to Contact")
         {
             fixed(Allgemein)
@@ -153,7 +176,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 Caption = 'Allgemein';
             }
         }
-        addafter("Last Date Modified")
+        addbefore("No.")
         {
             field("Job Type"; Rec."Job Type")
             {
@@ -168,6 +191,17 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     NewJobNo: Code[20];
                     Pattern: Text;
                     Regex: Codeunit Regex;
+                    ItemJournalLine: Record "Item Journal Line";
+                    WarehouseEntry: Record "Warehouse Entry";
+                    BinContent: Record "Bin Content";
+                    ReservationEntry: Record "Reservation Entry";
+                    Item: Record Item;
+                    OldBin: Record Bin;
+                    NewBin: Record Bin;
+                    LineNo: Integer;
+
+                    DictSerialNo: Dictionary of [Code[20], Decimal];
+                    SerialNo: Code[20];
                 begin
                     NewJobFlag := false;
                     if Rec."Job Type" <> xRec."Job Type" then begin
@@ -184,32 +218,155 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         end;
 
                         if NewJobFlag then
-                            case Rec."Job Type" of
-                                '10000':
-                                    NewJobNo += '.1';
-                                '20000':
-                                    NewJobNo += '.2';
-                                '30000':
-                                    NewJobNo += '.3';
-                                '40000':
-                                    NewJobNo += '.4';
-                                '50000':
-                                    NewJobNo += '.5';
-                                '60000':
-                                    NewJobNo += '.6';
-                                '70000':
-                                    NewJobNo += '.7';
-                                '80000':
-                                    NewJobNo += '.8';
-                                '90000':
-                                    NewJobNo += '.9';
-                            end;
+                            NewJobNo += GetJobTypeSuffix(Rec."Job Type");
                         Rec."No." := NewJobNo;
+
+                        // CHANGE BIN + CONTENT
+                        // LineNo := 0;
+
+                        // NewBin.Init();
+                        // NewBin.Code := Rec."No.";
+                        // NewBin."Location Code" := 'PROJEKT';
+                        // NewBin.Insert();
+
+                        // ItemJournalLine.DeleteAll();
+
+                        // BinContent.SetRange("Location Code", 'PROJEKT');
+                        // BinContent.SetRange("Bin Code", xRec."No.");
+
+                        // if false then
+                        //     repeat
+                        //         LineNo += 10000;
+                        //         // remove item
+                        //         ItemJournalLine.Init();
+                        //         ItemJournalLine.Validate("Journal Template Name", 'ARTIKEL');
+                        //         ItemJournalLine.Validate("Journal Batch Name", 'PROJEKT');
+                        //         ItemJournalLine."Line No." := LineNo;
+                        //         ItemJournalLine.Insert(true);
+                        //         ItemJournalLine.Validate("Item No.", BinContent."Item No.");
+                        //         ItemJournalLine.Validate("Serial No.", WarehouseEntry."Serial No.");
+                        //         ItemJournalLine.Validate("Posting Date", Today());
+                        //         ItemJournalLine.Validate("Entry Type", ItemJournalLine."Entry Type"::"Negative Adjmt.");
+                        //         ItemJournalLine.Validate("Document No.", Rec."No.");
+                        //         ItemJournalLine.Validate("Source Code", 'UMLAG');
+                        //         ItemJournalLine.Validate("Document Date", Today());
+                        //         ItemJournalLine.Validate("Location Code", BinContent."Location Code");
+                        //         ItemJournalLine.Validate("Bin Code", BinContent."Bin Code");
+                        //         ItemJournalLine.Validate(Quantity, BinContent.Quantity);
+                        //         ItemJournalLine.Validate("Quantity (Base)", BinContent."Quantity (Base)");
+                        //         ItemJournalLine.Validate("Flushing Method", ItemJournalLine."Flushing Method"::Manual);
+                        //         ItemJournalLine.Validate("Value Entry Type", ItemJournalLine."Value Entry Type"::"Direct Cost");
+                        //         ItemJournalLine.Modify();
+
+                        //         // apply reservation -
+                        //         WarehouseEntry.SetRange("Location Code", 'PROJEKT');
+                        //         WarehouseEntry.SetRange("Bin Code", xRec."No.");
+                        //         WarehouseEntry.SetFilter("Serial No.", '<>%1', '');
+
+                        //         if WarehouseEntry.FindLast() then begin
+                        //             DictSerialNo := CreateEmptyDictionary();
+                        //             repeat
+                        //                 if NOT DictSerialNo.ContainsKey(WarehouseEntry."Serial No.") then
+                        //                     DictSerialNo.Add(WarehouseEntry."Serial No.", 0);
+                        //                 DictSerialNo.Set(WarehouseEntry."Serial No.", DictSerialNo.Get(WarehouseEntry."Serial No.") + WarehouseEntry.Quantity);
+                        //             until WarehouseEntry.Next() = 0;
+                        //         end;
+
+                        //         foreach SerialNo in DictSerialNo.Keys do begin
+                        //             ReservationEntry.Init();
+                        //             ReservationEntry."Entry No." := NextEntryNo();
+                        //             ReservationEntry."Item No." := WarehouseEntry."Item No.";
+                        //             ReservationEntry.Description := WarehouseEntry.Description;
+                        //             ReservationEntry."Location Code" := WarehouseEntry."Location Code";
+                        //             ReservationEntry."Variant Code" := WarehouseEntry."Variant Code";
+                        //             ReservationEntry."Reservation Status" := ReservationEntry."Reservation Status"::Prospect;
+                        //             ReservationEntry."Source Type" := Database::"Item Journal Line";
+                        //             // SUBTYPE = 3 für ABGANG!!!  SUBTYPPE = 2 für ZUGANG
+                        //             ReservationEntry."Source Subtype" := ReservationEntry."Source Subtype"::"3";
+                        //             ReservationEntry."Source Batch Name" := 'PROJEKT';
+                        //             ReservationEntry."Source ID" := 'ARTIKEL';
+                        //             ReservationEntry."Source Ref. No." := LineNo;
+                        //             ReservationEntry."Serial No." := SerialNo;
+                        //             ReservationEntry."Item Tracking" := ReservationEntry."Item Tracking"::"Serial No.";
+                        //             ReservationEntry."Created By" := UserId;
+                        //             ReservationEntry.Positive := false;
+                        //             ReservationEntry.Quantity := DictSerialNo.Get(SerialNo) * -1;
+                        //             ReservationEntry."Qty. per Unit of Measure" := DictSerialNo.Get(SerialNo);
+                        //             ReservationEntry."Quantity (Base)" := DictSerialNo.Get(SerialNo) * -1;
+                        //             ReservationEntry."Qty. to Handle (Base)" := DictSerialNo.Get(SerialNo) * -1;
+                        //             ReservationEntry."Qty. to Invoice (Base)" := DictSerialNo.Get(SerialNo) * -1;
+                        //             ReservationEntry."Quantity Invoiced (Base)" := 0;
+
+                        //             ReservationEntry."Creation Date" := Today();
+                        //             ReservationEntry."Expiration Date" := Today();
+                        //             ReservationEntry.Insert();
+                        //         end;
+                        //         LineNo += 10000;
+                        //         // add item
+                        //         ItemJournalLine.Init();
+                        //         ItemJournalLine.Validate("Journal Template Name", 'ARTIKEL');
+                        //         ItemJournalLine.Validate("Journal Batch Name", 'PROJEKT');
+                        //         ItemJournalLine."Line No." := LineNo;
+                        //         ItemJournalLine.Insert(true);
+                        //         ItemJournalLine.Validate("Item No.", BinContent."Item No.");
+                        //         ItemJournalLine.Validate("Serial No.", WarehouseEntry."Serial No.");
+                        //         ItemJournalLine.Validate("Posting Date", Today());
+                        //         ItemJournalLine.Validate("Entry Type", ItemJournalLine."Entry Type"::"Positive Adjmt.");
+                        //         ItemJournalLine.Validate("Document No.", Rec."No.");
+                        //         ItemJournalLine.Validate("Source Code", 'UMLAG');
+                        //         ItemJournalLine.Validate("Document Date", Today());
+                        //         ItemJournalLine.Validate("Location Code", BinContent."Location Code");
+                        //         ItemJournalLine.Validate("Bin Code", BinContent."Bin Code");
+                        //         ItemJournalLine.Validate(Quantity, BinContent.Quantity);
+                        //         ItemJournalLine.Validate("Quantity (Base)", BinContent."Quantity (Base)");
+                        //         ItemJournalLine.Validate("Value Entry Type", ItemJournalLine."Value Entry Type"::"Direct Cost");
+                        //         ItemJournalLine.Validate("Flushing Method", ItemJournalLine."Flushing Method"::Manual);
+                        //         ItemJournalLine.Modify();
+
+                        //         foreach SerialNo in DictSerialNo.Keys do begin
+                        //             ReservationEntry.Init();
+                        //             ReservationEntry."Entry No." := NextEntryNo;
+                        //             ReservationEntry."Item No." := WarehouseEntry."Item No.";
+                        //             ReservationEntry.Description := WarehouseEntry.Description;
+                        //             ReservationEntry."Location Code" := WarehouseEntry."Location Code";
+                        //             ReservationEntry."Variant Code" := WarehouseEntry."Variant Code";
+                        //             ReservationEntry."Reservation Status" := ReservationEntry."Reservation Status"::Prospect;
+                        //             ReservationEntry."Source Type" := Database::"Item Journal Line";
+                        //             // SUBTYPE = 3 für ABGANG!!!  SUBTYPPE = 2 für ZUGANG
+                        //             ReservationEntry."Source Subtype" := ReservationEntry."Source Subtype"::"2";
+                        //             ReservationEntry."Source Batch Name" := 'PROJEKT';
+                        //             ReservationEntry."Source ID" := 'ARTIKEL';
+                        //             ReservationEntry."Source Ref. No." := LineNo;
+                        //             ReservationEntry."Serial No." := SerialNo;
+                        //             ReservationEntry."Item Tracking" := ReservationEntry."Item Tracking"::"Serial No.";
+                        //             ReservationEntry."Created By" := UserId;
+                        //             ReservationEntry.Positive := true;
+                        //             ReservationEntry.Quantity := DictSerialNo.Get(SerialNo);
+                        //             ReservationEntry."Qty. per Unit of Measure" := DictSerialNo.Get(SerialNo);
+                        //             ReservationEntry."Quantity (Base)" := DictSerialNo.Get(SerialNo);
+                        //             ReservationEntry."Qty. to Handle (Base)" := DictSerialNo.Get(SerialNo);
+                        //             ReservationEntry."Qty. to Invoice (Base)" := DictSerialNo.Get(SerialNo);
+                        //             ReservationEntry."Quantity Invoiced (Base)" := 0;
+
+                        //             ReservationEntry."Creation Date" := Today();
+                        //             ReservationEntry."Expiration Date" := Today();
+                        //             ReservationEntry.Insert();
+                        //         end;
+                        //     // apply reservation +
+
+                        //     until BinContent.Next() = 0;
+
+                        // CODEUNIT.Run(CODEUNIT::"Item Jnl.-Post", ItemJournalLine);
+
                         CurrPage.Update();
                     end
                 end;
             }
-            field("Object"; Rec.Object)
+        }
+        addbefore("Last Date Modified")
+        {
+            field("Object";
+            Rec.Object)
             {
                 ApplicationArea = Basic;
                 Caption = 'Objekt';
@@ -539,103 +696,131 @@ PageExtension 50150 JobCardExt extends "Job Card"
         {
             Visible = false;
         }
-        addafter("Ledger E&ntries")
+        addfirst(navigation)
         {
+            action("New Job Customer 1")
+            {
+                ApplicationArea = All;
+                Caption = 'Neue Kopie ohne Debitor';
+                Image = Add;
+                Promoted = true;
+                PromotedCategory = New;
+                PromotedIsBig = true;
 
-            // TODO activate
-            // action("New Job")
-            // {
-            //     ApplicationArea = None;
-            //     Caption = 'Neue Kopie ohne Debitor';
-            //     Image = Add;
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    JobCard: Page "Job Card";
+                    NoSeriesManagement: Codeunit NoSeriesManagement;
+                    NewJobNo: Code[20];
+                begin
+                    NewJobNo := NoSeriesManagement.GetNextNo('PROJEKT', Today, true);
+                    NewJobNo += GetJobTypeSuffix(Rec."Job Type");
 
-            //     trigger OnAction()
-            //     var
-            //         Job: Record Job;
-            //         JobCard: Page "Job Card";
-            //         NoSeriesManagement: Codeunit NoSeriesManagement;
-            //         NewJobNo: Code[20];
-            //     begin
-            //         Job.Init();
-            //         NewJobNo := NoSeriesManagement.GetNextNo('PROJEKT', Today, true);
+                    Job.Init();
+                    Job."No." := NewJobNo;
+                    Job."No. Series" := 'PROJEKT';
+                    Job.Insert(false);
+                    Job.TransferFields(Rec, false);
+                    Job."Sell-to Customer No." := '';
+                    Job."Sell-to Address" := '';
+                    Job."Sell-to Address 2" := '';
+                    Job."Sell-to City" := '';
+                    Job."Sell-to Contact" := '';
+                    Job."Sell-to Contact No." := '';
+                    Job."Sell-to Country/Region Code" := '';
+                    Job."Sell-to County" := '';
+                    Job."Sell-to Customer Name" := '';
+                    Job."Sell-to Customer Name 2" := '';
+                    Job."Sell-to E-Mail" := '';
+                    Job."Sell-to Phone No." := '';
+                    Job."Sell-to Post Code" := '';
 
-            //         case Rec."Job Type" of
-            //             '10000':
-            //                 NewJobNo += '.1';
-            //             '20000':
-            //                 NewJobNo += '.2';
-            //             '30000':
-            //                 NewJobNo += '.3';
-            //             '40000':
-            //                 NewJobNo += '.4';
-            //             '50000':
-            //                 NewJobNo += '.5';
-            //             '60000':
-            //                 NewJobNo += '.6';
-            //             '70000':
-            //                 NewJobNo += '.7';
-            //             '80000':
-            //                 NewJobNo += '.8';
-            //             '90000':
-            //                 NewJobNo += '.9';
-            //         end;
+                    Job."Bill-to Customer No." := '';
+                    Job."Bill-to Address" := '';
+                    Job."Bill-to Address 2" := '';
+                    Job."Bill-to City" := '';
+                    Job."Bill-to Contact" := '';
+                    Job."Bill-to Contact No." := '';
+                    Job."Bill-to Country/Region Code" := '';
+                    Job."Bill-to County" := '';
+                    Job."Bill-to Name" := '';
+                    Job."Bill-to Name 2" := '';
+                    Job."Bill-to Post Code" := '';
 
-            //         Job."No." := NewJobNo;
-            //         Job."No. Series" := 'PROJEKT';
-            //         Job."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
-            //         Job."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
-            //         Job.Insert();
+                    Job."Ship-to Code" := '';
+                    Job."Ship-to Address" := '';
+                    Job."Ship-to Address 2" := '';
+                    Job."ship-to City" := '';
+                    Job."Ship-to Contact" := '';
+                    Job."Ship-to Country/Region Code" := '';
+                    Job."Ship-to County" := '';
+                    Job."Ship-to Name" := '';
+                    Job."Ship-to Name 2" := '';
+                    Job."Ship-to Post Code" := '';
 
-            //         Job.Validate("Job Type", Rec."Job Type");
-            //         Job.Validate(Description, Rec.Description);
-            //         Job.Validate("Description 2", Rec."Description 2");
-            //         Job.Validate("Person Responsible", Rec."Person Responsible");
-            //         Job.Validate("Job Posting Group", Rec."Job Posting Group");
-            //         Job.Validate("Language Code", Rec."Language Code");
-            //         Job.Validate("Scheduled Res. Gr. Qty.", Rec."Scheduled Res. Gr. Qty.");
-            //         Job.Validate("Resource Filter", Rec."Resource Filter");
-            //         Job.Validate(Reserve, Rec.Reserve);
-            //         Job.Validate(Image, Rec.Image);
-            //         Job.Validate("Currency Code", Rec."Currency Code");
-            //         Job.Validate("Invoice Currency Code", Rec."Invoice Currency Code");
-            //         Job.Validate("Exch. Calculation (Cost)", Rec."Exch. Calculation (Cost)");
-            //         Job.Validate("Exch. Calculation (Price)", Rec."Exch. Calculation (Price)");
-            //         Job.Validate("Allow Schedule/Contract Lines", Rec."Allow Schedule/Contract Lines");
-            //         Job.Validate("Project Manager", Rec."Project Manager");
-            //         Job.Validate("Payment Method Code", Rec."Payment Method Code");
-            //         Job.Validate("Your Reference", Rec."Your Reference");
-            //         Job.Validate("Price Calculation Method", Rec."Price Calculation Method");
-            //         Job.Validate("Cost Calculation Method", Rec."Cost Calculation Method");
-            //         Job.Validate(Object, Rec.Object);
-            //         Job.Validate("Anfrage von", Rec."Anfrage von");
-            //         Job.Validate("Anfrage per", Rec."Anfrage per");
-            //         Job.Validate("Angebotsabgabe durch", Rec."Angebotsabgabe durch");
-            //         Job.Validate(Reparaturort, Rec.Reparaturort);
-            //         Job.Validate(Agentur, Rec.Agentur);
-            //         Job.Validate(Agenturperson, Rec.Agenturperson);
-            //         Job.Validate("Letzte Notiz", Rec."Letzte Notiz");
-            //         Job.Validate(Verfasser, Rec.Verfasser);
-            //         Job.Validate(Reparaturleiter, Rec.Reparaturleiter);
-            //         Job.Validate("Betriebsstätte Rotterdam", Rec."Betriebsstätte Rotterdam");
-            //         Job.Validate("Contact Company No.", Rec."Contact Company No.");
-            //         Job.Validate("Your Order No.", Rec."Your Order No.");
-            //         Job.Validate(ASME, Rec.ASME);
-            //         Job.Validate("Parts for", Rec."Parts for");
-            //         Job.Validate(Maker, Rec.Maker);
-            //         Job.Validate(Type, Rec.Type);
-            //         Job.Validate("We Quote for", Rec."We Quote for");
-            //         Job.Validate("Serial Number", Rec."Serial Number");
-            //         Job.Validate(Specification, Rec.Specification);
-            //         Job.Validate("Ship Owner", Rec."Ship Owner");
-            //         Job.Validate("Bareboat Charterer", Rec."Bareboat Charterer");
-            //         Job.Validate(Preisstellung, Rec.Preisstellung);
-            //         Job.Validate("Validity (DAYS)", Rec."Validity (DAYS)");
-            //         Job.Validate("Ship Owner Bearbeiter", Rec."Ship Owner Bearbeiter");
-            //         Job.Modify();
-            //         JobCard.SetRecord(Job);
-            //         JobCard.Run();
-            //     end;
-            // }
+                    Job.Modify();
+                    JobCard.SetRecord(Job);
+                    JobCard.Run();
+                end;
+            }
+            action("New Job Customer 2")
+            {
+                ApplicationArea = All;
+                Caption = 'Neue Kopie mit Debitor';
+                Image = Add;
+                Promoted = true;
+                PromotedCategory = New;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    JobCard: Page "Job Card";
+                    NoSeriesManagement: Codeunit NoSeriesManagement;
+                    NewJobNo: Code[20];
+                begin
+                    NewJobNo := NoSeriesManagement.GetNextNo('PROJEKT', Today, true);
+                    case Rec."Job Type" of
+                        '10000':
+                            NewJobNo += '.1';
+                        '20000':
+                            NewJobNo += '.2';
+                        '30000':
+                            NewJobNo += '.3';
+                        '40000':
+                            NewJobNo += '.4';
+                        '50000':
+                            NewJobNo += '.5';
+                        '60000':
+                            NewJobNo += '.6';
+                        '70000':
+                            NewJobNo += '.7';
+                        '80000':
+                            NewJobNo += '.8';
+                        '90000':
+                            NewJobNo += '.9';
+                    end;
+
+                    Job.Init();
+                    Job."No." := NewJobNo;
+                    Job."No. Series" := 'PROJEKT';
+                    Job.Insert(false);
+                    Job.TransferFields(Rec, false);
+                    Job."Anfrage am" := 0D;
+                    Job."Anfrage per" := '';
+                    Job."Anfrage von" := '';
+                    job."Angebotsabgabe bis" := 0D;
+                    Job."Angebotsabgabe durch" := '';
+                    Job.Modify();
+                    JobCard.SetRecord(Job);
+                    JobCard.Run();
+                end;
+            }
+        }
+
+        addbefore("Ledger E&ntries")
+        {
             action(Bilder)
             {
                 ApplicationArea = Basic;
@@ -733,24 +918,32 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     // G-ERP.RS+ 2021-02-01 - 01
 
                     if Rec.Status = Rec.Status::Open then begin
+                        Rec."Prev. Status" := Rec.Status;
+                        Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Quote;
                         Rec.Modify();
                         exit;
                     end;
 
                     if Rec.Status = Rec.Status::Quote then begin
+                        Rec."Prev. Status" := Rec.Status;
+                        Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Planning;
                         Rec.Modify();
                         exit;
                     end;
 
                     if Rec.Status = Rec.Status::Planning then begin
+                        Rec."Prev. Status" := Rec.Status;
+                        Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Invoiced;
                         Rec.Modify();
                         exit;
                     end;
 
                     if Rec.Status = Rec.Status::Completed then begin
+                        Rec."Prev. Status" := Rec.Status;
+                        Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Invoiced;
                         Rec.Modify();
                         exit;
@@ -784,18 +977,24 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         EXIT;
 
                     if (Rec.Status = Rec.Status::Cancelled) then begin
+                        Rec."Prev. Status" := Rec.Status;
+                        Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Quote;
                         Rec.Modify();
                         exit;
                     end;
 
                     if Rec.Status = Rec.Status::"Gewährleistung" then begin
+                        Rec."Prev. Status" := Rec.Status;
+                        Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Planning;
                         Rec.Modify();
                         exit;
                     end;
 
                     if Rec.Status = Rec.Status::Invoiced then begin
+                        Rec."Prev. Status" := Rec.Status;
+                        Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Planning;
                         Rec.Modify();
                         exit;
@@ -811,6 +1010,8 @@ PageExtension 50150 JobCardExt extends "Job Card"
 
                 trigger OnAction()
                 begin
+                    Rec."Prev. Status" := Rec.Status;
+                    Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::Cancelled;
                 end;
             }
@@ -823,6 +1024,8 @@ PageExtension 50150 JobCardExt extends "Job Card"
 
                 trigger OnAction()
                 begin
+                    Rec."Prev. Status" := Rec.Status;
+                    Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::Completed;
                 end;
             }
@@ -835,6 +1038,8 @@ PageExtension 50150 JobCardExt extends "Job Card"
 
                 trigger OnAction()
                 begin
+                    Rec."Prev. Status" := Rec.Status;
+                    Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::"Gewährleistung";
                 end;
             }
@@ -852,6 +1057,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     JobNo: Code[20];
                     Bin_l: Record Bin;
                     InventorySetup_l: Record "Inventory Setup";
+                    JobCard: Page "Job Card";
                 begin
                     // Auf anfrage von Florian Prill
                     // AC01 B
@@ -878,19 +1084,34 @@ PageExtension 50150 JobCardExt extends "Job Card"
 
                         //l_Job2 := Rec;
                         l_Job2."No." := JobNo;
+                        l_Job2.Description := Rec.Description;
+                        l_Job2."Contact Person Name" := Rec."Contact Person Name";
+                        l_Job2."Contact Person No." := Rec."Contact Person No.";
+                        l_Job2."Your Reference" := Rec."Your Reference";
+                        l_Job2."Person Responsible" := Rec."Person Responsible";
+                        l_Job2.Verfasser := Rec.Verfasser;
+                        l_Job2.Reparaturort := Rec.Reparaturort;
+                        l_Job2."Anfrage per" := Rec."Anfrage per";
+                        l_Job2."Anfrage von" := Rec."Anfrage von";
+                        l_Job2."Anfrage am" := Rec."Anfrage am";
+                        l_Job2."Angebotsabgabe bis" := Rec."Angebotsabgabe bis";
+                        l_Job2."Angebotsabgabe durch" := Rec."Angebotsabgabe durch";
+                        l_Job2."Starting Date" := Rec."Starting Date";
+                        l_Job2."Ending Date" := Rec."Ending Date";
                         l_Job2.Validate("Sell-to Customer No.", Rec."Sell-to Customer No.");
                         l_Job2."Sell-to Contact No." := Rec."Sell-to Contact No.";
                         l_Job2."Job Type" := Rec."Job Type";
                         l_Job2.Status := Rec.Status;
                         l_Job2.Object := Rec.Object;
                         l_Job2.Objektname := Rec.Objektname;
+                        l_Job2."Ship Owner" := Rec."Ship Owner";
+                        l_Job2."Ship Owner Bearbeiter" := Rec."Ship Owner Bearbeiter";
 
                         // l_Job2.Status := l_Job2.Status::Order;
                         l_Job2.Subproject := true;        //G-ERP.RS 2019-01-24
                         l_Job2.MainProjektNo := Rec."No.";    //G-ERP.RS 2019-01-24
                         l_Job2."Folder Created" := false; //G-ERP.RS 2019-01-24
                         l_Job2.Insert;
-                        l_Job2.Modify(true); //G-ERP.RS 2019-01-24
 
                         //G-ERP.RS 2021-07-09 +++ Anfrage#2310609
                         //G-ERP.RS 2021-07-14 IF Status = Status::Order THEN BEGIN
@@ -906,9 +1127,38 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         end;
                         //G-ERP.RS 2021-07-14 END;
                         //G-ERP.RS 2021-07-09 --- Anfrage#2310609
+                        l_Job2."Bill-to Customer No." := Rec."Bill-to Customer No.";
+                        l_Job2."Bill-to Name" := Rec."Bill-to Name";
+                        l_Job2."Bill-to Name 2" := Rec."Bill-to Name 2";
+                        l_Job2."Bill-to Address" := Rec."Bill-to Address";
+                        l_Job2."Bill-to Address 2" := Rec."Bill-to Address 2";
+                        l_Job2."Bill-to City" := Rec."Bill-to City";
+                        l_Job2."Bill-to County" := Rec."Bill-to County";
+                        l_Job2."Bill-to Post Code" := Rec."Bill-to Post Code";
+                        l_Job2."Bill-to Country/Region Code" := l_Job2."Bill-to Country/Region Code";
+                        l_Job2."Bill-to Contact No." := Rec."Bill-to Contact No.";
+                        l_Job2."Bill-to Contact" := Rec."Bill-to Contact";
 
+                        l_Job2."Ship-to Code" := Rec."Ship-to Code";
+                        l_Job2."Ship-to Name" := Rec."Ship-to Name";
+                        l_Job2."Ship-to Name 2" := Rec."Ship-to Name 2";
+                        l_Job2."Ship-to Address" := Rec."Ship-to Address";
+                        l_Job2."Ship-to Address 2" := Rec."Ship-to Address 2";
+                        l_Job2."Ship-to City" := Rec."Ship-to City";
+                        l_Job2."Ship-to County" := Rec."Ship-to County";
+                        l_Job2."Ship-to Post Code" := Rec."Ship-to Post Code";
+                        l_Job2."Ship-to Country/Region Code" := l_Job2."Ship-to Country/Region Code";
+                        l_Job2."Ship-to Contact" := Rec."Ship-to Contact";
 
-                        Message('Es wurde Unterauftrag %1 angelegt!', l_Job2."No.");
+                        l_Job2."Payment Method Code" := Rec."Payment Method Code";
+                        l_Job2."Payment Terms Code" := Rec."Payment Terms Code";
+
+                        l_Job2.Validate(Status, l_Job2.Status::Open);
+                        l_Job2.Modify(true); //G-ERP.RS 2019-01-24
+
+                        Jobcard.SetRecord(l_Job2);
+                        JobCard.Run();
+                        // Message('Es wurde Unterauftrag %1 angelegt!', l_Job2."No.");
                     end;
                     // AC01 B
                     //END;
@@ -1044,6 +1294,9 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     CustomerChangeDlg: Page "Job Customer Change Dlg";
                     Customer: Record Customer;
                 begin
+                    if NOT ((Rec.Status = Rec.Status::Open) OR (Rec.Status = Rec.Status::Quote)) then
+                        Error('Der aktive Status erlaubt keinen Debitorenwechsel.');
+
                     CustomerChangeDlg.SetCustomerNo(Rec."Sell-to Customer No.");
                     if CustomerChangeDlg.RunModal() = Action::OK then begin
                         if Customer.Get(CustomerChangeDlg.GetCustomerNo()) then begin
@@ -1087,5 +1340,48 @@ PageExtension 50150 JobCardExt extends "Job Card"
             EVALUATE(Rec.Status, Rec.GETFILTER(Status));
         //G-ERP.KBS 2017-07-25 -
     end;
-}
 
+
+    local procedure NextEntryNo(): Integer
+    var
+        LastEntryNo: Integer;
+        ReservationEntry: Record "Reservation Entry";
+    begin
+        LastEntryNo := 0;
+        ReservationEntry.Reset();
+        if ReservationEntry.FindLast() then
+            LastEntryNo := ReservationEntry."Entry No.";
+        exit(LastEntryNo + 1);
+    end;
+
+    local procedure CreateEmptyDictionary() Result: Dictionary of [Code[20], Decimal]
+    begin
+        exit(Result);
+    end;
+
+    local procedure GetJobTypeSuffix(JobType_L: Code[20]) JobTypeSuffix: Code[4]
+    begin
+        JobTypeSuffix := '';
+        case "JobType_L" of
+            '10000':
+                JobTypeSuffix += '.1';
+            '20000':
+                JobTypeSuffix += '.2';
+            '30000':
+                JobTypeSuffix += '.3';
+            '40000':
+                JobTypeSuffix += '.4';
+            '50000':
+                JobTypeSuffix += '.5';
+            '60000':
+                JobTypeSuffix += '.6';
+            '70000':
+                JobTypeSuffix += '.7';
+            '80000':
+                JobTypeSuffix += '.8';
+            '90000':
+                JobTypeSuffix += '.9';
+        end;
+        Exit(JobTypeSuffix);
+    end;
+}
