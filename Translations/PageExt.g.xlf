@@ -3178,6 +3178,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Wareneingangskontrolle - Control Verpackung i.O. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1223227876 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schweißaufsichten</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Welding Supervisiors - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1223227876 - Control 129688762 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Benutzer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Welding Supervisiors - Control User Name - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1709059224 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Werkzeuganforderung - Auswahl</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3293,13 +3303,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Kopf - Control Reparatur - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3558012457 - Control 2955582367 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fertigstellung Werkzeuge Lager</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Kopf - Control Fertigstellung - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3558012457 - Control 288087153 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Beginn</source>
+          <source>Reparaturbeginn</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Kopf - Control Reparaturbeginn - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3558012457 - Control 3642984 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Ende</source>
+          <source>Reparaturende</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Kopf - Control Reparaturende - Property Caption</note>
         </trans-unit>
@@ -3442,6 +3457,11 @@
           <source>Drucken</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Übersicht - Action Print - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1124344531 - Action 370122556 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schweißaufsichten</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Übersicht - Action WeldingSupervisiors - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2715795398 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
           <source>WerkzeuganforderungZeile</source>

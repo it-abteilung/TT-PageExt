@@ -42,20 +42,22 @@ Page 50077 "Werkzeuganforderung Kopf"
                     field(Reparaturbeginn; Rec.Reparaturbeginn)
                     {
                         ApplicationArea = Basic;
-                        Caption = 'Beginn';
+                        Caption = 'Reparaturbeginn';
                     }
                     field(Reparaturende; Rec.Reparaturende)
                     {
                         ApplicationArea = Basic;
-                        Caption = 'Ende';
+                        Caption = 'Reparaturende';
                     }
                     field(Fertigstellung; Rec.Fertigstellung)
                     {
                         ApplicationArea = Basic;
+                        Caption = 'Fertigstellung Werkzeuge Lager';
                     }
                 }
                 group("Freigabe Schweißzusätze")
                 {
+                    Editable = IsWeldingSupervisior;
                     Caption = 'Freigabe Schweißzusätze';
                     field("Freigabe Schweißzusätze am"; Rec."Freigabe Schweißzusätze am")
                     {
@@ -229,5 +231,16 @@ Page 50077 "Werkzeuganforderung Kopf"
             }
         }
     }
+
+    var
+        IsWeldingSupervisior: Boolean;
+
+    trigger OnOpenPage()
+    var
+        WeldingSupervisior: Record "Welding Supervisior";
+    begin
+        WeldingSupervisior.SetRange("User Name", UserId());
+        IsWeldingSupervisior := NOT WeldingSupervisior.IsEmpty();
+    end;
 }
 

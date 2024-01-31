@@ -3334,13 +3334,13 @@
         </trans-unit>
         <trans-unit id="Page 3558012457 - Control 288087153 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Beginn</source>
-          <target>Beginn</target>
+          <target>Reparaturbeginn</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Kopf - Control Reparaturbeginn - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3558012457 - Control 3642984 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Ende</source>
-          <target>Ende</target>
+          <target>Reparaturende</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Kopf - Control Reparaturende - Property Caption</note>
         </trans-unit>

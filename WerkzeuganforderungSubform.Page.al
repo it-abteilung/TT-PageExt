@@ -22,7 +22,7 @@ Page 50078 "Werkzeuganforderung Subform"
                 field("Artikel Nr"; Rec."Artikel Nr")
                 {
                     ApplicationArea = Basic;
-                    TableRelation = Item."No." where(Blocked = filter(false));
+                    TableRelation = Item."No." where(Blocked = const(false));
 
                     trigger OnValidate()
                     var
@@ -43,11 +43,12 @@ Page 50078 "Werkzeuganforderung Subform"
 
                         Item.Reset();
                         if Rec."Artikel Nr" <> '' then
-                            if Item.Get(Rec."Artikel Nr") then
-                                if Item."Blocked Tool Requirement" then begin
+                            if Item.Get(Rec."Artikel Nr") then begin
+                                if Item."Blocked Tool Requirement" then
                                     Error('Der ausgewählte Artikel ist nicht für die Werkzeuganforderung zugelassen');
-
-                                end;
+                                if Item.Blocked then
+                                    Error('Der ausgewählte Artikel ist nicht für die Werkzeuganforderung zugelassen');
+                            end;
                     end;
                 }
                 field(Beschreibung; Rec.Beschreibung)

@@ -106,6 +106,18 @@ Page 50076 "Werkzeuganforderung Übersicht"
                     end;
                 end;
             }
+            action(WeldingSupervisiors)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Schweißaufsichten';
+                Image = List;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+
+                RunObject = Page "Welding Supervisiors";
+            }
         }
     }
 
