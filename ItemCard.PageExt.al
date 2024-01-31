@@ -2,6 +2,14 @@ PageExtension 50010 pageextension50010 extends "Item Card"
 {
     layout
     {
+        addafter("Item Category Code")
+        {
+            field("Product Group Code TT"; Rec."Product Group Code TT")
+            {
+                ApplicationArea = all;
+                Caption = 'Produktgruppencode';
+            }
+        }
         addafter(Description)
         {
             // Feld wurde mit v22.3.5.... in die Base-App aufgenommen 04.08.2023 CN 

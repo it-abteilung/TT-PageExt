@@ -596,11 +596,12 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
         MATRIX_CurrentColumnOrdinal: Integer;
     begin
         //MATRIX_CurrentColumnOrdinal := 0;
-        if MatrixRecord.FindFirst then
+        if MatrixRecord.FindFirst() then begin
             repeat
                 MATRIX_CurrentColumnOrdinal := MATRIX_CurrentColumnOrdinal + 1;
                 MATRIX_OnAfterGetRecord(MATRIX_CurrentColumnOrdinal);
             until (MatrixRecord.Next = 0) or (MATRIX_CurrentColumnOrdinal = MATRIX_NoOfMatrixColumns);
+        end;
     end;
 
     trigger OnInit()
@@ -818,7 +819,6 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
         LineNo_alt: Integer;
         ItemNo_alt: Code[20];
 
-
     procedure Load(MatrixColumns1: array[64] of Text[1024]; var MatrixRecords1: array[64] of Record "Purchase Line"; var MatrixRecord1: Record "Purchase Line")
     begin
         CopyArray(MATRIX_ColumnCaption, MatrixColumns1, 1);
@@ -833,30 +833,44 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
     var
         PurchaseLine: Record "Purchase Line";
     begin
+        MATRIX_CellData[ColumnID] := 0;
         Clear(PurchaseLine);
         //PurchaseLine.copy(Rec);
         PurchaseLine.SetRange("Document Type", Rec."Document Type");
         PurchaseLine.SetRange("Document No.", Rec."No.");
         PurchaseLine.SetRange("Line No.", MatrixRecords[ColumnID]."Line No.");
         PurchaseLine.SetFilter(Type, '%1 | %2', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)");
-        if PurchaseLine.FindFirst then;
-        MATRIX_CellData[ColumnID] := PurchaseLine.Amount;
+        if PurchaseLine.FindFirst then begin
 
-        if (Rec."No." = No_alt) and (PurchaseLine."Line No." <> 0) then //G-ERP.RS 2019-02-06
-            if LineNo_alt > PurchaseLine."Line No." then
-                SumZeile := 0;
-        if No_alt <> Rec."No." then
+            MATRIX_CellData[ColumnID] := PurchaseLine.Amount;
+
+            // if (Rec."No." = No_alt) and (PurchaseLine."Line No." <> 0) then //G-ERP.RS 2019-02-06
+            //     if LineNo_alt > PurchaseLine."Line No." then
+            //         SumZeile := 0;
+            // if No_alt <> Rec."No." then
+            //     SumZeile := 0;
+
+            if (LineNo_alt = PurchaseLine."Line No.") and (ItemNo_alt = PurchaseLine."No.") then
+                if SumZeile <> 0 then
+                    MATRIX_CellData[ColumnID] := 0;
+
+            // No_alt := Rec."No.";
+            // LineNo_alt := PurchaseLine."Line No.";
+            // ItemNo_alt := PurchaseLine."No.";
+            // SumZeile := SumZeile + MATRIX_CellData[ColumnID];
             SumZeile := 0;
-
-        if (LineNo_alt = PurchaseLine."Line No.") and (ItemNo_alt = PurchaseLine."No.") then
-            if SumZeile <> 0 then
-                MATRIX_CellData[ColumnID] := 0;
-
-        No_alt := Rec."No.";
-        LineNo_alt := PurchaseLine."Line No.";
-        ItemNo_alt := PurchaseLine."No.";
-        SumZeile := SumZeile + MATRIX_CellData[ColumnID];
-        SetVisible;
+            Clear(PurchaseLine);
+            //PurchaseLine.copy(Rec);
+            PurchaseLine.SetRange("Document Type", Rec."Document Type");
+            PurchaseLine.SetRange("Document No.", Rec."No.");
+            // PurchaseLine.SetRange("Line No.", MatrixRecords[ColumnID]."Line No.");
+            PurchaseLine.SetFilter(Type, '%1 | %2', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)");
+            if PurchaseLine.FindSet() then
+                repeat
+                    SumZeile += PurchaseLine.Amount;
+                until PurchaseLine.Next() = 0;
+            SetVisible;
+        end;
     end;
 
     procedure SetVisible()

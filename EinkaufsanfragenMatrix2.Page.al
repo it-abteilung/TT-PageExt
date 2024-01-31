@@ -156,10 +156,12 @@ Page 50054 "Einkaufsanfragen Matrix2"
         if Rec.Serienanfragennr <> '' then begin
 
             //G-ERP.AG 2021-07-22 + Anfrage#2312362
+
+            // build a string for filter to find all purchase lines
             Clear(purchHeader);
             purchHeader.SetRange("Document Type", purchHeader."document type"::Quote);
             purchHeader.SetRange(Serienanfragennr, Rec.Serienanfragennr);
-            if purchHeader.FindSet(false, false) then
+            if purchHeader.FindSet() then
                 repeat
                     if documentNoFilter = '' then
                         documentNoFilter := purchHeader."No."
@@ -168,6 +170,7 @@ Page 50054 "Einkaufsanfragen Matrix2"
                 until purchHeader.Next = 0;
             //G-ERP.AG 2021-07-22 -
 
+            // get all purchaselines fltered by the purchase header no. field and type
             MatrixRecord.SetRange("Document Type", Rec."Document Type");
             //G-ERP.AG 2021-07-22 + Anfrage#2312362
             if documentNoFilter <> '' then
@@ -177,15 +180,18 @@ Page 50054 "Einkaufsanfragen Matrix2"
                 MatrixRecord.SetRange("Document No.", Rec."No.");
             MatrixRecord.SetFilter(Type, '%1 | %2', MatrixRecord.Type::Item, MatrixRecord.Type::"Charge (Item)");
 
+            //table exists
             MatrixRecRef.GetTable(MatrixRecord);
+            //set table
             MatrixRecRef.SetTable(MatrixRecord);
-
+            //get line no id
             CaptionFieldNo := MatrixRecord.FieldNo("Line No.");
 
-
+            //magic
             MatrixMgt.GenerateMatrixData(MatrixRecRef, SetWanted, ArrayLen(MatrixRecords), CaptionFieldNo, MATRIX_PKFirstRecInCurrSet,
               Matrix_ColumnCaptions, MATRIX_CaptionRange, ColumnSetLength);
 
+            // get all purchaselines fltered by the purchase header no. field and type again
             PurchaseLine.SetRange("Document Type", Rec."Document Type");
             //G-ERP.AG 2021-07-22 + Anfrage#2312362
             if documentNoFilter <> '' then
@@ -193,14 +199,18 @@ Page 50054 "Einkaufsanfragen Matrix2"
             else
                 //G-ERP.AG 2021-07-22 -
                 PurchaseLine.SetRange("Document No.", Rec."No.");
-
             //G-ERP.AG 2021-07-22 + Anfrage#2312362
             PurchaseLine.SetFilter(Type, '%1 | %2', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)");
 
+            //remove duplicates in Matrix_ColumnCaptions
             for i := 1 to ArrayLen(Matrix_ColumnCaptions) do begin
+                // if caption is not blank
                 if Matrix_ColumnCaptions[i] <> '' then begin
+                    // this for-loop grows every iteration
                     for x := 1 to i do begin
+                        // two columns index x and i have same value, but x != i
                         if (x <> i) and (Matrix_ColumnCaptions[x] = Matrix_ColumnCaptions[i]) then
+                            // set last column of the iteration to blank
                             Matrix_ColumnCaptions[i] := '';
                     end;
                 end;
@@ -208,7 +218,9 @@ Page 50054 "Einkaufsanfragen Matrix2"
             //G-ERP.AG 2021-07-22 -
 
             for i := 1 to ArrayLen(Matrix_ColumnCaptions) do begin
+                //caption is not blank
                 if Matrix_ColumnCaptions[i] <> '' then begin
+                    // filter by line no, this can lead to an error, if you copy a lines and bc recalcs line no
                     PurchaseLine.SetFilter("Line No.", Matrix_ColumnCaptions[i]);
                     if PurchaseLine.FindFirst then
                         Matrix_ColumnCaptions[i] := PurchaseLine."No." + ' - ' + PurchaseLine.Description + ' ' + PurchaseLine."Description 2";

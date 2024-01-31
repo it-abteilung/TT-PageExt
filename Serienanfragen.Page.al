@@ -41,6 +41,8 @@ Page 50060 Serienanfragen
                 var
                     PurchSetup: Record "Purchases & Payables Setup";
                     UserSetup: Record "User Setup";
+                    PurchaseLineOld: Record "Purchase Line";
+                    PurchaseLineNew: Record "Purchase Line";
                 begin
                     VendorSerienanfrage.SetRange(Serienanfragenr, Rec."No.");
                     VendorSerienanfrage.SetRange(Erledigt, false);
@@ -90,14 +92,34 @@ Page 50060 Serienanfragen
                                 PurchaseHeader.Modify;
                                 PurchSetup.Get;
 
-                                if UpperCase(UserId) = 'TURBO-TECHNIK\GERWING-ERP' then
-                                    CopyDocMgt.SetProperties(
-                                      false, true, false, false, false, PurchSetup."Exact Cost Reversing Mandatory", false)
-                                else
-                                    CopyDocMgt.SetProperties(
-                                      false, true, false, false, false, PurchSetup."Exact Cost Reversing Mandatory", false);
+                                //TODO muss auskommentiert werden, weil line no neu berechnet werden
+                                // if UpperCase(UserId) = 'TURBO-TECHNIK\GERWING-ERP' then
+                                //     CopyDocMgt.SetProperties(
+                                //       false, true, false, false, false, PurchSetup."Exact Cost Reversing Mandatory", false)
+                                // else
+                                //     CopyDocMgt.SetProperties(
+                                //       false, true, false, false, false, PurchSetup."Exact Cost Reversing Mandatory", false);
 
-                                CopyDocMgt.CopyPurchDoc(PurchaseHeader2."Document Type", PurchaseHeader2."No.", PurchaseHeader);
+                                // CopyDocMgt.CopyPurchDoc(PurchaseHeader2."Document Type", PurchaseHeader2."No.", PurchaseHeader);
+
+                                //TODO hier weitermachen es fehlen noch felder
+                                Clear(PurchaseLineOld);
+                                PurchaseLineOld.SetRange("Document Type", PurchaseHeader2."Document Type");
+                                PurchaseLineOld.SetRange("Document No.", PurchaseHeader2."No.");
+                                if PurchaseLineOld.FindFirst() then begin
+                                    repeat
+                                        PurchaseLineNew.Init();
+                                        PurchaseLineNew.TransferFields(PurchaseLineOld);
+                                        PurchaseLineNew."Document Type" := PurchaseHeader."Document Type";
+                                        PurchaseLineNew."Document No." := PurchaseHeader."No.";
+                                        PurchaseLineNew."Line No." := PurchaseLineOld."Line No.";
+                                        PurchaseLineNew.Amount := PurchaseLineOld.Amount;
+                                        if PurchaseLineOld.HasLinks() then
+                                            PurchaseLineNew.CopyLinks(PurchaseLineOld);
+                                        PurchaseLineNew.Insert(true);
+                                    until PurchaseLineOld.Next() = 0;
+                                end;
+
                                 //      IF PurchaseLine.FINDSET THEN
                                 //        REPEAT
                                 //          NewPurchaseLine.TRANSFERFIELDS(PurchaseLine);
@@ -119,9 +141,11 @@ Page 50060 Serienanfragen
                                     until PurchaseLine.Next = 0;
                                 end
                             end;
+
                             VendorSerienanfrage.Erledigt := true;
                             VendorSerienanfrage.Modify;
                         until VendorSerienanfrage.Next = 0;
+                        // RepairLineNos(Rec."No.", Rec."No."); Funktioniert nicht, sollte es funktionieren dann sind die Einkaufspreise leer.
                         Message('Serienanfragen abgeschlossen');
                     end;
                 end;
@@ -389,5 +413,58 @@ Page 50060 Serienanfragen
         NewPurchaseLine: Record "Purchase Line";
         ItemVendor: Record "Item Vendor";
         CopyDocMgt: Codeunit "Copy Document Mgt.";
+
+
+
+    procedure RepairLineNos(FromPurchHeaderNo: Code[20]; SerialNo: Code[20])
+    var
+        FromPurchaseHeader: Record "Purchase Header";
+        FromPurchaseLine: Record "Purchase Line";
+        ToPurchaseHeader: Record "Purchase Header";
+        ToPurchaseLine: Record "Purchase Line";
+        LineNoList: List of [Integer];
+        Counter: Integer;
+    begin
+        FromPurchaseHeader.SetRange("Document Type", FromPurchaseHeader."Document Type"::Quote);
+        FromPurchaseHeader.SetRange("No.", FromPurchHeaderNo);
+        FromPurchaseHeader.SetRange(Serienanfragennr, SerialNo);
+
+        if FromPurchaseHeader.FindFirst() then begin
+            FromPurchaseLine.SetRange("Document Type", FromPurchaseHeader."Document Type");
+            FromPurchaseLine.SetRange("Document No.", FromPurchaseHeader."No.");
+            if FromPurchaseLine.FindSet() then begin
+
+                repeat
+                    LineNoList.Add(FromPurchaseLine."Line No.");
+                until FromPurchaseLine.Next() = 0;
+
+                if LineNoList.Count > 0 then begin
+
+                    ToPurchaseHeader.SetRange("Document Type", FromPurchaseHeader."Document Type"::Quote);
+                    ToPurchaseHeader.SetRange(Serienanfragennr, SerialNo);
+                    ToPurchaseHeader.SetFilter("No.", '<>%1', FromPurchHeaderNo);
+
+                    if ToPurchaseHeader.FindSet() then begin
+                        repeat
+                            ToPurchaseLine.SetRange("Document Type", ToPurchaseHeader."Document Type");
+                            ToPurchaseLine.SetRange("Document No.", ToPurchaseHeader."No.");
+                            if ToPurchaseLine.FindSet() then begin
+                                repeat
+                                    ToPurchaseLine."Line No." := LineNoList.Get(ToPurchaseLine."Line No." / 10000);
+                                    ToPurchaseLine.Modify();
+                                until ToPurchaseLine.Next() = 0;
+                            end;
+
+                        until ToPurchaseHeader.Next() = 0;
+
+                    end
+
+                end;
+
+            end;
+
+        end;
+
+    end;
 }
 

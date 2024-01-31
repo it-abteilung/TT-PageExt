@@ -44,34 +44,24 @@ Page 50064 "Materialanforderung Übersicht"
                 field("Beschreibung 2"; Rec."Beschreibung 2")
                 {
                     ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = Basic;
                 }
             }
         }
     }
-
     actions
     {
-        area(navigation)
+        area(Promoted)
         {
-            action(Karte)
-            {
-                ApplicationArea = Basic, Suite;
-                Image = EditLines;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedOnly = true;
-                RunObject = Page "Materialanforderung Kopf";
-                RunPageLink = "Projekt Nr" = field("Projekt Nr"),
-                              "Lfd Nr" = field("Lfd Nr");
-                Visible = false;
-            }
+
+        }
+        area(Processing)
+        {
+
         }
     }
-
-    var
-        Materialanforderung2: Record Materialanforderungzeile;
-        Lfd: Integer;
-        Projektnr: Code[20];
-        Materialanforderung: Record Materialanforderungskopf;
 }
-

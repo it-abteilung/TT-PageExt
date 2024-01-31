@@ -40,6 +40,7 @@ Page 50065 "Materialanforderung Kopf"
                 field("Lfd Nr"; Rec."Lfd Nr")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field(Stichwort; Rec.Stichwort)
                 {
@@ -80,67 +81,55 @@ Page 50065 "Materialanforderung Kopf"
             group(Texte)
             {
                 Caption = 'Vor-/Nachtext (durch KE auszufüllen)';
-                grid(Control100000010)
+                grid(GridColumnText)
                 {
-                    GridLayout = Rows;
-                    group("Vortext 1")
+                    GridLayout = Columns;
+                    grid(Control100000010)
                     {
-                        Caption = 'Vortext 1';
-                        field(Vorlauftext; Rec.Vorlauftext)
+                        GridLayout = Rows;
+                        group("Vortext")
                         {
-                            ApplicationArea = Basic;
                             ShowCaption = false;
+                            field(Vorlauftext; Rec.Vorlauftext)
+                            {
+                                ApplicationArea = All;
+                                Caption = 'Vortext 1';
+                            }
+                            field("Vorlauftext 2"; Rec."Vorlauftext 2")
+                            {
+                                ApplicationArea = All;
+                                Caption = 'Vortext 2';
+                            }
+                            field("Vorlauftext m"; Rec."Vorlauftext m")
+                            {
+                                ApplicationArea = All;
+                                Caption = 'Vortext manuell';
+                                MultiLine = true;
+                            }
                         }
                     }
-                    group("Vortext 2")
+                    grid(Control100000015)
                     {
-                        Caption = 'Vortext 2';
-                        field("Vorlauftext 2"; Rec."Vorlauftext 2")
+                        GridLayout = Rows;
+                        group("Nachtext")
                         {
-                            ApplicationArea = Basic;
                             ShowCaption = false;
-                        }
-                    }
-                    group("Vortext manuell")
-                    {
-                        Caption = 'Vortext manuell';
-                        field("Vorlauftext m"; Rec."Vorlauftext m")
-                        {
-                            ApplicationArea = Basic;
-                            MultiLine = true;
-                            ShowCaption = false;
-                        }
-                    }
-                }
-                grid(Control100000015)
-                {
-                    GridLayout = Rows;
-                    group("Nachtext 1")
-                    {
-                        Caption = 'Nachtext 1';
-                        field(Nachlauftext; Rec.Nachlauftext)
-                        {
-                            ApplicationArea = Basic;
-                            ShowCaption = false;
-                        }
-                    }
-                    group("Nachtext 2")
-                    {
-                        Caption = 'Nachtext 2';
-                        field("Nachlauftext 2"; Rec."Nachlauftext 2")
-                        {
-                            ApplicationArea = Basic;
-                            ShowCaption = false;
-                        }
-                    }
-                    group("Nachtext manuell")
-                    {
-                        Caption = 'Nachtext manuell';
-                        field("Nachlauftext m"; Rec."Nachlauftext m")
-                        {
-                            ApplicationArea = Basic;
-                            MultiLine = true;
-                            ShowCaption = false;
+                            field(Nachlauftext; Rec.Nachlauftext)
+                            {
+                                ApplicationArea = All;
+                                Caption = 'Nachtext 1';
+                            }
+                            field("Nachlauftext 2"; Rec."Nachlauftext 2")
+                            {
+                                ApplicationArea = All;
+                                Caption = 'Nachtext 2';
+                            }
+                            field("Nachlauftext m"; Rec."Nachlauftext m")
+                            {
+                                ApplicationArea = All;
+                                Caption = 'Nachtext manuell';
+                                MultiLine = true;
+                            }
                         }
                     }
                 }
@@ -157,17 +146,68 @@ Page 50065 "Materialanforderung Kopf"
 
     actions
     {
+        area(Promoted)
+        {
+
+            group("New Document")
+            {
+                Caption = 'Neu';
+                Image = Add;
+
+                actionref(NewHeader; "New Header") { }
+                actionref(NewHeaderLines; "New Header Lines") { }
+            }
+            group(Release)
+            {
+                Caption = 'Freigabe';
+                Image = ReleaseDoc;
+                actionref(ReleaseDoc; "Release Doc") { }
+                actionref(UnreleaseDoc; "Unrelease Doc") { }
+                actionref(CloseDoc; "Close Doc") { }
+            }
+            group(Reports)
+            {
+                Caption = 'Berichte';
+                Image = Report;
+                actionref(PrintMaterialList; "Materialanforderung drucken") { }
+            }
+            actionref(CommentList; "Comment List") { }
+            actionref(VendorSelection; "Vendor Selection") { }
+            actionref(NewQuote; "New Quote") { }
+        }
         area(processing)
         {
+            action("New Header Lines")
+            {
+                ApplicationArea = all;
+                Caption = 'Kopiere Materialanforderung';
+                trigger OnAction()
+                var
+                    MaterialanforderungKopf_Copy: Record Materialanforderungskopf;
+                begin
+                    MaterialanforderungKopf_Copy := CopyHeader(Rec);
+                    CopyLines(Rec, MaterialanforderungKopf_Copy);
+                    Page.Run(50065, MaterialanforderungKopf_Copy);
+                end;
+            }
+            action("New Header")
+            {
+                ApplicationArea = all;
+                Caption = 'Kopiere nur Materialanforderung Kopf';
+                trigger OnAction()
+                var
+                    MaterialanforderungKopf_Copy: Record Materialanforderungskopf;
+                begin
+                    MaterialanforderungKopf_Copy := CopyHeader(Rec);
+                    Page.Run(50065, MaterialanforderungKopf_Copy);
+                end;
+            }
             group(ActionGroup1000000010)
             {
                 action("Materialanforderung drucken")
                 {
                     ApplicationArea = Basic;
                     Image = Print;
-                    Promoted = true;
-                    PromotedCategory = "Report";
-                    PromotedOnly = true;
 
                     trigger OnAction()
                     begin
@@ -176,11 +216,11 @@ Page 50065 "Materialanforderung Kopf"
                         Report.RunModal(50065, true, false, Materialanforderung);
                     end;
                 }
-                action(Freigeben)
+                action("Release Doc")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Release';
-
+                    Caption = 'Freigabe erteilen';
+                    Image = ReleaseDoc;
                     trigger OnAction()
                     begin
                         if Rec.Status < Rec.Status::freigegeben then begin
@@ -190,53 +230,47 @@ Page 50065 "Materialanforderung Kopf"
                         end;
                     end;
                 }
-                action("Status zurücksetzen")
+                action("Unrelease Doc")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Reject Status';
-
+                    Caption = 'Freigabe entfernen';
+                    Image = CloseDocument;
                     trigger OnAction()
                     begin
                         if Rec.Status = Rec.Status::freigegeben then begin
                             Rec.Status := Rec.Status::erfasst;
-                            Rec.Modify;
-                            CurrPage.Update;
+                            Rec.Modify();
+                            CurrPage.Update();
                         end;
                     end;
                 }
-                action(Beenden)
+                action("Close Doc")
                 {
                     ApplicationArea = Basic;
-
+                    Caption = 'Beenden';
+                    Image = Document;
                     trigger OnAction()
                     begin
                         if Rec.Status = Rec.Status::freigegeben then begin
                             Rec.Status := Rec.Status::beendet;
-                            Rec.Modify;
-                            CurrPage.Update;
+                            Rec.Modify();
+                            CurrPage.Update();
                         end;
                     end;
                 }
-                action(Comment)
+                action("Comment List")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Bemerkungen';
                     Image = Comment;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedOnly = true;
                     RunObject = Page "Comment Sheet";
-                    RunPageLink = "Table Name" = const(14),
-                                  "No." = field("Projekt Nr");
+                    RunPageLink = "No." = field("Projekt Nr");
                 }
-                action("Kreditorauswahl (Schritt 1)")
+                action("Vendor Selection")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Kreditorauswahl (Schritt 1)';
                     Image = Vendor;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
 
                     trigger OnAction()
                     var
@@ -261,9 +295,7 @@ Page 50065 "Materialanforderung Kopf"
 
                         if Materialanforderungzeile.FindSet() then begin
                             repeat
-                                if (Item.Get(Materialanforderungzeile."Artikel Nr") and
-                                            (Item."Item Category Code" <> '') and
-                                            (Item."Item Category Code" <> '')) then begin
+                                if Item.Get(Materialanforderungzeile."Artikel Nr") and (Item."Item Category Code" <> '') then begin
                                     if not Segmentation_tmp.Get(Item."Item Category Code", Item."Item Category Code") then begin
                                         Segmentation_tmp.Code := Item."Item Category Code";
                                         Segmentation_tmp.Group := Item."Item Category Code";
@@ -315,20 +347,17 @@ Page 50065 "Materialanforderung Kopf"
                             VendorSerienanfrage.SetRange(Serienanfragenr, Format(Rec."Projekt Nr") + ';' + Format(Rec."Lfd Nr"));
                             KreditorSeriennummer_l.SetRecord(VendorSerienanfrage);
                             KreditorSeriennummer_l.SetTableview(VendorSerienanfrage);
-                            if KreditorSeriennummer_l.RunModal() = Action::OK then;
+                            if KreditorSeriennummer_l.RunModal() = Action::OK then begin
 
+                            end
                         end;
                     end;
                 }
-                action("Anfrage erz. (Schritt 2)")
+                action("New Quote")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Anfrage erz. (Schritt 2)';
                     Image = CreateDocument;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
-                    PromotedOnly = true;
 
                     trigger OnAction()
                     var
@@ -345,16 +374,14 @@ Page 50065 "Materialanforderung Kopf"
                         VendorSegmentation: Record "Vendor Segmentation";
                         Segmentation_tmp: Record Segmentation temporary;
                         CopyDocumentMgt: Codeunit "Copy Document Mgt.";
-                        "-----------------------------1": Integer;
                         LineNo: Integer;
                         Serienanfragenummer: Code[20];
-                        "-----------------------------2": Integer;
                         ExtendedTextHeader_l: Record "Extended Text Header";
                         ExtendedTextLine_l: Record "Extended Text Line";
                     begin
                         VendorSerienanfrage.SetRange(Serienanfragenr, Format(Rec."Projekt Nr") + ';' + Format(Rec."Lfd Nr"));
                         VendorSerienanfrage.SetRange(Erledigt, false);
-                        VendorSerienanfrage.SetRange("Ignore Vendor", false);
+                        VendorSerienanfrage.SetRange("Use Vendor", true);
                         if VendorSerienanfrage.FindSet then begin
                             repeat
                                 VendorSerienanfrage.TestField("Buy-from Contact No.");
@@ -381,13 +408,13 @@ Page 50065 "Materialanforderung Kopf"
                                 Error('Es wurden mehrere Einkäufer der UserID %1 gefunden. Bitte einmal überprüfen.', UserId);
 
                             if not SalespersonPurchaser.FindSet() then
-                                Error('Es konnte kein kein Einkäufer zu der UserID %1 gefunden werden. Bitte einmal überprüfen.', UserId);
+                                Error('Es konnte kein Einkäufer zu der UserID %1 gefunden werden. Bitte einmal überprüfen.', UserId);
 
                             repeat
                                 Clear(PurchaseHeader);
                                 PurchaseHeader.Init();
                                 PurchaseHeader.Validate("No.", '');
-                                PurchaseHeader.Validate("Document Type", PurchaseHeader."document type"::Quote);
+                                PurchaseHeader.Validate("Document Type", PurchaseHeader."Document Type"::Quote);
                                 PurchaseHeader.Insert(true);
 
                                 if Serienanfragenummer = '' then begin
@@ -427,7 +454,7 @@ Page 50065 "Materialanforderung Kopf"
                                 PurchaseHeader.Validate("Purchaser Code", SalespersonPurchaser.Code);
                                 PurchaseHeader.Validate(Anforderer, Rec.Anforderer);
                                 PurchaseHeader.Modify(true);
-                                PurchSetup.Get;
+                                PurchSetup.Get();
                                 //CopyDocumentMgt.SetProperties(FALSE,TRUE,FALSE,FALSE,FALSE,PurchSetup."Exact Cost Reversing Mandatory",FALSE);
                                 //CopyDocumentMgt.CopyPurchDoc(PurchaseHeader2."Document Type",PurchaseHeader2."No.",PurchaseHeader);
 
@@ -465,6 +492,7 @@ Page 50065 "Materialanforderung Kopf"
                                             PurchaseLine.Modify(true);
 
                                             Materialanforderungzeile."Anfrage erstellt" := true;
+                                            Materialanforderungzeile.Modify();
                                         end;
                                     until (Materialanforderungzeile.Next() = 0);
                                 end;
@@ -472,7 +500,7 @@ Page 50065 "Materialanforderung Kopf"
                                 VendorSerienanfrage.Modify;
 
                                 //Nachlauftext
-                                LeereZeileEinfuegen(PurchaseHeader);
+                                AddEmptyLine(PurchaseHeader, FindLastLine(PurchaseHeader));
                                 TextEinfuegen(Rec.Nachlauftext, PurchaseHeader);
                                 TextEinfuegen(Rec."Nachlauftext 2", PurchaseHeader);
                                 TextEinfuegenManuell(Rec."Nachlauftext m", PurchaseHeader);
@@ -481,9 +509,7 @@ Page 50065 "Materialanforderung Kopf"
                                     SendMail(PurchaseHeader."Document Type", PurchaseHeader."No.", VendorSerienanfrage."Send Mail To");
                                     VendorSerienanfrage."Mail is Send" := true;
                                 end;
-
                             until VendorSerienanfrage.Next = 0;
-
                             Message('Serienanfragen abgeschlossen');
                         end;
 
@@ -492,6 +518,10 @@ Page 50065 "Materialanforderung Kopf"
             }
         }
     }
+
+    trigger OnOpenPage()
+    begin
+    end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
@@ -514,7 +544,7 @@ Page 50065 "Materialanforderung Kopf"
         ERR_StandardText: label 'The standard text %1 could not be found in the table %2. \ Please check your entry and try again.';
         ERR_NoVenderSegment: label 'Für die Artikelkategorie- und/oder Produktgruppencode %1 und %2 konnte kein Kreditor gefunden werden.';
 
-    local procedure SendMail(_DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"; _DocumentNo: Code[20]; _Mail: Text[80])
+    local procedure SendMail(_DocumentType: enum "Purchase Document Type"; _DocumentNo: Code[20]; _Mail: Text[80])
     var
         PurchaseHeader_l: Record "Purchase Header";
         PurchaseHeader2_l: Record "Purchase Header";
@@ -525,8 +555,8 @@ Page 50065 "Materialanforderung Kopf"
         ToFile_l: Text[250];
         GERW_l: Codeunit 50001;
     begin
-        PurchaseHeader_l.SetRange("Document Type", _DocumentType);
-        PurchaseHeader_l.SetRange("No.", _DocumentNo);
+        // PurchaseHeader_l.SetRange("Document Type", _DocumentType);
+        // PurchaseHeader_l.SetRange("No.", _DocumentNo);
 
         // if PurchaseHeader_l.FindSet then begin
         //     Vendor_l.Get(PurchaseHeader_l."Buy-from Vendor No.");
@@ -567,42 +597,40 @@ Page 50065 "Materialanforderung Kopf"
 
             ExtendedTextHeader_l.SetRange("Table Name", ExtendedTextHeader_l."table name"::"Standard Text");
             ExtendedTextHeader_l.SetRange("No.", _StandardTextCode);
-            ExtendedTextHeader_l.SetFilter("Starting Date", '<=%1|%2', Today, 0D);
-            ExtendedTextHeader_l.SetFilter("Ending Date", '>=%1|%2', Today, 0D);
+            //TODO >=%1 | %2 for starting date, but <=%1 | %2 was given
+            ExtendedTextHeader_l.SetFilter("Starting Date", '>=%1 | %2', Today, 0D);
+            ExtendedTextHeader_l.SetFilter("Ending Date", '<=%1 | %2', Today, 0D);
 
-            if _PurchaseHeader."Language Code" = '' then
-                ExtendedTextHeader_l.SetRange("Language Code", 'DEU')
-            else
-                ExtendedTextHeader_l.SetRange("Language Code", _PurchaseHeader."Language Code");
+            // if _PurchaseHeader."Language Code" = '' then
+            //     ExtendedTextHeader_l.SetRange("Language Code", 'DEU')
+            // else
+            //     ExtendedTextHeader_l.SetRange("Language Code", _PurchaseHeader."Language Code");
 
             if not ExtendedTextHeader_l.FindLast() then
                 ExtendedTextHeader_l.SetFilter("Language Code", '%1', '');
+
+
+            //Letzte Zeilennr. + 100
+            Clear(PurchaseLine);
+            LineNo_l := FindLastLine(_PurchaseHeader);
+            //1. Zeile der Textes Anlegen.
+            LineNo_l += 100;
+            Clear(PurchaseLine);
+            PurchaseLine.Validate("Document No.", _PurchaseHeader."No.");
+            PurchaseLine.Validate("Document Type", _PurchaseHeader."Document Type");
+            PurchaseLine.Validate("Line No.", LineNo_l);
+            PurchaseLine.Insert(true);
+            PurchaseLine.Validate(Type, PurchaseLine.Type::" ");
+            PurchaseLine.Validate(Description, StandardText_l.Description);
+            PurchaseLine.Modify(true);
+            LineNo_l += 100;
+            AddEmptyLine(_PurchaseHeader, FindLastLine(_PurchaseHeader));
 
             if ExtendedTextHeader_l.FindLast() then begin
                 ExtendedTextLine_l.SetRange("Table Name", ExtendedTextHeader_l."Table Name");
                 ExtendedTextLine_l.SetRange("No.", ExtendedTextHeader_l."No.");
                 ExtendedTextLine_l.SetRange("Language Code", ExtendedTextHeader_l."Language Code");
                 ExtendedTextLine_l.SetRange("Text No.", ExtendedTextHeader_l."Text No.");
-
-                //Letzte Zeilennr. + 100
-                Clear(PurchaseLine);
-                PurchaseLine.SetCurrentkey("Document Type", "Document No.", "Line No.");
-                PurchaseLine.Ascending();
-                PurchaseLine.SetRange("Document No.", _PurchaseHeader."No.");
-                PurchaseLine.SetRange("Document Type", _PurchaseHeader."Document Type");
-                if PurchaseLine.FindLast() then
-                    LineNo_l := PurchaseLine."Line No.";
-
-                //1. Zeile der Textes Anlegen.
-                LineNo_l += 100;
-                Clear(PurchaseLine);
-                PurchaseLine.Validate("Document No.", _PurchaseHeader."No.");
-                PurchaseLine.Validate("Document Type", _PurchaseHeader."Document Type");
-                PurchaseLine.Validate("Line No.", LineNo_l);
-                PurchaseLine.Insert(true);
-                PurchaseLine.Validate(Type, PurchaseLine.Type::" ");
-                PurchaseLine.Validate(Description, StandardText_l.Description);
-                PurchaseLine.Modify(true);
 
                 //Weitere Textbausteinzeilen aus den Textbausteinzeilen
                 if ExtendedTextLine_l.FindSet() then begin
@@ -616,100 +644,178 @@ Page 50065 "Materialanforderung Kopf"
                         PurchaseLine.Validate(Type, PurchaseLine.Type::" ");
                         PurchaseLine.Validate(Description, ExtendedTextLine_l.Text);
                         PurchaseLine.Modify(true);
-                    until (ExtendedTextLine_l.Next() = 0);
+                    until ExtendedTextLine_l.Next() = 0;
                 end;
 
-                //Weitere Leere Zeile einfürgen.
+                AddEmptyLine(_PurchaseHeader, FindLastLine(_PurchaseHeader));
+            end;
+        end;
+    end;
+
+    local procedure TextEinfuegenManuell(_Text: Text[1000]; _PurchaseHeader: Record "Purchase Header")
+    var
+        PurchaseLine: Record "Purchase Line";
+        LineNo_l: Integer;
+        ListTexts: List of [Text];
+        ListItemText: Text;
+    begin
+        if _Text <> '' then begin
+            LineNo_l := FindLastLine(_PurchaseHeader);
+            ListTexts := SplitStringByCRLF(_Text, 100);
+
+            foreach ListItemText in ListTexts do begin
                 LineNo_l += 100;
                 Clear(PurchaseLine);
                 PurchaseLine.Validate("Document No.", _PurchaseHeader."No.");
                 PurchaseLine.Validate("Document Type", _PurchaseHeader."Document Type");
                 PurchaseLine.Validate("Line No.", LineNo_l);
                 PurchaseLine.Insert(true);
+                PurchaseLine.Validate(Type, PurchaseLine.Type::" ");
+                PurchaseLine.Validate(Description, ListItemText);
+                PurchaseLine.Modify(true);
+            end;
 
+            AddEmptyLine(_PurchaseHeader, FindLastLine(_PurchaseHeader));
+        end;
+    end;
+
+    local procedure FindLastLine(_PurchaseHeader: Record "Purchase Header") ResultLineNo: Integer
+    var
+        PurchaseLine_l: Record "Purchase Line";
+    begin
+        ResultLineNo := 0;
+        PurchaseLine_l.SetRange("Document No.", _PurchaseHeader."No.");
+        PurchaseLine_l.SetRange("Document Type", _PurchaseHeader."Document Type");
+        if PurchaseLine_l.FindLast() then
+            ResultLineNo := PurchaseLine_l."Line No.";
+    end;
+
+    local procedure AddEmptyLine(_PurchaseHeader: Record "Purchase Header"; _LineNo: Integer)
+    var
+        PurchaseLine_l: Record "Purchase Line";
+    begin
+        _LineNo += 100;
+        Clear(PurchaseLine_l);
+        PurchaseLine_l.Validate("Document No.", _PurchaseHeader."No.");
+        PurchaseLine_l.Validate("Document Type", _PurchaseHeader."Document Type");
+        PurchaseLine_l.Validate("Line No.", _LineNo);
+        PurchaseLine_l.Insert(true);
+    end;
+
+    // better function to cut the string into multiple lines
+    local procedure SplitStringByCRLF(InputText: Text; FieldLength: Integer) ListOfText: List of [Text]
+    var
+        CLRF: Char;
+        TmpText: Text;
+        TmpList: List of [Text];
+        TmpListSplit: List of [Text];
+    begin
+        CLRF := 10;
+        TmpList := InputText.Split(CLRF);
+        foreach TmpText in TmpList do begin
+            if StrLen(TmpText) > FieldLength then begin
+                TmpListSplit := SplitStringIntoFixedLength(TmpText, FieldLength);
+                foreach TmpText in TmpListSplit do begin
+                    ListOfText.Add(TmpText);
+                end;
+            end
+            else begin
+                ListOfText.Add(TmpText);
             end;
         end;
     end;
 
-    local procedure TextEinfuegenManuell(_Text: Text[50]; _PurchaseHeader: Record "Purchase Header")
+    local procedure SplitStringIntoFixedLength(InputText: Text; FieldLength: Integer) ListOfText: List of [Text]
     var
-        PurchaseLine: Record "Purchase Line";
-        LineNo_l: Integer;
-        workingTextCopy: Text[50];
-        workingTextCopySave: Text[50];
-        cr: Char;
-        lf: Char;
+        DivValue: Integer;
+        I: Integer;
+        ModValue: Integer;
+        SplitTo: Integer;
+        RemainValue: Text[1024];
+        SplitResult: Text[1024];
     begin
-        cr := 13;
-        lf := 10;
+        DivValue := StrLen(InputText) div FieldLength;
+        ModValue := StrLen(InputText) mod FieldLength;
 
-        workingTextCopy := _Text;
+        if ModValue = 0 then
+            SplitTo := DivValue
+        else
+            SplitTo := DivValue + 1;
 
-        if workingTextCopy <> '' then begin
-            Clear(PurchaseLine);
-            PurchaseLine.SetCurrentkey("Document Type", "Document No.", "Line No.");
-            PurchaseLine.Ascending();
-            PurchaseLine.SetRange("Document No.", _PurchaseHeader."No.");
-            PurchaseLine.SetRange("Document Type", _PurchaseHeader."Document Type");
-            if PurchaseLine.FindLast() then
-                LineNo_l := PurchaseLine."Line No.";
-
-            if StrPos(workingTextCopy, Format(cr) + Format(lf)) > 0 then begin
-                repeat
-                    LineNo_l += 100;
-                    Clear(PurchaseLine);
-                    PurchaseLine.Validate("Document No.", _PurchaseHeader."No.");
-                    PurchaseLine.Validate("Document Type", _PurchaseHeader."Document Type");
-                    PurchaseLine.Validate("Line No.", LineNo_l);
-                    PurchaseLine.Insert(true);
-                    PurchaseLine.Validate(Type, PurchaseLine.Type::" ");
-                    PurchaseLine.Validate(Description, CopyStr(workingTextCopy, 1, StrPos(workingTextCopy, Format(cr) + Format(lf))));
-                    PurchaseLine.Modify(true);
-                    workingTextCopy := CopyStr(workingTextCopy, StrPos(workingTextCopy, Format(cr) + Format(lf)) + 2, StrLen(workingTextCopy));
-                until (StrPos(workingTextCopy, Format(cr) + Format(lf)) = 0);
-            end;
-
-            //Letzten Teil einfügen
-            LineNo_l += 100;
-            Clear(PurchaseLine);
-            PurchaseLine.Validate("Document No.", _PurchaseHeader."No.");
-            PurchaseLine.Validate("Document Type", _PurchaseHeader."Document Type");
-            PurchaseLine.Validate("Line No.", LineNo_l);
-            PurchaseLine.Insert(true);
-            PurchaseLine.Validate(Type, PurchaseLine.Type::" ");
-            PurchaseLine.Validate(Description, workingTextCopy);
-            PurchaseLine.Modify(true);
-
-            //Weitere Leere Zeile einfürgen.
-            LineNo_l += 100;
-            Clear(PurchaseLine);
-            PurchaseLine.Validate("Document No.", _PurchaseHeader."No.");
-            PurchaseLine.Validate("Document Type", _PurchaseHeader."Document Type");
-            PurchaseLine.Validate("Line No.", LineNo_l);
-            PurchaseLine.Insert(true);
-
+        RemainValue := InputText;
+        for I := 1 to SplitTo do begin
+            SplitResult := CopyStr(RemainValue, 1, FieldLength);
+            if StrLen(RemainValue) >= FieldLength + 1 then
+                RemainValue := CopyStr(RemainValue, FieldLength + 1, StrLen(RemainValue));
+            ListOfText.Add(SplitResult);
         end;
     end;
 
-    local procedure LeereZeileEinfuegen(_PurchaseHeader: Record "Purchase Header")
-    var
-        PurchaseLine: Record "Purchase Line";
-        LineNo_l: Integer;
+    local procedure CopyHeader(Original: Record Materialanforderungskopf) NewCopy: Record Materialanforderungskopf
     begin
-        Clear(PurchaseLine);
-        PurchaseLine.SetCurrentkey("Document Type", "Document No.", "Line No.");
-        PurchaseLine.Ascending();
-        PurchaseLine.SetRange("Document No.", _PurchaseHeader."No.");
-        PurchaseLine.SetRange("Document Type", _PurchaseHeader."Document Type");
-        if PurchaseLine.FindLast() then
-            LineNo_l := PurchaseLine."Line No.";
+        NewCopy.Init();
+        NewCopy."Projekt Nr" := Original."Projekt Nr";
+        NewCopy."Lfd Nr" := FindNewEntryNo(Original);
+        NewCopy.Insert(true);
+        NewCopy.Validate(Anforderer, Original.Anforderer);
+        NewCopy.Validate(AngebotsAbgabeBis, Original.AngebotsAbgabeBis);
+        NewCopy.Validate(Belegdatum, Original.Belegdatum);
+        NewCopy.Validate("Geplantes Versanddatum", Original."Geplantes Versanddatum");
+        NewCopy.Validate("GewünschtesWareneingangsdatum", Original."GewünschtesWareneingangsdatum");
+        NewCopy.Validate(Leistung, Original.Leistung);
+        NewCopy.Validate(Nachlauftext, Original.Nachlauftext);
+        NewCopy.Validate("Nachlauftext 2", Original."Nachlauftext 2");
+        NewCopy.Validate("Nachlauftext m", Original."Nachlauftext m");
+        NewCopy.Validate(Status, NewCopy.Status::erfasst);
+        NewCopy.Validate(Stichwort, Original.Stichwort);
+        NewCopy.Validate(Typ, Original.Typ);
+        NewCopy.Validate(Vorlauftext, Original.Vorlauftext);
+        NewCopy.Validate("Vorlauftext 2", Original."Vorlauftext 2");
+        NewCopy.Validate("Vorlauftext m", Original."Vorlauftext m");
+        NewCopy.Modify();
+        exit(NewCopy);
+    end;
 
-        LineNo_l += 100;
-        Clear(PurchaseLine);
-        PurchaseLine.Validate("Document No.", _PurchaseHeader."No.");
-        PurchaseLine.Validate("Document Type", _PurchaseHeader."Document Type");
-        PurchaseLine.Validate("Line No.", LineNo_l);
-        PurchaseLine.Insert(true);
+    procedure CopyLines(Original: Record "Materialanforderungskopf"; NewCopy: Record "Materialanforderungskopf")
+    var
+        MaterialZeile: Record Materialanforderungzeile;
+        MaterialZeile_Copy: Record Materialanforderungzeile;
+        Counter: Integer;
+    begin
+        Counter := 10000;
+        MaterialZeile.SetRange("Projekt Nr", Original."Projekt Nr");
+        MaterialZeile.SetRange("Lfd Nr", Original."Lfd Nr");
+        if MaterialZeile.FindSet() then
+            repeat
+                MaterialZeile_Copy.Init();
+                MaterialZeile_Copy."Projekt Nr" := NewCopy."Projekt Nr";
+                MaterialZeile_Copy."Lfd Nr" := NewCopy."Lfd Nr";
+                MaterialZeile_Copy."Zeilen Nr" := Counter;
+                MaterialZeile_Copy.Insert();
+                MaterialZeile_Copy.Abgehakt := false;
+                MaterialZeile_Copy.Validate("Artikel Nr", MaterialZeile."Artikel Nr");
+                MaterialZeile_Copy.Validate(Beschreibung, MaterialZeile."Beschreibung");
+                MaterialZeile_Copy.Validate("Beschreibung 2", MaterialZeile."Beschreibung 2");
+                MaterialZeile_Copy.Validate("Beschreibung 3", MaterialZeile."Beschreibung 3");
+                MaterialZeile_Copy.Validate("Beschreibung 4", MaterialZeile."Beschreibung 4");
+                MaterialZeile_Copy.Validate("Beschreibung 5", MaterialZeile."Beschreibung 5");
+                MaterialZeile_Copy.Validate(Einheit, MaterialZeile.Einheit);
+                MaterialZeile_Copy.Validate("Gehört zu Zeilen Nr", MaterialZeile."Gehört zu Zeilen Nr");
+                MaterialZeile_Copy.Validate(Menge, MaterialZeile."Menge");
+                MaterialZeile_Copy.Validate("zusätzliche Anforderungen", MaterialZeile."zusätzliche Anforderungen");
+                MaterialZeile_Copy.Modify();
+                Counter += 10000;
+            until MaterialZeile.Next() = 0;
+    end;
+
+    local procedure FindNewEntryNo(Original: Record Materialanforderungskopf): Integer
+    var
+        Materialanforderungskopf: Record Materialanforderungskopf;
+    begin
+        Materialanforderungskopf.SetRange("Projekt Nr", Original."Projekt Nr");
+        if Materialanforderungskopf.FindLast() then
+            exit(Materialanforderungskopf."Lfd Nr" + 10);
+        Error('Die Materialanforderung kann nicht kopiert werden');
     end;
 }
 

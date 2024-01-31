@@ -34,7 +34,6 @@ Page 50066 "Materialanforderung Subform"
                             *///G-ERP.RS 2021-05-21 -
                         end;
                         //G-ERP.RS 2019-07-25 ---
-
                     end;
                 }
                 field(Beschreibung; Rec.Beschreibung)
@@ -45,41 +44,44 @@ Page 50066 "Materialanforderung Subform"
                 field("Beschreibung 2"; Rec."Beschreibung 2")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                     QuickEntry = false;
                 }
                 field("Beschreibung 3"; Rec."Beschreibung 3")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
+                    QuickEntry = false;
                 }
                 field("Beschreibung 4"; Rec."Beschreibung 4")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Zusätzliche Anforderungen 1';
 
-                    trigger OnAssistEdit()
-                    var
-                        Eingabe_l: Page Eingabe;
-                    begin
-                        Eingabe_l.SetCaptionText_ML(Rec.FieldCaption("Beschreibung 4"));
-                        Eingabe_l.SetValueText_ML(Rec."Beschreibung 4");
-                        if Eingabe_l.RunModal() = Action::OK then
-                            Rec."Beschreibung 4" := Eingabe_l.GetValueText_ML();
-                    end;
+                    // trigger OnAssistEdit()
+                    // var
+                    //     Eingabe_l: Page Eingabe;
+                    // begin
+                    //     Eingabe_l.SetCaptionText_ML(Rec.FieldCaption("Beschreibung 4"));
+                    //     Eingabe_l.SetValueText_ML(Rec."Beschreibung 4");
+                    //     if Eingabe_l.RunModal() = Action::OK then
+                    //         Rec."Beschreibung 4" := Eingabe_l.GetValueText_ML();
+                    // end;
                 }
                 field("Beschreibung 5"; Rec."Beschreibung 5")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Zusätzliche Anforderungen 2';
 
-                    trigger OnAssistEdit()
-                    var
-                        Eingabe_l: Page Eingabe;
-                    begin
-                        Eingabe_l.SetCaptionText_ML(Rec.FieldCaption("Beschreibung 5"));
-                        Eingabe_l.SetValueText_ML(Rec."Beschreibung 5");
-                        if Eingabe_l.RunModal() = Action::OK then
-                            Rec."Beschreibung 5" := Eingabe_l.GetValueText_ML();
-                    end;
+                    // trigger OnAssistEdit()
+                    // var
+                    //     Eingabe_l: Page Eingabe;
+                    // begin
+                    //     Eingabe_l.SetCaptionText_ML(Rec.FieldCaption("Beschreibung 5"));
+                    //     Eingabe_l.SetValueText_ML(Rec."Beschreibung 5");
+                    //     if Eingabe_l.RunModal() = Action::OK then
+                    //         Rec."Beschreibung 5" := Eingabe_l.GetValueText_ML();
+                    // end;
                 }
                 field(MengeWHM; MengeWHM)
                 {
@@ -90,16 +92,16 @@ Page 50066 "Materialanforderung Subform"
 
                     trigger OnAssistEdit()
                     var
-                        itemLedgerEntry: Record "Item Ledger Entry";
+                        ItemLedgerEntry: Record "Item Ledger Entry";
                     begin
                         //G-ERP.RS 2021-07-07 +++ Anfrage#2312202
-                        itemLedgerEntry.SetRange("Item No.", Rec."Artikel Nr");
-                        itemLedgerEntry.SetRange("Location Code", InventorySetup."Picking Location");
+                        ItemLedgerEntry.SetRange("Item No.", Rec."Artikel Nr");
+                        ItemLedgerEntry.SetRange("Location Code", InventorySetup."Picking Location");
                         //G-ERP.RS 2021-07-09 +++ Anfrage#2312202
-                        itemLedgerEntry.SetRange(Open, true);
-                        itemLedgerEntry.SetFilter("Remaining Quantity", '<>%1', 0);
+                        ItemLedgerEntry.SetRange(Open, true);
+                        ItemLedgerEntry.SetFilter("Remaining Quantity", '<>%1', 0);
                         //G-ERP.RS 2021-07-09 --- Anfrage#2312202
-                        Page.RunModal(0, itemLedgerEntry);
+                        Page.RunModal(0, ItemLedgerEntry);
                         //G-ERP.RS 2021-07-07 --- Anfrage#2312202
                     end;
                 }
@@ -133,17 +135,8 @@ Page 50066 "Materialanforderung Subform"
     {
         area(processing)
         {
-            group(ActionGroup1000000013)
+            group(Funktionen)
             {
-                action("Materialanforderung drucken")
-                {
-                    ApplicationArea = Basic;
-
-                    trigger OnAction()
-                    begin
-                        Report.RunModal(50030, true, false, Rec);
-                    end;
-                }
                 action("RecordID finden ")
                 {
                     ApplicationArea = Basic;
@@ -173,75 +166,126 @@ Page 50066 "Materialanforderung Subform"
                         PurchaseHeader: Record "Purchase Header";
                         PurchaseLine: Record "Purchase Line";
                         Vendor: Record Vendor;
-                        RecordLink: Record "Record Link";
+                        Materialanforderungskopf: Record Materialanforderungskopf;
+                        Materialanforderungszeile: Record Materialanforderungzeile;
+                        RecRef: RecordRef;
+                        SelectionFilterManagement: Codeunit SelectionFilterManagement;
+                        Quantity: Decimal;
+                        LineCounter: Integer;
                     begin
-                        PurchaseHeader.Init;
-                        PurchaseHeader.Validate("Document Type", PurchaseHeader."document type"::Quote);
+                        Materialanforderungskopf.Reset();
+                        Materialanforderungszeile.Reset();
+                        Vendor.Reset();
+
+                        Materialanforderungskopf.SetRange("Projekt Nr", Rec."Projekt Nr");
+                        Materialanforderungskopf.SetRange("Lfd Nr", Rec."Lfd Nr");
+                        CurrPage.SetSelectionFilter(Materialanforderungszeile);
+                        RecRef.GetTable(Materialanforderungszeile);
+                        Materialanforderungszeile.SetFilter("Lfd Nr", SelectionFilterManagement.GetSelectionFilter(RecRef, Materialanforderungszeile.FieldNo("Lfd Nr")));
 
                         Vendor.SetRange(Blocked, Vendor.Blocked::" ");
-                        if Page.RunModal(27, Vendor) = Action::LookupOK then
-                            PurchaseHeader.Validate("Buy-from Vendor No.", Vendor."No.");
+                        if Materialanforderungskopf.FindFirst() then
+                            if Page.RunModal(27, Vendor) = Action::LookupOK then begin
 
-                        PurchaseHeader.Validate("Job No.", Projektnr);
-                        PurchaseHeader.Insert(true);
+                                PurchaseHeader.Init();
+                                PurchaseHeader.Validate("Document Type", PurchaseHeader."Document Type"::Quote);
+                                PurchaseHeader.Insert(true);
 
-                        PurchaseLine.Init;
-                        PurchaseLine.Validate("Document Type", PurchaseLine."document type"::Quote);
-                        PurchaseLine.Validate("Document No.", PurchaseHeader."No.");
-                        PurchaseLine.Validate(Type, PurchaseLine.Type::Item);
-                        PurchaseLine.Validate("No.", Rec."Artikel Nr");
-                        PurchaseLine.Validate(Quantity, Rec.Menge);
-                        PurchaseLine.Validate("Unit of Measure", Rec.Einheit);
-                        PurchaseLine.CopyLinks(Rec);
-                        PurchaseLine.Insert(true);
+                                PurchaseHeader.Validate("Job No.", Materialanforderungskopf."Projekt Nr");
+                                PurchaseHeader.Validate("Buy-from Vendor No.", Vendor."No.");
+                                PurchaseHeader.Validate("Buy-from Vendor Name", Vendor.Name);
+                                PurchaseHeader.Modify();
 
-                        Rec."Anfrage erstellt" := true;
-                        Rec."Anfrage Nr" := PurchaseHeader."No.";
-                        Rec.Modify;
+                                if NOT Materialanforderungszeile.IsEmpty() then
+                                    if Materialanforderungszeile.FindSet() then
+                                        repeat
+                                            Quantity := Materialanforderungszeile.Menge;
 
-                        Page.Run(49, PurchaseHeader);
+                                            LineCounter += 10000;
+                                            PurchaseLine.Init();
+                                            PurchaseLine.Validate("Document Type", PurchaseLine."Document Type"::Quote);
+                                            PurchaseLine.Validate("Document No.", PurchaseHeader."No.");
+                                            PurchaseLine.Validate("Line No.", LineCounter);
+                                            PurchaseLine.Insert(true);
+                                            PurchaseLine.Validate("Type", PurchaseLine.Type::Item);
+                                            PurchaseLine.Validate("No.", Materialanforderungszeile."Artikel Nr");
+                                            PurchaseLine.Validate(Quantity, Materialanforderungszeile.Menge);
+                                            PurchaseLine.Validate("Unit of Measure", Materialanforderungszeile.Einheit);
+                                            PurchaseLine.Validate("Unit of Measure Code", Materialanforderungszeile.Einheit);
+                                            PurchaseLine.Validate("Description 4", Materialanforderungszeile."Beschreibung 4");
+                                            PurchaseLine.Validate("Description 5", Materialanforderungszeile."Beschreibung 5");
+                                            PurchaseLine.Modify();
+                                            Materialanforderungszeile.Validate("Anfrage erstellt", true);
+                                            Materialanforderungszeile.Modify();
+                                        until Materialanforderungszeile.Next() = 0;
+                                Page.Run(49, PurchaseHeader);
+                            end;
                     end;
                 }
                 action("Bestellung erstellen")
                 {
                     ApplicationArea = Basic;
                     Scope = Repeater;
-                    Visible = false;
 
                     trigger OnAction()
                     var
                         PurchaseHeader: Record "Purchase Header";
                         PurchaseLine: Record "Purchase Line";
                         Vendor: Record Vendor;
-                        RecordLink: Record "Record Link";
+                        Materialanforderungskopf: Record Materialanforderungskopf;
+                        Materialanforderungszeile: Record Materialanforderungzeile;
+                        RecRef: RecordRef;
+                        SelectionFilterManagement: Codeunit SelectionFilterManagement;
+                        Quantity: Decimal;
+                        LineCounter: Integer;
                     begin
-                        //G-ERP.RS 2021-07-14 +++
-                        // PurchaseHeader.INIT;
-                        // PurchaseHeader.VALIDATE("Document Type", PurchaseHeader."Document Type"::Order);
-                        //
-                        // Vendor.SETRANGE(Blocked, Vendor.Blocked::" ");
-                        // IF PAGE.RUNMODAL(27, Vendor) = ACTION::LookupOK THEN
-                        //  PurchaseHeader.VALIDATE("Buy-from Vendor No.", Vendor."No.");
-                        //
-                        // PurchaseHeader.VALIDATE("Job No.", Projektnr);
-                        // PurchaseHeader.INSERT(TRUE);
-                        //
-                        // PurchaseLine.INIT;
-                        // PurchaseLine.VALIDATE("Document Type", PurchaseLine."Document Type"::Order);
-                        // PurchaseLine.VALIDATE("Document No.", PurchaseHeader."No.");
-                        // PurchaseLine.VALIDATE(Type, PurchaseLine.Type::Item);
-                        // PurchaseLine.VALIDATE("No.", "Artikel Nr");
-                        // PurchaseLine.VALIDATE(Quantity, Menge);
-                        // PurchaseLine.VALIDATE("Unit of Measure", Einheit);
-                        // PurchaseLine.COPYLINKS(Rec);
-                        // PurchaseLine.INSERT(TRUE);
-                        //
-                        // Rec."Anfrage erstellt" := TRUE;
-                        // Rec."Anfrage Nr" := PurchaseHeader."No.";
-                        // Rec.MODIFY;
-                        //
-                        // PAGE.RUN(49, PurchaseHeader);
-                        //G-ERP.RS 2021-07-14 ---
+                        Materialanforderungskopf.Reset();
+                        Materialanforderungszeile.Reset();
+                        Vendor.Reset();
+
+                        Materialanforderungskopf.SetRange("Projekt Nr", Rec."Projekt Nr");
+                        Materialanforderungskopf.SetRange("Lfd Nr", Rec."Lfd Nr");
+                        CurrPage.SetSelectionFilter(Materialanforderungszeile);
+                        RecRef.GetTable(Materialanforderungszeile);
+                        Materialanforderungszeile.SetFilter("Lfd Nr", SelectionFilterManagement.GetSelectionFilter(RecRef, Materialanforderungszeile.FieldNo("Lfd Nr")));
+
+                        Vendor.SetRange(Blocked, Vendor.Blocked::" ");
+                        if Materialanforderungskopf.FindFirst() then
+                            if Page.RunModal(27, Vendor) = Action::LookupOK then begin
+
+                                PurchaseHeader.Init();
+                                PurchaseHeader.Validate("Document Type", PurchaseHeader."Document Type"::Order);
+                                PurchaseHeader.Insert(true);
+
+                                PurchaseHeader.Validate("Job No.", Materialanforderungskopf."Projekt Nr");
+                                PurchaseHeader.Validate("Buy-from Vendor No.", Vendor."No.");
+                                PurchaseHeader.Validate("Buy-from Vendor Name", Vendor.Name);
+                                PurchaseHeader.Modify();
+
+                                if NOT Materialanforderungszeile.IsEmpty() then
+                                    if Materialanforderungszeile.FindSet() then
+                                        repeat
+                                            Quantity := Materialanforderungszeile.Menge;
+
+                                            LineCounter += 10000;
+                                            PurchaseLine.Init();
+                                            PurchaseLine.Validate("Document Type", PurchaseLine."Document Type"::Order);
+                                            PurchaseLine.Validate("Document No.", PurchaseHeader."No.");
+                                            PurchaseLine.Validate("Line No.", LineCounter);
+                                            PurchaseLine.Insert(true);
+                                            PurchaseLine.Validate("Type", PurchaseLine.Type::Item);
+                                            PurchaseLine.Validate("No.", Materialanforderungszeile."Artikel Nr");
+                                            PurchaseLine.Validate(Quantity, Materialanforderungszeile.Menge);
+                                            PurchaseLine.Validate("Unit of Measure", Materialanforderungszeile.Einheit);
+                                            PurchaseLine.Validate("Unit of Measure Code", Materialanforderungszeile.Einheit);
+                                            PurchaseLine.Validate("Description 4", Materialanforderungszeile."Beschreibung 4");
+                                            PurchaseLine.Validate("Description 5", Materialanforderungszeile."Beschreibung 5");
+                                            PurchaseLine.Modify();
+                                            Materialanforderungszeile.Validate("Anfrage erstellt", true);
+                                            Materialanforderungszeile.Modify();
+                                        until Materialanforderungszeile.Next() = 0;
+                                Page.Run(49, PurchaseHeader);
+                            end;
                     end;
                 }
             }
@@ -310,15 +354,11 @@ Page 50066 "Materialanforderung Subform"
         Projektnr: Code[20];
         Menge: Decimal;
         MengeWHM: Decimal;
-        Anfordern: Boolean;
         MaterialanforderungZeile: Record Materialanforderungzeile;
         Materialanforderung2: Record Materialanforderungzeile;
         Lfd: Integer;
         Text1: label 'Projektnr. muss gefüllt sein.';
         Item: Record Item;
-        BOMComp: Record "BOM Component";
-        BOMComp_tmp: Record "BOM Component" temporary;
         InventorySetup: Record "Inventory Setup";
-        lfdnr: Integer;
 }
 

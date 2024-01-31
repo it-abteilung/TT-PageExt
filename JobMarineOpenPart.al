@@ -67,11 +67,11 @@ page 50202 JobMarineOpenPart
 
     var
         Gesamtpr: Decimal;
+        TextBuilderTmp: TextBuilder;
 
     trigger OnOpenPage()
     var
         EmployeeToJobType: Record "Employee To Job Type";
-        TextBuilderTmp: TextBuilder;
     begin
         EmployeeToJobType.SetRange("User ID", UserId);
         if EmployeeToJobType.FindSet() then begin

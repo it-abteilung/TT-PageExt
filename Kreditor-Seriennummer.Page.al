@@ -10,9 +10,10 @@ Page 50042 "Kreditor - Seriennummer"
         {
             repeater(Group)
             {
-                field("Ignore Vendor"; Rec."Ignore Vendor")
+                field("Use Vendor"; Rec."Use Vendor")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Verwende Kreditor';
                 }
                 field("No."; Rec."No.")
                 {
@@ -86,15 +87,40 @@ Page 50042 "Kreditor - Seriennummer"
     {
     }
 
+    trigger OnAfterGetRecord()
+    var
+        ContCompany: Record Contact;
+        ContPerson: Record Contact;
+    begin
+        ContCompany.Reset();
+        ContPerson.Reset();
+        if Rec."Buy-from Contact No." = '' then begin
+            ContCompany.SetRange("Vendor No.", Rec."No.");
+            ContCompany.SetRange(Type, ContCompany.Type::Company);
+            if ContCompany.FindFirst() then begin
+                ContPerson.SetRange("Company No.", ContCompany."No.");
+                ContPerson.SetRange(Type, ContPerson.Type::Person);
+                if ContPerson.Count() = 1 then
+                    if ContPerson.FindFirst() then begin
+                        Rec.Validate("Buy-from Contact No.", ContPerson."No.");
+                        Rec.Validate("Buy-from Contact", ContPerson.Name);
+                        Rec.Modify();
+                    end;
+            end;
+        end;
+    end;
+
     trigger OnQueryClosePage(CloseAction: action): Boolean
     begin
         if CloseAction = Action::OK then begin
             if Rec.GetFilter(Serienanfragenr) <> '' then begin
                 if Rec.FindSet() then begin
                     repeat
-                        Rec.TestField("Buy-from Contact No.");
-                        Rec.TestField("Buy-from Contact");
-                        Rec.TestField("Send Mail To");
+                        if Rec."Use Vendor" then begin
+                            Rec.TestField("Buy-from Contact No.");
+                            Rec.TestField("Buy-from Contact");
+                            Rec.TestField("Send Mail To");
+                        end;
                     until (Rec.Next() = 0);
                 end;
             end;

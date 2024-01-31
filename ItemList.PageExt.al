@@ -133,7 +133,9 @@ PageExtension 50011 pageextension50011 extends "Item List"
 
     trigger OnAfterGetRecord()
     begin
-        D2Test := Rec."Description 2";
+        D2Test := '';
+        if Rec."Description 2" <> '' then
+            D2Test := Rec."Description 2";
     end;
 
     var

@@ -47,6 +47,11 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
             field(Unterschriftscode; Rec.Unterschriftscode)
             {
                 ApplicationArea = Basic;
+
+                trigger OnValidate()
+                begin
+                    Rec."Status Approval 1" := false;
+                end;
             }
             field("Status Approval 1"; Rec."Status Approval 1")
             {
@@ -57,6 +62,10 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
             field("Unterschriftscode 2"; Rec."Unterschriftscode 2")
             {
                 ApplicationArea = Basic;
+                trigger OnValidate()
+                begin
+                    Rec."Status Approval 2" := false;
+                end;
             }
             field("Status Approval 2"; Rec."Status Approval 2")
             {
@@ -106,12 +115,25 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
                     Report.RunModal(50026, true, false, L_SalesHeader);
                 end;
             }
+            // action(ForceApproval)
+            // {
+            //     ApplicationArea = all;
+            //     Caption = 'Force Approval';
+
+            //     trigger OnAction()
+            //     begin
+            //         rec."Status Approval 1" := true;
+            //         rec."Status Approval 2" := true;
+            //         Rec.Modify();
+            //     end;
+            // }
         }
 
         addfirst(Category_New)
         {
             actionref(NewCopyHeader; "New Copy Header") { }
             actionref(NewCopyHeaderLines; "New Copy Header Lines") { }
+
         }
         addfirst(navigation)
         {
