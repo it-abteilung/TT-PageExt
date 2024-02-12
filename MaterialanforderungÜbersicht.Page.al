@@ -7,7 +7,7 @@ Page 50064 "Materialanforderung Übersicht"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = Materialanforderungskopf;
-    Caption = 'Materialanforderung Übersicht';
+    Caption = 'TT Materialanforderung';
     UsageCategory = Documents;
     ApplicationArea = All;
 
@@ -20,14 +20,17 @@ Page 50064 "Materialanforderung Übersicht"
                 field("Projekt Nr"; Rec."Projekt Nr")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Projekt-Nr.';
                 }
                 field("Lfd Nr"; Rec."Lfd Nr")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Lfd. Nr.';
                 }
                 field(Stichwort; Rec.Stichwort)
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Anforderungsgrund';
                 }
                 field(Belegdatum; Rec.Belegdatum)
                 {

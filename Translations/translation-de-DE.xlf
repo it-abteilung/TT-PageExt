@@ -1313,7 +1313,7 @@
         </trans-unit>
         <trans-unit id="Page 62512670 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Materialanforderung</source>
-          <target>Materialanforderung</target>
+          <target>TT Materialanforderung</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Property Caption</note>
         </trans-unit>
@@ -1337,7 +1337,7 @@
         </trans-unit>
         <trans-unit id="Page 62512670 - Control 1432687292 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Vor-/Nachtext (durch KE auszufüllen)</source>
-          <target>Vor-/Nachtext (durch KE auszufüllen)</target>
+          <target>Bemerkungstexte</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Texte - Property Caption</note>
         </trans-unit>
@@ -1445,7 +1445,7 @@
         </trans-unit>
         <trans-unit id="Page 2335476184 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Materialanforderung Übersicht</source>
-          <target>Materialanforderung Übersicht</target>
+          <target>TT Materialanforderung</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Property Caption</note>
         </trans-unit>
@@ -3652,7 +3652,7 @@
         </trans-unit>
         <trans-unit id="PageExtension 4021402358 - Action 2901622326 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4010542053">
           <source>Materialanforderung</source>
-          <target>Materialanforderung</target>
+          <target>TT Materialanforderung</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension JobCardExt - Action Material Request - Property Caption</note>
         </trans-unit>

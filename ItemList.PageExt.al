@@ -52,6 +52,23 @@ PageExtension 50011 pageextension50011 extends "Item List"
     }
     actions
     {
+
+        addlast(processing)
+        {
+            action(FindSerialNumber)
+            {
+                ApplicationArea = all;
+                Caption = 'Artikel & Seriennummer';
+
+                trigger OnAction()
+                var
+                    ItemSerialPage: Page "Artikel-Seriennr";
+                begin
+                    ItemSerialPage.Editable(false);
+                    ItemSerialPage.RunModal();
+                end;
+            }
+        }
         addafter(Translations)
         {
             action("Artikel Barcode")
@@ -95,6 +112,7 @@ PageExtension 50011 pageextension50011 extends "Item List"
             }
 
         }
+
         addafter(CopyItem)
         {
             action("Update article number series")
@@ -103,6 +121,69 @@ PageExtension 50011 pageextension50011 extends "Item List"
                 Caption = 'Update article number series';
                 Image = NumberSetup;
                 // RunObject = Report 50042;
+            }
+            action(ImportItemsviaCSVBuffer)
+            {
+                ApplicationArea = All;
+                Caption = 'Import Items via CSV Buffer';
+                Visible = isSuper;
+                Enabled = isSuper;
+
+                trigger OnAction()
+                var
+                    InS: InStream;
+                    FileName: Text[100];
+                    UploadMsg: Label 'Please choose the CSV file';
+                    Item: Record Item;
+                    LineNo: Integer;
+                begin
+                    CSVBuffer.Reset();
+                    CSVBuffer.DeleteAll();
+                    if UploadIntoStream(UploadMsg, '', '', FileName, InS) then begin
+                        CSVBuffer.LoadDataFromStream(InS, ',');
+                        for LineNo := 2 to CSVBuffer.GetNumberOfLines() do begin
+                            Clear(Item);
+                            if Item.Get(GetValueAtCell(LineNo, 1)) then begin
+                                if GetValueAtCell(LineNo, 2) = '""' then begin
+                                    Item."Product Group Code TT" := '';
+                                end else
+                                    Item."Product Group Code TT" := GetValueAtCell(LineNo, 2);
+                                Item.Modify();
+                            end;
+                        end;
+                    end;
+                end;
+            }
+            action(ServiceToProductSwitch)
+            {
+                ApplicationArea = All;
+                Caption = 'Service to product switch';
+                Visible = isSuper;
+                Enabled = isSuper;
+
+                trigger OnAction()
+                var
+                    ProductGroup: Record "TT Product Group";
+                    ServiceItemGroup: Record "Service Item Group";
+                    Item: Record Item;
+                begin
+                    Clear(Item);
+                    Item.SetFilter("Service Item Group", '<>%1', '');
+                    if Item.FindSet() then
+                        repeat
+                            Clear(ProductGroup);
+                            if NOT ProductGroup.Get(Item."Item Category Code", Item."Service Item Group") then begin
+                                ProductGroup.Init();
+                                ProductGroup."Item Category Code" := Item."Item Category Code";
+                                ProductGroup.Code := Item."Service Item Group";
+                                ProductGroup.Insert(true);
+                            end;
+                            if Item."Product Group Code TT" = '' then begin
+                                Item."Product Group Code TT" := ProductGroup.Code;
+                                Item.Modify();
+                            end;
+                        until Item.Next() = 0;
+                end;
             }
         }
         addafter(Orders)
@@ -131,6 +212,20 @@ PageExtension 50011 pageextension50011 extends "Item List"
         }
     }
 
+    var
+        TempFilteredItem: Record Item temporary;
+        D2Test: Text;
+        CSVBuffer: Record "CSV Buffer" temporary;
+        isSuper: Boolean;
+
+    local procedure GetValueAtCell(RowNo: Integer; ColNo: Integer): Text
+    begin
+        if CSVBuffer.Get(RowNo, ColNo) then
+            exit(CSVBuffer.Value)
+        else
+            exit('');
+    end;
+
     trigger OnAfterGetRecord()
     begin
         D2Test := '';
@@ -138,8 +233,12 @@ PageExtension 50011 pageextension50011 extends "Item List"
             D2Test := Rec."Description 2";
     end;
 
+    trigger OnOpenPage()
     var
-        TempFilteredItem: Record Item temporary;
-        D2Test: Text;
+        UserPerm: Codeunit "User Permissions";
+    begin
+        isSuper := UserPerm.IsSuper(UserSecurityId())
+    end;
+
 }
 

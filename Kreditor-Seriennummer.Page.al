@@ -50,6 +50,8 @@ Page 50042 "Kreditor - Seriennummer"
                 field(Erledigt; Rec.Erledigt)
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Anfrage erz.';
+                    Editable = false;
                 }
                 field("Buy-from Contact No."; Rec."Buy-from Contact No.")
                 {
@@ -71,14 +73,14 @@ Page 50042 "Kreditor - Seriennummer"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mail is Send"; Rec."Mail is Send")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Send Mail To"; Rec."Send Mail To")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Mail is Send"; Rec."Mail is Send")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("Send Mail To"; Rec."Send Mail To")
+                // {
+                //     ApplicationArea = Basic;
+                // }
             }
         }
     }

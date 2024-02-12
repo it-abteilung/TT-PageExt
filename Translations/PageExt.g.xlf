@@ -1093,6 +1093,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Kred offene Posten ausbuchen - Control Vendor.Name - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3693267281 - Control 3369988884 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Anfrage erz.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Kreditor - Seriennummer - Control Erledigt - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3693267281 - Control 4209407297 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Verwende Kreditor</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1263,13 +1268,83 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - NamedType ERR_StandardText</note>
         </trans-unit>
-        <trans-unit id="Page 62512670 - Control 2783723338 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Werkzeuge/Verbrauchermaterialen</source>
+        <trans-unit id="Page 62512670 - Control 2869646683 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projekt-Nr.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Control1000000008 - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Projekt Nr - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 1451854269 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Anforderungsgrund</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Stichwort - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 1191007703 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Angebotsabgabe bis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control AngebotsAbgabeBis - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 2229719162 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lieferort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Place of Delivery - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 1187003046 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adresse</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Ship-to Address - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 1417792948 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adresse 2</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Ship-to Address 2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 1981213637 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Ship-to City - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 929198632 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kontakt vor Ort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Ship-to Contact - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 3354576322 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Land/Region</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Ship-to Country/Region Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 2743501653 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Ship-to Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 3261344115 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Name 2</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Ship-to Name 2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 3172878019 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PLZ</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Ship-to Post Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 3239713555 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Erlaubt eine Zeichenkette mit einer maximalen Länge von 7 Zeichen.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Delivery Period - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 3239713555 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gewünschter Leitungszeitraum</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Delivery Period - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Control 3758467595 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spätester Bestelltermin</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Purchase Order Date - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 62512670 - Control 1432687292 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Vor-/Nachtext (durch KE auszufüllen)</source>
+          <source>Bemerkungszeilen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Texte - Property Caption</note>
         </trans-unit>
@@ -1304,7 +1379,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Control Nachlauftext m - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 62512670 - Action 1829993074 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Beenden</source>
+          <source>Status: Erledigt</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Close Doc - Property Caption</note>
         </trans-unit>
@@ -1318,13 +1393,23 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action New Quote - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 62512670 - Action 2061302160 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status: Angefordert</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Open Doc - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Action 2183099302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Prüfung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Open Inspection - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 62512670 - Action 4020773187 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Freigabe erteilen</source>
+          <source>Anforderung senden</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Release Doc - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 62512670 - Action 3455193574 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Freigabe entfernen</source>
+          <source>Anforderung stornieren</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Unrelease Doc - Property Caption</note>
         </trans-unit>
@@ -1348,30 +1433,105 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action New Document - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 62512670 - Action 1554716946 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Purchasing - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 62512670 - Action 4032263875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Freigabe</source>
+          <source>Anforderung senden</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Release - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 62512670 - Action 2176459415 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Berichte</source>
+        <trans-unit id="Page 1206725512 - Control 2228292980 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>TT-Artikel-Nr.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Reports - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Control Artikel Nr - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1206725512 - Control 141693254 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lfd. Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Control Lfd Nr - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1206725512 - Control 1210017112 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Angeforderte Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Control Menge - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1206725512 - Control 2295337790 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Geplantes Versanddatum</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Control PlanedDeliveryDate_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1206725512 - Control 2869646683 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projekt-Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Control Projekt Nr - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1206725512 - Control 1563913911 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Angefragte Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Control Quoted Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1206725512 - Control 320761455 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lfd. Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Control EntryNo_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1206725512 - Control 1009256322 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projekt-Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Control JobNo_G - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1206725512 - Control 1368373035 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Picture</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Control ItemPicture - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1206725512 - Action 2683397862 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nächste Materialanforderung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Action Next Record - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1206725512 - Action 2395603976 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vorherige Materialanforderung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Prüfung - Action Prev Record - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 436054070 - NamedType 3721534664" size-unit="char" translate="yes" xml:space="preserve">
           <source>Projektnr. muss gefüllt sein.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - NamedType Text1</note>
         </trans-unit>
+        <trans-unit id="Page 436054070 - Control 2228292980 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nur notwendig, wenn Artikel bereits angelegt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Artikel Nr - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 2228292980 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>TT-Artikel-Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Artikel Nr - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 436054070 - Control 2228292980 - Method 2126772001 - NamedType 494174125" size-unit="char" translate="yes" xml:space="preserve">
           <source>The description 2 must be filled.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Artikel Nr - Method OnValidate - NamedType ERR_01</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 2512543841 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bezeichnung (tech. Angaben, DIN, SDB 1.1, ...)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Beschreibung - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 118707231 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Artikelbeschreibung 2</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Beschreibung 2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 756403848 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Artikelbeschreibung 3</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Beschreibung 3 - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 436054070 - Control 3944886933 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Zusätzliche Anforderungen 1</source>
@@ -1383,15 +1543,75 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Beschreibung 5 - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 436054070 - Control 2378916386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Menge auf Lager</source>
+        <trans-unit id="Page 436054070 - Control 101964516 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Hat Alternative</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control MengeWHM - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Has Substitute - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 982444044 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ist Alternative</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Is Substitute - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 1210017112 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Angeforderte Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Menge - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 856369893 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Angefragte Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Requested Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 3460833340 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Alternative zu Zeile</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Substitute To Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 186174251 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Anfragen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control VendorText - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Control 1861330735 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeile</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Zeilen Nr - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 436054070 - Action 1502113334 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Substitute</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Action Substitute - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2335476184 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Materialanforderung Übersicht</source>
+          <source>TT Materialanforderung</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - Control 141693254 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lfd. Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Control Lfd Nr - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - Control 2869646683 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projekt-Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Control Projekt Nr - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - Control 1451854269 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Anforderungsgrund</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Control Stichwort - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 665420451 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Anfragen und Kreditoren</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materials To Quote - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 665420451 - Control 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projekt-Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materials To Quote - Control Job No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4269032927 - Control 739346273 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Allgemein</source>
@@ -3928,6 +4148,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50010 - Control Blocked Tool Requirement - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 1233218449 - Action 3342552370 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
+          <source>Artikel &amp; Seriennummer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Action FindSerialNumber - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1233218449 - Action 3364199826 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
           <source>Dummy Artikel anlegen</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3937,6 +4162,21 @@
           <source>New from template</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Action New from template - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1233218449 - Action 1511591685 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
+          <source>Import Items via CSV Buffer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Action ImportItemsviaCSVBuffer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1233218449 - Action 1511591685 - Method 1377591017 - NamedType 1478738838" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 1233218449">
+          <source>Please choose the CSV file</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Action ImportItemsviaCSVBuffer - Method OnAction - NamedType UploadMsg</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1233218449 - Action 4019144913 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
+          <source>Service to product switch</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Action ServiceToProductSwitch - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1233218449 - Action 1131649719 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
           <source>Update article number series</source>

@@ -276,49 +276,5 @@ PageExtension 50151 ProjectListExt extends "Job List"
         TotalPriceIncludingDiscount_g: Decimal;
 
 
-    trigger OnOpenPage()
-    var
-        DictJobEmployee: Dictionary of [Code[20], List of [Code[50]]];
-        Job: Record Job;
-        ListEmployee: List of [Code[50]];
-        User: Record User;
-        TmpTextBuilder: TextBuilder;
-        UserName: Code[50];
-        JobType: Code[20];
-    begin
-        if Job.FindSet() then begin
-            repeat
-                if NOT DictJobEmployee.ContainsKey(Job."Job Type") then begin
-                    DictJobEmployee.Add(Job."Job Type", CreateEmptyList());
-                end;
-                Clear(User);
-                User.SetRange("User Security ID", Job.SystemCreatedBy);
-                if User.FindFirst() then begin
-                    ListEmployee := DictJobEmployee.Get(Job."Job Type");
-                    if NOT ListEmployee.Contains(User."User Name") then begin
-                        ListEmployee.Add(User."User Name");
-                        DictJobEmployee.Set(Job."Job Type", ListEmployee);
-                    end;
-                end;
-            until Job.Next() = 0;
-
-            foreach JobType in DictJobEmployee.Keys() do begin
-                ListEmployee := DictJobEmployee.Get(JobType);
-                TmpTextBuilder.Clear();
-                TmpTextBuilder.Append(JobType + ': ');
-                foreach UserName in ListEmployee do begin
-                    if TmpTextBuilder.Length > 0 then
-                        TmpTextBuilder.Append(', ');
-                    TmpTextBuilder.Append(UserName);
-                end;
-                Message('%1', TmpTextBuilder.ToText());
-            end;
-
-        end;
-    end;
-
-    procedure CreateEmptyList(): List of [Code[50]]
-    begin
-    end;
 }
 
