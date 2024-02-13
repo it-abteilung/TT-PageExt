@@ -274,16 +274,13 @@ Page 50066 "Materialanforderung Subform"
                         Vendor.SetRange(Blocked, Vendor.Blocked::" ");
                         if Materialanforderungskopf.FindFirst() then
                             if Page.RunModal(27, Vendor) = Action::LookupOK then begin
-
                                 PurchaseHeader.Init();
                                 PurchaseHeader.Validate("Document Type", PurchaseHeader."Document Type"::Quote);
                                 PurchaseHeader.Insert(true);
-
                                 PurchaseHeader.Validate("Job No.", Materialanforderungskopf."Projekt Nr");
                                 PurchaseHeader.Validate("Buy-from Vendor No.", Vendor."No.");
                                 PurchaseHeader.Validate("Buy-from Vendor Name", Vendor.Name);
                                 PurchaseHeader.Modify();
-
                                 if NOT Materialanforderungszeile.IsEmpty() then
                                     if Materialanforderungszeile.FindSet() then
                                         repeat
@@ -341,16 +338,13 @@ Page 50066 "Materialanforderung Subform"
                         Vendor.SetRange(Blocked, Vendor.Blocked::" ");
                         if Materialanforderungskopf.FindFirst() then
                             if Page.RunModal(27, Vendor) = Action::LookupOK then begin
-
                                 PurchaseHeader.Init();
                                 PurchaseHeader.Validate("Document Type", PurchaseHeader."Document Type"::Order);
                                 PurchaseHeader.Insert(true);
-
                                 PurchaseHeader.Validate("Job No.", Materialanforderungskopf."Projekt Nr");
                                 PurchaseHeader.Validate("Buy-from Vendor No.", Vendor."No.");
                                 PurchaseHeader.Validate("Buy-from Vendor Name", Vendor.Name);
                                 PurchaseHeader.Modify();
-
                                 if NOT Materialanforderungszeile.IsEmpty() then
                                     if Materialanforderungszeile.FindSet() then
                                         repeat
@@ -400,7 +394,6 @@ Page 50066 "Materialanforderung Subform"
                                 LineNoNew := (Rec."Zeilen Nr" + MaterialZeile."Zeilen Nr") / 2
                             else
                                 LineNoNew := Rec."Zeilen Nr" + 10000;
-
                             MaterialZeileNew.Init();
                             MaterialZeileNew."Projekt Nr" := Rec."Projekt Nr";
                             MaterialZeileNew."Lfd Nr" := Rec."Lfd Nr";
@@ -471,7 +464,6 @@ Page 50066 "Materialanforderung Subform"
         VendorText := Format(Counter) + ' Kreditoren'
     end;
 
-
     trigger OnNewRecord(BelowxRec: Boolean)
     var
         itemLedgerEntry: Record "Item Ledger Entry";
@@ -518,4 +510,3 @@ Page 50066 "Materialanforderung Subform"
         IsEditable: Boolean;
         VendorText: Text;
 }
-

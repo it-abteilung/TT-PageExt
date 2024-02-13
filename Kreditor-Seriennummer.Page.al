@@ -18,34 +18,43 @@ Page 50042 "Kreditor - Seriennummer"
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field("Line No."; Rec."Line No.")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
+                    Visible = false;
                 }
                 field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field("Name 2"; Rec."Name 2")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field("Address 2"; Rec."Address 2")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field(City; Rec.City)
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field("Post Code"; Rec."Post Code")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field(Erledigt; Rec.Erledigt)
                 {
@@ -73,14 +82,16 @@ Page 50042 "Kreditor - Seriennummer"
                 {
                     ApplicationArea = Basic;
                 }
-                // field("Mail is Send"; Rec."Mail is Send")
-                // {
-                //     ApplicationArea = Basic;
-                // }
-                // field("Send Mail To"; Rec."Send Mail To")
-                // {
-                //     ApplicationArea = Basic;
-                // }
+                field("Mail is Send"; Rec."Mail is Send")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Send Mail To"; Rec."Send Mail To")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
             }
         }
     }

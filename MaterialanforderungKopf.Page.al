@@ -490,11 +490,10 @@ Page 50065 "Materialanforderung Kopf"
                                     end;
                             until (Materialanforderungzeile.Next() = 0);
                         end;
-
+                        Clear(Segmentation_tmp);
                         //Kreditoren zur Serienanfrage hinzufügen
                         if Segmentation_tmp.FindSet() then begin
                             LineNo += 10000;
-
                             repeat
                                 VendorSegmentation.SetRange(Segmentation, Segmentation_tmp.Code);
                                 //VendorSegmentation.SETRANGE(Group,Segmentation_tmp.Group);
@@ -511,7 +510,7 @@ Page 50065 "Materialanforderung Kopf"
                                                 VendorSerienanfrage.Serienanfragenr := Format(Rec."Projekt Nr") + ';' + Format(Rec."Lfd Nr");
                                                 VendorSerienanfrage.Validate("No.", VendorSegmentation.Vendor);
                                                 VendorSerienanfrage."Line No." := LineNo;
-                                                // VendorSerienanfrage."Send Mail" := false;
+                                                VendorSerienanfrage."Send Mail" := true;
                                                 if VendorSerienanfrage.Insert() then
                                                     LineNo += 10000;
                                             end else begin

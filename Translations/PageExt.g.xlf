@@ -1603,6 +1603,51 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Control Stichwort - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2335476184 - Action 105510766 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Eigene MA</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Action Apply_Filter_Own - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - Action 3102839202 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status: Erstellt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Action Apply_Filter_Status_1 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - Action 1189749351 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status: Angefordert</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Action Apply_Filter_Status_2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - Action 1827445968 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status: Erledigt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Action Apply_Filter_Status_3 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - Action 2864664443 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Alle MA</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Action Remove_Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - Action 612842039 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - Action Special_Filters - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - View 3005981655 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Erstellt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - View Filter_Status_1 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - View 624104210 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Angefordert</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - View Filter_Status_2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2335476184 - View 4281374889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Erledigt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Übersicht - View Filter_Status_3 - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 665420451 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Anfragen und Kreditoren</source>
           <note from="Developer" annotates="general" priority="2"></note>
