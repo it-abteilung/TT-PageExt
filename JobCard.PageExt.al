@@ -188,7 +188,10 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 trigger OnValidate()
                 var
                     NewJobFlag: Boolean;
+                    TransferItemsFlag: Boolean;
                     NewJobNo: Code[20];
+                    NewJobNoExt: Code[20];
+                    OldJobNo: Code[20];
                     Pattern: Text;
                     Regex: Codeunit Regex;
                     ItemJournalLine: Record "Item Journal Line";
@@ -199,11 +202,13 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     OldBin: Record Bin;
                     NewBin: Record Bin;
                     LineNo: Integer;
-
+                    Qty: Decimal;
                     DictSerialNo: Dictionary of [Code[20], Decimal];
                     SerialNo: Code[20];
+                    SubJob: Record Job;
                 begin
                     NewJobFlag := false;
+                    TransferItemsFlag := false;
                     if Rec."Job Type" <> xRec."Job Type" then begin
                         Pattern := '^[0-9]{2}\-[0-9]{3}\.[0-9]{1}$';
                         if Regex.IsMatch(Rec."No.", Pattern, 0) then begin
@@ -221,145 +226,72 @@ PageExtension 50150 JobCardExt extends "Job Card"
                             NewJobNo += GetJobTypeSuffix(Rec."Job Type");
                         Rec."No." := NewJobNo;
 
+                        if xRec."No." <> '' then begin
+                            UpdateJobNotices(xRec."No.", NewJobNo);
+                        end;
+
                         // CHANGE BIN + CONTENT
-                        // LineNo := 0;
+                        LineNo := 0;
 
-                        // NewBin.Init();
-                        // NewBin.Code := Rec."No.";
-                        // NewBin."Location Code" := 'PROJEKT';
-                        // NewBin.Insert();
+                        BinContent.SetRange("Location Code", 'PROJEKT');
+                        BinContent.SetFilter("Bin Code", '%1', xRec."No." + '*');
 
-                        // ItemJournalLine.DeleteAll();
+                        if BinContent.FindSet() then begin
+                            // if false then
+                            ItemLedgerLineNo := 0;
+                            ItemJournalLine.DeleteAll();
+                            ReservationEntry.DeleteAll();
+                            repeat
+                                NewJobNoExt := NewJobNo;
+                                if StrLen(NewJobNo) < StrLen(BinContent."Bin Code") then begin
+                                    NewJobNoExt += Text.CopyStr(BinContent."Bin Code", StrLen(NewJobNo) + 1)
+                                end;
+                                if NOT NewBin.Get('PROJEKT', NewJobNoExt) then begin
+                                    NewBin.Init();
+                                    NewBin.Code := NewJobNoExt;
+                                    NewBin."Location Code" := 'PROJEKT';
+                                    NewBin.Description := Rec.Description;
+                                    NewBin.Insert();
+                                end;
 
-                        // BinContent.SetRange("Location Code", 'PROJEKT');
-                        // BinContent.SetRange("Bin Code", xRec."No.");
+                                Clear(Item);
+                                if Item.Get(BinContent."Item No.") then begin
+                                    Qty := BinContent.CalcQtyUOM();
+                                    if Qty > 0 then begin
+                                        WarehouseEntry.SetRange("Location Code", 'PROJEKT');
+                                        WarehouseEntry.SetRange("Bin Code", BinContent."Bin Code");
+                                        WarehouseEntry.SetRange("Item No.", BinContent."Item No.");
+                                        WarehouseEntry.SetFilter("Serial No.", '<>%1', '');
+                                        if WarehouseEntry.FindSet() then begin
+                                            DictSerialNo := CreateEmptyDictionary();
+                                            repeat
+                                                if NOT DictSerialNo.ContainsKey(WarehouseEntry."Serial No.") then
+                                                    DictSerialNo.Add(WarehouseEntry."Serial No.", 0);
+                                                DictSerialNo.Set(WarehouseEntry."Serial No.", DictSerialNo.Get(WarehouseEntry."Serial No.") + WarehouseEntry.Quantity);
+                                            until WarehouseEntry.Next() = 0;
 
-                        // if false then
-                        //     repeat
-                        //         LineNo += 10000;
-                        //         // remove item
-                        //         ItemJournalLine.Init();
-                        //         ItemJournalLine.Validate("Journal Template Name", 'ARTIKEL');
-                        //         ItemJournalLine.Validate("Journal Batch Name", 'PROJEKT');
-                        //         ItemJournalLine."Line No." := LineNo;
-                        //         ItemJournalLine.Insert(true);
-                        //         ItemJournalLine.Validate("Item No.", BinContent."Item No.");
-                        //         ItemJournalLine.Validate("Serial No.", WarehouseEntry."Serial No.");
-                        //         ItemJournalLine.Validate("Posting Date", Today());
-                        //         ItemJournalLine.Validate("Entry Type", ItemJournalLine."Entry Type"::"Negative Adjmt.");
-                        //         ItemJournalLine.Validate("Document No.", Rec."No.");
-                        //         ItemJournalLine.Validate("Source Code", 'UMLAG');
-                        //         ItemJournalLine.Validate("Document Date", Today());
-                        //         ItemJournalLine.Validate("Location Code", BinContent."Location Code");
-                        //         ItemJournalLine.Validate("Bin Code", BinContent."Bin Code");
-                        //         ItemJournalLine.Validate(Quantity, BinContent.Quantity);
-                        //         ItemJournalLine.Validate("Quantity (Base)", BinContent."Quantity (Base)");
-                        //         ItemJournalLine.Validate("Flushing Method", ItemJournalLine."Flushing Method"::Manual);
-                        //         ItemJournalLine.Validate("Value Entry Type", ItemJournalLine."Value Entry Type"::"Direct Cost");
-                        //         ItemJournalLine.Modify();
-
-                        //         // apply reservation -
-                        //         WarehouseEntry.SetRange("Location Code", 'PROJEKT');
-                        //         WarehouseEntry.SetRange("Bin Code", xRec."No.");
-                        //         WarehouseEntry.SetFilter("Serial No.", '<>%1', '');
-
-                        //         if WarehouseEntry.FindLast() then begin
-                        //             DictSerialNo := CreateEmptyDictionary();
-                        //             repeat
-                        //                 if NOT DictSerialNo.ContainsKey(WarehouseEntry."Serial No.") then
-                        //                     DictSerialNo.Add(WarehouseEntry."Serial No.", 0);
-                        //                 DictSerialNo.Set(WarehouseEntry."Serial No.", DictSerialNo.Get(WarehouseEntry."Serial No.") + WarehouseEntry.Quantity);
-                        //             until WarehouseEntry.Next() = 0;
-                        //         end;
-
-                        //         foreach SerialNo in DictSerialNo.Keys do begin
-                        //             ReservationEntry.Init();
-                        //             ReservationEntry."Entry No." := NextEntryNo();
-                        //             ReservationEntry."Item No." := WarehouseEntry."Item No.";
-                        //             ReservationEntry.Description := WarehouseEntry.Description;
-                        //             ReservationEntry."Location Code" := WarehouseEntry."Location Code";
-                        //             ReservationEntry."Variant Code" := WarehouseEntry."Variant Code";
-                        //             ReservationEntry."Reservation Status" := ReservationEntry."Reservation Status"::Prospect;
-                        //             ReservationEntry."Source Type" := Database::"Item Journal Line";
-                        //             // SUBTYPE = 3 für ABGANG!!!  SUBTYPPE = 2 für ZUGANG
-                        //             ReservationEntry."Source Subtype" := ReservationEntry."Source Subtype"::"3";
-                        //             ReservationEntry."Source Batch Name" := 'PROJEKT';
-                        //             ReservationEntry."Source ID" := 'ARTIKEL';
-                        //             ReservationEntry."Source Ref. No." := LineNo;
-                        //             ReservationEntry."Serial No." := SerialNo;
-                        //             ReservationEntry."Item Tracking" := ReservationEntry."Item Tracking"::"Serial No.";
-                        //             ReservationEntry."Created By" := UserId;
-                        //             ReservationEntry.Positive := false;
-                        //             ReservationEntry.Quantity := DictSerialNo.Get(SerialNo) * -1;
-                        //             ReservationEntry."Qty. per Unit of Measure" := DictSerialNo.Get(SerialNo);
-                        //             ReservationEntry."Quantity (Base)" := DictSerialNo.Get(SerialNo) * -1;
-                        //             ReservationEntry."Qty. to Handle (Base)" := DictSerialNo.Get(SerialNo) * -1;
-                        //             ReservationEntry."Qty. to Invoice (Base)" := DictSerialNo.Get(SerialNo) * -1;
-                        //             ReservationEntry."Quantity Invoiced (Base)" := 0;
-
-                        //             ReservationEntry."Creation Date" := Today();
-                        //             ReservationEntry."Expiration Date" := Today();
-                        //             ReservationEntry.Insert();
-                        //         end;
-                        //         LineNo += 10000;
-                        //         // add item
-                        //         ItemJournalLine.Init();
-                        //         ItemJournalLine.Validate("Journal Template Name", 'ARTIKEL');
-                        //         ItemJournalLine.Validate("Journal Batch Name", 'PROJEKT');
-                        //         ItemJournalLine."Line No." := LineNo;
-                        //         ItemJournalLine.Insert(true);
-                        //         ItemJournalLine.Validate("Item No.", BinContent."Item No.");
-                        //         ItemJournalLine.Validate("Serial No.", WarehouseEntry."Serial No.");
-                        //         ItemJournalLine.Validate("Posting Date", Today());
-                        //         ItemJournalLine.Validate("Entry Type", ItemJournalLine."Entry Type"::"Positive Adjmt.");
-                        //         ItemJournalLine.Validate("Document No.", Rec."No.");
-                        //         ItemJournalLine.Validate("Source Code", 'UMLAG');
-                        //         ItemJournalLine.Validate("Document Date", Today());
-                        //         ItemJournalLine.Validate("Location Code", BinContent."Location Code");
-                        //         ItemJournalLine.Validate("Bin Code", BinContent."Bin Code");
-                        //         ItemJournalLine.Validate(Quantity, BinContent.Quantity);
-                        //         ItemJournalLine.Validate("Quantity (Base)", BinContent."Quantity (Base)");
-                        //         ItemJournalLine.Validate("Value Entry Type", ItemJournalLine."Value Entry Type"::"Direct Cost");
-                        //         ItemJournalLine.Validate("Flushing Method", ItemJournalLine."Flushing Method"::Manual);
-                        //         ItemJournalLine.Modify();
-
-                        //         foreach SerialNo in DictSerialNo.Keys do begin
-                        //             ReservationEntry.Init();
-                        //             ReservationEntry."Entry No." := NextEntryNo;
-                        //             ReservationEntry."Item No." := WarehouseEntry."Item No.";
-                        //             ReservationEntry.Description := WarehouseEntry.Description;
-                        //             ReservationEntry."Location Code" := WarehouseEntry."Location Code";
-                        //             ReservationEntry."Variant Code" := WarehouseEntry."Variant Code";
-                        //             ReservationEntry."Reservation Status" := ReservationEntry."Reservation Status"::Prospect;
-                        //             ReservationEntry."Source Type" := Database::"Item Journal Line";
-                        //             // SUBTYPE = 3 für ABGANG!!!  SUBTYPPE = 2 für ZUGANG
-                        //             ReservationEntry."Source Subtype" := ReservationEntry."Source Subtype"::"2";
-                        //             ReservationEntry."Source Batch Name" := 'PROJEKT';
-                        //             ReservationEntry."Source ID" := 'ARTIKEL';
-                        //             ReservationEntry."Source Ref. No." := LineNo;
-                        //             ReservationEntry."Serial No." := SerialNo;
-                        //             ReservationEntry."Item Tracking" := ReservationEntry."Item Tracking"::"Serial No.";
-                        //             ReservationEntry."Created By" := UserId;
-                        //             ReservationEntry.Positive := true;
-                        //             ReservationEntry.Quantity := DictSerialNo.Get(SerialNo);
-                        //             ReservationEntry."Qty. per Unit of Measure" := DictSerialNo.Get(SerialNo);
-                        //             ReservationEntry."Quantity (Base)" := DictSerialNo.Get(SerialNo);
-                        //             ReservationEntry."Qty. to Handle (Base)" := DictSerialNo.Get(SerialNo);
-                        //             ReservationEntry."Qty. to Invoice (Base)" := DictSerialNo.Get(SerialNo);
-                        //             ReservationEntry."Quantity Invoiced (Base)" := 0;
-
-                        //             ReservationEntry."Creation Date" := Today();
-                        //             ReservationEntry."Expiration Date" := Today();
-                        //             ReservationEntry.Insert();
-                        //         end;
-                        //     // apply reservation +
-
-                        //     until BinContent.Next() = 0;
-
-                        // CODEUNIT.Run(CODEUNIT::"Item Jnl.-Post", ItemJournalLine);
-
-                        CurrPage.Update();
-                    end
+                                            foreach SerialNo in DictSerialNo.Keys do begin
+                                                // Die Reihenfolge muss eingehalten werden. 1. Abgang 2. Neg. Reservierung 3. Zugang 4. Pos. Reservierung
+                                                // 1. Abgang 2. Zugang 3. Neg. Reservierung 4. Pos. Reservierung => Fehler
+                                                NewItemJournalLine(ItemJournalLine, Item, SerialNo, BinContent."Location Code", BinContent."Bin Code", 1, ItemJournalLine."Entry Type"::"Negative Adjmt.", 'UMLAG');
+                                                CreateReservationEntryNegative(ReservationEntry, ItemJournalLine, SerialNo);
+                                                NewItemJournalLine(ItemJournalLine, Item, SerialNo, NewBin."Location Code", NewBin.Code, 1, ItemJournalLine."Entry Type"::"Positive Adjmt.", 'UMLAG');
+                                                CreateReservationEntryPositive(ReservationEntry, ItemJournalLine, SerialNo);
+                                                TransferItemsFlag := true;
+                                            end;
+                                        end else begin
+                                            NewItemJournalLine(ItemJournalLine, Item, '', BinContent."Location Code", BinContent."Bin Code", Qty, ItemJournalLine."Entry Type"::"Negative Adjmt.", 'UMLAG');
+                                            NewItemJournalLine(ItemJournalLine, Item, '', NewBin."Location Code", NewBin.Code, Qty, ItemJournalLine."Entry Type"::"Positive Adjmt.", 'UMLAG');
+                                            TransferItemsFlag := true;
+                                        end;
+                                    end;
+                                end;
+                            until BinContent.Next() = 0;
+                            if TransferItemsFlag then
+                                CODEUNIT.Run(CODEUNIT::"Item Jnl.-Post", ItemJournalLine);
+                        end;
+                    end;
+                    CurrPage.Update();
                 end;
             }
         }
@@ -1320,6 +1252,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
         AnfrageUeber: Text;
         MontageGrp: Text;
         ProjektNotizen: Record 50001;
+        ItemLedgerLineNo: Integer;
 
     trigger OnAfterGetRecord()
     begin
@@ -1383,5 +1316,121 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 JobTypeSuffix += '.9';
         end;
         Exit(JobTypeSuffix);
+    end;
+
+    local procedure UpdateJobNotices(OldJobNo: Code[20]; NewJobNo: Code[20])
+    var
+        JobNotice: Record "Projekt-Notizen";
+        JobNoticeNew: Record "Projekt-Notizen";
+    begin
+        Clear(JobNoticeNew);
+        if JobNotice.Get(NewJobNo) then begin
+            Exit;
+        end;
+        if JobNotice.Get(OldJobNo) then begin
+            JobNoticeNew.Init();
+            JobNoticeNew."Job No." := NewJobNo;
+            JobNoticeNew.Insert(true);
+            JobNoticeNew."Anfrage über1" := JobNotice."Anfrage über1";
+            JobNoticeNew."Anfrage über2" := JobNotice."Anfrage über2";
+            JobNoticeNew."Anfrage über3" := JobNotice."Anfrage über3";
+            JobNoticeNew.Montagegruppe1 := JobNotice.Montagegruppe1;
+            JobNoticeNew.Montagegruppe2 := JobNotice.Montagegruppe2;
+            JobNoticeNew.Montagegruppe3 := JobNotice.Montagegruppe3;
+            JobNoticeNew."Zu beachten1" := JobNotice."Zu beachten1";
+            JobNoticeNew."Zu beachten2" := JobNotice."Zu beachten2";
+            JobNoticeNew."Zu beachten3" := JobNotice."Zu beachten3";
+            JobNoticeNew.Modify();
+        end;
+    end;
+
+    procedure NewItemJournalLine(var ItemJournalLine: Record "Item Journal Line"; Item: Record Item; SerialNo: Code[50]; Location: Code[20]; Bin: Code[20]; Qty: Decimal; EntryType: Enum "Item Journal Entry Type"; DocumentNo: Code[20])
+    var
+        ItemJournalLine_Tmp: Record "Item Journal Line";
+    begin
+        ItemLedgerLineNo += 10000;
+        ItemJournalLine.Init();
+        ItemJournalLine.Validate("Journal Template Name", 'ARTIKEL');
+        ItemJournalLine.Validate("Journal Batch Name", 'PROJEKT');
+        ItemJournalLine."Line No." := ItemLedgerLineNo;
+        ItemJournalLine.Insert(true);
+        ItemJournalLine.Validate("Item No.", Item."No.");
+        ItemJournalLine.Validate("Serial No.", SerialNo);
+        ItemJournalLine.Validate("Posting Date", Today());
+        ItemJournalLine.Validate("Entry Type", EntryType);
+        ItemJournalLine.Validate("Document No.", DocumentNo);
+        ItemJournalLine.Validate(Description, Item.Description);
+        ItemJournalLine.Validate("Source Code", 'LAGPLUMLAG');
+        ItemJournalLine.Validate("Gen. Prod. Posting Group", Item."Gen. Prod. Posting Group");
+        ItemJournalLine.Validate("Document Date", Today());
+        ItemJournalLine.Validate("Location Code", Location);
+        ItemJournalLine.Validate("Bin Code", Bin);
+        ItemJournalLine.Validate(Quantity, Qty);
+        ItemJournalLine.Validate("Flushing Method", ItemJournalLine."Flushing Method"::Manual);
+        ItemJournalLine.Validate("Value Entry Type", ItemJournalLine."Value Entry Type"::"Direct Cost");
+        ItemJournalLine.Validate("Unit Cost Calculation", ItemJournalLine."Unit Cost Calculation"::Time);
+        ItemJournalLine.Modify();
+    end;
+
+    procedure CreateReservationEntryNegative(var ReservationEntry: Record "Reservation Entry"; var NewItemJnlLine: Record "Item Journal Line"; SerialNo: Code[50])
+    begin
+        ReservationEntry.Init();
+        ReservationEntry."Entry No." := NextEntryNo;
+        ReservationEntry."Item No." := NewItemJnlLine."Item No.";
+        ReservationEntry.Description := NewItemJnlLine.Description;
+        ReservationEntry."Location Code" := NewItemJnlLine."Location Code";
+        ReservationEntry."Variant Code" := NewItemJnlLine."Variant Code";
+        ReservationEntry."Reservation Status" := ReservationEntry."Reservation Status"::Prospect;
+        ReservationEntry."Source Type" := Database::"Item Journal Line";
+        // SUBTYPE = 3 für ABGANG!!!  SUBTYPPE = 2 für ZUGANG
+        ReservationEntry."Source Subtype" := ReservationEntry."Source Subtype"::"3";
+        ReservationEntry."Source Batch Name" := NewItemJnlLine."Journal Batch Name";
+        ReservationEntry."Source ID" := NewItemJnlLine."Journal Template Name";
+        ReservationEntry."Source Ref. No." := NewItemJnlLine."Line No.";
+        ReservationEntry."Serial No." := SerialNo;
+        ReservationEntry."Item Tracking" := ReservationEntry."Item Tracking"::"Serial No.";
+        ReservationEntry."Created By" := UserId;
+        ReservationEntry.Positive := false;
+        ReservationEntry.Quantity := -1;
+        ReservationEntry."Qty. per Unit of Measure" := 1;
+        ReservationEntry."Quantity (Base)" := -1;
+        ReservationEntry."Qty. to Handle (Base)" := -1;
+        ReservationEntry."Qty. to Invoice (Base)" := -1;
+        ReservationEntry."Quantity Invoiced (Base)" := 0;
+
+        ReservationEntry."Creation Date" := Today();
+        ReservationEntry."Expiration Date" := Today();
+        ReservationEntry.Insert();
+    end;
+
+    procedure CreateReservationEntryPositive(var ReservationEntry: Record "Reservation Entry"; var NewItemJnlLine: Record "Item Journal Line"; SerialNo: Code[50])
+    begin
+        ReservationEntry.Init();
+        ReservationEntry."Entry No." := NextEntryNo;
+        ReservationEntry."Item No." := NewItemJnlLine."Item No.";
+        ReservationEntry.Description := NewItemJnlLine.Description;
+        ReservationEntry."Location Code" := NewItemJnlLine."Location Code";
+        ReservationEntry."Variant Code" := NewItemJnlLine."Variant Code";
+        ReservationEntry."Reservation Status" := ReservationEntry."Reservation Status"::Prospect;
+        ReservationEntry."Source Type" := Database::"Item Journal Line";
+        // SUBTYPE = 3 für ABGANG!!!  SUBTYPPE = 2 für ZUGANG
+        ReservationEntry."Source Subtype" := ReservationEntry."Source Subtype"::"2";
+        ReservationEntry."Source Batch Name" := NewItemJnlLine."Journal Batch Name";
+        ReservationEntry."Source ID" := NewItemJnlLine."Journal Template Name";
+        ReservationEntry."Source Ref. No." := NewItemJnlLine."Line No.";
+        ReservationEntry."Serial No." := SerialNo;
+        ReservationEntry."Item Tracking" := ReservationEntry."Item Tracking"::"Serial No.";
+        ReservationEntry."Created By" := UserId;
+        ReservationEntry.Positive := true;
+        ReservationEntry.Quantity := 1;
+        ReservationEntry."Qty. per Unit of Measure" := 1;
+        ReservationEntry."Quantity (Base)" := 1;
+        ReservationEntry."Qty. to Handle (Base)" := 1;
+        ReservationEntry."Qty. to Invoice (Base)" := 1;
+        ReservationEntry."Quantity Invoiced (Base)" := 0;
+
+        ReservationEntry."Creation Date" := Today();
+        ReservationEntry."Expiration Date" := Today();
+        ReservationEntry.Insert();
     end;
 }

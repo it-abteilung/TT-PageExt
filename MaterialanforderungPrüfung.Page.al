@@ -159,7 +159,7 @@ Page 50063 "Materialanforderung Prüfung"
                         Rec.SetRange("Lfd Nr", EntryNo_G);
                         CurrPage.Update(false);
                     end else
-                        Message('Keine ältere Materialanforderung gefunden.');
+                        Message('Keine vorherige Materialanforderung gefunden.');
                 end;
             }
             action("Next Record")
@@ -179,7 +179,7 @@ Page 50063 "Materialanforderung Prüfung"
                         Rec.SetRange("Lfd Nr", EntryNo_G);
                         CurrPage.Update(false);
                     end else
-                        Message('Keine neue Materialanforderung gefunden.');
+                        Message('Keine nächste Materialanforderung gefunden.');
                 end;
             }
         }

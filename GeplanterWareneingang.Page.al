@@ -4,10 +4,8 @@ Page 50018 "Geplante Wareneingänge"
     PageType = List;
     PromotedActionCategories = 'Neu,Vorgang,Berichte,Filter';
     SourceTable = "Purchase Header";
-    SourceTableView = sorting("Expected Receipt Date")
-                      where("Document Type" = const(Order),
-                            Leistungsart = const(Fremdlieferung));
-    usagecategory = Lists;
+    SourceTableView = sorting("Promised Receipt Date") where("Document Type" = const(Order), Leistungsart = const(Fremdlieferung));
+    UsageCategory = Lists;
     ApplicationArea = All;
     AdditionalSearchTerms = 'Geplante Wareneingänge';
 
@@ -17,7 +15,7 @@ Page 50018 "Geplante Wareneingänge"
         {
             repeater(Control1000000000)
             {
-                field("Expected Receipt Date"; Rec."Expected Receipt Date")
+                field("Promised Receipt Date"; Rec."Promised Receipt Date")
                 {
                     ApplicationArea = Basic;
                 }
@@ -153,7 +151,7 @@ Page 50018 "Geplante Wareneingänge"
 
                     trigger OnAction()
                     begin
-                        Rec.SetRange("Expected Receipt Date", Today);
+                        Rec.SetRange("Promised Receipt Date", Today);
                     end;
                 }
                 action(future)
@@ -166,7 +164,7 @@ Page 50018 "Geplante Wareneingänge"
 
                     trigger OnAction()
                     begin
-                        Rec.SetFilter("Expected Receipt Date", '>%', Today);
+                        Rec.SetFilter("Promised Receipt Date", '>%', Today);
                     end;
                 }
                 action(delayed)
@@ -179,7 +177,7 @@ Page 50018 "Geplante Wareneingänge"
 
                     trigger OnAction()
                     begin
-                        Rec.SetFilter("Expected Receipt Date", '<%', Today);
+                        Rec.SetFilter("Promised Receipt Date", '<%', Today);
                     end;
                 }
             }
@@ -190,7 +188,7 @@ Page 50018 "Geplante Wareneingänge"
     begin
         BuyfromVendorNameOnFormat;
 
-        if Rec."Expected Receipt Date" < Today then
+        if Rec."Promised Receipt Date" < Today then
             Style := true
         else
             Style := false;
@@ -202,8 +200,7 @@ Page 50018 "Geplante Wareneingänge"
 
     trigger OnOpenPage()
     begin
-        Rec.SetFilter("Expected Receipt Date", '%1..', CalcDate('-8W', Today));
-
+        Rec.SetFilter("Promised Receipt Date", '%1..%2', CalcDate('-8W', Today()), Today());
         //G-ERP.RS 2019-01-23 +++
         Rec.FilterGroup := 29;
         Rec.SetRange("Status Purchase", Rec."status purchase"::" ", Rec."status purchase"::"partly delivered");
@@ -219,7 +216,7 @@ Page 50018 "Geplante Wareneingänge"
 
     local procedure BuyfromVendorNameOnFormat()
     begin
-        if Rec."Expected Receipt Date" < Today then;
+        if Rec."Promised Receipt Date" < Today then;
     end;
 }
 

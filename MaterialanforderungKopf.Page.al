@@ -44,11 +44,13 @@ Page 50065 "Materialanforderung Kopf"
                 {
                     ApplicationArea = Basic;
                     Editable = false;
+                    QuickEntry = false;
                 }
                 field("Lfd Nr"; Rec."Lfd Nr")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
+                    QuickEntry = false;
                 }
                 field(Stichwort; Rec.Stichwort)
                 {
@@ -66,11 +68,13 @@ Page 50065 "Materialanforderung Kopf"
                 {
                     ApplicationArea = Basic;
                     Editable = false;
+                    QuickEntry = false;
                 }
                 field(Belegdatum; Rec.Belegdatum)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
+                    QuickEntry = false;
                 }
                 field(Leistung; Rec.Leistung)
                 {
@@ -365,6 +369,7 @@ Page 50065 "Materialanforderung Kopf"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Anforderung senden';
+                    Enabled = Rec.Status = Rec.Status::erfasst;
                     Image = ReleaseDoc;
                     trigger OnAction()
                     begin
@@ -386,6 +391,7 @@ Page 50065 "Materialanforderung Kopf"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Anforderung stornieren';
+                    Enabled = Rec.Status = Rec.Status::freigegeben;
                     Image = CloseDocument;
                     trigger OnAction()
                     begin
@@ -400,8 +406,8 @@ Page 50065 "Materialanforderung Kopf"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Status: Erledigt';
+                    Enabled = IsPurchaser AND (Rec.Status = Rec.Status::freigegeben);
                     Image = Document;
-                    Enabled = IsPurchaser;
                     Visible = IsPurchaser;
 
                     trigger OnAction()
@@ -417,8 +423,8 @@ Page 50065 "Materialanforderung Kopf"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Status: Angefordert';
+                    Enabled = IsPurchaser AND (Rec.Status = Rec.Status::beendet);
                     Image = Document;
-                    Enabled = IsPurchaser;
                     Visible = IsPurchaser;
 
                     trigger OnAction()
@@ -437,14 +443,16 @@ Page 50065 "Materialanforderung Kopf"
                     Image = Comment;
                     RunObject = Page "Comment Sheet";
                     RunPageLink = "No." = field("Projekt Nr");
+                    ToolTip = 'Zeigt alle erstellten Bemerkungen für die Projekt-Nr. an.';
                 }
                 action("Vendor Selection")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Kreditorauswahl (Schritt 1)';
-                    Enabled = IsPurchaser;
+                    Enabled = IsPurchaser AND (Rec.Status = Rec.Status::freigegeben);
                     Visible = IsPurchaser;
                     Image = Vendor;
+                    ToolTip = 'Enthält eine gefilterte Auswahl an Kreditoren.\Filterung verwendet Artikelkategorie- und Produktgruppencodes der Artikel und Segementierungen.\Materialanforderung muss im Status "Angefordert" sein.';
 
                     trigger OnAction()
                     var
@@ -537,9 +545,10 @@ Page 50065 "Materialanforderung Kopf"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Anfrage erz. (Schritt 2)';
-                    Enabled = IsPurchaser;
+                    Enabled = IsPurchaser AND (Rec.Status = Rec.Status::freigegeben);
                     Visible = IsPurchaser;
                     Image = CreateDocument;
+                    ToolTip = 'Erzeugt Serienanfragen und versendet automatisch E-Mails an die ausgewählten Kontakte.\Materialanforderung muss im Status "Angefordert" sein.';
 
                     trigger OnAction()
                     var
@@ -562,11 +571,17 @@ Page 50065 "Materialanforderung Kopf"
                         ExtendedTextLine_l: Record "Extended Text Line";
                         MaterialToQuote: Record "Material To Quote";
                         Counter: Integer;
+                        VendorPicked: Boolean;
+                        VendorUsed: Boolean;
                     begin
+                        Clear(VendorSerienanfrage);
                         VendorSerienanfrage.SetRange(Serienanfragenr, Format(Rec."Projekt Nr") + ';' + Format(Rec."Lfd Nr"));
-                        VendorSerienanfrage.SetRange(Erledigt, false);
                         VendorSerienanfrage.SetRange("Use Vendor", true);
+                        if VendorSerienanfrage.FindFirst() then
+                            VendorPicked := true;
+                        VendorSerienanfrage.SetRange(Erledigt, false);
                         if VendorSerienanfrage.FindSet then begin
+                            VendorUsed := true;
                             repeat
                                 VendorSerienanfrage.TestField("Buy-from Contact No.");
                             until VendorSerienanfrage.Next = 0;
@@ -713,8 +728,12 @@ Page 50065 "Materialanforderung Kopf"
                                 end;
                             until VendorSerienanfrage.Next = 0;
                             Message('Serienanfragen abgeschlossen');
-                        end;
-
+                        end else
+                            if NOT VendorPicked then
+                                Message('In der Kreditorauswahl wurde kein Kreditor ausgewählt.')
+                            else
+                                if Not VendorUsed then
+                                    Message('Die ausgewählten Kreditoren wurden bereits in Serienanfragen verwendet.');
                     end;
                 }
 
@@ -725,6 +744,7 @@ Page 50065 "Materialanforderung Kopf"
                     Enabled = IsPurchaser;
                     Image = CheckList;
                     Visible = IsPurchaser;
+                    ToolTip = 'Ansicht mit einer Filterung nach Projekt-Nr. und Lfd. Nr., um nicht abgehakte Posten auf der Materialanforderung anzuzeigen.';
 
                     trigger OnAction()
                     var
@@ -788,7 +808,7 @@ Page 50065 "Materialanforderung Kopf"
         Vendor: Record Vendor;
         PurchaseHeader: Record "Purchase Header";
         PurchaseLine_C: Record "Purchase Line";
-        SMTP: Codeunit EMail;
+        Email: Codeunit EMail;
         MailMsg: Codeunit "EMail Message";
         MailInStream: InStream;
         MailOutStream: OutStream;
@@ -839,24 +859,25 @@ Page 50065 "Materialanforderung Kopf"
                 TTQuoteRTC.SaveAs('', ReportFormat::Pdf, AttachmentOutStream, RecRef);
                 AttachmentTempBlob.CreateInStream(AttachmentInStream);
                 txtB64 := Base64Convert.ToBase64(AttachmentInStream, true);
-                if Confirm('Mail an den Kreditor %1 %2 senden?', true, VendorNo_L, Vendor.Name) then begin
-                    FileMgt.BLOBExport(AttachmentTempBlob, VendorName + '.pdf', true);
-                    // create mailbody with report "email body text purchquote"
-                    // if Report.SaveAs(Report::"Email Body Text PurchQuote", '', ReportFormat::Html, MailOutStream, RecRef) then begin
-                    //     AttachmentTempBlob.CreateInStream(MailInStream, TextEncoding::Windows);
-                    //     MailInStream.ReadText(MailBody);
-                    // end;
-                    // // create subject
-                    // if PurchaseHeader."Language Code" = 'ENU' then
-                    //     MailMsg.Create(MailTo_L, 'Our Quote ' + PurchaseHeader."Job No." + '/' + PurchaseHeader."No.", MailBody, true)
-                    // else
-                    //     MailMsg.Create(MailTo_L, 'Unsere Anfrage ' + PurchaseHeader."Job No." + '/' + PurchaseHeader."No.", MailBody, true);
-                    // // add pdf file to mail
-                    // MailMsg.AddAttachment(FileName, 'pdf', txtB64);
-                    // // send mail
-                    // SMTP.Send(MailMsg);
-                    // SendMailTo := true;
+                Message('E-Mail wird noch auf %1 umgeleitet, diese Funktion ist noch in der Testphase', MailTo_L);
+                // if Confirm('Mail an den Kreditor %1 %2 senden?', true, VendorNo_L, Vendor.Name) then begin
+                // FileMgt.BLOBExport(AttachmentTempBlob, VendorName + '.pdf', true);
+                // create mailbody with report "email body text purchquote"
+                if Report.SaveAs(Report::"Email Body Text PurchQuote", '', ReportFormat::Html, MailOutStream, RecRef) then begin
+                    AttachmentTempBlob.CreateInStream(MailInStream, TextEncoding::Windows);
+                    MailInStream.ReadText(MailBody);
                 end;
+                // create subject
+                if PurchaseHeader."Language Code" = 'ENU' then
+                    MailMsg.Create(MailTo_L, 'Our Quote ' + PurchaseHeader."Job No." + '/' + PurchaseHeader."No.", MailBody, true)
+                else
+                    MailMsg.Create(MailTo_L, 'Unsere Anfrage ' + PurchaseHeader."Job No." + '/' + PurchaseHeader."No.", MailBody, true);
+                // add pdf file to mail
+                MailMsg.AddAttachment(FileName, 'pdf', txtB64);
+                // send mail
+                Email.Send(MailMsg, Enum::"Email Scenario"::"Purchase Quote");
+                SendMailTo := true;
+                // end;
             end;
             Commit();
         end;

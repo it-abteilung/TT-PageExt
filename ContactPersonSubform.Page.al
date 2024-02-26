@@ -210,7 +210,6 @@ Page 82000 "Contact Person Subform"
         Text000: label 'Your mail client has returned the following error.\';
         Text001: label 'R E C A L L   %1 ';
         Text002: label 'Please call %1. Phone: %2 - %3 extension: %4';
-        [InDataSet]
         NameEmphasize: Boolean;
 
     local procedure DisplayLevelOnAfterValidate()

@@ -1383,10 +1383,20 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Close Doc - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 62512670 - Action 1024335499 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zeigt alle erstellten Bemerkungen für die Projekt-Nr. an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Comment List - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 62512670 - Action 1024335499 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bemerkungen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Comment List - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Action 1356437402 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Erzeugt Serienanfragen und versendet automatisch E-Mails an die ausgewählten Kontakte.\Materialanforderung muss im Status "Angefordert" sein.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action New Quote - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 62512670 - Action 1356437402 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Anfrage erz. (Schritt 2)</source>
@@ -1397,6 +1407,11 @@
           <source>Status: Angefordert</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Open Doc - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Action 2183099302 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ansicht mit einer Filterung nach Projekt-Nr. und Lfd. Nr., um nicht abgehakte Posten auf der Materialanforderung anzuzeigen.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Open Inspection - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 62512670 - Action 2183099302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Prüfung</source>
@@ -1412,6 +1427,11 @@
           <source>Anforderung stornieren</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Unrelease Doc - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 62512670 - Action 3468920432 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enthält eine gefilterte Auswahl an Kreditoren.\Filterung verwendet Artikelkategorie- und Produktgruppencodes der Artikel und Segementierungen.\Materialanforderung muss im Status "Angefordert" sein.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Vendor Selection - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 62512670 - Action 3468920432 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Kreditorauswahl (Schritt 1)</source>

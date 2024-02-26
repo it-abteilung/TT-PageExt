@@ -255,7 +255,7 @@ Page 50055 "TT Stundenerfassung"
     trigger OnAfterGetRecord()
     begin
         Rec.ShowShortcutDimCode(ShortcutDimCode);
-        OnAfterGetCurrRecord;
+        GetNames();
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -272,7 +272,7 @@ Page 50055 "TT Stundenerfassung"
     begin
         Rec.SetUpNewLine(xRec);
         Clear(ShortcutDimCode);
-        OnAfterGetCurrRecord;
+        GetNames();
 
         //G-ERP 06.07.2012+
         Rec.Validate("Posting Date", Today);
@@ -311,7 +311,7 @@ Page 50055 "TT Stundenerfassung"
         CurrPage.Update(false);
     end;
 
-    local procedure OnAfterGetCurrRecord()
+    local procedure GetNames()
     begin
         xRec := Rec;
         JobJnlManagement.GetNames(Rec, JobDescription, AccName);

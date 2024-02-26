@@ -716,13 +716,9 @@ Page 82001 "Contact Person Card"
         TAPIManagement: Codeunit TAPIManagement;
         CompanyDetails: Page "Company Details";
         NameDetails: Page "Name Details";
-        [InDataSet]
         "Company No.Enable": Boolean;
-        [InDataSet]
         "Company NameEnable": Boolean;
-        [InDataSet]
         OrganizationalLevelCodeEnable: Boolean;
-        [InDataSet]
         NoofJobResponsibilitiesEnable: Boolean;
 
 

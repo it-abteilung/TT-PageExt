@@ -272,7 +272,7 @@ Page 50019 "TT Job Journal"
     trigger OnAfterGetRecord()
     begin
         Rec.ShowShortcutDimCode(ShortcutDimCode);
-        OnAfterGetCurrRecord;
+        GetNames();
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -304,7 +304,7 @@ Page 50019 "TT Job Journal"
         Rec.Validate(Type, Rec.Type::Item);
         //G-ERP 06.07.2012-
 
-        OnAfterGetCurrRecord;
+        GetNames();
     end;
 
     trigger OnOpenPage()
@@ -340,7 +340,7 @@ Page 50019 "TT Job Journal"
         CurrPage.Update(false);
     end;
 
-    local procedure OnAfterGetCurrRecord()
+    local procedure GetNames()
     begin
         xRec := Rec;
         JobJnlManagement.GetNames(Rec, JobDescription, AccName);

@@ -129,12 +129,12 @@ Page 50066 "Materialanforderung Subform"
                 field(Einheit; Rec.Einheit)
                 {
                     ApplicationArea = Basic;
-                    Editable = IsEditable;
                 }
                 field("Anfrage erstellt"; Rec."Anfrage erstellt")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
+                    QuickEntry = false;
                 }
                 field(Liefertermin; Rec.Liefertermin)
                 {
@@ -145,6 +145,7 @@ Page 50066 "Materialanforderung Subform"
                     ApplicationArea = Basic;
                     Caption = 'Hat Alternative';
                     Editable = false;
+                    QuickEntry = false;
                     // Visible = false;
                 }
                 field("Is Substitute"; Rec."Is Substitute")
@@ -152,6 +153,7 @@ Page 50066 "Materialanforderung Subform"
                     ApplicationArea = Basic;
                     Caption = 'Ist Alternative';
                     Editable = false;
+                    QuickEntry = false;
                     // Visible = false;
                 }
                 field("Zeilen Nr"; Rec."Zeilen Nr")
@@ -159,17 +161,21 @@ Page 50066 "Materialanforderung Subform"
                     ApplicationArea = Basic;
                     Caption = 'Zeile';
                     Editable = false;
+                    QuickEntry = false;
                 }
                 field("Substitute To Line No."; Rec."Substitute To Line No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Alternative zu Zeile';
+                    Editable = false;
+                    QuickEntry = false;
                 }
                 field(VendorText; VendorText)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Anfragen';
                     Editable = false;
+                    QuickEntry = false;
 
                     trigger OnDrillDown()
                     var
@@ -210,6 +216,8 @@ Page 50066 "Materialanforderung Subform"
                 field(Abgehakt; Rec.Abgehakt)
                 {
                     ApplicationArea = Basic;
+                    QuickEntry = false;
+                    Enabled = IsPurchaser;
                 }
             }
         }

@@ -864,13 +864,9 @@ Page 50025 "Projekt Soll/Ist Vergleich"
         l_PurchInvHeader: Record "Purch. Inv. Header";
         l_PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr.";
         PurchaseHeader: Record "Purchase Header";
-        [InDataSet]
         AmpelStd: Boolean;
-        [InDataSet]
         AmpelEKStd: Boolean;
-        [InDataSet]
         AmpelMaterial: Boolean;
-        [InDataSet]
         AmpelFremd: Boolean;
         "Zähler": Integer;
         Fremdlief: Decimal;

@@ -116,5 +116,6 @@ PageExtension 50049 pageextension50049 extends "Contact List"
         END;
         // G-ERP-
     end;
+
 }
 
