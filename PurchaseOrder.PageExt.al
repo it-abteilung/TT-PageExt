@@ -281,6 +281,10 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
         OutStrMailBody: OutStream;
         Body: Text;
         VendorName: Text;
+        ObjectName: Text;
+        Job: Record Job;
+        //TODO delete maileditor wenn editor wieder funktioniert
+        MailEditor: Page "Mail Editor";
     begin
         CurrPage.SetSelectionFilter(l_PurchaseHeader);
         l_Vendor.Get(rec."Buy-from Vendor No.");
@@ -321,13 +325,24 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
             InStrMailBody.ReadText(Body);
         end;
 
+        ObjectName := '';
+        if AnzeigeSchiff then begin
+            if Job.Get(Rec."Job No.") then
+                ObjectName := ' - ' + Job.Objektname;
+        end;
+
         l_Cont.Get(rec."Buy-from Contact No.");
         if Rec."Language Code" = 'ENU' then
-            MailMsg.Create(l_Cont."E-Mail", 'Our Order ' + Rec."Job No." + '/' + Rec."No.", Body, true)
+            MailMsg.Create(l_Cont."E-Mail", 'Our Order ' + Rec."Job No." + '/' + Rec."No." + ObjectName, Body, true)
         else
-            MailMsg.Create(l_Cont."E-Mail", 'Unsere Bestellung ' + Rec."Job No." + '/' + Rec."No.", Body, true);
+            MailMsg.Create(l_Cont."E-Mail", 'Unsere Bestellung ' + Rec."Job No." + '/' + Rec."No." + ObjectName, Body, true);
         MailMsg.AddAttachment(Name, 'pdf', txtB64);
-        Mail.OpenInEditor(MailMsg);
+        // Mail.OpenInEditor(MailMsg);
+        CLear(MailEditor);
+        commit();
+        MailEditor.SetMail(Mail);
+        MailEditor.SetMailMsg(MailMsg);
+        MailEditor.RunModal();
     end;
 
     local procedure FaxErstellen(AnzeigeSchiff: Boolean)

@@ -23,6 +23,14 @@ PageExtension 50050 pageextension50050 extends "Salesperson/Purchaser Card"
                 ApplicationArea = Basic;
             }
         }
+        addafter(Blocked)
+        {
+            field("Allow Edit Item"; Rec."Allow Edit Item")
+            {
+                ApplicationArea = All;
+                Caption = 'Kann Artikel bearbeiten';
+            }
+        }
     }
 }
 

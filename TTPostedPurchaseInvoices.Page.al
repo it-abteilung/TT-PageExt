@@ -512,13 +512,16 @@ Page 50033 "TT Posted Purchase Invoices"
         if PurchInvLine.FindSet then
             repeat
                 waehrungsfaktor := 1;
-                waehrungsfaktor := Rec."Currency Factor";
+                // Bei einige Gebuchten Einkaufsrechnungen war ein falscher Currency Factor hinterlegt, konnte nicht geändert werden
+                if Rec."Currency Factor" <> 130.477431234563572 then
+                    waehrungsfaktor := Rec."Currency Factor"
+                else
+                    waehrungsfaktor := 0;
                 if waehrungsfaktor = 0 then
                     waehrungsfaktor := 1;
 
                 AmountLCY += (PurchInvLine.Amount / waehrungsfaktor);
             until PurchInvLine.Next = 0;
-
     end;
 
     trigger OnOpenPage()

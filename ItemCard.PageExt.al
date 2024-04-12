@@ -149,7 +149,29 @@ PageExtension 50010 pageextension50010 extends "Item Card"
                 Image = Resource;
             }
         }
+        addlast(processing)
+        {
+            action(Toggle_Block_Item)
+            {
+                ApplicationArea = All;
+                Caption = 'Toggle Artikelsperre';
+                Image = ChangeStatus;
 
+                trigger OnAction()
+                var
+                    UserSetup_L: Record "User Setup";
+                begin
+                    UserSetup_L.SetRange("User ID", UserId());
+                    if UserSetup_L.FindFirst() then
+                        if UserSetup_L.Block_Items then begin
+                            Rec.Blocked := NOT Rec.Blocked;
+                            CurrPage.Update();
+                        end
+                        else
+                            Message('Der Benutzer muss für die Aktion freigeschalten werden.');
+                end;
+            }
+        }
     }
 
     var
@@ -157,6 +179,18 @@ PageExtension 50010 pageextension50010 extends "Item Card"
 
     local procedure "***G-ERP***"()
     begin
+    end;
+
+    trigger OnOpenPage()
+    var
+        Purchaser_L: Record "Salesperson/Purchaser";
+        UserSetup_L: Record "User Setup";
+    begin
+        CurrPage.Editable(false);
+        Purchaser_L.SetRange("User ID", UserId());
+        if Purchaser_L.FindFirst() then
+            if Purchaser_L."Allow Edit Item" then
+                CurrPage.Editable(true);
     end;
 
     local procedure SetVisibleSerialNumbers()

@@ -2,11 +2,9 @@
 Page 50077 "Werkzeuganforderung Kopf"
 {
     AutoSplitKey = true;
+    Caption = 'Werkzeuganforderung Kopf';
     PageType = Card;
     SourceTable = Werkzeuganforderungskopf;
-    Caption = 'Werkzeuganforderung Kopf';
-
-
 
     layout
     {
@@ -53,6 +51,11 @@ Page 50077 "Werkzeuganforderung Kopf"
                     {
                         ApplicationArea = Basic;
                         Caption = 'Fertigstellung Werkzeuge Lager';
+                    }
+                    field(Status; Rec.Status)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Status';
                     }
                 }
                 group("Freigabe Schweißzusätze")
@@ -241,6 +244,12 @@ Page 50077 "Werkzeuganforderung Kopf"
     begin
         WeldingSupervisior.SetRange("User Name", UserId());
         IsWeldingSupervisior := NOT WeldingSupervisior.IsEmpty();
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        if Rec."Creation Date" = 0D then
+            Rec."Creation Date" := DT2Date(Rec.SystemCreatedAt);
     end;
 }
 

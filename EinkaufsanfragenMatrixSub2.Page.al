@@ -775,7 +775,7 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
         PurchaseLine.SetRange("Document Type", Rec."Document Type");
         PurchaseLine.SetRange("Document No.", Rec."No.");
         PurchaseLine.SetRange("Line No.", MatrixRecords[ColumnID]."Line No.");
-        PurchaseLine.SetFilter(Type, '%1 | %2', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)");
+        PurchaseLine.SetFilter(Type, '%1 | %2 | %3', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)", PurchaseLine.Type::"G/L Account");
         if PurchaseLine.FindFirst then begin
 
             MATRIX_CellData[ColumnID] := PurchaseLine.Amount;
@@ -800,7 +800,7 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
             PurchaseLine.SetRange("Document Type", Rec."Document Type");
             PurchaseLine.SetRange("Document No.", Rec."No.");
             // PurchaseLine.SetRange("Line No.", MatrixRecords[ColumnID]."Line No.");
-            PurchaseLine.SetFilter(Type, '%1 | %2', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)");
+            PurchaseLine.SetFilter(Type, '%1 | %2 | %3', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)", PurchaseLine.Type::"G/L Account");
             if PurchaseLine.FindSet() then
                 repeat
                     SumZeile += PurchaseLine.Amount;

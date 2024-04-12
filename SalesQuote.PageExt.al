@@ -193,6 +193,7 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
     var
         HasAddressOnCustomer: Boolean;
 
+    // Wird aktuell nicht benötigt
     // trigger OnOpenPage()
     // var
     //     TenantMedia: Record "Tenant Media";

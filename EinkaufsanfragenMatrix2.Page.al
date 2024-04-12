@@ -178,8 +178,7 @@ Page 50054 "Einkaufsanfragen Matrix2"
             else
                 //G-ERP.AG 2021-07-22 -
                 MatrixRecord.SetRange("Document No.", Rec."No.");
-            MatrixRecord.SetFilter(Type, '%1 | %2', MatrixRecord.Type::Item, MatrixRecord.Type::"Charge (Item)");
-
+            MatrixRecord.SetFilter(Type, '%1 | %2 | %3', MatrixRecord.Type::Item, MatrixRecord.Type::"Charge (Item)", PurchaseLine.Type::"G/L Account" );
             //table exists
             MatrixRecRef.GetTable(MatrixRecord);
             //set table
@@ -200,7 +199,7 @@ Page 50054 "Einkaufsanfragen Matrix2"
                 //G-ERP.AG 2021-07-22 -
                 PurchaseLine.SetRange("Document No.", Rec."No.");
             //G-ERP.AG 2021-07-22 + Anfrage#2312362
-            PurchaseLine.SetFilter(Type, '%1 | %2', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)");
+            PurchaseLine.SetFilter(Type, '%1 | %2 | %3', PurchaseLine.Type::Item, PurchaseLine.Type::"Charge (Item)", PurchaseLine.Type::"G/L Account");
 
             //remove duplicates in Matrix_ColumnCaptions
             for i := 1 to ArrayLen(Matrix_ColumnCaptions) do begin

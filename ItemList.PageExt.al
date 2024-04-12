@@ -235,8 +235,15 @@ PageExtension 50011 pageextension50011 extends "Item List"
 
     trigger OnOpenPage()
     var
+        Purchaser_L: Record "Salesperson/Purchaser";
+        UserSetup_L: Record "User Setup";
         UserPerm: Codeunit "User Permissions";
     begin
+        CurrPage.Editable(false);
+        Purchaser_L.SetRange("User ID", UserId());
+        if Purchaser_L.FindFirst() then
+            if Purchaser_L."Allow Edit Item" then
+                CurrPage.Editable(true);
         isSuper := UserPerm.IsSuper(UserSecurityId())
     end;
 

@@ -2,7 +2,7 @@
   "id": "b58e8bbd-706d-449c-b90c-51dd042d6491",
   "name": "PageExt",
   "publisher": "Dennis Appelt",
-  "version": "23.4.2024022601.2024022601",
+  "version": "23.5.2024041101.2024041102",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -42,7 +42,7 @@
   "resourceExposurePolicy": {
     "allowDebugging": true,
     "allowDownloadingSource": true,
-    "includeSourceInSymbolFile": false
+    "includeSourceInSymbolFile": true
   },
   "runtime": "11.0",
   "features": [

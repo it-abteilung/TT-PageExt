@@ -45,6 +45,12 @@ PageExtension 50064 pageextension50064 extends "Job WIP/Recognition FactBox"
             {
                 ApplicationArea = Basic;
             }
+            field(Insurance; Insurance)
+            {
+                ApplicationArea = Basic;
+                Caption = '1,5% Versich.';
+                DecimalPlaces = 2 : 2;
+            }
             field(Gesamtpreis; Gesamtpr)
             {
                 ApplicationArea = Basic;
@@ -66,17 +72,36 @@ PageExtension 50064 pageextension50064 extends "Job WIP/Recognition FactBox"
     var
         JobPlanningLine: Record "Job Planning Line";
         Gesamtpr: Decimal;
+        Insurance: Decimal;
 
     trigger OnAfterGetRecord()
+    var
+        Job_L: Record Job;
+        JobLedgerEntry: Record "Job Ledger Entry";
+        JobPlanningLine_L: Record "Job Planning Line";
+        JobType_l: Record "Job Type";
+        LiquidityPlanning_l: Record "Liquidity Planning";
+        PurchaseHeader_l: Record "Purchase Header";
+        PurchInvHeader_l: Record "Purch. Inv. Header";
+        PurchCrMemoHdr_l: Record "Purch. Cr. Memo Hdr.";
+        JobSum_l: Decimal;
+        JobSumDiscount_l: Decimal;
+
+        LagegrmaterialIst: Decimal;
+        TotalCost_Soll: Decimal;
+        TotalCost_Ist: Decimal;
     begin
+        TotalCost_Ist := 0;
+        TotalCost_Soll := 0;
+        LagegrmaterialIst := 0;
 
         CLEAR(JobPlanningLine);
         JobPlanningLine.SETRANGE("Job No.", Rec."No.");
-        JobPlanningLine.CALCSUMS(Quantity, Lohnkosten, Materialkosten, Fremdarbeitenkosten, Fremdlieferungskosten,
-                                 Transportkosten, Hotelkosten, Flugkosten, Auslöse);
-        Gesamtpr := JobPlanningLine.Lohnkosten + JobPlanningLine.Materialkosten + JobPlanningLine.Fremdarbeitenkosten +
-                    JobPlanningLine.Fremdlieferungskosten + JobPlanningLine.Transportkosten + JobPlanningLine.Hotelkosten +
-                    JobPlanningLine.Flugkosten + JobPlanningLine.Auslöse;
+        JobPlanningLine.CALCSUMS(Quantity, Lohnkosten, Materialkosten, Fremdarbeitenkosten, Fremdlieferungskosten, Transportkosten, Hotelkosten, Flugkosten, Auslöse);
+
+        Gesamtpr := JobPlanningLine.Lohnkosten + JobPlanningLine.Materialkosten + JobPlanningLine.Fremdarbeitenkosten + JobPlanningLine.Fremdlieferungskosten
+                    + JobPlanningLine.Transportkosten + JobPlanningLine.Hotelkosten + JobPlanningLine.Flugkosten + JobPlanningLine.Auslöse;
+
+        Insurance := (Gesamtpr - Rec."Nachlass in Euro") / 101.5 * 1.5;
     end;
 }
-

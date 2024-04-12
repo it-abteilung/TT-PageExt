@@ -220,6 +220,18 @@ Page 50091 "Item Serial Subpage"
                         SetValue(200);
                     end;
                 }
+                field("Last Scan Date"; LastScanDate)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Letze Scan-Datum';
+                    Editable = false;
+                }
+                field("Last Scan Location"; LastScanLocation)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Letzer Scan-Ort';
+                    Editable = false;
+                }
             }
         }
     }
@@ -279,6 +291,15 @@ Page 50091 "Item Serial Subpage"
             "Weight (kg)_g" := ArtikelSeriennr_l."Gewicht (kg)";
             "Object ID_g" := ArtikelSeriennr_l."Object ID";
         end;
+
+        Clear(ArtikelSeriennr_l);
+        if ArtikelSeriennr_l.Get(Rec."Item No.", Rec."Serial No.") then begin
+            LastScanDate := ArtikelSeriennr_l."Last Scan Date";
+            LastScanLocation := ArtikelSeriennr_l."Last Scan Location";
+        end else begin
+            LastScanDate := 0D;
+            LastScanLocation := '';
+        end;
     end;
 
     trigger OnOpenPage()
@@ -309,6 +330,9 @@ Page 50091 "Item Serial Subpage"
         "Weight (kg)_g": Decimal;
         "Object ID_g": Code[20];
         ERR_ItemSerialNo: label 'Die Artikel- und Serien Nummer dürfen nicht leer sein.';
+
+        LastScanDate: Date;
+        LastScanLocation: Code[10];
 
     local procedure SetValue(p_FieldNo: Integer)
     var

@@ -3,7 +3,6 @@ Page 50025 "Projekt Soll/Ist Vergleich"
     Caption = 'Job Soll/Ist Vergleich';
     PageType = CardPart;
     SourceTable = Job;
-
     layout
     {
         area(content)

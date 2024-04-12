@@ -42,7 +42,10 @@ Page 50076 "Werkzeuganforderung Übersicht"
                 {
                     ApplicationArea = Basic;
                 }
-
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = Basic;
+                }
             }
         }
     }
@@ -118,6 +121,45 @@ Page 50076 "Werkzeuganforderung Übersicht"
 
                 RunObject = Page "Welding Supervisiors";
             }
+        }
+    }
+
+    views
+    {
+        view(ShowStatusCreate)
+        {
+            Caption = 'Nur Status "Erstellt"';
+            Filters = where(Status = filter(Erstellt));
+        }
+        view(ShowStatusProcessing)
+        {
+            Caption = 'Nur Status "Bearbeitung"';
+            Filters = where(Status = filter(Bearbeitung));
+        }
+        view(ShowStatusClosed)
+        {
+            Caption = 'Nur Status "Erledigt"';
+            Filters = where(Status = filter(Erledigt));
+        }
+        view(LastWeek)
+        {
+            Caption = 'Erstellt in der letzten Woche';
+            Filters = where("Creation Date" = filter('<-1W>..T'));
+        }
+        view(LastMonth)
+        {
+            Caption = 'Erstellt im letzten Monat';
+            Filters = where("Creation Date" = filter('<-1M>..T'));
+        }
+        view(CollectionWeek)
+        {
+            Caption = 'Abholung <= 7T';
+            Filters = where("Abholung am" = filter('T..<7D>'));
+        }
+        view(CollectionMonth)
+        {
+            Caption = 'Abholung <= 30T';
+            Filters = where("Abholung am" = filter('T..<30D>'));
         }
     }
 
