@@ -75,6 +75,11 @@ Page 50033 "TT Posted Purchase Invoices"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Vollständig geliefert am:"; FullDeliveredDate)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Vollständig geliefert am:';
+                }
                 field("Buy-from Post Code"; Rec."Buy-from Post Code")
                 {
                     ApplicationArea = Basic;
@@ -359,7 +364,7 @@ Page 50033 "TT Posted Purchase Invoices"
         }
         area(processing)
         {
-            group(Navigation)
+            group(Grp_Navigation)
             {
                 Caption = 'Navigation';
                 Image = Invoice;
@@ -494,7 +499,10 @@ Page 50033 "TT Posted Purchase Invoices"
     end;
 
     trigger OnAfterGetRecord()
+    var
+        WarehouseEntry: Record "Warehouse Entry";
     begin
+
         AmountLCY := 0;
         /*
         VendLedgEntry.SETCURRENTKEY("Document No.");
@@ -522,6 +530,15 @@ Page 50033 "TT Posted Purchase Invoices"
 
                 AmountLCY += (PurchInvLine.Amount / waehrungsfaktor);
             until PurchInvLine.Next = 0;
+
+        FullDeliveredDate := 0D;
+
+        WarehouseEntry.SetRange("Source No.", Rec."Order No.");
+        if WarehouseEntry.FindLast() then begin
+            FullDeliveredDate := WarehouseEntry."Registering Date";
+        end else begin
+            FullDeliveredDate := DT2Date(Rec.SystemCreatedAt);
+        end;
     end;
 
     trigger OnOpenPage()
@@ -546,5 +563,6 @@ Page 50033 "TT Posted Purchase Invoices"
         JobFilter: Text;
         LesitungsartFilter: Text;
         waehrungsfaktor: Decimal;
+        FullDeliveredDate: Date;
 }
 

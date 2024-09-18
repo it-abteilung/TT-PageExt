@@ -70,10 +70,10 @@ Page 50042 "Kreditor - Seriennummer"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Buy-from Contact Ansprech"; Rec."Buy-from Contact Ansprech")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Buy-from Contact Ansprech"; Rec."Buy-from Contact Ansprech")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Serienanfrage erstellt"; Rec."Serienanfrage erstellt")
                 {
                     ApplicationArea = Basic;

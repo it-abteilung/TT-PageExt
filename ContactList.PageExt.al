@@ -1,5 +1,6 @@
 PageExtension 50049 pageextension50049 extends "Contact List"
 {
+    AdditionalSearchTerms = 'Kontakt,Kontakte,Kontaktübersicht';
     Caption = 'Contact List';
     layout
     {

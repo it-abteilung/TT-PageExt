@@ -158,17 +158,18 @@ Page 50078 "Werkzeuganforderung Subform"
                                     end;
                                 until BinContent.Next() = 0;
                             WerkzeuganforderungKopf.SetRange("Projekt Nr", Rec."Projekt Nr");
-                            Counter := 0;
-                            if WerkzeuganforderungKopf.Count() <= 15 then begin
-                                if WerkzeuganforderungKopf.FindSet() then
-                                    repeat
-                                        if counter > 1 then break;
-                                        if (Counter = 0) or (Counter = 1) then LfdNr := WerkzeuganforderungKopf."Lfd Nr";
-                                        Counter += 1;
-                                    until WerkzeuganforderungKopf.Next() = 0;
-                            end
-                            else
-                                if WerkzeuganforderungKopf.FindLast() then LfdNr := WerkzeuganforderungKopf."Lfd Nr";
+                            WerkzeuganforderungKopf.SetRange("Lfd Nr", Rec."Lfd Nr");
+                            // Counter := 0;
+                            // if WerkzeuganforderungKopf.Count() <= 15 then begin
+                            //     if WerkzeuganforderungKopf.FindSet() then
+                            //         repeat
+                            //             if counter > 1 then break;
+                            //             if (Counter = 0) or (Counter = 1) then LfdNr := WerkzeuganforderungKopf."Lfd Nr";
+                            //             Counter += 1;
+                            //         until WerkzeuganforderungKopf.Next() = 0;
+                            // end
+                            // else
+                            if WerkzeuganforderungKopf.FindLast() then LfdNr := WerkzeuganforderungKopf."Lfd Nr";
                             if Page.RunModal(61011, TempWerkzeuganforderung) = Action::LookupOK then begin
                                 TempWerkzeuganforderung.SetFilter("Required Quantity", '<> %1', 0);
                                 if TempWerkzeuganforderung.FindSet() then

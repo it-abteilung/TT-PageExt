@@ -17,10 +17,14 @@ Page 50076 "Werkzeuganforderung Übersicht"
         {
             repeater(Group)
             {
-
                 field("Projekt Nr"; Rec."Projekt Nr")
                 {
                     ApplicationArea = Basic;
+                }
+                field("Lfd Nr"; Rec."Lfd Nr")
+                {
+                    ApplicationArea = All;
+                    Visible = false;
                 }
                 field(Stichwort; Rec.Stichwort)
                 {

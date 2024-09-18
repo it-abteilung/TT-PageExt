@@ -140,6 +140,23 @@ PageExtension 50024 pageextension50024 extends "Purchase Order Subform"
                     //1.00 E
                 end;
             }
+            // action("&rep")
+            // {
+            //     ApplicationArea = Basic;
+            //     Caption = 'Artikel Line 10000';
+            //     trigger OnAction()
+            //     var
+            //         PurchaseLine: Record "Purchase Line";
+            //     begin
+            //         PurchaseLine.init();
+            //         PurchaseLine."Document Type" := PurchaseLine."Document Type"::Order;
+            //         PurchaseLine."Document No." := '057385';
+            //         PurchaseLine."Line No." := 5000;
+            //         PurchaseLine.Insert();
+
+            //         Message('%1', PurchaseLine);
+            //     end;
+            // }
         }
         addafter("O&rder")
         {

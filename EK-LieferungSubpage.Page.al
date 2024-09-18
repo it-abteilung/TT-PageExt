@@ -123,10 +123,6 @@ Page 50024 "EK-Lieferung Subpage"
                 {
                     ApplicationArea = Basic;
                     Gesture = LeftSwipe;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    PromotedOnly = true;
                     Scope = Repeater;
 
                     trigger OnAction()
@@ -140,10 +136,6 @@ Page 50024 "EK-Lieferung Subpage"
                 {
                     ApplicationArea = Basic;
                     Gesture = RightSwipe;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    PromotedOnly = true;
                     Scope = Repeater;
 
                     trigger OnAction()
@@ -164,10 +156,6 @@ Page 50024 "EK-Lieferung Subpage"
                     ApplicationArea = Basic;
                     Gesture = RightSwipe;
                     Image = Print;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    PromotedOnly = true;
                     Scope = Repeater;
 
                     trigger OnAction()

@@ -34,6 +34,11 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
                 {
                     ApplicationArea = Basic;
                 }
+                field(CompleteQuote; CompleteQuote)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Vollständig';
+                }
                 field(SumZeile; SumZeile)
                 {
                     ApplicationArea = Basic;
@@ -568,8 +573,6 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
                     ApplicationArea = Basic;
                     Caption = 'Make &Order';
                     Image = MakeOrder;
-                    Promoted = true;
-                    PromotedCategory = Process;
 
                     trigger OnAction()
                     var
@@ -678,6 +681,7 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
     end;
 
     var
+        CompleteQuote: Boolean;
         MatrixRecord: Record "Purchase Line";
         MatrixRecords: array[64] of Record "Purchase Line";
         MATRIX_CellData: array[64] of Decimal;
@@ -769,6 +773,7 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
     var
         PurchaseLine: Record "Purchase Line";
     begin
+        CompleteQuote := true;
         MATRIX_CellData[ColumnID] := 0;
         Clear(PurchaseLine);
         //PurchaseLine.copy(Rec);
@@ -785,6 +790,9 @@ Page 50053 "Einkaufsanfragen Matrix Sub2"
             //         SumZeile := 0;
             // if No_alt <> Rec."No." then
             //     SumZeile := 0;
+            if PurchaseLine.Amount = 0 then begin
+                CompleteQuote := false;
+            end;
 
             if (LineNo_alt = PurchaseLine."Line No.") and (ItemNo_alt = PurchaseLine."No.") then
                 if SumZeile <> 0 then

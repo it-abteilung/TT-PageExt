@@ -168,17 +168,56 @@ Page 50077 "Werkzeuganforderung Kopf"
 
     actions
     {
+
+        area(Promoted)
+        {
+            group(Category_New)
+            {
+                actionref(NewEntry1; NewEntry_1)
+                {
+                }
+                actionref(NewEntry2; NewEntry_2)
+                {
+                }
+            }
+            actionref(Print_; Print) { }
+        }
         area(processing)
         {
+            action(NewEntry_1)
+            {
+                ApplicationArea = all;
+                Caption = 'Kopiere Werkzeuganforderung';
+                Image = Copy;
+
+                trigger OnAction()
+                var
+                    WAK_Copy: Record Werkzeuganforderungskopf;
+                begin
+                    WAK_Copy := CopyHeader(Rec);
+                    CopyLines(Rec, WAK_Copy);
+                    Page.Run(50077, WAK_Copy);
+                end;
+            }
+            action(NewEntry_2)
+            {
+                ApplicationArea = all;
+                Caption = 'Kopiere nur Werkzeuganforderungskopf';
+                Image = Copy;
+
+                trigger OnAction()
+                var
+                    WAK_Copy: Record Werkzeuganforderungskopf;
+                begin
+                    WAK_Copy := CopyHeader(Rec);
+                    Page.Run(50077, WAK_Copy);
+                end;
+            }
             action(Print)
             {
                 ApplicationArea = Basic;
                 Caption = 'Drucken';
                 Image = Print;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                PromotedOnly = true;
 
                 trigger OnAction()
                 var
@@ -251,5 +290,81 @@ Page 50077 "Werkzeuganforderung Kopf"
         if Rec."Creation Date" = 0D then
             Rec."Creation Date" := DT2Date(Rec.SystemCreatedAt);
     end;
+
+
+    local procedure CopyHeaderEmpty(Original: Record Werkzeuganforderungskopf) NewCopy: Record Werkzeuganforderungskopf
+    begin
+        NewCopy.Init();
+        NewCopy."Projekt Nr" := Original."Projekt Nr";
+        NewCopy.Insert(true);
+        exit(NewCopy);
+    end;
+
+    local procedure CopyHeader(Original: Record Werkzeuganforderungskopf) NewCopy: Record Werkzeuganforderungskopf
+    begin
+        NewCopy.Init();
+        NewCopy."Projekt Nr" := Original."Projekt Nr";
+        NewCopy.Insert(true);
+        NewCopy.Belegdatum := Original.Belegdatum;
+        NewCopy."Geplantes Versanddatum" := Original."Geplantes Versanddatum";
+        NewCopy.Beschreibung := Original.Beschreibung;
+        NewCopy."Beschreibung 2" := Original."Beschreibung 2";
+        NewCopy.Schiff := Original.Schiff;
+        NewCopy."Stichwort" := Original.Stichwort;
+        NewCopy.Typ := Original.Typ;
+        NewCopy.Reparaturleiter := Original.Reparaturleiter;
+        NewCopy.Reparaturort := Original.Reparaturort;
+        NewCopy.Reparaturbeginn := Original.Reparaturbeginn;
+        NewCopy.Reparaturende := Original.Reparaturende;
+        NewCopy.Fertigstellung := Original.Fertigstellung;
+        NewCopy."Abholung am" := Original."Abholung am";
+        NewCopy."Abholung durch" := Original."Abholung durch";
+        NewCopy."Transport LKW" := Original."Transport LKW";
+        NewCopy."Transport Luftfracht" := Original."Transport Luftfracht";
+        NewCopy."Transport Seefracht" := Original."Transport Seefracht";
+        NewCopy."Transport Sonstig" := Original."Transport Sonstig";
+        NewCopy."Transport Sonstig Text" := Original."Transport Sonstig Text";
+        NewCopy."Weitertransport von" := Original."Weitertransport von";
+        NewCopy."Weitertransport nach" := Original."Weitertransport nach";
+        NewCopy."Verpackung Container" := Original."Verpackung Container";
+        NewCopy."Verpackung Kiste" := Original."Verpackung Kiste";
+        NewCopy."Verpackung Unverpackt" := Original."Verpackung Unverpackt";
+        NewCopy."Verpackung Verschlag" := Original."Verpackung Verschlag";
+        NewCopy.Modify();
+        exit(NewCopy);
+    end;
+
+    procedure CopyLines(Original: Record Werkzeuganforderungskopf; NewCopy: Record Werkzeuganforderungskopf)
+    var
+        WAZ: Record Werkzeuganforderungzeile;
+        WAZ_Copy: Record Werkzeuganforderungzeile;
+        Counter: Integer;
+    begin
+        Counter := 10000;
+        WAZ.SetRange("Projekt Nr", Original."Projekt Nr");
+        WAZ.SetRange("Lfd Nr", Original."Lfd Nr");
+        if WAZ.FindSet() then
+            repeat
+                WAZ_Copy.Init();
+                WAZ_Copy."Projekt Nr" := NewCopy."Projekt Nr";
+                WAZ_Copy."Lfd Nr" := NewCopy."Lfd Nr";
+                WAZ_Copy."Zeilen Nr" := Counter;
+                WAZ_Copy."Artikel Nr" := WAZ."Artikel Nr";
+                WAZ_Copy.Insert(true);
+                WAZ_Copy.Abgehakt := false;
+                WAZ_Copy.Anforderungsdatum := Today();
+                WAZ_Copy.Beschreibung := WAZ.Beschreibung;
+                WAZ_Copy."Beschreibung 2" := WAZ."Beschreibung 2";
+                WAZ_Copy."Contains Hazardous Substance" := WAZ."Contains Hazardous Substance";
+                WAZ_Copy.Delta := WAZ.Delta;
+                WAZ_Copy.Einheit := WAZ.Einheit;
+                WAZ_Copy."Gehört zu Zeilen Nr" := WAZ."Gehört zu Zeilen Nr";
+                WAZ_Copy."Hazard Accepted By" := WAZ."Hazard Accepted By";
+                WAZ_Copy.Menge := WAZ.Menge;
+                WAZ_Copy.Modify();
+                Counter += 10000;
+            until WAZ.Next() = 0;
+    end;
+
 }
 

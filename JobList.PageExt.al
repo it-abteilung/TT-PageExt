@@ -104,16 +104,6 @@ PageExtension 50151 ProjectListExt extends "Job List"
                 ApplicationArea = Basic;
                 Caption = 'Performance progress %';
             }
-            // TODO remove it for 24.1.16924.0
-            // field("External Document No."; Rec."External Document No.")
-            // {
-            //     ApplicationArea = Basic;
-            // }
-            field("External Document No. Copy"; Rec."External Document No. Copy")
-            {
-                Caption = 'Externe Belegnummer';
-                ApplicationArea = Basic;
-            }
             field("Starting Date"; Rec."Starting Date")
             {
                 ApplicationArea = Basic;
@@ -142,6 +132,10 @@ PageExtension 50151 ProjectListExt extends "Job List"
                 Caption = 'Status geändert am';
                 Visible = false;
             }
+        }
+        modify("External Document No.")
+        {
+            Visible = true;
         }
         addafter(Control1902018507)
         {
@@ -276,19 +270,12 @@ PageExtension 50151 ProjectListExt extends "Job List"
             }
         }
     }
-
-
     var
         TotalPriceIncludingDiscount_g: Decimal;
         TempExternalDocumentNo_G: Text;
 
     trigger OnAfterGetRecord()
     begin
-        if Rec."External Document No." <> '' then
-            if Rec."External Document No. Copy" <> Rec."External Document No." then begin
-                Rec."External Document No. Copy" := Rec."External Document No.";
-                Rec.Modify();
-            end;
     end;
 }
 

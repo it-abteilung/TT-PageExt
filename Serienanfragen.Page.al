@@ -175,6 +175,31 @@ Page 50060 Serienanfragen
                     end;
                 end;
             }
+            action("Mail senden Alternative")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Serienanfragen Mail (Alternative)';
+                Ellipsis = true;
+                Image = Print;
+                Promoted = true;
+                PromotedCategory = "Report";
+                PromotedIsBig = true;
+                PromotedOnly = true;
+
+                trigger OnAction()
+                var
+                    l_PurchaseHeader: Record "Purchase Header";
+                begin
+                    l_PurchaseHeader.SetRange("Document Type", Rec."Document Type");
+                    l_PurchaseHeader.SetRange(Serienanfragennr, Rec."No.");
+
+                    if l_PurchaseHeader.FindSet then begin
+                        repeat
+                            OpenEditor_Alt(l_PurchaseHeader);
+                        until l_PurchaseHeader.Next = 0;
+                    end;
+                end;
+            }
             action("Kreditor nach Segmentierung")
             {
                 ApplicationArea = Basic;
@@ -373,9 +398,76 @@ Page 50060 Serienanfragen
         OutStrMailBody: OutStream;
         Body: Text;
         VendorName: Text;
-        Maileditor: Page "Mail Editor";
     begin
-        Clear(Maileditor);
+        Clear(tmpBlob);
+        Clear(InStr);
+        Clear(InStrMailBody);
+        Clear(OutStr);
+        Clear(OutStrMailBody);
+        Clear(Body);
+        Clear(MailMsg);
+        Clear(Mail);
+        txtB64 := '';
+        Name := '';
+        VendorName := '';
+
+        l_Vendor.Get(l_PurchaseHeader."Buy-from Vendor No.");
+        if StrPos(l_Vendor."Search Name", ' ') <> 0 then
+            VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrPos(l_Vendor."Search Name", ' ') - 1))
+        else
+            VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrLen(l_Vendor."Search Name")));
+
+        Name := Lowercase(l_PurchaseHeader."Job No.") + '-' + l_PurchaseHeader."No." + '-' +
+                VendorName + '.pdf';
+
+        l_PurchaseHeader2.SetRange("No.", l_PurchaseHeader."No.");
+        recRef.GetTable(l_PurchaseHeader2);
+        tmpBlob.CreateOutStream(OutStr);
+        tmpBlob.CreateOutStream(OutStrMailBody);
+        if Report.SaveAs(report::"TT Purchase - Quote RTC", '', format::Pdf, OutStr, recRef) then begin
+            tmpBlob.CreateInStream(InStr);
+            txtB64 := cnv64.ToBase64(InStr, true);
+        end;
+        if Report.SaveAs(Report::"Email Body Text PurchQuote", '', format::Html, OutStrMailBody, recRef) then begin
+            tmpBlob.CreateInStream(InStrMailBody);
+            InStrMailBody.ReadText(Body);
+        end;
+        if l_Cont.Get(l_PurchaseHeader."Buy-from Contact Ansprech") then begin
+            if l_Cont."E-Mail" = '' then begin
+                l_Cont.Get(l_PurchaseHeader."Buy-from Contact No.");
+            end;
+        end else
+            l_Cont.Get(l_PurchaseHeader."Buy-from Contact No.");
+        if l_PurchaseHeader."Language Code" = 'ENU' then
+            MailMsg.Create(l_Cont."E-Mail", 'Our Inquiry ' + l_PurchaseHeader."Job No." + '/' + l_PurchaseHeader."No.", Body, true)
+        else
+            MailMsg.Create(l_Cont."E-Mail", 'Unsere Anfrage ' + l_PurchaseHeader."Job No." + '/' + l_PurchaseHeader."No.", Body, true);
+        MailMsg.AddAttachment(Name, 'pdf', txtB64);
+        Mail.OpenInEditor(MailMsg);
+    end;
+
+    procedure OpenEditor_Alt(L_PurchaseHeader: Record "Purchase Header")
+    var
+        l_PurchaseHeader2: Record "Purchase Header";
+        l_Cont: Record Contact;
+        l_Vendor: Record Vendor;
+        Mail: Codeunit EMail;
+        MailMsg: Codeunit "Email Message";
+        Name: Text[250];
+        tmpBlob: Codeunit "Temp Blob";
+        cnv64: Codeunit "Base64 Convert";
+        InStr: InStream;
+        OutStr: OutStream;
+        txtB64: Text;
+        format: ReportFormat;
+        recRef: RecordRef;
+        InStrMailBody: InStream;
+        OutStrMailBody: OutStream;
+        Body: Text;
+        VendorName: Text;
+        MailEditor: Page "Mail Editor";
+    begin
+        Clear(MailEditor);
         Clear(tmpBlob);
         Clear(InStr);
         Clear(InStrMailBody);
@@ -465,15 +557,10 @@ Page 50060 Serienanfragen
                             end;
 
                         until ToPurchaseHeader.Next() = 0;
-
                     end
-
                 end;
-
             end;
-
         end;
-
     end;
 }
 

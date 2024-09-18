@@ -14,6 +14,11 @@ pageextension 50003 "User Setup" extends "User Setup"
                 ApplicationArea = All;
                 Caption = 'Erlaube Artikelbilder-Import';
             }
+            field("Edit Memo Goods Receipt"; Rec."Edit Memo Goods Receipt")
+            {
+                ApplicationArea = All;
+                Caption = 'Erlaube "Fehler im Wareneingang"';
+            }
         }
     }
 }

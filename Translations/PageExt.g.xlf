@@ -138,6 +138,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Bildanzeige - Control Bild-Nr. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2281931638 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Neue Lagerplatzbeschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Bin Creation Worksheet Dialog - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2281931638 - Control 241600246 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Neue Beschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Bin Creation Worksheet Dialog - Control NewDescription - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3175432507 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Contactperson Card</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -447,6 +457,11 @@
           <source>Previous Set</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Einkaufsanfragen Matrix - Action Previous Set - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3154623829 - Control 4133727013 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vollständig</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Einkaufsanfragen Matrix Sub2 - Control CompleteQuote - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3154623829 - Control 108480568 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Summe Kreditor</source>
@@ -1118,6 +1133,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Liquidity Planning - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3879875145 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Wähle Charge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Lot No. Quantity Temp - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3879875145 - Control 400793991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lagerplatz</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Lot No. Quantity Temp - Control Bin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3879875145 - Control 3891454143 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lagerort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Lot No. Quantity Temp - Control Location - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3879875145 - Control 1482668068 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Chargennummer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Lot No. Quantity Temp - Control Lot No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3879875145 - Control 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Verfügbare Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Lot No. Quantity Temp - Control Quantity - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3858424774 - Control 1119322085 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Geben oder scannen Sie die LOT-Nr. / Chargennr.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1519,7 +1559,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Vendor Selection - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 62512670 - Action 3468920432 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Kreditorauswahl (Schritt 1)</source>
+          <source>Kreditorenauswahl (Schritt 1)</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Kopf - Action Vendor Selection - Property Caption</note>
         </trans-unit>
@@ -1663,10 +1703,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Menge - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 436054070 - Control 856369893 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 436054070 - Control 1563913911 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Angefragte Menge</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Requested Quantity - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Materialanforderung Subform - Control Quoted Quantity - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 436054070 - Control 3460833340 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Alternative zu Zeile</source>
@@ -1762,6 +1802,656 @@
           <source>Projekt-Nr.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Materials To Quote - Control Job No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>TT Fehler im Wareneingang</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 3543129988 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Erledigt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Blocked - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 568743302 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Wird von der Bestellung vorgegeben.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Item No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 568743302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>TT Artikelnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Item No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 1908272084 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Wird vom System autom. gesetzt, sobald eine Artikelnr. ausgewählt wurde.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Job No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projektnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Job No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 2202932243 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> Eine noch nicht fakturierte Bestellung, diese als Grundlage für die Posten dient.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Order No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 2202932243 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bestellnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Order No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tatsächliche Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 1776579392 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bestellte Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Quantity Ordered - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 3122616504 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gebuchte Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Quantity Received - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3200332813 - Control 3369789712 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Begründung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Memo. Goods Receipts - Control Reason - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Restbleche</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Blech</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lfd. Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 568743302 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die Artikelnr. an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Item No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 568743302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Artikelnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Item No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1276515965 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die Artikelbeschreibung an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control ItemDescription_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1276515965 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Artikelbeschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control ItemDescription_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 776446637 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt an, ob der Artikel bereits gebucht wurde. Nur ein gebuchter Artikel erzeugt </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Locking_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 776446637 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gebucht</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Locking_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 419426744 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Abmessung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Information - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 3532935625 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die gesamte Restfläche des Blechs an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Area - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 3532935625 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fläche</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Area - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1784493871 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den Kreisdurchmesser an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Circle Diameter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1784493871 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kreisdurchmesser</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Circle Diameter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Detailierte Information über das Blech</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2737878565 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Information über die grobe Form des Blechs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Format - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2737878565 - Property 1968111052" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Rechteck</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Format - Property InstructionalText</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2737878565 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Form</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Format - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2706134799 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die erste Blechlänge an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Length A - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2706134799 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Länge A</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Length A - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 324257354 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die zweite Blechlänge an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Length B - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 324257354 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Länge B</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Length B - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1411301385 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die erste Blechbreite an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Width A - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1411301385 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Breite A</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Width A - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 773604768 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die zweite Blechbreite an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Width B - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 773604768 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Breite B</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Width B - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2282416948 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Buchungsdaten</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Post - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 522225613 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Herkunft</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control FromLocation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1957547255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die verfügbare Menge an, diese über die ausgewählte Herkunfts-Chargennummer bereitgestellt wird.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Available_Quantity_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1957547255 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Verfügbare Menge (KG)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Available_Quantity_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2064349133 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den Lagerplatz an, dieser als Quelle für die Umlagerung dient.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control From Bin - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2064349133 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Von Lagerplatz</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control From Bin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1901018133 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den Lagerort an, dieser als Quelle für die Umlagerung dient.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control From Location - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1901018133 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Von Lagerort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control From Location - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1480716043 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die Herkunfts-Chargennummer an, diese für die Umlagerung verwendet werden soll.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Original Lot No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1480716043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Herkunfts-Chargennummer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Original Lot No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 3725695778 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ziel</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control ToLocation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1482668068 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die neue Chargennummer an. Die neue Chargennummer beinhaltet die Herkunfts-Chargennummer und die aktuelle Lfd. Nr. des Blechs.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Lot No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1482668068 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Neue Chargennummer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Lot No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2119743863 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die zugeschnittene Menge an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Required_Quantity_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2119743863 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zuschnittmenge (KG)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Required_Quantity_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1514955906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den zukünftigen Lagerplatz an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control To Bin - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1514955906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nach Lagerplatz</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control To Bin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 252338194 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den zukünftigen Lagerort an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control To Location - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 252338194 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nach Lagerort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control To Location - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1748756531 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Oberfläche</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Special - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2760163472 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt an, ob es sich um ein genopptes Blech handelt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Is Nipped - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 2760163472 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ist Genoppt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Is Nipped - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1238653941 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt an, ob es sich um ein gestanztes Blech handelt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Is Punched - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Control 1238653941 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ist Gestanzt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Control Is Punched - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Action 1093524598 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Erlaubt die Erstellung von einem neuen Restblech basierend auf dem ausgewählten Blech.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Action Cut_Sheet - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Action 1093524598 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zuschnitt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Action Cut_Sheet - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Action 1462746742 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Erlaubt die Buchung von dem Restblech, dies beinhaltet eine Umlagerung auf den neuen Lagerort und Lagerplatz mit einer neuen Chargennummer.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Action Post_Record - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Action 1462746742 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Buchen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Action Post_Record - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Action 10872387 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Erlaubt die Umlagerung des Blechs auf einen neuen Lagerort und Lagerplatz. Die abgeleiteten Bleche werden nicht aktualisiert.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Action Transfer_Reocrd - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1397697578 - Action 10872387 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Umlagerung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet - Action Transfer_Reocrd - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Blechzuschnitt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 538984681 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die gesamte Restfläche des Blechs an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Area_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 538984681 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fläche</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Area_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 955803063 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den Kreisdurchmesser an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control CircleDiameter_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 955803063 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kreisdurchmesser</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control CircleDiameter_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 3398860202 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Detailierte Information über das Blech</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Description_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 3398860202 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Description_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 1050338133 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Information über die grobe Form des Blechs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Format_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 1050338133 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Form</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Format_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 3049723815 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die erste Blechlänge an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control LengthA_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 3049723815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Länge A</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control LengthA_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 2570426290 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die zweite Blechlänge an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control LengthB_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 2570426290 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Länge B</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control LengthB_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 2516761665 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die erste Blechbreite an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control WidthA_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 2516761665 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Breite A</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control WidthA_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 3668227624 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die zweite Blechbreite an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control WidthB_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 3668227624 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Breite B</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control WidthB_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 1686813415 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mengen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Quantities - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 1957547255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die verfügbare Menge an, diese über die ausgewählte Herkunfts-Chargennummer bereitgestellt wird.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Available_Quantity_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 1957547255 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Verfügbare Menge (KG)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Available_Quantity_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 2119743863 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die zugeschnittene Menge an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Required_Quantity_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 2119743863 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zuschnittmenge (KG)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control Required_Quantity_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 3725695778 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ziel</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control ToLocation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 1514955906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den zukünftigen Lagerplatz an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control To Bin - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 1514955906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nach Lagerplatz</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control To Bin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 252338194 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den zukünftigen Lagerort an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control To Location - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1147854832 - Control 252338194 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nach Lagerort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Cut - Control To Location - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Buchen des Zuschnitts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 1957547255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die verfügbare Menge an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control Available_Quantity_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 1957547255 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Verfügbare Menge (KG)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control Available_Quantity_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 1514955906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den derzeitigen Lagerplatz an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control To Bin - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 1514955906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nach Lagerplatz</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control To Bin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 252338194 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den derzeitigen Lagerort an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control To Location - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 252338194 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Von Lagerort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control To Location - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 2119743863 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt die zugeschnittene Menge an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control Required_Quantity_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 2119743863 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zuschnittmenge (KG)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control Required_Quantity_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 901830146 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den zukünftigen Lagerplatz an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control ToBin_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 901830146 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nach Lagerplatz</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control ToBin_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 3877487250 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gibt den zukünftigen Lagerort an.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control ToLocation_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 841249159 - Control 3877487250 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nach Lagerort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheet Transfer - Control ToLocation_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Restbleche</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zuschnitt, Blech, Bleche</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 3532935625 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fläche</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Area - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 1957547255 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Verfügbare Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Available_Quantity_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 1784493871 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kreisdurchmesser</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Circle Diameter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lfd. Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 2737878565 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Format</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Format - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 2760163472 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ist Genoppt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Is Nipped - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 1238653941 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ist Gestanzt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Is Punched - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 568743302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Artikelnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Item No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 4112877437 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Artikelbeschreibung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control ItemDescription - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 2706134799 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Länge A</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Length A - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 324257354 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Länge B</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Length B - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 1482668068 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Chargennr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Lot No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 1480716043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Herkunfts-Chargennr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Original Lot No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 1514955906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lagerplatz</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control To Bin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 252338194 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lagerort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control To Location - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 1411301385 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Breite A</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Width A - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1330323479 - Control 773604768 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Breite B</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Metal Sheets - Control Width B - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4269032927 - Control 739346273 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Allgemein</source>
@@ -2158,6 +2848,91 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Projekt Soll/Ist Vergleich - Control LiquidityPostedInvoiced - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1383814846 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Liste - Offene Bestellungen mit Posten</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Purchase Line Goods Receipts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1383814846 - Control 486908828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bestellnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Purchase Line Goods Receipts - Control Document No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1383814846 - Control 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Projektnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Purchase Line Goods Receipts - Control Job No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1383814846 - Control 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>TT Artikelnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Purchase Line Goods Receipts - Control No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1383814846 - Control 184790795 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Restmenge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Purchase Line Goods Receipts - Control Outstanding Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1383814846 - Control 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bestellte Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Purchase Line Goods Receipts - Control Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1383814846 - Control 3122616504 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gebuchte Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Purchase Line Goods Receipts - Control Quantity Received - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1607568277 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase Liquidity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Purchase Liquidity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1391183817 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Aufzeichnung - Berechtigungssätze (Automatisch)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1391183817 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Aufzeichnung,Berechtigung,Rechte,Log,Logging</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 1391183817 - NamedType 3304704372" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Solange die Seite geöffnet ist werden alle Berechtigungen aufgezeichnet. Wenn diese Seite geschlossen wird, dann erfolgt eine automatische Speicherung der Berechtigungen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets - NamedType TextBox</note>
+        </trans-unit>
+        <trans-unit id="Page 2543252487 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Aufzeichnung - Berechtigungssätze (Manuell)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets 2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2543252487 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Aufzeichnung,Berechtigung,Rechte,Log,Logging</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets 2 - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 2543252487 - NamedType 3304704372" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Die Aktion "Start" löst die Aufzeichnung von den Berechtigungen aus. Die Aktion "Stop" speichert die Berechtigungen.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets 2 - NamedType TextBox</note>
+        </trans-unit>
+        <trans-unit id="Page 2543252487 - Action 4187349208 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Role Center</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets 2 - Action Open_RoleCenter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2543252487 - Action 535410902 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Start</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets 2 - Action Start_Recording - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2543252487 - Action 3390896310 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Stop</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets 2 - Action Stop_Recording - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1707688526 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
           <source>SalesQuoteSign</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2473,6 +3248,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Serienanfragen - Action Mail senden - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 10352108 - Action 3100292371 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Serienanfragen Mail (Alternative)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Serienanfragen - Action Mail senden Alternative - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3848495358 - Action 1231942938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Serienanfragen Mail</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2634,12 +3414,12 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Storage Means - Control LocationCode - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1400266983 - Control 3912268364 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Gibt an, ob alle Unterprojekte &amp; Packete berücksichtigt werden sollen.</source>
+          <source>Gibt an, ob alle Unterprojekte &amp; Pakete berücksichtigt werden sollen.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Storage Means - Control SelectPacketFilter - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1400266983 - Control 3912268364 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Unterprojekte &amp; Packete anzeigen</source>
+          <source>Unterprojekte &amp; Pakete anzeigen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Storage Means - Control SelectPacketFilter - Property Caption</note>
         </trans-unit>
@@ -2762,11 +3542,6 @@
           <source>Seriennummer</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Storage Means Temp. - Control Serial No. - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3732224266 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Email outbox</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Test - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2289820698 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Materialerfassung</source>
@@ -3303,6 +4078,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page TT Posted Purchase Invoices - Control Shortcut Dimension 2 Code - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 2263659236 - Control 525849921 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vollständig geliefert am:</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Posted Purchase Invoices - Control Vollständig geliefert am: - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2263659236 - Action 394674921 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>&amp;Invoice</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3378,10 +4158,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page TT Posted Purchase Invoices - Action CreateCreditMemo - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 2263659236 - Action 4199857806 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 2263659236 - Action 3957884012 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Navigation</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page TT Posted Purchase Invoices - Action Navigation - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Posted Purchase Invoices - Action Grp_Navigation - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2263659236 - Action 3538210097 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Find all entries and documents that exist for the document number and posting date on the selected posted purchase document.</source>
@@ -3998,6 +4778,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Kopf - Action CreateStockTransferOrder - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3558012457 - Action 1791974866 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kopiere Werkzeuganforderung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Kopf - Action NewEntry_1 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3558012457 - Action 4173852311 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kopiere nur Werkzeuganforderungskopf</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Werkzeuganforderung Kopf - Action NewEntry_2 - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3558012457 - Action 1002420131 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Drucken</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -4177,6 +4967,11 @@
           <source>Werk Job No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page WerkzeugTracker API - Control WerkNo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 362000478 - Action 3373107219 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 467751638">
+          <source>Lagerplätze umbenennen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension BinCreationWorksheet - Action Rename_Bins - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 483486609 - Action 58441900 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2092058542">
           <source>Import Individualfelder</source>
@@ -4603,6 +5398,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Action Artikel in Einkauf anzeigen - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 1233218449 - Control 2670393275 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
+          <source>Produktgruppencode</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Control Product Group Code TT - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1233218449 - Control 1677239127 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
           <source>Seriennr.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -4612,6 +5412,11 @@
           <source>Picture</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Control ItemPicture - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 126734238 - Action 1022337758 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
+          <source>Force Approval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action ForceApproval - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 126734238 - Action 3803861919 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
           <source>Drucken TP</source>
@@ -4697,6 +5502,11 @@
           <source>Mail Schiff</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50020 - Action Mail Schiff - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2130651335 - Action 3800621001 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 387971303">
+          <source>Mail Schiff (Alternative)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50020 - Action Mail Schiff Alternative - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2130651335 - Action 3486358041 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 387971303">
           <source>Warenannahme</source>
@@ -4813,6 +5623,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 373725038 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
+          <source>Kontakt,Kontakte,Kontaktübersicht</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - Property AdditionalSearchTerms</note>
+        </trans-unit>
         <trans-unit id="PageExtension 373725038 - Action 3333864189 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
           <source>Spezielle Kontaktliste</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -4848,10 +5663,80 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50068 - Control Job No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 272296963 - Control 3241217231 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3195034673">
+          <source>Belegstatus</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50068 - Control DelieveryStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 272296963 - Control 525849921 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3195034673">
+          <source>Vollständig geliefert am:</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50068 - Control Vollständig geliefert am: - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1978391166 - Action 611771937 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3196174509">
           <source>Zahlungsimport</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextention50013 - Action Payment Import - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2094525155 - Control 176142393 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2431002931">
+          <source>Die maximal erlaubte Abweichung zwischen gezählter Menge und dem aktuellen Lagerbestand in Prozent.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysicalInventoryOrder - Control Threshold - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2094525155 - Control 176142393 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2431002931">
+          <source>Maximale Abweichung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysicalInventoryOrder - Control Threshold - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 785523581 - Control 172274166 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 6564063">
+          <source>Differenz zwischen der gezählten Menge und dem aktuellen Lagerbestand. Gezählte Mengen unter der maximalen Abweichung werden auf 0 gerundet.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysicalInventoryOrderSubf - Control DeltaOverQty - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 785523581 - Control 172274166 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 6564063">
+          <source>Delta-Menge 1</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysicalInventoryOrderSubf - Control DeltaOverQty - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 785523581 - Control 1873440788 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 6564063">
+          <source>Differenz zwischen der gezählten Menge und dem aktuellen Lagerbestand.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysicalInventoryOrderSubf - Control DeltaOverQtySort - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 785523581 - Control 1873440788 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 6564063">
+          <source>Delta-Menge 2</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysicalInventoryOrderSubf - Control DeltaOverQtySort - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1678605287 - Control 176142393 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1097750429">
+          <source>Die maximal erlaubte Abweichung zwischen gezählter Menge und dem aktuellen Lagerbestand in Prozent.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecording - Control Threshold - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1678605287 - Control 176142393 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1097750429">
+          <source>Maximale Abweichung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecording - Control Threshold - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1296605516 - Control 172274166 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3145597876">
+          <source>Differenz zwischen der gezählten Menge und dem aktuellen Lagerbestand. Gezählte Mengen unter der maximalen Abweichung werden auf 0 gerundet.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInvtRecordingSubform - Control DeltaOverQty - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1296605516 - Control 172274166 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3145597876">
+          <source>Delta-Menge 1</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInvtRecordingSubform - Control DeltaOverQty - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1296605516 - Control 1873440788 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3145597876">
+          <source>Differenz zwischen der gezählten Menge und dem aktuellen Lagerbestand.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInvtRecordingSubform - Control DeltaOverQtySort - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1296605516 - Control 1873440788 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3145597876">
+          <source>Delta-Menge 2</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInvtRecordingSubform - Control DeltaOverQtySort - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 3970930530 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2273701615">
           <source>Job List</source>
@@ -4898,11 +5783,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension ProjectListExt - Control Letzte Notiz - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 3970930530 - Control 3231421452 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2273701615">
-          <source>Externe Belegnummer</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension ProjectListExt - Control External Document No. Copy - Property Caption</note>
-        </trans-unit>
         <trans-unit id="PageExtension 3970930530 - Control 127971115 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2273701615">
           <source>Performance progress %</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -4932,6 +5812,11 @@
           <source>Erlaube Artikelsperrung</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension User Setup - Control Block_Items - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 337631938 - Control 4088877566 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 337631938">
+          <source>Erlaube "Fehler im Wareneingang"</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension User Setup - Control Edit Memo Goods Receipt - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 337631938 - Control 1951411979 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 337631938">
           <source>Erlaube Artikelbilder-Import</source>

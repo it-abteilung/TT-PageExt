@@ -23,8 +23,4 @@ pageextension 50200 "BusinessRoleCenterExt" extends "Business Manager Role Cente
             }
         }
     }
-    actions
-    {
-
-    }
 }

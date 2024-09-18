@@ -643,10 +643,11 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 var
                     Job: Record Job;
                     JobCard: Page "Job Card";
-                    NoSeriesManagement: Codeunit NoSeriesManagement;
+                    // NoSeriesManagement: Codeunit NoSeriesManagement;
+                    NoSeries: Codeunit "No. Series";
                     NewJobNo: Code[20];
                 begin
-                    NewJobNo := NoSeriesManagement.GetNextNo('PROJEKT', Today, true);
+                    NewJobNo := NoSeries.GetNextNo('PROJEKT', Today, true);
                     NewJobNo += GetJobTypeSuffix(Rec."Job Type");
 
                     Job.Init();
@@ -709,10 +710,11 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 var
                     Job: Record Job;
                     JobCard: Page "Job Card";
-                    NoSeriesManagement: Codeunit NoSeriesManagement;
+                    // NoSeriesManagement: Codeunit NoSeriesManagement;
+                    NoSeries: Codeunit "No. Series";
                     NewJobNo: Code[20];
                 begin
-                    NewJobNo := NoSeriesManagement.GetNextNo('PROJEKT', Today, true);
+                    NewJobNo := NoSeries.GetNextNo('PROJEKT', Today, true);
                     case Rec."Job Type" of
                         '10000':
                             NewJobNo += '.1';
@@ -945,6 +947,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     Rec."Prev. Status" := Rec.Status;
                     Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::Cancelled;
+                    Rec.Modify();
                 end;
             }
             action("<Action1000000029>")
@@ -959,6 +962,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     Rec."Prev. Status" := Rec.Status;
                     Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::Completed;
+                    Rec.Modify();
                 end;
             }
             action("<Action1000000050>")
@@ -973,6 +977,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     Rec."Prev. Status" := Rec.Status;
                     Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::"Gewährleistung";
+                    Rec.Modify();
                 end;
             }
             action("<Action1000000031>")

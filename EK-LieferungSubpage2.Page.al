@@ -101,10 +101,6 @@ Page 50040 "EK-Lieferung Subpage 2"
                     Caption = 'Take a picture';
                     Gesture = RightSwipe;
                     Image = Camera;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    PromotedOnly = true;
                     Scope = Repeater;
                     Visible = CameraAvailable;
 
@@ -123,10 +119,6 @@ Page 50040 "EK-Lieferung Subpage 2"
                 {
                     ApplicationArea = Basic;
                     Gesture = LeftSwipe;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    PromotedOnly = true;
                     Scope = Repeater;
 
                     trigger OnAction()
@@ -140,10 +132,6 @@ Page 50040 "EK-Lieferung Subpage 2"
                 {
                     ApplicationArea = Basic;
                     Gesture = RightSwipe;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    PromotedOnly = true;
                     Scope = Repeater;
 
                     trigger OnAction()
@@ -164,10 +152,6 @@ Page 50040 "EK-Lieferung Subpage 2"
                     ApplicationArea = Basic;
                     Gesture = RightSwipe;
                     Image = Print;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    PromotedOnly = true;
                     Scope = Repeater;
 
                     trigger OnAction()

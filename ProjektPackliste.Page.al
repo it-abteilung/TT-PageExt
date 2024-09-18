@@ -180,9 +180,5 @@ Page 50057 "Projekt Packliste"
     local procedure CurrentJnlBatchNameOnAfterVali()
     begin
     end;
-
-    local procedure OnAfterGetCurrRecord()
-    begin
-    end;
 }
 

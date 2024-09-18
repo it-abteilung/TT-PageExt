@@ -2,6 +2,34 @@ PageExtension 50048 pageextension50048 extends "Contact Card"
 {
     layout
     {
+        modify(Name)
+        {
+            ShowMandatory = true;
+        }
+        modify(Address)
+        {
+            ShowMandatory = true;
+        }
+        modify("Post Code")
+        {
+            ShowMandatory = true;
+        }
+        modify(City)
+        {
+            ShowMandatory = true;
+        }
+        modify("Country/Region Code")
+        {
+            ShowMandatory = true;
+        }
+        modify("Phone No.")
+        {
+            ShowMandatory = true;
+        }
+        modify("E-Mail")
+        {
+            ShowMandatory = true;
+        }
         addafter("Exclude from Segment")
         {
             field("Vendor No. TT"; Rec."Vendor No. TT")
@@ -87,5 +115,48 @@ PageExtension 50048 pageextension50048 extends "Contact Card"
 
         end;
     end;
-}
 
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    var
+        TextBuilder_L: TextBuilder;
+    begin
+        if (Rec.Name = '') then begin
+            TextBuilder_L.Append('Name');
+        end;
+        if (Rec.Address = '') then begin
+            if TextBuilder_L.Length > 0 then
+                TextBuilder_L.Append(', ');
+            TextBuilder_L.Append('Adresse');
+        end;
+        if (Rec."Post Code" = '') then begin
+            if TextBuilder_L.Length > 0 then
+                TextBuilder_L.Append(', ');
+            TextBuilder_L.Append('PLZ');
+        end;
+        if (Rec.City = '') then begin
+            if TextBuilder_L.Length > 0 then
+                TextBuilder_L.Append(', ');
+            TextBuilder_L.Append('Ort');
+        end;
+        if (Rec."Country/Region Code" = '') then begin
+            if TextBuilder_L.Length > 0 then
+                TextBuilder_L.Append(', ');
+            TextBuilder_L.Append('Länder-/Regionscode');
+        end;
+        if (Rec."Phone No." = '') then begin
+            if TextBuilder_L.Length > 0 then
+                TextBuilder_L.Append(', ');
+            TextBuilder_L.Append('Telefon Nr.');
+        end;
+        if (Rec."E-Mail" = '') then begin
+            if TextBuilder_L.Length > 0 then
+                TextBuilder_L.Append(', ');
+            TextBuilder_L.Append('E-Mail');
+        end;
+        if TextBuilder_L.Length > 0 then begin
+            if NOT Confirm('Die Pflichtfelder %1 sind leer und der Kontakt kann möglicherweise nicht für die weitere Verarbeitung verwendet werden, soll die Seite trotzdem geschlossen werden?', false, TextBuilder_L.ToText()) then
+                exit(false);
+        end;
+
+    end;
+}

@@ -9,6 +9,10 @@ pageextension 50016 "pageexntension50016" extends "Vendor List"
                 Caption = 'DATEV';
                 ApplicationArea = All;
             }
+            field("VAT Registration No."; Rec."VAT Registration No.")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }

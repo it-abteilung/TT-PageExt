@@ -66,8 +66,8 @@ page 50107 "Storage Means"
                 field(SelectPacketFilter; SelectPacketFilter_G)
                 {
                     ApplicationArea = All;
-                    Caption = 'Unterprojekte & Packete anzeigen';
-                    ToolTip = 'Gibt an, ob alle Unterprojekte & Packete berücksichtigt werden sollen.';
+                    Caption = 'Unterprojekte & Pakete anzeigen';
+                    ToolTip = 'Gibt an, ob alle Unterprojekte & Pakete berücksichtigt werden sollen.';
 
                     trigger OnValidate()
                     begin
@@ -145,6 +145,7 @@ page 50107 "Storage Means"
                                     until Bin.Next() = 0;
                             end;
                         end;
+                        CurrPage.Update();
                     end;
                 }
                 field("Inspector Code"; Rec."Inspector Code")

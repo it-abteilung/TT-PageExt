@@ -18,6 +18,11 @@ PageExtension 50011 pageextension50011 extends "Item List"
                 ApplicationArea = Basic;
                 Visible = false;
             }
+            field("Product Group Code TT"; Rec."Product Group Code TT")
+            {
+                ApplicationArea = all;
+                Caption = 'Produktgruppencode';
+            }
         }
         addafter("Default Deferral Template Code")
         {

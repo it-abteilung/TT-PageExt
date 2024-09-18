@@ -120,7 +120,7 @@ Page 50066 "Materialanforderung Subform"
                         CurrPage.Update(true);
                     end;
                 }
-                field("Requested Quantity"; Rec."Quoted Quantity")
+                field("Quoted Quantity"; Rec."Quoted Quantity")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Angefragte Menge';

@@ -448,7 +448,7 @@ Page 50065 "Materialanforderung Kopf"
                 action("Vendor Selection")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Kreditorauswahl (Schritt 1)';
+                    Caption = 'Kreditorenauswahl (Schritt 1)';
                     Enabled = IsPurchaser AND (Rec.Status = Rec.Status::freigegeben);
                     Visible = IsPurchaser;
                     Image = Vendor;
@@ -475,6 +475,7 @@ Page 50065 "Materialanforderung Kopf"
                         Materialanforderungzeile.SetRange("Projekt Nr", Rec."Projekt Nr");
                         Materialanforderungzeile.SetRange("Lfd Nr", Rec."Lfd Nr");
                         // Materialanforderungzeile.SetFilter("Menge", '>0');
+                        Materialanforderungzeile.SetFilter("Quoted Quantity", '>0');
 
                         if Materialanforderungzeile.FindSet() then begin
                             repeat
@@ -665,6 +666,7 @@ Page 50065 "Materialanforderung Kopf"
                                 Materialanforderungzeile.SetRange("Projekt Nr", Rec."Projekt Nr");
                                 Materialanforderungzeile.SetRange("Lfd Nr", Rec."Lfd Nr");
                                 // Materialanforderungzeile.SetFilter("Menge", '>0');
+                                Materialanforderungzeile.SetFilter("Quoted Quantity", '>0');
                                 if Materialanforderungzeile.FindSet() then begin
                                     repeat
                                         if Materialanforderungzeile."Artikel Nr" <> '' then begin
@@ -838,8 +840,8 @@ Page 50065 "Materialanforderung Kopf"
         FileName := '';
         VendorName := '';
 
-        // test - should be removed
-        MailTo_L := 'christian.nette@turbotechnik.com';
+        // TODO removed | should be used on the sandbox
+        // MailTo_L := 'christian.nette@turbotechnik.com';
 
         if PurchaseHeader.Get(DocumentType_L, DocumentNo_L) then begin
             // declare file name for pdf

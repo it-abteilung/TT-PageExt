@@ -2,6 +2,28 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
 {
     layout
     {
+        modify("Buy-from Vendor No.")
+        {
+            trigger OnAfterValidate()
+            var
+                Vendor: Record Vendor;
+            begin
+                if Vendor.Get(Rec."Buy-From Vendor No.") then begin
+                    if Vendor."Payment Terms Code" = '' then Error('Für den Kreditor %1 wurde keine Zlg.-Bedingungscode hinterlegt.', Vendor."No.");
+                end
+            end;
+        }
+        modify("Buy-from Vendor Name")
+        {
+            trigger OnAfterValidate()
+            var
+                Vendor: Record Vendor;
+            begin
+                if Vendor.Get(Rec."Buy-From Vendor No.") then begin
+                    if Vendor."Payment Terms Code" = '' then Error('Für den Kreditor %1 wurde keine Zlg.-Bedingungscode hinterlegt.', Vendor."No.");
+                end
+            end;
+        }
         addafter("No.")
         {
             field("Job No."; Rec."Job No.")
@@ -79,8 +101,17 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
                 Caption = 'Vendor No.';
                 Importance = Promoted;
 
+                trigger OnValidate()
+                var
+                    Vendor: Record Vendor;
+                begin
+                    if Vendor.Get(Rec."Pay-to Vendor No.") then begin
+                        if Vendor."Payment Terms Code" = '' then Error('Für den Kreditor %1 wurde keine Zlg.-Bedingungscode hinterlegt.', Vendor."No.");
+                    end
+                end;
             }
         }
+
         addafter("Pay-to Name")
         {
             field("Pay-to Name 2"; Rec."Pay-to Name 2")
@@ -191,6 +222,33 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
                     MailErstellen(true);
                 end;
             }
+            action("Mail Schiff Alternative")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Mail Schiff (Alternative)';
+                Ellipsis = true;
+                Image = Print;
+                Promoted = true;
+                PromotedCategory = "Report";
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                var
+                    l_PurchaseHeader: Record "Purchase Header";
+                    l_Cont: Record Contact;
+                    l_Vendor: Record Vendor;
+                    Mail: Codeunit Mail;
+                    Name: Text[250];
+                    FileName: Text[250];
+                    FileName2: Text[250];
+                    ToFile: Text[250];
+                    GERW: Codeunit 50001;
+                    R50000: Report 50000;
+                    ToFile2: Text[250];
+                begin
+                    MailErstellen_Alt(true);
+                end;
+            }
             action(Fax)
             {
                 ApplicationArea = Basic;
@@ -259,7 +317,16 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
         }
     }
 
+    trigger OnOpenPage()
     var
+        MemoGoodsReceipt: Record "Memo. Goods Receipt";
+    begin
+        MemoGoodsReceipt.SetRange("Order No.", Rec."No.");
+        MemoGoodsReceipt.SetRange("Blocked", false);
+        if MemoGoodsReceipt.FindSet() then
+            Message('Unter "TT Fehler im Wareneingang" wurde ein offener Eintrag für %1 gesetzt, eine Lieferung wird noch erwartet.', Rec."No.");
+    end;
+
     local procedure MailErstellen(AnzeigeSchiff: Boolean)
     var
         l_PurchaseHeader: Record "Purchase Header";
@@ -283,7 +350,93 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
         VendorName: Text;
         ObjectName: Text;
         Job: Record Job;
-        //TODO delete maileditor wenn editor wieder funktioniert
+    //TODO delete maileditor wenn editor wieder funktioniert 09.04.2024 CN
+    // MailEditor: Page "Mail Editor";
+    begin
+        CurrPage.SetSelectionFilter(l_PurchaseHeader);
+        l_Vendor.Get(rec."Buy-from Vendor No.");
+
+        Clear(tmpBlob);
+        Clear(InStr);
+        Clear(InStrMailBody);
+        Clear(OutStr);
+        Clear(OutStrMailBody);
+        Clear(Body);
+        txtB64 := '';
+        Name := '';
+        VendorName := '';
+
+        //Dateinamen bestimmen
+        if StrPos(l_Vendor."Search Name", ' ') <> 0 then
+            VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrPos(l_Vendor."Search Name", ' ') - 1))
+        else
+            VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrLen(l_Vendor."Search Name")));
+
+        Name := Lowercase(Rec."Job No.") + '-' + Rec."No." + '-' +
+                VendorName + '.pdf';
+
+        l_PurchaseHeader.SetRange("No.", Rec."No.");
+        recRef.GetTable(l_PurchaseHeader);
+        tmpBlob.CreateOutStream(OutStr);
+        tmpBlob.CreateOutStream(OutStrMailBody);
+        TTOrderRTC."AnzeigeSchiffÜbergeben"(AnzeigeSchiff);
+        TTOrderRTC.SetTableView(l_PurchaseHeader);
+        if TTOrderRTC.SaveAs('', format::Pdf, OutStr, recRef) then begin
+            tmpBlob.CreateInStream(InStr);
+            txtB64 := cnv64.ToBase64(InStr, true);
+        end;
+        // Message('%1 - %2', name, txtB64);
+
+        if Report.SaveAs(Report::"Email Body Text PurchQuote", '', format::Html, OutStrMailBody, recRef) then begin
+            tmpBlob.CreateInStream(InStrMailBody, TextEncoding::Windows);
+            InStrMailBody.ReadText(Body);
+        end;
+
+        ObjectName := '';
+        if AnzeigeSchiff then begin
+            if Job.Get(Rec."Job No.") then
+                ObjectName := ' - ' + Job.Objektname;
+        end;
+
+        l_Cont.Get(rec."Buy-from Contact No.");
+        if Rec."Language Code" = 'ENU' then
+            MailMsg.Create(l_Cont."E-Mail", 'Our Order ' + Rec."Job No." + '/' + Rec."No." + ObjectName, Body, true)
+        else
+            MailMsg.Create(l_Cont."E-Mail", 'Unsere Bestellung ' + Rec."Job No." + '/' + Rec."No." + ObjectName, Body, true);
+        MailMsg.AddAttachment(Name, 'pdf', txtB64);
+        Mail.OpenInEditor(MailMsg);
+        // Mail.OpenInEditor(MailMsg) funktioniert nicht 09.04.2024 CN
+        // Prozedur ist wieder funktionsfähig 17.04.2024 CN
+        // Clear(MailEditor);
+        // Commit();
+        // MailEditor.SetMail(Mail);
+        // MailEditor.SetMailMsg(MailMsg);
+        // MailEditor.RunModal();
+    end;
+
+    local procedure MailErstellen_Alt(AnzeigeSchiff: Boolean)
+    var
+        l_PurchaseHeader: Record "Purchase Header";
+        l_Cont: Record Contact;
+        l_Vendor: Record Vendor;
+        Mail: Codeunit EMail;
+        MailMsg: Codeunit "Email Message";
+        Name: Text[250];
+        GERW: Codeunit 50001;
+        TTOrderRTC: Report 50000;
+        tmpBlob: Codeunit "Temp Blob";
+        cnv64: Codeunit "Base64 Convert";
+        InStr: InStream;
+        OutStr: OutStream;
+        txtB64: Text;
+        format: ReportFormat;
+        recRef: RecordRef;
+        InStrMailBody: InStream;
+        OutStrMailBody: OutStream;
+        Body: Text;
+        VendorName: Text;
+        ObjectName: Text;
+        Job: Record Job;
         MailEditor: Page "Mail Editor";
     begin
         CurrPage.SetSelectionFilter(l_PurchaseHeader);
@@ -337,9 +490,8 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
         else
             MailMsg.Create(l_Cont."E-Mail", 'Unsere Bestellung ' + Rec."Job No." + '/' + Rec."No." + ObjectName, Body, true);
         MailMsg.AddAttachment(Name, 'pdf', txtB64);
-        // Mail.OpenInEditor(MailMsg);
-        CLear(MailEditor);
-        commit();
+        Clear(MailEditor);
+        Commit();
         MailEditor.SetMail(Mail);
         MailEditor.SetMailMsg(MailMsg);
         MailEditor.RunModal();
