@@ -15,10 +15,12 @@ PageExtension 50021 pageextension50021 extends "Purchase Invoice"
             field(Leistungsart; Rec.Leistungsart)
             {
                 ApplicationArea = Basic;
+                ShowMandatory = true;
             }
             field(Leistungszeitraum; Rec.Leistungszeitraum)
             {
                 ApplicationArea = Basic;
+                ShowMandatory = true;
             }
             field("CO2 Menge in Kilogramm"; Rec."CO2 Menge in Kilogramm")
             {

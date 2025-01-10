@@ -3,6 +3,22 @@ PageExtension 50150 JobCardExt extends "Job Card"
     Caption = 'Job Card';
     layout
     {
+        addlast(General)
+        {
+            field(Hyperlink_G; HyperLink_G)
+            {
+                ApplicationArea = All;
+                Caption = 'SharePoint';
+                Editable = false;
+
+                trigger OnDrillDown()
+                begin
+                    if Rec.Hyperlink <> '' then begin
+                        Hyperlink(Rec.Hyperlink);
+                    end;
+                end;
+            }
+        }
         modify("No.")
         {
             AssistEdit = false;
@@ -1243,6 +1259,27 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     end;
                 end;
             }
+            action(Create_SharePoint_Folders)
+            {
+                ApplicationArea = All;
+                Caption = 'SharePoint-Ordner erstellen';
+
+                trigger OnAction()
+                var
+                    WorkflowContext: Record "Workflow Approval Data";
+                begin
+                    Rec.TestField("No.");
+                    Rec.TestField(Description);
+                    if NOT WorkflowContext.Get(Rec.SystemId) then begin
+                        if (Rec."No." <> '') AND (Rec.Description <> '') then begin
+                            WorkflowContext.Init();
+                            WorkflowContext."Record Id" := Rec.SystemId;
+                            WorkflowContext."Workflow Context" := 'CreateSharePointFolder';
+                            WorkflowContext.Insert();
+                        end;
+                    end
+                end;
+            }
         }
     }
 
@@ -1258,6 +1295,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
         MontageGrp: Text;
         ProjektNotizen: Record 50001;
         ItemLedgerLineNo: Integer;
+        HyperLink_G: Text[200];
 
     trigger OnAfterGetRecord()
     begin
@@ -1269,6 +1307,9 @@ PageExtension 50150 JobCardExt extends "Job Card"
             ZuBeachten := ProjektNotizen."Zu beachten1" + ProjektNotizen."Zu beachten2" + ProjektNotizen."Zu beachten3";
             MontageGrp := ProjektNotizen.Montagegruppe1 + ProjektNotizen.Montagegruppe2 + ProjektNotizen.Montagegruppe3;
         END;
+        if Rec.Hyperlink <> '' then begin
+            HyperLink_G := Rec."No.";
+        end
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
@@ -1278,7 +1319,6 @@ PageExtension 50150 JobCardExt extends "Job Card"
             EVALUATE(Rec.Status, Rec.GETFILTER(Status));
         //G-ERP.KBS 2017-07-25 -
     end;
-
 
     local procedure NextEntryNo(): Integer
     var

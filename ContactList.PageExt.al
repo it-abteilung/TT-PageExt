@@ -97,6 +97,29 @@ PageExtension 50049 pageextension50049 extends "Contact List"
                 end;
 
             }
+            // action(Update_Primary_Key)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Update PK';
+            //     Image = UpdateXML;
+
+            //     trigger OnAction()
+            //     var
+            //         Contact_L: Record Contact;
+            //         StrLength_L: Integer;
+            //         Counter: Integer;
+            //     begin
+            //         if Contact_L.FindSet() then begin
+            //             repeat
+            //                 StrLength_L := StrLen(Contact_L."No.");
+            //                 if StrLength_L < 5 then begin
+            //                     Counter += 1;
+            //                 end;
+            //             until Contact_L.Next() = 0;
+            //         end;
+            //         Message('Counter: %1', Counter);
+            //     end;
+            // }
         }
     }
 

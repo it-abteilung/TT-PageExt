@@ -89,16 +89,109 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
     }
     actions
     {
+
+        addfirst(Promoted)
+        {
+            group("TT Aprrovals")
+            {
+                Caption = 'Genehmigung anfordern';
+                actionref(SubmitProposal; Submit_Proposal)
+                {
+                }
+                actionref(RevokeProposal; Revoke_Proposal)
+                {
+                }
+            }
+            group("TT Release")
+            {
+
+                Caption = 'Genehmigung freigeben';
+                actionref(AcceptProposal; Accept_Proposal)
+                {
+                }
+                actionref(RejectProposal; Reject_Proposal)
+                {
+                }
+            }
+        }
+
         modify(SendApprovalRequest)
         {
-            trigger OnBeforeAction()
-            begin
-                Rec."Status Approval 1" := false;
-                Rec."Status Approval 2" := false;
-            end;
+            Enabled = false;
         }
         addafter(Print)
         {
+            action(Submit_Proposal)
+            {
+                ApplicationArea = All;
+                Caption = 'Genehmigungsanfrage senden';
+                // Enabled = Rec.Status = Rec.Status::Created;
+                Image = SendApprovalRequest;
+
+                trigger OnAction()
+                var
+                    SalespersonPurchaser: Record "Salesperson/Purchaser";
+                begin
+                    Rec.TestField(Unterschriftscode);
+                    Rec.TestField("Unterschriftscode 2");
+
+                    // if Rec."Unterschriftscode" = Rec."Unterschriftscode 2" then
+                    //     Error(RequesterIsApproverErr);
+
+                    SalespersonPurchaser.SetRange("User ID", UserId);
+                    if SalespersonPurchaser.FindFirst() then begin
+                        if Rec.Unterschriftscode <> SalespersonPurchaser.Code then
+                            Error(WrongSalespersonCodeError, Rec.Unterschriftscode, UserId());
+                    end;
+
+                    // Rec."Status Flag" := 'Pending Approval';
+                    // TriggerWorkflowContext(Rec, 'Submit');
+                end;
+            }
+            action(Revoke_Proposal)
+            {
+                ApplicationArea = All;
+                Caption = 'Genehmigungsanfrage stornieren';
+                // Enabled = Rec.Status = Rec.Status::Open;
+                Image = CancelApprovalRequest;
+
+                trigger OnAction()
+                begin
+                    Rec."Status Flag" := 'Open';
+                    TriggerWorkflowContext(Rec, 'Revoke');
+                end;
+            }
+            action(Accept_Proposal)
+            {
+                ApplicationArea = All;
+                Caption = 'Akzeptieren';
+                // Enabled = Rec.Status = Rec.Status::Open;
+                Image = Approve;
+
+                trigger OnAction()
+                var
+                    ReleaseSalesDoc: Codeunit "Release Sales Document";
+                begin
+                    ReleaseSalesDoc.PerformManualRelease(Rec);
+                    CurrPage.SalesLines.PAGE.ClearTotalSalesHeader();
+
+                    Rec."Status Flag" := 'Released';
+                    TriggerWorkflowContext(Rec, 'Approve');
+                end;
+            }
+            action(Reject_Proposal)
+            {
+                ApplicationArea = All;
+                Caption = 'Ablehnen';
+                // Enabled = Rec.Status = Rec.Status::Open;
+                Image = Reject;
+
+                trigger OnAction()
+                begin
+                    Rec."Status Flag" := 'Open';
+                    TriggerWorkflowContext(Rec, 'Reject');
+                end;
+            }
             action("Print TP")
             {
                 ApplicationArea = Basic, Suite;
@@ -192,23 +285,34 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
 
     var
         HasAddressOnCustomer: Boolean;
+        RequesterIsApproverErr: Label 'Die Felder "Unterschriftencode" und "Unterschriftencode 2" dürfen nicht identisch sein.';
+        WrongSalespersonCodeError: Label 'Der Unterschriftencode %1 kann von %2 nicht verwendet werden.';
 
     // Wird aktuell nicht benötigt
-    // trigger OnOpenPage()
-    // var
-    //     TenantMedia: Record "Tenant Media";
-    //     EmployeeSignStore: Record "Employee Sign Store";
-    // begin
-    //     if NOT Rec."Status Approval 1" then begin
-    //         EmployeeSignStore.SetRange("User Name", UserId);
-    //         if EmployeeSignStore.FindFirst() then begin
-    //             if TenantMedia.Get(EmployeeSignStore.Signature.MediaId) then begin
-    //                 TenantMedia.CalcFields(Content);
+    trigger OnOpenPage()
+    var
+        TenantMedia: Record "Tenant Media";
+        EmployeeSignStore: Record "Employee Sign Store";
+    begin
+        if NOT Rec."Status Approval 1" then begin
+            EmployeeSignStore.SetRange("User Name", UserId);
+            if EmployeeSignStore.FindFirst() then begin
+                if TenantMedia.Get(EmployeeSignStore.Signature.MediaId) then begin
+                    TenantMedia.CalcFields(Content);
+                end;
+            end
+        end;
+    end;
 
-    //             end;
-    //         end
-    //     end;
-    // end;
-
+    local procedure TriggerWorkflowContext(var SalesHeader_L: Record "Sales Header"; WorkflowContext_L: Text)
+    var
+        WorkflowApprovalData: Record "Workflow Approval Data";
+    begin
+        if WorkflowApprovalData.Get(Rec.SystemId) then WorkflowApprovalData.Delete();
+        WorkflowApprovalData.Init();
+        WorkflowApprovalData."Record Id" := Rec.SystemId;
+        WorkflowApprovalData."Workflow Context" := WorkflowContext_L;
+        WorkflowApprovalData.Insert(true);
+    end;
 }
 

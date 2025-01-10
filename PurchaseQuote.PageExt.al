@@ -19,6 +19,11 @@ PageExtension 50019 pageextension50019 extends "Purchase Quote"
             {
                 ApplicationArea = Basic;
             }
+            field(SendDate; Rec."Send Date")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Angebot gesendet am';
+            }
         }
         addafter(Status)
         {
@@ -97,7 +102,6 @@ PageExtension 50019 pageextension50019 extends "Purchase Quote"
                         UNTIL PurchaseLine.NEXT = 0;
                 END;
                 //G-ERP.KBS 2017-09-04 -
-
             end;
 
         }
@@ -194,4 +198,3 @@ PageExtension 50019 pageextension50019 extends "Purchase Quote"
         ItemVendor: Record "Item Vendor";
         CreateIncomingDocumentEnabled: Boolean;
 }
-

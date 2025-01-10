@@ -11,31 +11,51 @@ page 50100 "Special Contact List"
         {
             repeater(General)
             {
-                field("Company Name"; Rec."Company Name")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Unternehmensname';
-                }
+                // field("Customer No. TT"; Rec."Customer No. TT")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Debitorennr.';
+                // }
+                // field("Vendor No. TT"; Rec."Vendor No. TT")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Kreditorennr.';
+                // }
                 field(Type; Rec.Type)
                 {
                     ApplicationArea = all;
                     Caption = 'Art';
                 }
-                field(Name; Rec.Name)
+                field("Company No."; CompanyNo_G)
                 {
                     ApplicationArea = all;
-                    Caption = 'Name';
+                    Caption = 'Unternehmens-Nr.';
                 }
-                field("Name 2"; Rec."Name 2")
+                field("No."; No_G)
                 {
                     ApplicationArea = all;
-                    Caption = 'Name 2';
+                    Caption = 'Kontakt-Nr.';
                 }
-                field("Name 3"; Rec."Name 3")
+                field("Company Name"; Rec."Company Name")
                 {
                     ApplicationArea = all;
-                    Caption = 'Name 3';
+                    Caption = 'Unternehmensname';
                 }
+                // field(Name; Rec.Name)
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Name';
+                // }
+                // field("Name 2"; Rec."Name 2")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Name 2';
+                // }
+                // field("Name 3"; Rec."Name 3")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Name 3';
+                // }
                 field(Address; Rec.Address)
                 {
                     ApplicationArea = all;
@@ -71,20 +91,25 @@ page 50100 "Special Contact List"
                     ApplicationArea = all;
                     Caption = 'Mobilenr.';
                 }
-                field("Fax No."; Rec."Fax No.")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Faxnr.';
-                }
+                // field("Fax No."; Rec."Fax No.")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'Faxnr.';
+                // }
                 field("E-Mail"; Rec."E-Mail")
                 {
                     ApplicationArea = all;
                     Caption = 'E-Mail';
                 }
-                field("E-Mail 2"; Rec."E-Mail 2")
+                // field("E-Mail 2"; Rec."E-Mail 2")
+                // {
+                //     ApplicationArea = all;
+                //     Caption = 'E-Mail 2';
+                // }
+                field("Salutation Code"; Rec."Salutation Code")
                 {
-                    ApplicationArea = all;
-                    Caption = 'E-Mail 2';
+                    ApplicationArea = All;
+                    Caption = 'Anrede';
                 }
                 field("First Name"; Rec."First Name")
                 {
@@ -110,4 +135,20 @@ page 50100 "Special Contact List"
         }
     }
 
+    var
+        No_G: Code[20];
+        CompanyNo_G: Code[20];
+
+    trigger OnAfterGetRecord()
+    begin
+        No_G := '';
+        CompanyNo_G := '';
+
+        if Rec."No." = Rec."Company No." then begin
+            CompanyNo_G := Rec."Company No.";
+        end else begin
+            CompanyNo_G := Rec."Company No.";
+            No_G := Rec."No.";
+        end;
+    end;
 }

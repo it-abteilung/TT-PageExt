@@ -1003,6 +1003,41 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Item Seriennr Factbox - Control Serial No. Description 2 - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 2010983680 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
+          <source>JobCustom</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job Custom API - Property EntityCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 2010983680 - Property 631549417" size-unit="char" translate="yes" xml:space="preserve">
+          <source>JobCustom</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job Custom API - Property EntitySetCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 2010983680 - Control 4232699882 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job Custom API - Control description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2010983680 - Control 1072850458 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Hyperlink</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job Custom API - Control hyperlink - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2010983680 - Control 547267953 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job Custom API - Control jobType - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2010983680 - Control 949215307 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job Custom API - Control No - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2010983680 - Control 3092263724 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemId</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job Custom API - Control systemId - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 230441574 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Debitorenwechsel</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2733,6 +2768,66 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Packliste Erfassung - Control Scannung - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1661311832 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Differenzen - Inventur</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 2814799924 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the code of the bin where the item was counted while performing the physical inventory.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control Bin Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 172274166 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Differenz zwischen der gezählten Menge und dem aktuellen Lagerbestand. Gezählte Mengen unter der maximalen Abweichung werden auf 0 gerundet.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control DeltaOverQty - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 172274166 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delta-Menge 1</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control DeltaOverQty - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 1873440788 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Differenz zwischen der gezählten Menge und dem aktuellen Lagerbestand.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control DeltaOverQtySort - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 1873440788 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delta-Menge 2</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control DeltaOverQtySort - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the description of the item.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 47657272 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the additional description of the item.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control Description 2 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 568743302 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the item that was counted when taking the physical inventory.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control Item No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 2161572060 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the code of the location where the item was counted during taking the physical inventory.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control Location Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 2704404533 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the quantity of the item of the physical inventory recording line.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control Quantity - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1661311832 - Control 2385270358 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how each unit of the item or resource is measured, such as in pieces or hours. By default, the value in the Base Unit of Measure field on the item or resource card is inserted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Phys. Inventory Delta List - Control Unit of Measure Code - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 1143488612 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Projekt Verbrauch</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3283,6 +3378,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control Company Name - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3202618669 - Control 1551200516 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unternehmens-Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control Company No. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3202618669 - Control 2763960724 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Geschäftsbeziehung</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3297,16 +3397,6 @@
           <source>E-Mail</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control E-Mail - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3202618669 - Control 3429784581 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>E-Mail 2</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control E-Mail 2 - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3202618669 - Control 1807381932 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Faxnr.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control Fax No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3202618669 - Control 3444679095 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Vorname</source>
@@ -3323,20 +3413,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control Mobile Phone No. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3202618669 - Control 2961552353 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Name</source>
+        <trans-unit id="Page 3202618669 - Control 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kontakt-Nr.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control Name - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3202618669 - Control 966287263 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Name 2</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control Name 2 - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3202618669 - Control 1603983880 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Name 3</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control Name 3 - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3202618669 - Control 3986423421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Telefonnr.</source>
@@ -3347,6 +3427,11 @@
           <source>PLZ</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control Post Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3202618669 - Control 4253241521 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Anrede</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Special Contact List - Control Salutation Code - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3202618669 - Control 1956934725 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Nachname</source>
@@ -4498,6 +4583,56 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page TT Stundenerfassung - Action Test Report - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3572722784 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>TT Benutzereinstellungen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3572722784 - Control 3489829666 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Profil</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Control Profile ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3572722784 - Control 3961767479 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ressource</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Control Resource No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3572722784 - Control 3399585325 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Einkäufer/Verkäufer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Control Salesperson/Purchaser - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3572722784 - Control 129688762 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Benutzer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Control User Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3572722784 - Control 1738986725 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zugeordnete Lagerorte</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Control Warehouse Locations - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3572722784 - Action 2695032545 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lagerorte zuordnen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Action Apply_Warehouse_Locations - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3572722784 - Action 1553588253 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zu Profilen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Action Open_Profiles - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3572722784 - Action 4236370006 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zu Ressourcen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Action Open_Resources - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3572722784 - Action 1701965100 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Zu Einkäufer/Verkäufer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT User Settings - Action Open_Salesperson_Purchaser - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2791355198 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>TT Kreditor Segmentierung</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -4968,6 +5103,51 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page WerkzeugTracker API - Control WerkNo - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3523810488 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
+          <source>workflowContext</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Workflow Context API - Property EntityCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 3523810488 - Property 631549417" size-unit="char" translate="yes" xml:space="preserve">
+          <source>workflowContext</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Workflow Context API - Property EntitySetCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 3523810488 - Control 3445226610 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Handled</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Workflow Context API - Control handled - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3523810488 - Control 3893764023 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Prev Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Workflow Context API - Control prevStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3523810488 - Control 1721103860 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Workflow Context API - Control recordId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3523810488 - Control 2028709373 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Rejection Reason</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Workflow Context API - Control rejectionReason - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3523810488 - Control 998393528 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Workflow Context API - Control status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3523810488 - Control 3092263724 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemId</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Workflow Context API - Control systemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3523810488 - Control 736961648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Workflow Context</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Workflow Context API - Control workflowContext - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 362000478 - Action 3373107219 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 467751638">
           <source>Lagerplätze umbenennen</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -5073,6 +5253,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension JobCardExt - Action &lt;Action1000000053&gt; - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 4021402358 - Action 1713259900 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4010542053">
+          <source>SharePoint-Ordner erstellen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension JobCardExt - Action Create_SharePoint_Folders - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 4021402358 - Action 933083614 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4010542053">
           <source>Debitorenwechsel</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -5107,6 +5292,11 @@
           <source>Co&amp;mments</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension JobCardExt - Change Co&amp;mments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 4021402358 - Control 1011577658 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4010542053">
+          <source>SharePoint</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension JobCardExt - Control Hyperlink_G - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 4021402358 - Control 3084968755 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4010542053">
           <source>Rechnungsempfänger</source>
@@ -5413,6 +5603,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Control ItemPicture - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 126734238 - NamedType 4193151256" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 126734238">
+          <source>Die Felder "Unterschriftencode" und "Unterschriftencode 2" dürfen nicht identisch sein.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - NamedType RequesterIsApproverErr</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 126734238 - NamedType 1366606453" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 126734238">
+          <source>Der Unterschriftencode %1 kann von %2 nicht verwendet werden.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - NamedType WrongSalespersonCodeError</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 126734238 - Action 1785524274 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
+          <source>Genehmigung anfordern</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action TT Aprrovals - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 126734238 - Action 4269840875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
+          <source>Genehmigung freigeben</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action TT Release - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 126734238 - Action 3371333341 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
+          <source>Akzeptieren</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action Accept_Proposal - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 126734238 - Action 1022337758 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
           <source>Force Approval</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -5422,6 +5637,21 @@
           <source>Drucken TP</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action Print TP - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 126734238 - Action 1445299320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
+          <source>Ablehnen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action Reject_Proposal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 126734238 - Action 133551269 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
+          <source>Genehmigungsanfrage stornieren</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action Revoke_Proposal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 126734238 - Action 2276942009 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
+          <source>Genehmigungsanfrage senden</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action Submit_Proposal - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 126734238 - Action 1775036146 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
           <source>Neue Kopie - Kopf</source>
@@ -5472,6 +5702,11 @@
           <source>Zu der Einkaufsanfrage gibt es keine Serienanfragen.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50019 - Action Serienanfragenmatrix - Method OnAction - NamedType Text001</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2039824089 - Control 3013389028 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3321822267">
+          <source>Angebot gesendet am</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50019 - Control SendDate - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2039824089 - Control 3001618318 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3321822267">
           <source>Your Reference</source>
@@ -5577,6 +5812,11 @@
           <source>Etikett drucken</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50024 - Action Etikett drucken - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1661863741 - Control 2708250016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1580859378">
+          <source>Benutzer-ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50026 - Control User ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2299560358 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4265073908">
           <source>Resource List</source>
@@ -5708,15 +5948,50 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysicalInventoryOrderSubf - Control DeltaOverQtySort - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 1678605287 - Action 754651374 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1097750429">
+          <source>Drucken (TT)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecording - Action Print_New - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1678605287 - Action 3340114608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1097750429">
+          <source>Differenzen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecording - Action Show_Delta - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1678605287 - Control 176142393 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1097750429">
           <source>Die maximal erlaubte Abweichung zwischen gezählter Menge und dem aktuellen Lagerbestand in Prozent.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecording - Control Threshold - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="PageExtension 1678605287 - Control 176142393 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1097750429">
-          <source>Maximale Abweichung</source>
+          <source>Maximale Abweichung (%)</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecording - Control Threshold - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2881139921 - Control 1638602300 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3637581363">
+          <source>Gibt die Anzahl der Zeilen an, diese sich nicht im Interval der erfassten Mengen befinden.\ Das Interval besteht aus der erfassten Menge +- maximalen Abweichung.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecordingList - Control Delta_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2881139921 - Control 1638602300 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3637581363">
+          <source>Delta</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecordingList - Control Delta_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2881139921 - Control 2184188022 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3637581363">
+          <source>Gibt die Anzahl der Zeilen an, diese noch nicht als "Erfasst" markiert wurden.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecordingList - Control StillOpen_G - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2881139921 - Control 2184188022 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3637581363">
+          <source>Nicht Erfasst</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecordingList - Control StillOpen_G - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2881139921 - Control 176142393 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3637581363">
+          <source>Maximale Abweichung (%)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInventoryRecordingList - Control Threshold - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1296605516 - Control 172274166 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3145597876">
           <source>Differenz zwischen der gezählten Menge und dem aktuellen Lagerbestand. Gezählte Mengen unter der maximalen Abweichung werden auf 0 gerundet.</source>

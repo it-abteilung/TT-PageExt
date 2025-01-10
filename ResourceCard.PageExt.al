@@ -13,9 +13,15 @@ PageExtension 50026 pageextension50026 extends "Resource Card"
                 ApplicationArea = Basic;
             }
         }
+        addlast("Personal Data")
+        {
+            field("User ID"; Rec."User Id")
+            {
+                ApplicationArea = All;
+                Caption = 'Benutzer-ID';
+            }
+        }
         moveafter("Address 2"; "Post Code")
     }
-    var
-        CRMIntegrationManagement: Codeunit "CRM Integration Management";
 }
 

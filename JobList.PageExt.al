@@ -268,8 +268,33 @@ PageExtension 50151 ProjectListExt extends "Job List"
                     Page.RunModal(50015, Bildspeicherung);
                 end;
             }
+            action(JobTask_Fix)
+            {
+                ApplicationArea = All;
+                trigger OnAction()
+                var
+                    JobTask_L: Record "Job Task";
+                    Job_L: Record Job;
+                begin
+                    Job_L.SetFilter("No.", '> %1 & < %2 ', '25-000.0', '26-000.0');
+                    if Job_L.FindSet() then
+                        repeat
+                            JobTask_L.SetRange("Job No.", Job_L."No.");
+                            JobTask_L.SetRange("Job Task No.", '');
+                            JobTask_L.SetRange("Job Task Type", JobTask_L."Job Task Type"::Posting);
+                            if NOT JobTask_L.FindFirst() then begin
+                                JobTask_L.Init();
+                                JobTask_L."Job No." := Job_L."No.";
+                                JobTask_L."Job Task No." := '';
+                                JobTask_L."Job Task Type" := "Job Task Type"::Posting;
+                                JobTask_L.Insert(false);
+                            end
+                        until Job_L.Next() = 0;
+                end;
+            }
         }
     }
+
     var
         TotalPriceIncludingDiscount_g: Decimal;
         TempExternalDocumentNo_G: Text;
