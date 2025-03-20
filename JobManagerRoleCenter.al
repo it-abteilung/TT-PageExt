@@ -27,6 +27,10 @@ pageextension 50201 "JobRoleCenterExt" extends "Job Project Manager RC"
                 ApplicationArea = all;
             }
         }
+        modify(Control21)
+        {
+            Visible = false;
+        }
     }
     actions
     {

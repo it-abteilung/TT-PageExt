@@ -55,13 +55,13 @@ Page 50078 "Werkzeuganforderung Subform"
                 {
                     ApplicationArea = Basic;
                     QuickEntry = false;
-                    Editable = false;
+                    Editable = Rec."Artikel Nr" = 'SONSTIGE';
                 }
                 field("Beschreibung 2"; Rec."Beschreibung 2")
                 {
                     ApplicationArea = Basic;
                     QuickEntry = false;
-                    Editable = false;
+                    Editable = Rec."Artikel Nr" = 'SONSTIGE';
                 }
                 field(Menge; Rec.Menge)
                 {

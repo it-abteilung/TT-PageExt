@@ -29,7 +29,6 @@ page 61011 "Werkzeuganf. Auswahl"
             }
             repeater(GeneralList)
             {
-
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;

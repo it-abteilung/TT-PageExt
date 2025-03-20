@@ -8,7 +8,6 @@ codeunit 50010 ProjectTypeOnBeforeInsertJob
         // NoSeriesMgt: Codeunit NoSeriesManagement; // "NoSeriesManagement" is now "No. Series"
         NoSeries: Codeunit "No. Series";
     begin
-        Message('%1', Job."No.");
         JobsSetup.Get();
         IF Job."No." = '' THEN BEGIN
             Job.FILTERGROUP(2);

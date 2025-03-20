@@ -23,6 +23,21 @@ PageExtension 50011 pageextension50011 extends "Item List"
                 ApplicationArea = all;
                 Caption = 'Produktgruppencode';
             }
+            field(DIN; Rec.DIN)
+            {
+                ApplicationArea = All;
+                Caption = 'DIN';
+            }
+            field(ASME; Rec.ASME)
+            {
+                ApplicationArea = All;
+                Caption = 'ASME';
+            }
+            field(ISO; Rec.ISO)
+            {
+                ApplicationArea = All;
+                Caption = 'ISO';
+            }
         }
         addafter("Default Deferral Template Code")
         {
@@ -188,6 +203,19 @@ PageExtension 50011 pageextension50011 extends "Item List"
                                 Item.Modify();
                             end;
                         until Item.Next() = 0;
+                end;
+            }
+            action(AdjustWarehouseEntry)
+            {
+                ApplicationArea = All;
+                Caption = 'TT Lagerbestand anpassen';
+                Visible = isSuper;
+
+                trigger OnAction()
+                var
+                    AdjustWarehouseItemQuantity_P: Page "Adjust Warehouse Item Quantity";
+                begin
+                    AdjustWarehouseItemQuantity_P.RunModal();
                 end;
             }
         }

@@ -56,6 +56,13 @@ PageExtension 50049 pageextension50049 extends "Contact List"
             {
                 ApplicationArea = All;
             }
+            field("Is Corporation"; Rec."Is Corporation")
+            {
+                ApplicationArea = All;
+                Caption = 'Ist Unternehmensgruppe';
+                ToolTip = 'Gibt an, ob es sich um einen Kontakt für eine Unternehmensgruppe handelt.';
+            }
+
         }
     }
 
@@ -120,6 +127,60 @@ PageExtension 50049 pageextension50049 extends "Contact List"
             //         Message('Counter: %1', Counter);
             //     end;
             // }
+            action(Update_ParentContactNo)
+            {
+                ApplicationArea = All;
+                Caption = 'Update Parent Contact No.';
+                Image = UpdateXML;
+
+                trigger OnAction()
+                var
+                    Contact_L: Record Contact;
+                begin
+                    if Contact_L.FindSet() then begin
+                        repeat
+                            Contact_L."Parent Contact No." := Contact_L."Company No.";
+                            Contact_L.Modify();
+                        until Contact_L.Next() = 0;
+                    end;
+                end;
+            }
+            action(Show_All_Interactions)
+            {
+                ApplicationArea = All;
+                Caption = 'Alle Aktivitäten';
+                Image = UpdateXML;
+
+                RunPageMode = View;
+                RunObject = Page "TT Inter. Log Entries";
+            }
+        }
+    }
+
+    views
+    {
+        addfirst
+        {
+            view(View_Customer)
+            {
+                Caption = 'Alle Debitoren';
+                Filters = WHERE("Contact Business Relation" = Const("Contact Business Relation"::Customer), Type = Const(Company));
+            }
+            view(View_Vendor)
+            {
+                Caption = 'Alle Kreditoren';
+                Filters = WHERE("Contact Business Relation" = Const("Contact Business Relation"::Vendor), Type = Const(Company));
+            }
+            view(View_Multiple)
+            {
+                Caption = 'Mehrere Geschäftsbeziehungen';
+                Filters = WHERE("Contact Business Relation" = Const("Contact Business Relation"::Multiple), Type = Const(Company));
+            }
+            view(View_None)
+            {
+                Caption = 'Keine Geschäftsbeziehung';
+                Filters = WHERE("Contact Business Relation" = Const("Contact Business Relation"::None), Type = Const(Company));
+            }
         }
     }
 
@@ -130,6 +191,8 @@ PageExtension 50049 pageextension50049 extends "Contact List"
         CRMCouplingManagement: Codeunit "CRM Coupling Management";
 
     trigger OnOpenPage()
+    var
+        SalespersonPurchaser_L: Record "Salesperson/Purchaser";
     begin
         // G-ERP+
         CASE rec.Type OF
@@ -139,6 +202,19 @@ PageExtension 50049 pageextension50049 extends "Contact List"
                 rec.SETRANGE(Type, rec.Type::Person);
         END;
         // G-ERP-
+
+        SalespersonPurchaser_L.SetRange("User ID", USERID);
+        if SalespersonPurchaser_L.FindFirst() then begin
+            if NOT SalespersonPurchaser_L."Just Sales" then begin
+                Rec.FilterGroup(4);
+                Rec.SetRange("Just Sales", false);
+                Rec.FilterGroup(0)
+            end;
+        end else begin
+            Rec.FilterGroup(4);
+            Rec.SetRange("Just Sales", false);
+            Rec.FilterGroup(0)
+        end;
     end;
 
 }

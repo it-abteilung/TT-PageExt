@@ -182,6 +182,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
         {
             trigger OnAfterValidate()
             begin
+                ChangeStatusUpdateSharePointJobStatus();
                 CurrPage.Update();
             end;
         }
@@ -872,6 +873,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Quote;
                         Rec.Modify();
+                        ChangeStatusUpdateSharePointJobStatus();
                         exit;
                     end;
 
@@ -880,6 +882,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Planning;
                         Rec.Modify();
+                        ChangeStatusUpdateSharePointJobStatus();
                         exit;
                     end;
 
@@ -888,6 +891,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Invoiced;
                         Rec.Modify();
+                        ChangeStatusUpdateSharePointJobStatus();
                         exit;
                     end;
 
@@ -896,6 +900,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Invoiced;
                         Rec.Modify();
+                        ChangeStatusUpdateSharePointJobStatus();
                         exit;
                     end;
 
@@ -908,10 +913,10 @@ PageExtension 50150 JobCardExt extends "Job Card"
                             Bin_l.Validate(Code, Rec."No.");
                             Bin_l.Validate(Description, Rec.Description);
                             Bin_l.Insert(true);
+                            ChangeStatusUpdateSharePointJobStatus();
                         end;
                     end;
                     // G-ERP.RS 2021-02-01 - 01
-
                 end;
             }
             action("<Action1000000028>")
@@ -931,6 +936,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Quote;
                         Rec.Modify();
+                        ChangeStatusUpdateSharePointJobStatus();
                         exit;
                     end;
 
@@ -939,6 +945,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Planning;
                         Rec.Modify();
+                        ChangeStatusUpdateSharePointJobStatus();
                         exit;
                     end;
 
@@ -947,6 +954,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Planning;
                         Rec.Modify();
+                        ChangeStatusUpdateSharePointJobStatus();
                         exit;
                     end;
                 end;
@@ -964,6 +972,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::Cancelled;
                     Rec.Modify();
+                    ChangeStatusUpdateSharePointJobStatus();
                 end;
             }
             action("<Action1000000029>")
@@ -979,6 +988,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::Completed;
                     Rec.Modify();
+                    ChangeStatusUpdateSharePointJobStatus();
                 end;
             }
             action("<Action1000000050>")
@@ -994,6 +1004,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::"Gewährleistung";
                     Rec.Modify();
+                    ChangeStatusUpdateSharePointJobStatus();
                 end;
             }
             action("<Action1000000031>")
@@ -1274,7 +1285,27 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         if (Rec."No." <> '') AND (Rec.Description <> '') then begin
                             WorkflowContext.Init();
                             WorkflowContext."Record Id" := Rec.SystemId;
-                            WorkflowContext."Workflow Context" := 'CreateSharePointFolder';
+                            if Rec.Status = Rec.Status::Open then begin
+                                WorkflowContext."Workflow Context" := 'CreateSharePointFolder1'
+                            end else begin
+                                WorkflowContext."Workflow Context" := 'ExtendSharePointFolder1';
+                                case Rec.Status of
+                                    Rec.Status::Open:
+                                        WorkflowContext.Status := 'Offen';
+                                    Rec.Status::Quote:
+                                        WorkflowContext.Status := 'Angebot';
+                                    Rec.Status::Planning:
+                                        WorkflowContext.Status := 'Planung';
+                                    Rec.Status::"Gewährleistung":
+                                        WorkflowContext.Status := 'Gewährleistung';
+                                    Rec.Status::Completed:
+                                        WorkflowContext.Status := 'Abgeschlossen';
+                                    Rec.Status::Cancelled:
+                                        WorkflowContext.Status := 'Abgsagt';
+                                    Rec.Status::Invoiced:
+                                        WorkflowContext.Status := 'Abgerechntet';
+                                end;
+                            end;
                             WorkflowContext.Insert();
                         end;
                     end
@@ -1309,10 +1340,12 @@ PageExtension 50150 JobCardExt extends "Job Card"
         END;
         if Rec.Hyperlink <> '' then begin
             HyperLink_G := Rec."No.";
-        end
+        end;
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    var
+        WorkflowContext: Record "Workflow Approval Data";
     begin
         //G-ERP.KBS 2017-07-25 +
         IF Rec.GETFILTER(Status) <> '' THEN
@@ -1477,5 +1510,38 @@ PageExtension 50150 JobCardExt extends "Job Card"
         ReservationEntry."Creation Date" := Today();
         ReservationEntry."Expiration Date" := Today();
         ReservationEntry.Insert();
+    end;
+
+
+
+    procedure ChangeStatusUpdateSharePointJobStatus()
+    var
+        WorkflowContext_L: Record "Workflow Approval Data";
+    begin
+        if WorkflowContext_L.Get(Rec.SystemId, 'ChangeSharePointFolderJobStatus') then begin
+            WorkflowContext_L.Delete();
+        end;
+        if (Rec."No." <> '') AND (Rec.Description <> '') then begin
+            WorkflowContext_L.Init();
+            WorkflowContext_L."Record Id" := Rec."SystemId";
+            WorkflowContext_L."Workflow Context" := 'ChangeSharePointFolderJobStatus';
+            case Rec.Status of
+                Rec.Status::Open:
+                    WorkflowContext_L.Status := 'Offen';
+                Rec.Status::Quote:
+                    WorkflowContext_L.Status := 'Angebot';
+                Rec.Status::Planning:
+                    WorkflowContext_L.Status := 'Planung';
+                Rec.Status::"Gewährleistung":
+                    WorkflowContext_L.Status := 'Gewährleistung';
+                Rec.Status::Completed:
+                    WorkflowContext_L.Status := 'Abgeschlossen';
+                Rec.Status::Cancelled:
+                    WorkflowContext_L.Status := 'Abgsagt';
+                Rec.Status::Invoiced:
+                    WorkflowContext_L.Status := 'Abgerechntet';
+            end;
+            WorkflowContext_L.Insert();
+        end
     end;
 }

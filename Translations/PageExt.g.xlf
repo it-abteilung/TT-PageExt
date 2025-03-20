@@ -3,6 +3,36 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="PageExt">
     <body>
       <group id="body">
+        <trans-unit id="Page 2008923082 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Anpassen Lagerartikelmenge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adjust Warehouse Item Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2008923082 - Control 2814799924 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lagerplatz</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adjust Warehouse Item Quantity - Control Bin Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2008923082 - Control 568743302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Artikel-Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adjust Warehouse Item Quantity - Control Item No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2008923082 - Control 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Buch.-Blatt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adjust Warehouse Item Quantity - Control Journal Batch Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2008923082 - Control 2161572060 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lagerort</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adjust Warehouse Item Quantity - Control Location Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2008923082 - Control 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delta Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adjust Warehouse Item Quantity - Control Quantity - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 137713387 - NamedType 3662963701" size-unit="char" translate="yes" xml:space="preserve">
           <source>The Invoice %1 does not exist.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -404,7 +434,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Contact Person Subform - Control Person Information - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2751854905 - Action 1181563972 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>neue Person anlegen</source>
+          <source>Neue Person anlegen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Contact Person Subform - Action CreateNewContact - Property Caption</note>
         </trans-unit>
@@ -537,6 +567,46 @@
           <source>Zeilen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EK-Lieferung Subpage 2 - Action Zeilen - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1889704128 - Control 2790486453 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Comment field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Employee Card History - Control Comment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1889704128 - Control 2790486453 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bemerkung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Employee Card History - Control Comment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1889704128 - Control 3161620306 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Expired On field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Employee Card History - Control Expired On - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1889704128 - Control 3161620306 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gültig bis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Employee Card History - Control Expired On - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1889704128 - Control 1898588168 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Issued On field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Employee Card History - Control Issued On - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1889704128 - Control 1898588168 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ausgestellt am</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Employee Card History - Control Issued On - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1889704128 - Control 16009230 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Returned On field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Employee Card History - Control Returned On - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1889704128 - Control 16009230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Rückgabe am</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Employee Card History - Control Returned On - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2669747704 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Mitarbeitersignaturen</source>
@@ -878,6 +948,81 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Item Charge Translations - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1152542406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lagerplatzposten - Kommentare</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Entry No. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lfd.-Nr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 149522872 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Entry Type field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Entry Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 149522872 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Postenart</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Entry Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 568743302 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Item No. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Item No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 568743302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Artikelnr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Item No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 2704404533 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Quantity field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Quantity - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 2704404533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Menge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 47037625 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Serial No. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Serial No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 47037625 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Seriennr.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Serial No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 2097712291 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Short Comment field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Short Comment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 2097712291 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kommentar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control Short Comment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 577209412 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the SystemCreatedAt field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control SystemCreatedAt - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1152542406 - Control 577209412 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Erstellt am</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Item Journal Line Comments - Control SystemCreatedAt - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1811497270 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Seriennummer / Lagerort</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1152,6 +1297,16 @@
           <source>Kreditorname</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Kred offene Posten ausbuchen - Control Vendor.Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3140000614 - Action 3457043036 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kreditoren sperren</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Kred offene Posten ausbuchen - Action ReadVendorBlockState - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3140000614 - Action 2894312329 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Kreditoren entsperren</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Kred offene Posten ausbuchen - Action WriteVendorBlockState - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3693267281 - Control 3369988884 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Anfrage erz.</source>
@@ -3028,6 +3183,51 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Record Permission Sets 2 - Action Stop_Recording - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2696886186 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resource</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Resource APIV2 - Property EntityCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 2696886186 - Property 631549417" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resource</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Resource APIV2 - Property EntitySetCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 2696886186 - Control 1355441219 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Id Card</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Resource APIV2 - Control IdCard - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2696886186 - Control 498382040 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Id Expires On</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Resource APIV2 - Control IdExpiresOn - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2696886186 - Control 277366227 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Id Issued On</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Resource APIV2 - Control IdIssuedOn - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2696886186 - Control 2961552353 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Resource APIV2 - Control Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2696886186 - Control 2374329076 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Next Row Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Resource APIV2 - Control NextRowId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2696886186 - Control 949215307 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>EmployeeId</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Resource APIV2 - Control No - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2696886186 - Control 1367528460 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Resource APIV2 - Control SystemId - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1707688526 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
           <source>SalesQuoteSign</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3627,6 +3827,236 @@
           <source>Seriennummer</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Storage Means Temp. - Control Serial No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Alle Aktivitäten</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1779603042 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Attachment No. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Attachment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1662713274 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the interaction records an failed attempt to reach the contact. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Attempt Failed - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3206702527 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the campaign entry to which the interaction log entry is linked.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Campaign Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3048556483 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the campaign (if any) to which the interaction is linked. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Campaign No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1102231375 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the interaction records a response to a campaign.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Campaign Response - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 315342065 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the interaction is applied to contacts that are part of the campaign target. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Campaign Target - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3844911025 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the interaction has been canceled. The field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Canceled - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 2790486453 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that a comment exists for this interaction log entry.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Comment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 2172940496 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Contact Alt. Address Code field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Contact Alt. Address Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 758907420 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the contact company for which an interaction has been logged.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Contact Company Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 895626116 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the contact company.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Contact Company No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 2378863201 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the contact for which an interaction has been logged.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Contact Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 202036913 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the contact involved in this interaction. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Contact No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3596397770 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the telephone number that you used when calling the contact.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Contact Via - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 2970743254 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the type of correspondence of the attachment in the interaction template. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Correspondence Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3196053552 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the cost of the interaction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Cost (LCY) - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3192175264 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date that you have entered in the Date field in the Create Interaction wizard or the Segment window when you created the interaction. The field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 775476300 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the delivery of the attachment. There are three options:</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Delivery Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the description of the interaction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3302998458 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Doc. No. Occurrence field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Doc. No. Occurrence - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 486908828 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the document (if any) that the interaction log entry records.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Document No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 2363328873 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the type of document if there is one that the interaction log entry records. You cannot change the contents of this field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Document Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1096928045 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the duration of the interaction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Duration (Min.) - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 4287344501 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Email Logged field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control E-Mail Logged - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the entry, as assigned from the specified number series when the entry was created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 2208614754 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the evaluation of the interaction. There are five options: Very Positive, Positive, Neutral, Negative, and Very Negative.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Evaluation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 2278016522 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the direction of information flow recorded by the interaction. There are two options: Outbound (the information was received by your contact) and Inbound (the information was received by your company).</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Information Flow - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 6975888 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies who initiated the interaction. There are two options: Us (the interaction was initiated by your company) and Them (the interaction was initiated by your contact).</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Initiated By - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1453912748 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the code of the interaction group used to create this interaction. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Interaction Group Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 156467535 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the language code for the interaction for the interaction log. The code is copied from the language code of the interaction template, if one is specified.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Interaction Language Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1312499801 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the code for the interaction template used to create the interaction. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Interaction Template Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1701257174 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Logged Segment Entry No. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Logged Segment Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3117591400 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Merged field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Merged - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 189804129 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Modified Word Template field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Modified Word Template - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3616132794 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the opportunity to which the interaction is linked.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Opportunity No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 339349164 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Postponed field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Postponed - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 553464652 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the code for the salesperson who carried out the interaction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Salesperson Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 2778536424 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the segment. This field is valid only for interactions created for segments, and is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Segment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1432403029 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Send Word Docs. as Attmt. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Send Word Docs. as Attmt. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1234124704 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the subject text that will be used for this interaction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Subject - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1278851706 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the time when the interaction was created. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Time of Interaction - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 4020372734 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the task if the interaction has been created to complete a task. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control To-do No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 2708250016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the ID of the user who logged this entry. This field is not editable.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control User ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 1684721775 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Version No. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Version No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2629588600 - Control 3559971701 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Word Template Code field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TT Inter. Log Entries - Control Word Template Code - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2289820698 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Materialerfassung</source>
@@ -5158,6 +5588,21 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Import Indiv Objects - Action Import Individualfelder - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 2977512831 - Control 75197648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3155150429">
+          <source>Teilnehmer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension InterLogEntryCommentList - Control Participants - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1755492196 - Control 75197648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1596138714">
+          <source>Teilnehmer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension InterLogEntryCommentSheet - Control Participants - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3940806096 - Control 2097712291 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3940806096">
+          <source>Kommentar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Item Journal - Control Short Comment - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 4021402358 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4010542053">
           <source>Job Card</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -5533,6 +5978,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50010 - Control Product Group Code TT - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 1870915066 - Control 654830241 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1434786627">
+          <source>Gesperrt Werkzeuganforderung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50010 - Control Blocked Tool Requirement - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1870915066 - Control 2023611044 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1434786627">
           <source>TT-Art</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -5542,11 +5992,6 @@
           <source>Seriennr.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50010 - Control Control1000000004 - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 1870915066 - Control 654830241 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1434786627">
-          <source>Gesperrt Werkzeuganforderung</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50010 - Control Blocked Tool Requirement - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1233218449 - Action 3342552370 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
           <source>Artikel &amp; Seriennummer</source>
@@ -5562,6 +6007,11 @@
           <source>New from template</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Action New from template - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1233218449 - Action 874511024 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
+          <source>TT Lagerbestand anpassen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Action AdjustWarehouseEntry - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1233218449 - Action 1511591685 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
           <source>Import Items via CSV Buffer</source>
@@ -5587,6 +6037,21 @@
           <source>Artikel in Einkauf anzeigen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Action Artikel in Einkauf anzeigen - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1233218449 - Control 1445364078 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
+          <source>ASME</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Control ASME - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1233218449 - Control 2965698973 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
+          <source>DIN</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Control DIN - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1233218449 - Control 1576016727 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
+          <source>ISO</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50011 - Control ISO - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1233218449 - Control 2670393275 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4178721393">
           <source>Produktgruppencode</source>
@@ -5627,11 +6092,6 @@
           <source>Akzeptieren</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action Accept_Proposal - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="PageExtension 126734238 - Action 1022337758 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
-          <source>Force Approval</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50014 - Action ForceApproval - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 126734238 - Action 3803861919 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 280137910">
           <source>Drucken TP</source>
@@ -5813,15 +6273,75 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50024 - Action Etikett drucken - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 1661863741 - Action 1889704128 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1580859378">
+          <source>Nachverfolgung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50026 - Action Employee Card History - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1661863741 - Control 2708250016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1580859378">
           <source>Benutzer-ID</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50026 - Control User ID - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 1661863741 - Control 2172472719 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1580859378">
+          <source>TT-Ausweisinformationen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50026 - Control TT-Ausweisinformationen - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1661863741 - Control 3949317875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1580859378">
+          <source>Gültig bis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50026 - Control Expires On - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1661863741 - Control 1967300195 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1580859378">
+          <source>besitzt TT-Ausweis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50026 - Control Id Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1661863741 - Control 1898588168 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1580859378">
+          <source>Ausgestellt am</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50026 - Control Issued On - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 2299560358 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4265073908">
           <source>Resource List</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50027 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2299560358 - Action 734494840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4265073908">
+          <source>Neue PN -&gt; Verantwortliche Person</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50027 - Action Switch Job Responsible Person - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2299560358 - Control 2671528441 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4265073908">
+          <source>Specifies the value of the TT-Ausweis gültig bis field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50027 - Control ATK Expires On - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2299560358 - Control 2671528441 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4265073908">
+          <source>TT-Ausweis gültig bis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50027 - Control ATK Expires On - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2299560358 - Control 3087650729 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4265073908">
+          <source>Specifies the value of the besitzt TT-Ausweis field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50027 - Control ATK Id Card - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2299560358 - Control 3087650729 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4265073908">
+          <source>besitzt TT-Ausweis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50027 - Control ATK Id Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2299560358 - Control 2364704534 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4265073908">
+          <source>Specifies the value of the TT-Ausweis ausgestellt am.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50027 - Control ATK Issued On - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2299560358 - Control 2364704534 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4265073908">
+          <source>TT-Ausweis ausgestellt am</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50027 - Control ATK Issued On - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1769486991 - Control 3873836974 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 997943925">
           <source>Zusätzliche Anforderungen 1</source>
@@ -5853,10 +6373,45 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50045 - Control Ordner - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 4030995717 - Action 2275209874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
+          <source>Unternehmensgruppe</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50048 - Action Group_Corporation - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 4030995717 - Action 3515197511 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
           <source>Neue Person erstellen</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50048 - Action Create New Person - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 4030995717 - Action 3028418184 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
+          <source>Unternehmensgruppe - Kontakte</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50048 - Action Show_Inherited_Contacts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 4030995717 - Action 1035853514 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
+          <source>Unternehmensgruppe - Aktivitäten</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50048 - Action Show_Inherited_Interactions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 4030995717 - Control 1374147736 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
+          <source>Gibt an, ob es sich um einen Kontakt für eine Unternehmensgruppe handelt. Der Kontakt erscheint in der Auswahl für die Unternehmensgruppe. Der Name erhält das Sufix "(Gruppe)"</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50048 - Control Is Corporation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 4030995717 - Control 1374147736 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
+          <source>Ist Unternehmensgruppe</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50048 - Control Is Corporation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 4030995717 - Control 442636540 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
+          <source>Nur Vertrieb</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50048 - Control Just Sales - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 4030995717 - Control 4180334485 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
+          <source>Unternehmensgruppe</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50048 - Control Parent Contact No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 373725038 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
           <source>Contact List</source>
@@ -5868,15 +6423,65 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - Property AdditionalSearchTerms</note>
         </trans-unit>
+        <trans-unit id="PageExtension 373725038 - Action 3101946517 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
+          <source>Alle Aktivitäten</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - Action Show_All_Interactions - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 373725038 - Action 3333864189 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
           <source>Spezielle Kontaktliste</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - Action Special_Contact_List - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 373725038 - Action 3284348189 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
+          <source>Update Parent Contact No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - Action Update_ParentContactNo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 373725038 - Control 1374147736 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
+          <source>Gibt an, ob es sich um einen Kontakt für eine Unternehmensgruppe handelt.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - Control Is Corporation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 373725038 - Control 1374147736 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
+          <source>Ist Unternehmensgruppe</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - Control Is Corporation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 373725038 - View 3641986810 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
+          <source>Alle Debitoren</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - View View_Customer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 373725038 - View 3699488094 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
+          <source>Mehrere Geschäftsbeziehungen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - View View_Multiple - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 373725038 - View 660460308 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
+          <source>Keine Geschäftsbeziehung</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - View View_None - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 373725038 - View 1051992578 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1023993454">
+          <source>Alle Kreditoren</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50049 - View View_Vendor - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 819166334 - Control 1465154660 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1258343441">
           <source>Kann Artikel bearbeiten</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50050 - Control Allow Edit Item - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 819166334 - Control 442636540 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1258343441">
+          <source>Wenn aktiviert, hat der Benutzer Zugriff auf die Unternehmensgruppen in der Kontaktverwaltung, die nur Vertriebsmitarbeiter sehen können.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50050 - Control Just Sales - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 819166334 - Control 442636540 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1258343441">
+          <source>Nur Vertrieb</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50050 - Control Just Sales - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2823083431 - Control 1729122042 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1875566024">
           <source>Arbeitsstd. Gesamt</source>
@@ -5902,6 +6507,11 @@
           <source>Job No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50068 - Control Job No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 272296963 - Control 3961227134 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3195034673">
+          <source>Vendor Invoice No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50068 - Control Vendor Invoice No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 272296963 - Control 3241217231 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3195034673">
           <source>Belegstatus</source>
@@ -6013,6 +6623,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension PhysInvtRecordingSubform - Control DeltaOverQtySort - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 3230677946 - Action 3565234926 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1708450418">
+          <source>Filter IT</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PostedPurchaseInvoiceLines - Action Filter_IT - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3230677946 - Control 779730061 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1708450418">
+          <source>Kreditor</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PostedPurchaseInvoiceLines - Control VendorName - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 3970930530 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2273701615">
           <source>Job List</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -6024,7 +6644,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension ProjectListExt - Property AdditionalSearchTerms</note>
         </trans-unit>
         <trans-unit id="PageExtension 3970930530 - Control 2123958759 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2273701615">
-          <source>Person Responsible</source>
+          <source>Objekt</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension ProjectListExt - Control Object - Property Caption</note>
         </trans-unit>

@@ -98,7 +98,7 @@ page 50068 "Purchase Liquidity"
         Clear(PurchaseHeader);
         Clear(PurchaseLine);
         PurchaseHeader.SetRange("Document Type", PurchaseHeader."Document Type"::Order);
-        PurchaseHeader.SetRange("No.", '058454');
+        // PurchaseHeader.SetRange("No.", '058454');
         PurchaseHeader.SetFilter("Promised Receipt Date", '>= %1 & <= %2', LowerBoundsDate, UpperBoundsDate);
 
         if PurchaseHeader.FindSet() then

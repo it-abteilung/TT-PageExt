@@ -30,6 +30,12 @@ PageExtension 50050 pageextension50050 extends "Salesperson/Purchaser Card"
                 ApplicationArea = All;
                 Caption = 'Kann Artikel bearbeiten';
             }
+            field("Just Sales"; Rec."Just Sales")
+            {
+                ApplicationArea = All;
+                Caption = 'Nur Vertrieb';
+                ToolTip = 'Wenn aktiviert, hat der Benutzer Zugriff auf die Unternehmensgruppen in der Kontaktverwaltung, die nur Vertriebsmitarbeiter sehen können.';
+            }
         }
     }
 }

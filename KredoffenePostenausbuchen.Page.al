@@ -135,6 +135,52 @@ Page 50089 "Kred offene Posten ausbuchen"
 
                     end;
                 }
+
+                action(WriteVendorBlockState)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Kreditoren entsperren';
+
+                    trigger OnAction()
+                    var
+                        Vendor: Record Vendor;
+                        VendorBlockedState: Record "Vendor Blocked State";
+                    begin
+                        Vendor.SetFilter(Blocked, '<>%1', Vendor.Blocked::" ");
+                        if Vendor.FindSet() then begin
+                            repeat
+                                VendorBlockedState.Init();
+                                VendorBlockedState."Vendor No." := Vendor."No.";
+                                VendorBlockedState.Blocked := Vendor.Blocked;
+                                VendorBlockedState.Insert();
+
+                                Vendor.Blocked := Vendor.Blocked::" ";
+                                Vendor.Modify();
+                            until Vendor.Next() = 0;
+                        end;
+                    end;
+                }
+                action(ReadVendorBlockState)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Kreditoren sperren';
+
+                    trigger OnAction()
+                    var
+                        Vendor: Record Vendor;
+                        VendorBlockedState: Record "Vendor Blocked State";
+                    begin
+                        if VendorBlockedState.FindSet() then begin
+                            repeat
+                                if Vendor.Get(VendorBlockedState."Vendor No.") then begin
+                                    Vendor.Blocked := VendorBlockedState.Blocked;
+                                    Vendor.Modify();
+                                end
+                            until VendorBlockedState.Next() = 0;
+                            VendorBlockedState.DeleteAll();
+                        end
+                    end;
+                }
             }
         }
     }

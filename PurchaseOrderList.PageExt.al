@@ -6,6 +6,11 @@ PageExtension 50068 pageextension50068 extends "Purchase Order List"
     {
         addafter("Buy-from Vendor Name")
         {
+            field("Vendor Invoice No."; Rec."Vendor Invoice No.")
+            {
+                ApplicationArea = All;
+                Caption = 'Vendor Invoice No.';
+            }
             field("Job No."; Rec."Job No.")
             {
                 ApplicationArea = Basic;

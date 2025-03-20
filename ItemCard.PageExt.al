@@ -10,18 +10,18 @@ PageExtension 50010 pageextension50010 extends "Item Card"
                 Caption = 'Produktgruppencode';
             }
         }
+        modify("Description 2")
+        {
+            Visible = true;
+        }
         addafter(Description)
         {
-            // Feld wurde mit v22.3.5.... in die Base-App aufgenommen 04.08.2023 CN 
-            // field("Description 2"; Rec."Description 2")
-            // {
-            //     ApplicationArea = All;
-            // }
             field("Description 3"; Rec."Description 3")
             {
                 ApplicationArea = All;
             }
         }
+        moveafter("Description"; "Description 2")
         addafter("Automatic Ext. Texts")
         {
             field("Seriennr. pflichtig"; Rec."Seriennr. pflichtig")
@@ -52,29 +52,29 @@ PageExtension 50010 pageextension50010 extends "Item Card"
                     ApplicationArea = All;
                 }
             }
-            part(Seriennummern; "Artikel-Seriennr-SubPage")
-            {
-                SubPageLink = "Item No." = field("No.");
-                Visible = false;
-                ApplicationArea = All;
-            }
-            part(Control100000001; "Item Serial Subpage")
-            {
-                SubPageLink = "Item No." = field("No."),
-                              "Serial No." = filter(<> '');
-                Visible = (Rec."Item Tracking Code" = 'SNALLE');
-                ApplicationArea = All;
-            }
-            part(Chargennummern; "Artikel-Chargennr")
-            {
-                Editable = false;
-                SubPageLink = "Item No." = field("No."),
-                              Open = const(true),
-                              "Lot No." = filter(<> ''),
-                              "Entry Type" = filter(Purchase | "Positive Adjmt." | Transfer);
-                Visible = (Rec."Item Tracking Code" = 'CHARGEALLE');
-                ApplicationArea = All;
-            }
+            // part(Seriennummern; "Artikel-Seriennr-SubPage")
+            // {
+            //     SubPageLink = "Item No." = field("No.");
+            //     Visible = false;
+            //     ApplicationArea = All;
+            // }
+            // part(Control100000001; "Item Serial Subpage")
+            // {
+            //     SubPageLink = "Item No." = field("No."),
+            //                   "Serial No." = filter(<> '');
+            //     Visible = (Rec."Item Tracking Code" = 'SNALLE');
+            //     ApplicationArea = All;
+            // }
+            // part(Chargennummern; "Artikel-Chargennr")
+            // {
+            //     Editable = false;
+            //     SubPageLink = "Item No." = field("No."),
+            //                   Open = const(true),
+            //                   "Lot No." = filter(<> ''),
+            //                   "Entry Type" = filter(Purchase | "Positive Adjmt." | Transfer);
+            //     Visible = (Rec."Item Tracking Code" = 'CHARGEALLE');
+            //     ApplicationArea = All;
+            // }
         }
         addafter(Inventory)
         {
@@ -97,13 +97,38 @@ PageExtension 50010 pageextension50010 extends "Item Card"
                 ApplicationArea = All;
             }
         }
-        addafter(ItemPicture)
+        // addafter(ItemPicture)
+        addafter(Item)
         {
             part(Control1000000004; "Item Seriennr Factbox")
             {
                 Caption = 'Seriennr.';
                 SubPageLink = "Item No." = field("No.");
                 SubPageView = sorting("Item No.", "Serial No.");
+                ApplicationArea = All;
+                Editable = true;
+            }
+            part(Seriennummern; "Artikel-Seriennr-SubPage")
+            {
+                SubPageLink = "Item No." = field("No.");
+                Visible = false;
+                ApplicationArea = All;
+            }
+            part(Control100000001; "Item Serial Subpage")
+            {
+                SubPageLink = "Item No." = field("No."),
+                              "Serial No." = filter(<> '');
+                Visible = (Rec."Item Tracking Code" = 'SNALLE');
+                ApplicationArea = All;
+            }
+            part(Chargennummern; "Artikel-Chargennr")
+            {
+                Editable = false;
+                SubPageLink = "Item No." = field("No."),
+                              Open = const(true),
+                              "Lot No." = filter(<> ''),
+                              "Entry Type" = filter(Purchase | "Positive Adjmt." | Transfer);
+                Visible = (Rec."Item Tracking Code" = 'CHARGEALLE');
                 ApplicationArea = All;
             }
         }

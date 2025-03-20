@@ -136,7 +136,6 @@ Page 50025 "Projekt Soll/Ist Vergleich"
                         PurchInvHeader_temp.SetFilter("Job No.", PurchInvLine.GetFilter("Job No."));
                         PurchInvHeader_temp.SetRange(Leistungsart, PurchInvHeader_temp.Leistungsart::Fremdlieferung);
 
-
                         PurchCrMemoLine_l.SetFilter("Job No.", PurchInvLine.GetFilter("Job No."));
                         PurchCrMemoLine_l.SetRange(Leistungsart, PurchCrMemoLine_l.Leistungsart::Fremdlieferung);
                         if PurchCrMemoLine_l.FindSet() then

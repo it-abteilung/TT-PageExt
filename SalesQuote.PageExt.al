@@ -14,7 +14,6 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
         }
         addafter("Sell-to Customer Name")
         {
-
             field("Sell-to Customer Name 2"; Rec."Sell-to Customer Name 2")
             {
                 ApplicationArea = Basic;
@@ -208,18 +207,18 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
                     Report.RunModal(50026, true, false, L_SalesHeader);
                 end;
             }
-            action(ForceApproval)
-            {
-                ApplicationArea = all;
-                Caption = 'Force Approval';
+            // action(ForceApproval)
+            // {
+            //     ApplicationArea = all;
+            //     Caption = 'Force Approval';
 
-                trigger OnAction()
-                begin
-                    rec."Status Approval 1" := true;
-                    rec."Status Approval 2" := true;
-                    Rec.Modify();
-                end;
-            }
+            //     trigger OnAction()
+            //     begin
+            //         rec."Status Approval 1" := true;
+            //         rec."Status Approval 2" := true;
+            //         Rec.Modify();
+            //     end;
+            // }
         }
 
         addfirst(Category_New)

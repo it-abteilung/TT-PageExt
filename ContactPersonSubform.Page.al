@@ -19,6 +19,14 @@ Page 82000 "Contact Person Subform"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Company No."; Rec."Company No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Company Name"; Rec."Company Name")
+                {
+                    ApplicationArea = All;
+                }
                 field(Name; rec.Name)
                 {
                     ApplicationArea = Basic;
@@ -153,7 +161,7 @@ Page 82000 "Contact Person Subform"
             {
                 action(CreateNewContact)
                 {
-                    Caption = 'neue Person anlegen';
+                    Caption = 'Neue Person anlegen';
                     ApplicationArea = All;
 
                     trigger OnAction()
@@ -186,7 +194,13 @@ Page 82000 "Contact Person Subform"
         }
     }
 
+    trigger OnOpenPage()
+    begin
+    end;
+
     trigger OnAfterGetRecord()
+    var
+        Contact_L: Record Contact;
     begin
         NameOnFormat;
     end;
@@ -211,6 +225,8 @@ Page 82000 "Contact Person Subform"
         Text001: label 'R E C A L L   %1 ';
         Text002: label 'Please call %1. Phone: %2 - %3 extension: %4';
         NameEmphasize: Boolean;
+        ShowParentContact_G: Boolean;
+        ContactNo_G: Code[20];
 
     local procedure DisplayLevelOnAfterValidate()
     begin
@@ -224,6 +240,11 @@ Page 82000 "Contact Person Subform"
         end else begin
             NameEmphasize := false;
         end;
+    end;
+
+    procedure ShowParentContact(ShowParentContact_L: Boolean)
+    begin
+        ShowParentContact_G := ShowParentContact_L;
     end;
 }
 
