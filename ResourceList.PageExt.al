@@ -36,34 +36,33 @@ PageExtension 50027 pageextension50027 extends "Resource List"
 
     actions
     {
+        // addlast(Processing)
+        // {
+        //     action("Switch Job Responsible Person")
+        //     {
+        //         ApplicationArea = All;
+        //         Caption = 'Neue PN -> Verantwortliche Person';
 
-        addlast(Processing)
-        {
-            action("Switch Job Responsible Person")
-            {
-                ApplicationArea = All;
-                Caption = 'Neue PN -> Verantwortliche Person';
+        //         trigger OnAction()
+        //         var
+        //             Job_L: Record Job;
+        //             ResLedgerEntry: Record "Res. Ledger Entry";
+        //             asfd: Record "Job Ledger Entry";
+        //         begin
+        //             Job_L.SetRange("Person Responsible", '30184');
+        //             if Job_L.FindSet() then
+        //                 Job_L.ModifyAll("Person Responsible", '20015');
+        //             Clear(Job_L);
+        //             Job_L.SetRange(Verfasser, '30184');
+        //             if Job_L.FindSet() then
+        //                 Job_L.ModifyAll(Verfasser, '20015');
 
-                trigger OnAction()
-                var
-                    Job_L: Record Job;
-                    ResLedgerEntry: Record "Res. Ledger Entry";
-                    asfd: Record "Job Ledger Entry";
-                begin
-                    Job_L.SetRange("Person Responsible", '30184');
-                    if Job_L.FindSet() then
-                        Job_L.ModifyAll("Person Responsible", '20015');
-                    Clear(Job_L);
-                    Job_L.SetRange(Verfasser, '30184');
-                    if Job_L.FindSet() then
-                        Job_L.ModifyAll(Verfasser, '20015');
-
-                    ResLedgerEntry.SetRange("Resource No.", '30184');
-                    if ResLedgerEntry.FindSet() then
-                        ResLedgerEntry.ModifyAll("Resource No.", '20015');
-                end;
-            }
-        }
+        //             ResLedgerEntry.SetRange("Resource No.", '30184');
+        //             if ResLedgerEntry.FindSet() then
+        //                 ResLedgerEntry.ModifyAll("Resource No.", '20015');
+        //         end;
+        //     }
+        // }
     }
 }
 

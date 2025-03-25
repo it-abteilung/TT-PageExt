@@ -6373,6 +6373,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50045 - Control Ordner - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 1011421655 - Action 3565234926 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1558565962">
+          <source>Filter IT</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension pageextension50046 - Action Filter_IT - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 4030995717 - Action 2275209874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
           <source>Unternehmensgruppe</source>
           <note from="Developer" annotates="general" priority="2"></note>

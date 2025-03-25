@@ -882,6 +882,7 @@ Page 50025 "Projekt Soll/Ist Vergleich"
         LagermaterialIst: Decimal;
         LiquidityPlanning_Invoice: Decimal;
         LiquidityPlanning_PostedInvoice: Decimal;
+        JobPlanningLine_L: Record "Job Planning Line";
 
     local procedure ShowDetails()
     begin
