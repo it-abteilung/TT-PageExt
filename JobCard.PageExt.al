@@ -182,6 +182,18 @@ PageExtension 50150 JobCardExt extends "Job Card"
         {
             trigger OnAfterValidate()
             begin
+                if Rec.Status = Rec.Status::Planning then begin
+                    if Rec."Auftragseingang erfolgte am" = 0D then begin
+                        Error('Status kann nicht auf Planung gesetzt werden, wenn kein Auftragseingangsdatum vorhanden ist.');
+                    end;
+                end;
+
+                if Rec.Status = Rec.Status::"Vorkasse" then begin
+                    if NOT ((Rec."Job Type" = '20000') OR (Rec."Job Type" = '40000')) then begin
+                        Error('Der Status Vorkasse ist nur für die Projekttypen 20000 und 40000 erlaubt.');
+                    end;
+                end;
+
                 ChangeStatusUpdateSharePointJobStatus();
                 CurrPage.Update();
             end;
@@ -498,6 +510,11 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         ProjektNotizen.Montagegruppe3 := CopyStr(MontageGrp, 501, 250);
                         ProjektNotizen.Modify;
                     end;
+                }
+                field(SumProject; Rec.SumProject)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Summiert Unteraufträge';
                 }
             }
             group("Stundensätze/Zuschläge")
@@ -878,6 +895,32 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     end;
 
                     if Rec.Status = Rec.Status::Quote then begin
+                        if (Rec."Job Type" = '20000') OR (Rec."Job Type" = '40000') then begin
+                            Rec."Prev. Status" := Rec.Status;
+                            Rec."Status Modify Date" := Today;
+                            Rec.Status := Rec.Status::Vorkasse;
+                            Rec.Modify();
+                            ChangeStatusUpdateSharePointJobStatus();
+                            exit;
+                        end else begin
+                            if Rec."Auftragseingang erfolgte am" = 0D then begin
+                                Error('Status kann nicht auf Planung gesetzt werden, wenn kein Auftragseingangsdatum vorhanden ist.');
+                            end;
+
+                            Rec."Prev. Status" := Rec.Status;
+                            Rec."Status Modify Date" := Today;
+                            Rec.Status := Rec.Status::Planning;
+                            Rec.Modify();
+                            ChangeStatusUpdateSharePointJobStatus();
+                            exit;
+                        end;
+                    end;
+
+                    if Rec.Status = Rec.Status::Vorkasse then begin
+                        if Rec."Auftragseingang erfolgte am" = 0D then begin
+                            Error('Status kann nicht auf Planung gesetzt werden, wenn kein Auftragseingangsdatum vorhanden ist.');
+                        end;
+
                         Rec."Prev. Status" := Rec.Status;
                         Rec."Status Modify Date" := Today;
                         Rec.Status := Rec.Status::Planning;
@@ -917,6 +960,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         end;
                     end;
                     // G-ERP.RS 2021-02-01 - 01
+
                 end;
             }
             action("<Action1000000028>")
@@ -956,6 +1000,17 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         Rec.Modify();
                         ChangeStatusUpdateSharePointJobStatus();
                         exit;
+                    end;
+
+                    if Rec.Status = Rec.Status::Planning then begin
+                        if (Rec."Job Type" = '20000') OR (Rec."Job Type" = '40000') then begin
+                            Rec."Prev. Status" := Rec.Status;
+                            Rec."Status Modify Date" := Today;
+                            Rec.Status := Rec.Status::Vorkasse;
+                            Rec.Modify();
+                            ChangeStatusUpdateSharePointJobStatus();
+                            exit;
+                        end;
                     end;
                 end;
             }
@@ -1003,6 +1058,23 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     Rec."Prev. Status" := Rec.Status;
                     Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::"Gewährleistung";
+                    Rec.Modify();
+                    ChangeStatusUpdateSharePointJobStatus();
+                end;
+            }
+            action("Status_Advanced_Payment")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Status Vorkasse';
+                Promoted = true;
+                PromotedCategory = Process;
+                Enabled = (Rec."Job Type" = '20000') OR (Rec."Job Type" = '40000');
+
+                trigger OnAction()
+                begin
+                    Rec."Prev. Status" := Rec.Status;
+                    Rec."Status Modify Date" := Today;
+                    Rec.Status := Rec.Status::"Vorkasse";
                     Rec.Modify();
                     ChangeStatusUpdateSharePointJobStatus();
                 end;
@@ -1512,13 +1584,14 @@ PageExtension 50150 JobCardExt extends "Job Card"
         ReservationEntry.Insert();
     end;
 
-
-
     procedure ChangeStatusUpdateSharePointJobStatus()
     var
         WorkflowContext_L: Record "Workflow Approval Data";
     begin
-        if WorkflowContext_L.Get(Rec.SystemId, 'ChangeSharePointFolderJobStatus') then begin
+
+        WorkflowContext_L.SetRange("Record Id", Rec.SystemId);
+        // WorkflowContext_L.SetRange("Workflow Context", 'ChangeSharePointFolderJobStatus');
+        if WorkflowContext_L.FindFirst() then begin
             WorkflowContext_L.Delete();
         end;
         if (Rec."No." <> '') AND (Rec.Description <> '') then begin

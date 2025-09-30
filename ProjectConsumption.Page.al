@@ -292,12 +292,18 @@ Page 50039 "Project Consumption"
                                         Error(ERR_ItemTtTypeNotFound, Item_l."TT Type", ProjectConsumption_l.TableCaption);
                                 end;
                                 //G-ERP.RS 2021-02-04 - 02
+                                // if Item_l."No. Series" = 'PM' then begin
+                                //     ProjectConsumption_l."Last Direct Cost" := 0;
+                                //     ProjectConsumption_l."Unit Price" := 0;
+                                //     ProjectConsumption_l."Selling Price Project" := 0;
+                                // end else begin
                                 ProjectConsumption_l."Last Direct Cost" := Item_l."Last Direct Cost";
                                 ProjectConsumption_l."Unit Price" := Item_l."Unit Price";
                                 //G-ERP.RS 2021-09-29 +
                                 //ProjectConsumption_l."Selling Price Project" := Item_l."Unit Price"; //G-ERP.RS 2021-03-30 06
                                 ProjectConsumption_l."Selling Price Project" := Item_l."Last Direct Cost";
                                 //G-ERP.RS 2021-09-10 -
+                                // end;
 
                                 //G-ERP.RS 2021-03-09 + 04
                                 ProjectConsumption_l.Employee := WarehouseEntry_l.Employee;

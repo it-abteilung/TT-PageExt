@@ -3,7 +3,7 @@ Page 50060 Serienanfragen
     DeleteAllowed = false;
     ModifyAllowed = false;
     PageType = Worksheet;
-    PromotedActionCategories = 'New,Process,Report,Segmentation';
+    // PromotedActionCategories = 'New,Process,Report,Segmentation';
     SourceTable = "Purchase Header";
 
     layout
@@ -27,15 +27,30 @@ Page 50060 Serienanfragen
 
     actions
     {
+        area(Promoted)
+        {
+            group(Start)
+            {
+                actionref(Erstellen1; Erstellen) { }
+            }
+            group(Bericht)
+            {
+                actionref(MailSenden; "Mail senden") { }
+                actionref(MailSendenAlternative; "Mail senden Alternative") { }
+            }
+            group(Segmentierung)
+            {
+                actionref(KreditorNachSegmentierung; "Kreditor nach Segmentierung") { }
+                actionref(ErstellenNachSegmentierung; "Erstellen nach Segmentierung") { }
+            }
+            actionref(KreditorNachPosten; "Kreditor nach Posten") { }
+        }
         area(processing)
         {
             action(Erstellen)
             {
                 ApplicationArea = Basic;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                PromotedOnly = true;
+                Image = CreateDocument;
 
                 trigger OnAction()
                 var
@@ -156,10 +171,6 @@ Page 50060 Serienanfragen
                 Caption = 'Serienanfragen Mail';
                 Ellipsis = true;
                 Image = Print;
-                Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
-                PromotedOnly = true;
 
                 trigger OnAction()
                 var
@@ -181,10 +192,6 @@ Page 50060 Serienanfragen
                 Caption = 'Serienanfragen Mail (Alternative)';
                 Ellipsis = true;
                 Image = Print;
-                Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
-                PromotedOnly = true;
 
                 trigger OnAction()
                 var
@@ -205,9 +212,6 @@ Page 50060 Serienanfragen
                 ApplicationArea = Basic;
                 Caption = 'Kreditor nach Segmentierung';
                 Image = Vendor;
-                Promoted = true;
-                PromotedCategory = Category4;
-                PromotedIsBig = true;
 
                 trigger OnAction()
                 var
@@ -270,15 +274,94 @@ Page 50060 Serienanfragen
                     end;
                 end;
             }
+
+
+
+
+            action("Kreditor nach Posten")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Kreditor nach Posten';
+                Image = VendorLedger;
+
+                trigger OnAction()
+                var
+                    VendorSerienanfrage: Record "Vendor - Serienanfrage";
+                    VendorSerienanfrage_Find: Record "Vendor - Serienanfrage";
+                    LineNo: Integer;
+
+                    Item_L: Record Item;
+                    VendorNoList_L: List of [Code[20]];
+                    VendorNo_L: Code[20];
+                    Vendor_L: Record Vendor;
+                    PurchaseHeader_L: Record "Purchase Header";
+                    PurchaseLine_L: Record "Purchase Line";
+                    PurchaseLine2_L: Record "Purchase Line";
+                    PurchInvHeader_L: Record "Purch. Inv. Header";
+                    PurchInvLine_L: Record "Purch. Inv. Line";
+                begin
+                    //Ermittlung welche Segmentierungen in der Anfrage vorhanden sind.
+                    PurchaseLine2_L.SetRange("Document Type", PurchaseLine."Document type"::Quote);
+                    PurchaseLine2_L.SetRange("Document No.", Rec."No.");
+                    PurchaseLine2_L.SetRange(Type, PurchaseLine.Type::Item);
+
+                    if PurchaseLine2_L.FindSet() then begin
+                        repeat
+                            if Item_L.Get(PurchaseLine2_L."No.") then begin
+                                Clear(PurchaseLine_L);
+                                PurchaseLine_L.SetRange("No.", Item_L."No.");
+                                if PurchaseLine_L.FindSet() then begin
+                                    repeat
+                                        if PurchaseHeader_L.Get(PurchaseLine_L."Document Type", PurchaseLine_L."Document No.") then begin
+                                            if NOT VendorNoList_L.Contains(PurchaseHeader_L."Buy-from Vendor No.") then
+                                                VendorNoList_L.Add(PurchaseHeader_L."Buy-from Vendor No.");
+                                        end;
+                                    until PurchaseLine_L.Next() = 0;
+                                end;
+
+                                Clear(PurchInvLine_L);
+                                PurchInvLine_L.SetRange("No.", Item_L."No.");
+                                if PurchInvLine_L.FindSet() then begin
+                                    repeat
+                                        if PurchInvHeader_L.Get(PurchInvLine_L."Document No.") then begin
+                                            if NOT VendorNoList_L.Contains(PurchInvHeader_L."Buy-from Vendor No.") then
+                                                VendorNoList_L.Add(PurchInvHeader_L."Buy-from Vendor No.");
+                                        end;
+                                    until PurchInvLine_L.Next() = 0;
+                                end;
+                            end;
+                        until (PurchaseLine2_L.Next() = 0);
+                    end;
+
+                    //Kreditoren zur Serienanfrage hinzufügen
+                    foreach VendorNo_L in VendorNoList_L do begin
+                        LineNo += 10000;
+
+                        VendorSerienanfrage_Find.SetRange(Serienanfragenr, Rec."No.");
+                        VendorSerienanfrage_Find.SetRange("No.", VendorNo_L);
+                        if not VendorSerienanfrage_Find.FindSet() then begin
+                            VendorSerienanfrage_Find.SetRange("No.");
+                            VendorSerienanfrage.Serienanfragenr := Rec."No.";
+                            VendorSerienanfrage.Validate("No.", VendorNo_L);
+                            VendorSerienanfrage."Line No." := LineNo;
+                            if VendorSerienanfrage.Insert() then
+                                LineNo += 10000;
+                        end else begin
+                            VendorSerienanfrage_Find.SetRange("No.");
+                        end;
+
+                    end;
+                end;
+            }
+
+
+
+
             action("Erstellen nach Segmentierung")
             {
                 ApplicationArea = Basic;
                 Caption = 'Erstellen nach Segmentierung';
                 Image = CreateDocument;
-                Promoted = true;
-                PromotedCategory = Category4;
-                PromotedIsBig = true;
-                PromotedOnly = true;
 
                 trigger OnAction()
                 var
@@ -412,26 +495,33 @@ Page 50060 Serienanfragen
         VendorName := '';
 
         l_Vendor.Get(l_PurchaseHeader."Buy-from Vendor No.");
-        if StrPos(l_Vendor."Search Name", ' ') <> 0 then
-            VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrPos(l_Vendor."Search Name", ' ') - 1))
+        // if StrPos(l_Vendor."Search Name", ' ') <> 0 then
+        //     VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrPos(l_Vendor."Search Name", ' ') - 1))
+        // else
+        //     VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrLen(l_Vendor."Search Name")));
+
+        // CN 03.04.2025 Einkauf möchte Kreditorennamen anstatt Suchbegriff
+        if StrPos(l_Vendor."Name", ' ') <> 0 then
+            VendorName := Lowercase(CopyStr(l_Vendor."Name", 1, StrPos(l_Vendor."Name", ' ') - 1))
         else
-            VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrLen(l_Vendor."Search Name")));
+            VendorName := Lowercase(CopyStr(l_Vendor."Name", 1, StrLen(l_Vendor."Name")));
 
         Name := Lowercase(l_PurchaseHeader."Job No.") + '-' + l_PurchaseHeader."No." + '-' +
-                VendorName + '.pdf';
+                        VendorName + '.pdf';
 
         l_PurchaseHeader2.SetRange("No.", l_PurchaseHeader."No.");
         recRef.GetTable(l_PurchaseHeader2);
         tmpBlob.CreateOutStream(OutStr);
         tmpBlob.CreateOutStream(OutStrMailBody);
-        if Report.SaveAs(report::"TT Purchase - Quote RTC", '', format::Pdf, OutStr, recRef) then begin
+        if Report.SaveAs(report::"TT Purchase - Quote RTC", '', format::Html, OutStr, recRef) then begin
             tmpBlob.CreateInStream(InStr);
             txtB64 := cnv64.ToBase64(InStr, true);
         end;
-        if Report.SaveAs(Report::"Email Body Text PurchQuote", '', format::Html, OutStrMailBody, recRef) then begin
+        if Report.SaveAs(Report::"Email Body Text PurchQuote", '', format::Word, OutStrMailBody, recRef) then begin
             tmpBlob.CreateInStream(InStrMailBody);
             InStrMailBody.ReadText(Body);
         end;
+
         if l_Cont.Get(l_PurchaseHeader."Buy-from Contact Ansprech") then begin
             if l_Cont."E-Mail" = '' then begin
                 l_Cont.Get(l_PurchaseHeader."Buy-from Contact No.");
@@ -443,7 +533,7 @@ Page 50060 Serienanfragen
         else
             MailMsg.Create(l_Cont."E-Mail", 'Unsere Anfrage ' + l_PurchaseHeader."Job No." + '/' + l_PurchaseHeader."No.", Body, true);
         MailMsg.AddAttachment(Name, 'pdf', txtB64);
-        Mail.OpenInEditor(MailMsg);
+        Mail.OpenInEditor(MailMsg, Enum::"Email Scenario"::"Purchase Quote");
     end;
 
     procedure OpenEditor_Alt(L_PurchaseHeader: Record "Purchase Header")
@@ -481,10 +571,16 @@ Page 50060 Serienanfragen
         VendorName := '';
 
         l_Vendor.Get(l_PurchaseHeader."Buy-from Vendor No.");
-        if StrPos(l_Vendor."Search Name", ' ') <> 0 then
-            VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrPos(l_Vendor."Search Name", ' ') - 1))
+        // if StrPos(l_Vendor."Search Name", ' ') <> 0 then
+        //     VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrPos(l_Vendor."Search Name", ' ') - 1))
+        // else
+        //     VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrLen(l_Vendor."Search Name")));
+
+        // CN 03.04.2025 Einkauf möchte Kreditorennamen anstatt Suchbegriff
+        if StrPos(l_Vendor."Name", ' ') <> 0 then
+            VendorName := Lowercase(CopyStr(l_Vendor."Name", 1, StrPos(l_Vendor."Name", ' ') - 1))
         else
-            VendorName := Lowercase(CopyStr(l_Vendor."Search Name", 1, StrLen(l_Vendor."Search Name")));
+            VendorName := Lowercase(CopyStr(l_Vendor."Name", 1, StrLen(l_Vendor."Name")));
 
         Name := Lowercase(l_PurchaseHeader."Job No.") + '-' + l_PurchaseHeader."No." + '-' +
                 VendorName + '.pdf';

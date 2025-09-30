@@ -1,4 +1,6 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0424, AW0006 // ForNAV settings
+// Verwendet von page 50044 "Package Tree List" - Teil einer Zeichenkette
+// Verwendet von Item Card als Part
 Page 50073 "Artikel-Chargennr"
 {
     DeleteAllowed = false;
@@ -21,6 +23,11 @@ Page 50073 "Artikel-Chargennr"
                 field("Location Code"; Rec."Location Code")
                 {
                     ApplicationArea = Basic;
+                }
+                field("Variante"; Rec."Variant Code")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Variante';
                 }
                 field("Lot No."; Rec."Lot No.")
                 {

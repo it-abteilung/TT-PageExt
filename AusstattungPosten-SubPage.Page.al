@@ -1,4 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0424, AW0006 // ForNAV settings
+
+// Verwendet von UserSetup, aber nicht wirklich notwendig.
+// Verwendet von Page 50004 "Material-/Werkzeug-Rücknahme", aber wird aktuell nicht verwendet
 Page 50003 "AusstattungPosten-SubPage"
 {
     DeleteAllowed = false;

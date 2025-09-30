@@ -53,6 +53,56 @@ PageExtension 50068 pageextension50068 extends "Purchase Order List"
         }
     }
 
+    actions
+    {
+        addafter("Co&mments")
+        {
+            action("JobTask=1")
+            {
+                ApplicationArea = Basic;
+                Caption = 'JobTask=1';
+
+                trigger OnAction()
+                var
+                    PurchaseHeader_L: Record "Purchase Header";
+                    PurchaseLine_L: Record "Purchase Line";
+                    Job_L: Record Job;
+                    JobTask_L: Record "Job Task";
+                begin
+                    PurchaseHeader_L.SetFilter("No.", '>%1', '060000');
+                    PurchaseHeader_L.SetRange("Document Type", PurchaseHeader_L."Document Type"::Order);
+                    if PurchaseHeader_L.FindSet() then begin
+                        Message('%1', PurchaseHeader_L.Count);
+                        repeat
+                            if NOT JobTask_L.Get(PurchaseHeader_L."Job No.", '1') then begin
+                                JobTask_L.Init();
+                                JobTask_L."Job No." := PurchaseHeader_L."Job No.";
+                                JobTask_L."Job Task No." := '1';
+                                JobTask_L."Job Task Type" := "Job Task Type"::Posting;
+                                JobTask_L.Insert(false);
+                            end;
+
+                            PurchaseLine_L.SetRange("Document No.", PurchaseHeader_L."No.");
+                            PurchaseLine_L.SetRange("Document Type", PurchaseHeader_L."Document Type");
+
+                            if PurchaseLine_L.FindSet() then begin
+                                repeat
+                                    if PurchaseLine_L.Type = PurchaseLine_L.Type::Item then
+                                        PurchaseLine_L."Job Task No." := '1'
+                                    else
+                                        PurchaseLine_L."Job Task No." := '';
+                                    PurchaseLine_L.Modify();
+                                until PurchaseLine_L.Next() = 0;
+                            end;
+
+                        until PurchaseHeader_L.Next() = 0;
+                    end;
+                    Message('Ende');
+                end;
+            }
+        }
+    }
+
     var
         DelieveryStatus: Text[100];
         FullDeliveredDate: Date;

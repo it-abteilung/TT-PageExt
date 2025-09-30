@@ -19,6 +19,11 @@ pageextension 50201 "JobRoleCenterExt" extends "Job Project Manager RC"
                 ApplicationArea = all;
                 Visible = true;
             }
+            part(JobMarineAdvPaymentPart; JobMarineAdvPaymentPart)
+            {
+                ApplicationArea = all;
+                Visible = true;
+            }
         }
         addafter(ApprovalsActivities)
         {

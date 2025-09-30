@@ -27,16 +27,17 @@ PageExtension 50007 pageextension50007 extends "Vendor Card"
     }
     actions
     {
-        addlast(Coupling)
+        addafter(Category_Report)
+        {
+            actionref(Action_Segmentation; Segmentation) { }
+        }
+        addlast(processing)
         {
             action(Segmentation)
             {
                 Caption = 'Segmentierung';
-                ApplicationArea = Basic;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                PromotedOnly = true;
+                ApplicationArea = All;
+                Image = ServiceItemGroup;
 
                 trigger OnAction()
                 var
@@ -70,4 +71,3 @@ PageExtension 50007 pageextension50007 extends "Vendor Card"
                 exit(false);
     end;
 }
-

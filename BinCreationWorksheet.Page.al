@@ -20,7 +20,7 @@ pageextension 50004 "BinCreationWorksheet" extends "Bin Creation Worksheet"
                     BinCreationWorksheetLine: Record "Bin Creation Worksheet Line";
                     SelectionFilterManagement: Codeunit SelectionFilterManagement;
                     RecRef: RecordRef;
-                    NewDescription: Text[20];
+                    NewDescription: Text[100];
                 begin
                     if BinCreationWorksheetDialog.RunModal() = Action::OK then begin
                         NewDescription := BinCreationWorksheetDialog.GetNewDescription();

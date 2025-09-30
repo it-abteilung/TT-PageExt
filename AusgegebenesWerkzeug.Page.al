@@ -2,6 +2,8 @@ Page 50041 "Ausgegebenes Werkzeug"
 {
     // ACO1  DAP  13.09.2021  Reset Filter OnValidate.
 
+    // Source Table hat keine neuen Einträge seit der Umstellung. Für alle Einträge gilt SystemCreatedAt = '0DT'
+
     PageType = List;
     SourceTable = Ausstattung_Posten;
     SourceTableView = where(Offen = filter(true));

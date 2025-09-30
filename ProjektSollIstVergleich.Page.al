@@ -546,14 +546,18 @@ Page 50025 "Projekt Soll/Ist Vergleich"
         JobLedgerEntry.SetRange(Type);
         JobLedgerEntry.SetRange("Source Code", '');                     //G-ERP.RS 2019-08-12 Anfrage#233374
         JobLedgerEntry.SetFilter("Source Code", '%1|%2', '', 'PROJBUCHBL'); //G-ERP.RS 2019-08-12
-        //JobLedgerEntry.CALCSUMS("Total Cost (LCY)");                                            //G-ERP.RS 2019-08-20
-        //LagermaterialIst := JobLedgerEntry."Total Cost (LCY)";                                  //G-ERP.RS 2019-08-20
-        //JobLedgerEntry.CALCSUMS("Direct Unit Cost (LCY)",Quantity);                             //G-ERP.RS 2019-08-20
-        //LagermaterialIst := JobLedgerEntry."Direct Unit Cost (LCY)" * JobLedgerEntry.Quantity;  //G-ERP.RS 2019-08-20
+                                                                            //JobLedgerEntry.CALCSUMS("Total Cost (LCY)");                                            //G-ERP.RS 2019-08-20
+                                                                            //LagermaterialIst := JobLedgerEntry."Total Cost (LCY)";                                  //G-ERP.RS 2019-08-20
+                                                                            //JobLedgerEntry.CALCSUMS("Direct Unit Cost (LCY)",Quantity);                             //G-ERP.RS 2019-08-20
+                                                                            //LagermaterialIst := JobLedgerEntry."Direct Unit Cost (LCY)" * JobLedgerEntry.Quantity;  //G-ERP.RS 2019-08-20
+
+        //Versuch
+        JobLedgerEntry.SetFilter(Quantity, '<> 0');
         if JobLedgerEntry.FindSet() then
             repeat
-                if (JobLedgerEntry."Direct Unit Cost (LCY)" <> 0) and
-                   (JobLedgerEntry.Quantity <> 0) then
+                // if (JobLedgerEntry."Direct Unit Cost (LCY)" <> 0) and
+                //    (JobLedgerEntry.Quantity <> 0) then
+                if (JobLedgerEntry."Direct Unit Cost (LCY)" <> 0) then
                     LagermaterialIst += JobLedgerEntry."Direct Unit Cost (LCY)" * JobLedgerEntry.Quantity;
             until (JobLedgerEntry.Next() = 0);
         //Arbeitsstd. geleistet ---
@@ -575,6 +579,7 @@ Page 50025 "Projekt Soll/Ist Vergleich"
         Arbeitsstunden_EIGEN := JobLedgerEntry.Quantity;
         if JobPlanningLine2.Quantity <> 0 then
             Lohnkosten_IST := JobLedgerEntry.Quantity * JobPlanningLine2.Lohnkosten / JobPlanningLine2.Quantity;
+
         //Arbeitsstunden_EIGEN ---
 
         //Arbeitsstunden_FREMD +++

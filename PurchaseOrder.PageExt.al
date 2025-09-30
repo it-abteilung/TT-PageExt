@@ -85,14 +85,14 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
                 ApplicationArea = Basic;
             }
         }
-        addafter("Ship-to Code")
-        {
-            field("Ship-to Name 2"; Rec."Ship-to Name 2")
-            {
-                ApplicationArea = Basic;
-                Caption = 'Name 2';
-            }
-        }
+        // addafter("Ship-to Code")
+        // {
+        //     field("Ship-to Name 2"; Rec."Ship-to Name 2")
+        //     {
+        //         ApplicationArea = Basic;
+        //         Caption = 'Name 2';
+        //     }
+        // }
         addfirst(Control71)
         {
             field("Pay-to Vendor No."; Rec."Pay-to Vendor No.")
@@ -112,6 +112,8 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
             }
         }
 
+        //TODO
+        // remove for 27.0.38460.39761
         addafter("Pay-to Name")
         {
             field("Pay-to Name 2"; Rec."Pay-to Name 2")
@@ -163,6 +165,8 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
                 }
             }
         }
+
+        // moveafter("Ship-to Code","Ship-to Name 2");
     }
     actions
     {
@@ -191,6 +195,7 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
                     GERW: Codeunit 50001;
                     ToFile2: Text[250];
                     R50000: Report 50000;
+                    Report: Report "Get Source Documents";
                 begin
                     MailErstellen(false);
                 end;
@@ -327,6 +332,20 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
             Message('Unter "TT Fehler im Wareneingang" wurde ein offener Eintrag für %1 gesetzt, eine Lieferung wird noch erwartet.', Rec."No.");
     end;
 
+    trigger OnAfterGetCurrRecord()
+    var
+        JobTask: Record "Job Task";
+    begin
+        if NOT JobTask.Get(Rec."Job No.", '1') then begin
+            JobTask.Init();
+            JobTask."Job No." := Rec."Job No.";
+            JobTask."Job Task No." := '1';
+            JobTask."Job Task Type" := "Job Task Type"::Posting;
+            JobTask.Insert(false);
+        end;
+    end;
+
+
     local procedure MailErstellen(AnzeigeSchiff: Boolean)
     var
         l_PurchaseHeader: Record "Purchase Header";
@@ -404,7 +423,8 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
         else
             MailMsg.Create(l_Cont."E-Mail", 'Unsere Bestellung ' + Rec."Job No." + '/' + Rec."No." + ObjectName, Body, true);
         MailMsg.AddAttachment(Name, 'pdf', txtB64);
-        Mail.OpenInEditor(MailMsg);
+        MailMsg.SetRecipients(Enum::"Email Recipient Type"::Bcc, 'purchasing@turbotechnik.com');
+        Mail.OpenInEditor(MailMsg, Enum::"Email Scenario"::"Purchase Order");
         // Mail.OpenInEditor(MailMsg) funktioniert nicht 09.04.2024 CN
         // Prozedur ist wieder funktionsfähig 17.04.2024 CN
         // Clear(MailEditor);
@@ -492,6 +512,9 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
         MailMsg.AddAttachment(Name, 'pdf', txtB64);
         Clear(MailEditor);
         Commit();
+
+        MailMsg.SetRecipients(Enum::"Email Recipient Type"::Bcc, 'purchasing@turbotechnik.com');
+
         MailEditor.SetMail(Mail);
         MailEditor.SetMailMsg(MailMsg);
         MailEditor.RunModal();
@@ -509,7 +532,7 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
         l_Vendor: Record Vendor;
     // R50000: Report 50000;
     begin
-        // CurrPage.SetSelectionFilter(l_PurchaseHeader);
+        // CurrPage.SetSelectionFilter(l_PurchaseHeader);^^^^^^
         // l_Vendor.Get("Buy-from Vendor No.");
         // Name := Lowercase("Job No.") + '-' + "No." + '-' +
         //         Lowercase(CopyStr(l_Vendor."Search Name",1,StrPos(l_Vendor."Search Name",' ')))

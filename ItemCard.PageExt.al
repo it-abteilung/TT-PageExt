@@ -222,6 +222,5 @@ PageExtension 50010 pageextension50010 extends "Item Card"
     begin
         CurrPage.Seriennummern.Page.SetVisibleSpalten(Rec."No.");
     end;
-
 }
 

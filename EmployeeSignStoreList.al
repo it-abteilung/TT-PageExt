@@ -24,7 +24,7 @@ page 50102 "Employee Sign Store List"
                     begin
                         EmployeeSignStore.SetRange("User Name", Rec."User Name");
                         if EmployeeSignStore.FindFirst() then
-                            Error('Ex existiert bereits ein Eintrag für diesen Benutzer.');
+                            Error('Es existiert bereits ein Eintrag für diesen Benutzer.');
                     end;
                 }
                 field(Signature; Rec.Signature)

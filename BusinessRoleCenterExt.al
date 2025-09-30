@@ -21,6 +21,11 @@ pageextension 50200 "BusinessRoleCenterExt" extends "Business Manager Role Cente
                 ApplicationArea = all;
                 Visible = false;
             }
+            part(JobMarineAdvPaymentPart; JobMarineAdvPaymentPart)
+            {
+                ApplicationArea = all;
+                Visible = false;
+            }
         }
         modify("Job Queue Tasks Activities")
         {

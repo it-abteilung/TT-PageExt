@@ -30,6 +30,13 @@ PageExtension 50019 pageextension50019 extends "Purchase Quote"
             field("Keine Angebotsabgabe"; Rec."Keine Angebotsabgabe")
             {
                 ApplicationArea = Basic;
+
+                trigger OnValidate()
+                begin
+                    If Rec."Keine Angebotsabgabe" <> xRec."Keine Angebotsabgabe" then
+                        if Rec."Keine Angebotsabgabe" then
+                            Message('Achtung: Es wurde ausgewählt, dass keine Angebotsabgabe erfolgen soll.\\Die Freigabe wird die Mengenangaben in den Einkaufszeilen ignorieren.');
+                end;
             }
             field("Your Reference"; Rec."Your Reference")
             {

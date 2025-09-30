@@ -1,3 +1,6 @@
+// Aufgerufen von Item Card / Item List
+// Verhält sich wie ein Artikel Buch.-Blatt, aber reduziert die notwendigen Eingaben für eine Buchung
+
 page 50097 "Adjust Warehouse Item Quantity"
 {
     ApplicationArea = All;

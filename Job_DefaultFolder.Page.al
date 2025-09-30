@@ -27,5 +27,7 @@ Page 50036 Job_DefaultFolder
     actions
     {
     }
-}
 
+    var
+        JobTask: Page "Job Task Lines Subform";
+}

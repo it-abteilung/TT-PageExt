@@ -11,6 +11,11 @@ pageextension 50106 "Item Journal" extends "Item Journal"
                 Visible = false;
             }
         }
+        modify("Variant Code")
+        {
+            Visible = true;
+        }
+        moveafter("Bin Code"; "Variant Code")
     }
 
     trigger OnAfterGetRecord()
