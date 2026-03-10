@@ -9,7 +9,7 @@ page 50081 "Metal Sheets"
     Editable = false;
     PageType = List;
     CardPageId = "Metal Sheet";
-    UsageCategory = Lists;
+    UsageCategory = None;
     SourceTable = "Metal Sheet";
     AdditionalSearchTerms = 'Zuschnitt, Blech, Bleche';
 

@@ -15,7 +15,7 @@ Page 82000 "Contact Person Subform"
         {
             repeater(Control1)
             {
-                field("No."; rec."No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
@@ -66,6 +66,16 @@ Page 82000 "Contact Person Subform"
                         Page.RunModal(Page::"Contact Person Card", Rec);
                         CurrPage.Update(true);
                     end;
+                }
+                field("Job Title"; Rec."Job Title")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Funktion';
+                }
+                field("Name 3"; Rec."Name 3")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Suchbegriff';
                 }
                 field("Extension No."; rec."Extension No.")
                 {
@@ -150,6 +160,7 @@ Page 82000 "Contact Person Subform"
                         DisplayLevelOnAfterValidate;
                     end;
                 }
+
             }
         }
     }

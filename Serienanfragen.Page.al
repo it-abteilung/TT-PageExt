@@ -481,6 +481,7 @@ Page 50060 Serienanfragen
         OutStrMailBody: OutStream;
         Body: Text;
         VendorName: Text;
+        IndexOfHTML_L: Integer;
     begin
         Clear(tmpBlob);
         Clear(InStr);
@@ -513,21 +514,31 @@ Page 50060 Serienanfragen
         recRef.GetTable(l_PurchaseHeader2);
         tmpBlob.CreateOutStream(OutStr);
         tmpBlob.CreateOutStream(OutStrMailBody);
-        if Report.SaveAs(report::"TT Purchase - Quote RTC", '', format::Html, OutStr, recRef) then begin
+        if Report.SaveAs(report::"TT Purchase - Quote RTC", '', format::Pdf, OutStr, recRef) then begin
             tmpBlob.CreateInStream(InStr);
             txtB64 := cnv64.ToBase64(InStr, true);
         end;
-        if Report.SaveAs(Report::"Email Body Text PurchQuote", '', format::Word, OutStrMailBody, recRef) then begin
+        if Report.SaveAs(Report::"Email Body Text PurchQuote", '', format::Html, OutStrMailBody, recRef) then begin
             tmpBlob.CreateInStream(InStrMailBody);
             InStrMailBody.ReadText(Body);
         end;
-
         if l_Cont.Get(l_PurchaseHeader."Buy-from Contact Ansprech") then begin
             if l_Cont."E-Mail" = '' then begin
                 l_Cont.Get(l_PurchaseHeader."Buy-from Contact No.");
             end;
         end else
             l_Cont.Get(l_PurchaseHeader."Buy-from Contact No.");
+
+        // Body adds a weird string at the end, we need to remove it
+        IndexOfHTML_L := 0;
+        IndexOfHTML_L := Body.IndexOf('</html>');
+        if IndexOfHTML_L <> 0 then begin
+            // add length of </html>, so we cut the string right after it (one-based index)
+            IndexOfHTML_L += 6;
+            if IndexOfHTML_L <= StrLen(Body) then
+                Body := Body.Substring(1, IndexOfHTML_L);
+        end;
+
         if l_PurchaseHeader."Language Code" = 'ENU' then
             MailMsg.Create(l_Cont."E-Mail", 'Our Inquiry ' + l_PurchaseHeader."Job No." + '/' + l_PurchaseHeader."No.", Body, true)
         else

@@ -14,13 +14,6 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
         }
         addafter("Sell-to Customer Name")
         {
-            field("Sell-to Customer Name 2"; Rec."Sell-to Customer Name 2")
-            {
-                ApplicationArea = Basic;
-                Editable = NOT HasAddressOnCustomer;
-
-                ToolTip = 'Der Wert wird nicht auf dem Bericht gedruckt.';
-            }
             field(Salutation; Rec.Salutation)
             {
                 ApplicationArea = Basic;
@@ -85,6 +78,13 @@ PageExtension 50014 pageextension50014 extends "Sales Quote"
                 ApplicationArea = Basic;
             }
         }
+        // modify("Sell-to Customer Name 2")
+        // {
+        //     ApplicationArea = Basic;
+        //     Editable = NOT HasAddressOnCustomer;
+
+        //     ToolTip = 'Der Wert wird nicht auf dem Bericht gedruckt.';
+        // }
     }
     actions
     {

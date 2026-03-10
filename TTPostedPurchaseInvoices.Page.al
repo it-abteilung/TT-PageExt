@@ -502,7 +502,6 @@ Page 50033 "TT Posted Purchase Invoices"
     var
         WarehouseEntry: Record "Warehouse Entry";
     begin
-
         AmountLCY := 0;
         /*
         VendLedgEntry.SETCURRENTKEY("Document No.");

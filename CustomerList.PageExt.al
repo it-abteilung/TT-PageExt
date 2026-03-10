@@ -27,11 +27,13 @@ PageExtension 50006 pageextension50006 extends "Customer List"
                 Caption = 'Ort';
             }
         }
+
         modify("Post Code")
         {
             ApplicationArea = Basic;
             Visible = true;
         }
+
     }
     actions
     {
@@ -77,5 +79,10 @@ PageExtension 50006 pageextension50006 extends "Customer List"
         }
         moveafter(ReportAgedAccountsReceivable; General)
     }
+
+    trigger OnAfterGetRecord()
+    begin
+
+    end;
 }
 

@@ -33,7 +33,16 @@ PageExtension 50024 pageextension50024 extends "Purchase Order Subform"
                 //G-ERP.RS 2019-08-21 --- Anfrage#233671
             end;
         }
-
+        modify("Invoice Discount Amount")
+        {
+            Visible = false;
+            Enabled = false;
+        }
+        modify("Invoice Disc. Pct.")
+        {
+            Visible = false;
+            Enabled = false;
+        }
         addafter("Line No.")
         {
             field(Baugruppe; Rec.Baugruppe)
@@ -509,7 +518,7 @@ PageExtension 50024 pageextension50024 extends "Purchase Order Subform"
             CurrPage.SaveRecord;
             L_NewLine := true;
         end;
-        // Commit;
+        // Commit
         // L_RecRef.GetTable(Rec);
         // if (not L_TextEdit.EditTextLines(L_RecRef,
         //                        'Description',

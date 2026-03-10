@@ -34,13 +34,18 @@ page 50202 JobMarineOpenPart
                 {
                     ApplicationArea = Basic;
                     Caption = 'Gesamtpreis inkl. Nachlass';
-                    Visible = true;
+                    Visible = false;
                 }
                 field(Objektname; Rec.Objektname)
                 {
                     ApplicationArea = All;
                     Caption = 'Objekt';
                     Visible = false;
+                }
+                field("Angebotsabgabe bis"; Rec."Angebotsabgabe bis")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Angebotsabgabe bis';
                 }
             }
         }

@@ -16,8 +16,11 @@ PageExtension 50001 pageextension50001 extends "Company Information"
             {
                 ApplicationArea = Basic;
             }
+            field("Managing Director"; Rec."Managing Director")
+            {
+                ApplicationArea = Basic;
+            }
         }
     }
-
 }
 

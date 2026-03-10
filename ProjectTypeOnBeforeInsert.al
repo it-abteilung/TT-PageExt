@@ -15,6 +15,7 @@ codeunit 50010 ProjectTypeOnBeforeInsertJob
                 JobsSetup.TESTFIELD("Job Nos.");
                 // NoSeriesMgt.InitSeries(JobsSetup."Job Nos.", xJob."No. Series", 0D, Job."No.", Job."No. Series");
                 Job."No." := NoSeries.GetNextNo(JobsSetup."Job Nos.");
+                // 22.01.2026 CN - Entfernt, da die Suffix-Logik nicht mehr verwendet wird
                 Job."No." := Job."No." + '.' + COPYSTR(JobType.Code, 1, 1);
                 Job."Job Type" := JobType.Code;
                 Job.FILTERGROUP(0);

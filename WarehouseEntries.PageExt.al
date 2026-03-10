@@ -1,5 +1,17 @@
 pageextension 50205 "Warehouse Entries" extends "Warehouse Entries"
 {
+
+    layout
+    {
+        addafter("Source No.")
+        {
+            field(SystemCreatedAt; Rec.SystemCreatedAt)
+            {
+                ApplicationArea = All;
+                Caption = 'Erstellt am';
+            }
+        }
+    }
     trigger OnAfterGetRecord()
     var
         Item: Record Item;

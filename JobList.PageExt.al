@@ -143,6 +143,7 @@ PageExtension 50151 ProjectListExt extends "Job List"
             {
                 ApplicationArea = Jobs;
                 SubPageLink = "No." = field("No.");
+                Visible = DefaultShow;
             }
             // Der Part wird doppelt angezeigt, es werden auch die selben Informationen angezeigt.
             // part("Projektdetails - WIP/Umsatzrealisierung"; "Job WIP/Recognition FactBox")
@@ -271,9 +272,16 @@ PageExtension 50151 ProjectListExt extends "Job List"
         }
     }
 
+
     var
         TotalPriceIncludingDiscount_g: Decimal;
         TempExternalDocumentNo_G: Text;
+        DefaultShow: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        DefaultShow := UserId <> 'MARTIN.DASSLER';
+    end;
 
     trigger OnAfterGetRecord()
     begin

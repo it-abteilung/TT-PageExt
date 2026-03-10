@@ -99,6 +99,31 @@ PageExtension 50048 pageextension50048 extends "Contact Card"
                 SubPageView = SORTING("Company No.", Type, "Display Level", Surname) WHERE(Type = CONST(Person), Canceled = CONST(false));
                 ApplicationArea = All;
             }
+            // part(ContactObjects; "Contact Object ListPart")
+            // {
+            //     Caption = 'Contact Objects';
+            //     SubPageLink = "Company Contact No." = FIELD("Company No.");
+            //     ApplicationArea = All;
+            // }
+        }
+        addlast(factboxes)
+        {
+            part("Contact Object Factbox Company"; "Contact Object Factbox")
+            {
+                ApplicationArea = All;
+                Visible = Rec."No." = Rec."Company No.";
+                Enabled = Rec."No." = Rec."Company No.";
+
+                SubPageLink = "Contact Parent No." = FIELD("No.");
+            }
+            part("Contact Object Factbox Person"; "Contact Object Factbox")
+            {
+                ApplicationArea = All;
+                Visible = Rec."No." <> Rec."Company No.";
+                Enabled = Rec."No." <> Rec."Company No.";
+
+                SubPageLink = "Contact No." = FIELD("No.");
+            }
         }
     }
     actions
@@ -112,6 +137,7 @@ PageExtension 50048 pageextension50048 extends "Contact Card"
                 actionref(ShowInheritedContact; Show_Inherited_Contacts) { }
                 actionref(ShowInheritedInteractions; Show_Inherited_Interactions) { }
             }
+            actionref(RelatedContracts; "Relate&d Contacts") { }
         }
         addfirst("F&unctions")
         {
@@ -127,6 +153,7 @@ PageExtension 50048 pageextension50048 extends "Contact Card"
                     CRMPlusFunctions.insertPerson(Rec, rContactNew);
                     CurrPage.UPDATE(FALSE);
                 end;
+
             }
             action("Show_Inherited_Contacts")
             {
@@ -194,6 +221,7 @@ PageExtension 50048 pageextension50048 extends "Contact Card"
                 end;
             }
         }
+        movefirst("C&ontact"; "Relate&d Contacts")
     }
 
     local procedure RecursiveContactList(var Contact_L: Record Contact; var ContactList_L: List of [Code[20]])
@@ -222,8 +250,8 @@ PageExtension 50048 pageextension50048 extends "Contact Card"
     var
         SalespersonPurchaser_L: Record "Salesperson/Purchaser";
     begin
-        IF UPPERCASE(USERID) <> 'TURBO-TECHNIK\KE-TH' THEN  //G-ERP.RS 2021-03-23 Auf Wunsch von Herrn Habsch
-            Rec.SETRANGE(Type, Rec.Type::Company);                // G-ERP
+        // IF UPPERCASE(USERID) <> 'TURBO-TECHNIK\KE-TH' THEN  //G-ERP.RS 2021-03-23 Auf Wunsch von Herrn Habsch
+        //     Rec.SETRANGE(Type, Rec.Type::Company);                // G-ERP
 
         SalespersonPurchaser_L.SetRange("User ID", USERID);
         if SalespersonPurchaser_L.FindFirst() then begin

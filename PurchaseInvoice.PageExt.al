@@ -28,5 +28,21 @@ PageExtension 50021 pageextension50021 extends "Purchase Invoice"
             }
         }
     }
+
+    trigger OnAfterGetCurrRecord()
+    var
+        Job_L: Record Job;
+    begin
+        Rec.Invoice := true;
+        if Job_L.Get(Rec."Job No.") then
+            if (Job_L.Status = Job_L.Status::Invoiced) OR (Job_L.Status = Job_L.Status::Completed) then
+                Message('Das zugeordnete Projekt %1 befindet sich im Status %2. Bitte prüfen Sie, ob für dieses Projekt noch Rechnungen erfasst werden dürfen.', Rec."Job No.", Job_L.Status);
+    end;
+
+
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    begin
+        Rec.Invoice := true;
+    end;
 }
 

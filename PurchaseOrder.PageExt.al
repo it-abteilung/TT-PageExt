@@ -57,6 +57,7 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
             field(Leistungszeitraum; Rec.Leistungszeitraum)
             {
                 ApplicationArea = Basic;
+                ShowMandatory = true;
             }
             field(Besteller; Rec.Besteller)
             {
@@ -112,16 +113,6 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
             }
         }
 
-        //TODO
-        // remove for 27.0.38460.39761
-        addafter("Pay-to Name")
-        {
-            field("Pay-to Name 2"; Rec."Pay-to Name 2")
-            {
-                ApplicationArea = Basic;
-                Caption = 'Name 2';
-            }
-        }
         addafter("Shipping and Payment")
         {
             group(Abschlag)
@@ -334,6 +325,7 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
 
     trigger OnAfterGetCurrRecord()
     var
+        Job_L: Record Job;
         JobTask: Record "Job Task";
     begin
         if NOT JobTask.Get(Rec."Job No.", '1') then begin
@@ -343,8 +335,11 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
             JobTask."Job Task Type" := "Job Task Type"::Posting;
             JobTask.Insert(false);
         end;
-    end;
 
+        if Job_L.Get(Rec."Job No.") then
+            if (Job_L.Status = Job_L.Status::Invoiced) OR (Job_L.Status = Job_L.Status::Completed) then
+                Message('Das zugeordnete Projekt %1 befindet sich im Status %2. Bitte prüfen Sie, ob für dieses Projekt noch Bestellungen erfasst werden dürfen.', Rec."Job No.", Job_L.Status);
+    end;
 
     local procedure MailErstellen(AnzeigeSchiff: Boolean)
     var
@@ -369,6 +364,7 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
         VendorName: Text;
         ObjectName: Text;
         Job: Record Job;
+        IndexOfHTML_L: Integer;
     //TODO delete maileditor wenn editor wieder funktioniert 09.04.2024 CN
     // MailEditor: Page "Mail Editor";
     begin
@@ -417,6 +413,17 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
                 ObjectName := ' - ' + Job.Objektname;
         end;
 
+        // Body adds a weird string at the end, we need to remove it
+        IndexOfHTML_L := 0;
+        IndexOfHTML_L := Body.IndexOf('</html>');
+        if IndexOfHTML_L <> 0 then begin
+            // add length of </html>, so we cut the string right after it (one-based index)
+            IndexOfHTML_L += 6;
+            if IndexOfHTML_L <= StrLen(Body) then
+                Body := Body.Substring(1, IndexOfHTML_L);
+        end;
+
+
         l_Cont.Get(rec."Buy-from Contact No.");
         if Rec."Language Code" = 'ENU' then
             MailMsg.Create(l_Cont."E-Mail", 'Our Order ' + Rec."Job No." + '/' + Rec."No." + ObjectName, Body, true)
@@ -431,7 +438,7 @@ PageExtension 50020 pageextension50020 extends "Purchase Order"
         // Commit();
         // MailEditor.SetMail(Mail);
         // MailEditor.SetMailMsg(MailMsg);
-        // MailEditor.RunModal();
+        // MailEditor.RunModal();TTWHVPass
     end;
 
     local procedure MailErstellen_Alt(AnzeigeSchiff: Boolean)

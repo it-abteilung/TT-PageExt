@@ -61,4 +61,13 @@ page 50093 "Item Journal Line Comments"
             }
         }
     }
+
+    var
+        AllSerialNo_G: Text;
+
+    trigger OnAfterGetRecord()
+    begin
+        AllSerialNo_G := '';
+
+    end;
 }

@@ -813,17 +813,17 @@ Page 50025 "Projekt Soll/Ist Vergleich"
                        //         (PurchaseLine.Leistungsart = PurchaseLine.Leistungsart::Hotelkosten) OR
                        //         (PurchaseLine.Leistungsart = PurchaseLine.Leistungsart::Personal) OR
                        (PurchaseLine.Leistungsart = PurchaseLine.Leistungsart::" ") then
-                        Fremdleist += (PurchaseLine."Outstanding Amount" / waehrungsfaktor);
+                        Fremdleist += (PurchaseLine."Outstanding Amt. Ex. VAT (LCY)" / waehrungsfaktor);
                     if PurchaseLine.Leistungsart = PurchaseLine.Leistungsart::Transport then
-                        TranspLeist += (PurchaseLine."Outstanding Amount" / waehrungsfaktor);
+                        TranspLeist += (PurchaseLine."Outstanding Amt. Ex. VAT (LCY)" / waehrungsfaktor);
                     if PurchaseLine.Leistungsart = PurchaseLine.Leistungsart::Flugkosten then
-                        ReiseLeist += (PurchaseLine."Outstanding Amount" / waehrungsfaktor);
+                        ReiseLeist += (PurchaseLine."Outstanding Amt. Ex. VAT (LCY)" / waehrungsfaktor);
                     if PurchaseLine.Leistungsart = PurchaseLine.Leistungsart::Auslöse then
-                        AuslöseLeist += (PurchaseLine."Outstanding Amount" / waehrungsfaktor);
+                        AuslöseLeist += (PurchaseLine."Outstanding Amt. Ex. VAT (LCY)" / waehrungsfaktor);
                     if PurchaseLine.Leistungsart = PurchaseLine.Leistungsart::Hotelkosten then
-                        HotelLeist += (PurchaseLine."Outstanding Amount" / waehrungsfaktor);
+                        HotelLeist += (PurchaseLine."Outstanding Amt. Ex. VAT (LCY)" / waehrungsfaktor);
                     if PurchaseLine.Leistungsart = PurchaseLine.Leistungsart::Personal then
-                        PersonalIst += (PurchaseLine."Outstanding Amount" / waehrungsfaktor);
+                        PersonalIst += (PurchaseLine."Outstanding Amt. Ex. VAT (LCY)" / waehrungsfaktor);
                 end;
 
             until PurchaseLine.Next = 0;

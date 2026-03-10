@@ -22,6 +22,12 @@ PageExtension 50150 JobCardExt extends "Job Card"
         modify("No.")
         {
             AssistEdit = false;
+
+            trigger OnAfterValidate()
+            begin
+                if Rec."No." <> xRec."No." then
+                    Error('');
+            end;
         }
         modify("Bill-to Customer No.")
         {
@@ -180,8 +186,12 @@ PageExtension 50150 JobCardExt extends "Job Card"
         }
         modify(Status)
         {
+            Enabled = IsAllowedToChangeStatus_G;
             trigger OnAfterValidate()
+            var
+                UserPermissions_L: Codeunit "User Permissions";
             begin
+
                 if Rec.Status = Rec.Status::Planning then begin
                     if Rec."Auftragseingang erfolgte am" = 0D then begin
                         Error('Status kann nicht auf Planung gesetzt werden, wenn kein Auftragseingangsdatum vorhanden ist.');
@@ -193,6 +203,10 @@ PageExtension 50150 JobCardExt extends "Job Card"
                         Error('Der Status Vorkasse ist nur für die Projekttypen 20000 und 40000 erlaubt.');
                     end;
                 end;
+                if Rec.Status <> xRec.Status then
+                    if (xRec.Status = Rec.Status::Invoiced) OR (xRec.Status = Rec.Status::Completed) then
+                        if NOT UserPermissions_L.HasUserPermissionSetAssigned(UserSecurityId(), CompanyName, 'JobStatusPerm', 1, '00000000-0000-0000-0000-000000000000') then
+                            Error('Es fehlt die notwendige Berechtigung, um den Status zu ändern.');
 
                 ChangeStatusUpdateSharePointJobStatus();
                 CurrPage.Update();
@@ -214,6 +228,8 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 NotBlank = true;
                 ShowMandatory = true;
 
+                // 22.01.2026 CN - Projekte sollen kein Suffix mehr im Projektnummernfeld haben
+                // 26.02.2026 CN - Änderung soll jetzt wieder rückgängig gemacht werden
                 trigger OnValidate()
                 var
                     NewJobFlag: Boolean;
@@ -399,6 +415,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 Importance = Additional;
                 ShowMandatory = true;
                 Caption = 'Angebotsabgabe bis';
+                ToolTip = 'Bei einer Angebotsabgabe bis 12:00 Uhr des angegebenen Tages ist hier der vorherige Werktag anzugeben.';
             }
             field("Angebotsabgabe durch"; Rec."Angebotsabgabe durch")
             {
@@ -871,6 +888,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
             {
                 ApplicationArea = Basic;
                 Caption = 'Status hoch stufen';
+                Enabled = IsAllowedToChangeStatus_G;
                 Promoted = true;
                 PromotedCategory = Process;
 
@@ -878,12 +896,17 @@ PageExtension 50150 JobCardExt extends "Job Card"
                 var
                     Bin_l: Record Bin;
                     InventorySetup_l: Record "Inventory Setup";
+                    UserPermissions_L: Codeunit "User Permissions";
                 begin
 
                     // G-ERP.RS+ 2021-02-01 + 01
                     InventorySetup_l.Get();
                     InventorySetup_l.TestField("Project Location");
                     // G-ERP.RS+ 2021-02-01 - 01
+
+                    if (xRec.Status = Rec.Status::Invoiced) OR (xRec.Status = Rec.Status::Completed) then
+                        if NOT UserPermissions_L.HasUserPermissionSetAssigned(UserSecurityId(), CompanyName, 'JobStatusPerm', 1, '00000000-0000-0000-0000-000000000000') then
+                            Error('Es fehlt die notwendige Berechtigung, um den Status zu ändern.');
 
                     if Rec.Status = Rec.Status::Open then begin
                         Rec."Prev. Status" := Rec.Status;
@@ -967,11 +990,18 @@ PageExtension 50150 JobCardExt extends "Job Card"
             {
                 ApplicationArea = Basic;
                 Caption = 'Status runter stufen';
+                Enabled = IsAllowedToChangeStatus_G;
                 Promoted = true;
                 PromotedCategory = Process;
 
                 trigger OnAction()
+                var
+                    UserPermissions_L: Codeunit "User Permissions";
                 begin
+                    if (xRec.Status = Rec.Status::Invoiced) OR (xRec.Status = Rec.Status::Completed) then
+                        if NOT UserPermissions_L.HasUserPermissionSetAssigned(UserSecurityId(), CompanyName, 'JobStatusPerm', 1, '00000000-0000-0000-0000-000000000000') then
+                            Error('Es fehlt die notwendige Berechtigung, um den Status zu ändern.');
+
                     IF (Rec.Status = Rec.Status::Open) THEN
                         EXIT;
 
@@ -1018,6 +1048,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
             {
                 ApplicationArea = Basic;
                 Caption = 'Status abgesagt';
+                Enabled = IsAllowedToChangeStatus_G;
                 Promoted = true;
                 PromotedCategory = Process;
 
@@ -1034,6 +1065,7 @@ PageExtension 50150 JobCardExt extends "Job Card"
             {
                 ApplicationArea = Basic;
                 Caption = 'Status Abgeschlossen';
+                Enabled = IsAllowedToChangeStatus_G;
                 Promoted = true;
                 PromotedCategory = Process;
 
@@ -1050,11 +1082,17 @@ PageExtension 50150 JobCardExt extends "Job Card"
             {
                 ApplicationArea = Basic;
                 Caption = 'Status Gewährleistung';
+                Enabled = IsAllowedToChangeStatus_G;
                 Promoted = true;
                 PromotedCategory = Process;
 
                 trigger OnAction()
+                var
+                    UserPermissions_L: Codeunit "User Permissions";
                 begin
+                    if (xRec.Status = Rec.Status::Invoiced) OR (xRec.Status = Rec.Status::Completed) then
+                        if NOT UserPermissions_L.HasUserPermissionSetAssigned(UserSecurityId(), CompanyName, 'JobStatusPerm', 1, '00000000-0000-0000-0000-000000000000') then
+                            Error('Es fehlt die notwendige Berechtigung, um den Status zu ändern.');
                     Rec."Prev. Status" := Rec.Status;
                     Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::"Gewährleistung";
@@ -1066,12 +1104,17 @@ PageExtension 50150 JobCardExt extends "Job Card"
             {
                 ApplicationArea = Basic;
                 Caption = 'Status Vorkasse';
+                Enabled = IsAllowedToChangeStatus_G AND (Rec."Job Type" = '20000') OR (Rec."Job Type" = '40000');
                 Promoted = true;
                 PromotedCategory = Process;
-                Enabled = (Rec."Job Type" = '20000') OR (Rec."Job Type" = '40000');
 
                 trigger OnAction()
+                var
+                    UserPermissions_L: Codeunit "User Permissions";
                 begin
+                    if (xRec.Status = Rec.Status::Invoiced) OR (xRec.Status = Rec.Status::Completed) then
+                        if NOT UserPermissions_L.HasUserPermissionSetAssigned(UserSecurityId(), CompanyName, 'JobStatusPerm', 1, '00000000-0000-0000-0000-000000000000') then
+                            Error('Es fehlt die notwendige Berechtigung, um den Status zu ändern.');
                     Rec."Prev. Status" := Rec.Status;
                     Rec."Status Modify Date" := Today;
                     Rec.Status := Rec.Status::"Vorkasse";
@@ -1349,38 +1392,54 @@ PageExtension 50150 JobCardExt extends "Job Card"
 
                 trigger OnAction()
                 var
-                    WorkflowContext: Record "Workflow Approval Data";
+                    WorkFlowSharePoint: Record "Workflow SharePoint";
+                    WorkflowContextValue_L: Text;
+                    WorkflowStatusValue_L: Text;
+                    Pattern: Text;
+                    Regex_C: Codeunit Regex;
                 begin
-                    Rec.TestField("No.");
-                    Rec.TestField(Description);
-                    if NOT WorkflowContext.Get(Rec.SystemId) then begin
-                        if (Rec."No." <> '') AND (Rec.Description <> '') then begin
-                            WorkflowContext.Init();
-                            WorkflowContext."Record Id" := Rec.SystemId;
-                            if Rec.Status = Rec.Status::Open then begin
-                                WorkflowContext."Workflow Context" := 'CreateSharePointFolder1'
-                            end else begin
-                                WorkflowContext."Workflow Context" := 'ExtendSharePointFolder1';
-                                case Rec.Status of
-                                    Rec.Status::Open:
-                                        WorkflowContext.Status := 'Offen';
-                                    Rec.Status::Quote:
-                                        WorkflowContext.Status := 'Angebot';
-                                    Rec.Status::Planning:
-                                        WorkflowContext.Status := 'Planung';
-                                    Rec.Status::"Gewährleistung":
-                                        WorkflowContext.Status := 'Gewährleistung';
-                                    Rec.Status::Completed:
-                                        WorkflowContext.Status := 'Abgeschlossen';
-                                    Rec.Status::Cancelled:
-                                        WorkflowContext.Status := 'Abgsagt';
-                                    Rec.Status::Invoiced:
-                                        WorkflowContext.Status := 'Abgerechntet';
-                                end;
+                    Pattern := '^\d{2}-\d{3}\.\d{1}-d{3}';
+                    if Regex_C.IsMatch(Rec."No.", Pattern) then begin
+                        Rec.TestField("No.");
+                        Rec.TestField(Description);
+
+                        WorkflowContextValue_L := '';
+                        WorkflowStatusValue_L := '';
+                        if Rec.Status = Rec.Status::Open then begin
+                            WorkflowContextValue_L := 'CreateSharePointFolder1';
+                            WorkflowStatusValue_L := 'Offen';
+                        end else begin
+                            WorkflowContextValue_L := 'ExtendSharePointFolder1';
+                            case Rec.Status of
+                                Rec.Status::Open:
+                                    WorkflowStatusValue_L := 'Offen';
+                                Rec.Status::Quote:
+                                    WorkflowStatusValue_L := 'Angebot';
+                                Rec.Status::Planning:
+                                    WorkflowStatusValue_L := 'Planung';
+                                Rec.Status::"Gewährleistung":
+                                    WorkflowStatusValue_L := 'Gewährleistung';
+                                Rec.Status::Completed:
+                                    WorkflowStatusValue_L := 'Abgeschlossen';
+                                Rec.Status::Cancelled:
+                                    WorkflowStatusValue_L := 'Abgsagt';
+                                Rec.Status::Invoiced:
+                                    WorkflowStatusValue_L := 'Abgerechntet';
                             end;
-                            WorkflowContext.Insert();
                         end;
-                    end
+
+                        if WorkflowContextValue_L <> '' then begin
+                            WorkFlowSharePoint.SetRange("Record Id", Rec.SystemId);
+                            WorkFlowSharePoint.SetRange("Workflow Context", WorkflowContextValue_L);
+                            if NOT WorkFlowSharePoint.FindFirst() then begin
+                                WorkFlowSharePoint.Init();
+                                WorkFlowSharePoint."Record Id" := Rec.SystemId;
+                                WorkFlowSharePoint."Workflow Context" := WorkflowContextValue_L;
+                                WorkFlowSharePoint.Status := WorkflowStatusValue_L;
+                                WorkFlowSharePoint.Insert();
+                            end;
+                        end;
+                    end;
                 end;
             }
         }
@@ -1399,8 +1458,13 @@ PageExtension 50150 JobCardExt extends "Job Card"
         ProjektNotizen: Record 50001;
         ItemLedgerLineNo: Integer;
         HyperLink_G: Text[200];
+        IsAllowedToChangeStatus_G: boolean;
 
     trigger OnAfterGetRecord()
+    var
+        UserPermissions_L: Codeunit "User Permissions";
+        Regex_C: Codeunit Regex;
+        Pattern: Text;
     begin
         AnfrageUeber := '';
         ZuBeachten := '';
@@ -1410,6 +1474,14 @@ PageExtension 50150 JobCardExt extends "Job Card"
             ZuBeachten := ProjektNotizen."Zu beachten1" + ProjektNotizen."Zu beachten2" + ProjektNotizen."Zu beachten3";
             MontageGrp := ProjektNotizen.Montagegruppe1 + ProjektNotizen.Montagegruppe2 + ProjektNotizen.Montagegruppe3;
         END;
+
+        IsAllowedToChangeStatus_G := false;
+        Pattern := '^\d{2}-\d{3}$';
+        if Regex_C.IsMatch(Rec."No.", Pattern) then
+            IsAllowedToChangeStatus_G := UserPermissions_L.HasUserPermissionSetAssigned(UserSecurityId(), CompanyName, 'JobStatusPerm', 1, '00000000-0000-0000-0000-000000000000')
+        else
+            IsAllowedToChangeStatus_G := true;
+
         if Rec.Hyperlink <> '' then begin
             HyperLink_G := Rec."No.";
         end;
@@ -1423,6 +1495,70 @@ PageExtension 50150 JobCardExt extends "Job Card"
         IF Rec.GETFILTER(Status) <> '' THEN
             EVALUATE(Rec.Status, Rec.GETFILTER(Status));
         //G-ERP.KBS 2017-07-25 -
+        Rec.SumProject := true;
+    end;
+
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    var
+        Job_L: Record Job;
+        Regex_C: Codeunit Regex;
+        Pattern: Text;
+        WorkFlowSharePoint: Record "Workflow SharePoint";
+        WorkflowContextValue_L: Text;
+        WorkflowStatusValue_L: Text;
+    begin
+        //Unterauftrag -000 erstellen, nur aktivieren mit dem dazugehörigen Subscriber in der Codeunit
+        if CloseAction = CloseAction::OK then begin
+            // Pattern := '^\d{2}-\d{3}\.\d{1}$';
+            // if Regex_C.IsMatch(Rec."No.", Pattern) then begin
+            //     Message('Das Projekt %1-000 wurde angelegt. Bitte nur auf den Unterprojekten arbeiten.', Rec."No.");
+            // end;
+
+            Pattern := '^\d{2}-\d{3}\.\d{1}-d{3}';
+            if Regex_C.IsMatch(Rec."No.", Pattern) then begin
+                Rec.TestField("No.");
+                Rec.TestField(Description);
+
+                WorkflowContextValue_L := '';
+                WorkflowStatusValue_L := '';
+                if Rec.Status = Rec.Status::Open then begin
+                    WorkflowContextValue_L := 'CreateSharePointFolder1';
+                    WorkflowStatusValue_L := 'Offen';
+                end else begin
+                    WorkflowContextValue_L := 'ExtendSharePointFolder1';
+                    case Rec.Status of
+                        Rec.Status::Open:
+                            WorkflowStatusValue_L := 'Offen';
+                        Rec.Status::Quote:
+                            WorkflowStatusValue_L := 'Angebot';
+                        Rec.Status::Planning:
+                            WorkflowStatusValue_L := 'Planung';
+                        Rec.Status::"Gewährleistung":
+                            WorkflowStatusValue_L := 'Gewährleistung';
+                        Rec.Status::Completed:
+                            WorkflowStatusValue_L := 'Abgeschlossen';
+                        Rec.Status::Cancelled:
+                            WorkflowStatusValue_L := 'Abgsagt';
+                        Rec.Status::Invoiced:
+                            WorkflowStatusValue_L := 'Abgerechntet';
+                    end;
+                end;
+
+                if WorkflowContextValue_L <> '' then begin
+                    WorkFlowSharePoint.SetRange("Record Id", Rec.SystemId);
+                    WorkFlowSharePoint.SetRange("Workflow Context", WorkflowContextValue_L);
+                    if NOT WorkFlowSharePoint.FindFirst() then begin
+                        WorkFlowSharePoint.Init();
+                        WorkFlowSharePoint."Record Id" := Rec.SystemId;
+                        WorkFlowSharePoint."Workflow Context" := WorkflowContextValue_L;
+                        WorkFlowSharePoint.Status := WorkflowStatusValue_L;
+                        WorkFlowSharePoint.Insert();
+                    end;
+                end;
+            end;
+        end;
+
+        exit(true);
     end;
 
     local procedure NextEntryNo(): Integer
@@ -1587,8 +1723,13 @@ PageExtension 50150 JobCardExt extends "Job Card"
     procedure ChangeStatusUpdateSharePointJobStatus()
     var
         WorkflowContext_L: Record "Workflow Approval Data";
+        WorkFlowSharePoint: Record "Workflow SharePoint";
+        WorkflowContextValue_L: Text;
+        WorkflowStatusValue_L: Text;
+        Pattern: Text;
+        Regex_C: Codeunit Regex;
+        Job_L: Record Job;
     begin
-
         WorkflowContext_L.SetRange("Record Id", Rec.SystemId);
         // WorkflowContext_L.SetRange("Workflow Context", 'ChangeSharePointFolderJobStatus');
         if WorkflowContext_L.FindFirst() then begin
@@ -1615,6 +1756,229 @@ PageExtension 50150 JobCardExt extends "Job Card"
                     WorkflowContext_L.Status := 'Abgerechntet';
             end;
             WorkflowContext_L.Insert();
-        end
+
+            Pattern := '^\d{2}-\d{3}\.\d{1}-\d{3}';
+            if Regex_C.IsMatch(Rec."No.", Pattern) then begin
+                Rec.TestField("No.");
+                Rec.TestField(Description);
+
+                WorkflowContextValue_L := '';
+                WorkflowStatusValue_L := '';
+                if Rec.Status = Rec.Status::Planning then begin
+                    WorkflowContextValue_L := 'ExtendSharePointFolder1';
+                    WorkflowStatusValue_L := 'Planung';
+
+                    WorkFlowSharePoint.SetRange("Record Id", Rec.SystemId);
+                    WorkFlowSharePoint.SetRange("Workflow Context", WorkflowContextValue_L);
+                    if NOT WorkFlowSharePoint.FindFirst() then begin
+                        WorkFlowSharePoint.Init();
+                        WorkFlowSharePoint."Record Id" := Rec.SystemId;
+                        WorkFlowSharePoint."Workflow Context" := WorkflowContextValue_L;
+                        WorkFlowSharePoint.Status := WorkflowStatusValue_L;
+                        WorkFlowSharePoint.Insert();
+                    end;
+                end;
+
+                if Format(Rec."No.").EndsWith('-000') then
+                    if Job_L.Get(Rec.MainProjektNo) then begin
+                        Job_L.Status := Rec.Status;
+                        Job_L.Modify();
+                    end;
+            end;
+
+            // if (Rec."No." <> '') AND (Rec.Status = Rec.Status::Planning) then begin
+            //     CreateProjectZero();
+            // end
+        end;
+    end;
+
+    local procedure CreateProjectZero()
+    var
+        Job_L: Record Job;
+        JobTask_L: Record "Job Task";
+        ProjektNotizen_L: Record "Projekt-Notizen";
+        ProjektNotizen2_L: Record "Projekt-Notizen";
+        InventorySetup_L: Record "Inventory Setup";
+        Bin_L: Record Bin;
+        Regex_C: Codeunit Regex;
+        Pattern: Text;
+
+        WorkFlowSharePoint: Record "Workflow SharePoint";
+        WorkflowContextValue_L: Text;
+        WorkflowStatusValue_L: Text;
+
+        TempBlob_L: Codeunit "Temp Blob";
+        InStr_L: InStream;
+        OutStr_L: OutStream;
+    begin
+        if Rec."Creation Date" > 20260201D then begin
+            Pattern := '^\d{2}-\d{3}\.\d{1}$';
+            if Regex_C.IsMatch(Rec."No.", Pattern) then begin
+                if NOT Job_L.Get(Rec."No." + '-000') then begin
+                    Job_L.Init();
+                    Job_L."No." := Rec."No." + '-000';
+                    Job_L.Description := Rec.Description;
+                    Job_L."Contact Person Name" := Rec."Contact Person Name";
+                    Job_L."Contact Person No." := Rec."Contact Person No.";
+                    Job_L."Your Reference" := Rec."Your Reference";
+                    Job_L."Person Responsible" := Rec."Person Responsible";
+                    Job_L.Verfasser := Rec.Verfasser;
+                    Job_L.Reparaturort := Rec.Reparaturort;
+                    Job_L."Anfrage per" := Rec."Anfrage per";
+                    Job_L."Anfrage von" := Rec."Anfrage von";
+                    Job_L."Anfrage am" := Rec."Anfrage am";
+                    Job_L."Angebotsabgabe bis" := Rec."Angebotsabgabe bis";
+                    Job_L."Angebotsabgabe durch" := Rec."Angebotsabgabe durch";
+                    Job_L."Starting Date" := Rec."Starting Date";
+                    Job_L."Ending Date" := Rec."Ending Date";
+                    Job_L.Validate("Sell-to Customer No.", Rec."Sell-to Customer No.");
+                    Job_L."Sell-to Contact No." := Rec."Sell-to Contact No.";
+                    Job_L."Job Type" := Rec."Job Type";
+                    Job_L.Status := Rec.Status;
+                    Job_L.Object := Rec.Object;
+                    Job_L.Objektname := Rec.Objektname;
+                    Job_L."Ship Owner" := Rec."Ship Owner";
+                    Job_L."Ship Owner Bearbeiter" := Rec."Ship Owner Bearbeiter";
+
+                    Job_L."External Document No." := Rec."External Document No.";
+
+                    Job_L."Sell-to Address" := Rec."Sell-to Address";
+                    Job_L."Sell-to Address 2" := Rec."Sell-to Address 2";
+                    Job_L."Sell-to City" := Rec."Sell-to City";
+                    Job_L."Sell-to Contact" := Rec."Sell-to Contact";
+                    Job_L."Sell-to Contact No." := Rec."Sell-to Contact No.";
+                    Job_L."Sell-to Country/Region Code" := Rec."Sell-to Country/Region Code";
+                    Job_L."Sell-to County" := Rec."Sell-to County";
+                    Job_L."Sell-to Customer Name" := Rec."Sell-to Customer Name";
+                    Job_L."Sell-to Customer Name 2" := Rec."Sell-to Customer Name 2";
+                    Job_L."Sell-to Customer No." := Rec."Sell-to Customer No.";
+                    Job_L."Sell-to E-Mail" := Rec."Sell-to E-Mail";
+                    Job_L."Sell-to Phone No." := Rec."Sell-to Phone No.";
+                    Job_L."Sell-to Post Code" := Rec."Sell-to Post Code";
+
+                    Job_L."Currency Code" := Rec."Currency Code";
+                    Job_L."Invoice Currency Code" := Rec."Invoice Currency Code";
+                    Job_L."Task Billing Method" := Rec."Task Billing Method";
+                    Job_l."WIP Method" := Rec."WIP Method";
+                    Job_L."WIP Posting Method" := Rec."WIP Posting Method";
+
+                    Job_L."Your Order No." := Rec."Your Order No.";
+                    Job_L."Your Reference" := Rec."Your Reference";
+                    Job_L."Leistungsfortschritt %" := Rec."Leistungsfortschritt %";
+                    Job_l.Reparaturleiter := Rec.Reparaturleiter;
+                    Job_L."Serial Number" := Rec."Serial Number";
+                    Job_L."Letzte Notiz" := Rec."Letzte Notiz";
+
+                    Rec.CalcFields("Anfrage über", "Zu beachten", Montagegruppe);
+                    Job_L.CalcFields("Anfrage über", "Zu beachten", Montagegruppe);
+
+                    Job_L."Project Manager" := Rec."Project Manager";
+                    Job_L."Location Code" := Rec."Location Code";
+                    Job_L."Bin Code" := Rec."Bin Code";
+                    Job_L."Job Posting Group" := Rec."Job Posting Group";
+
+                    Job_L.Subproject := true;
+                    Job_L.MainProjektNo := Rec."No.";
+                    Job_L."Folder Created" := false;
+                    Job_L.Insert();
+
+                    InventorySetup_L.Get();
+                    InventorySetup_L.TestField("Project Location");
+                    if not Bin_L.Get(InventorySetup_L."Project Location", Job_L."No.") then begin
+                        Clear(Bin_L);
+                        Bin_L.Init();
+                        Bin_L.Validate("Location Code", InventorySetup_L."Project Location");
+                        Bin_L.Validate(Code, Job_L."No.");
+                        Bin_L.Validate(Description, Job_L.Description);
+                        Bin_L.Insert(true);
+                    end;
+
+                    Job_L."Bill-to Customer No." := Rec."Bill-to Customer No.";
+                    Job_L."Bill-to Name" := Rec."Bill-to Name";
+                    Job_L."Bill-to Name 2" := Rec."Bill-to Name 2";
+                    Job_L."Bill-to Address" := Rec."Bill-to Address";
+                    Job_L."Bill-to Address 2" := Rec."Bill-to Address 2";
+                    Job_L."Bill-to City" := Rec."Bill-to City";
+                    Job_L."Bill-to County" := Rec."Bill-to County";
+                    Job_L."Bill-to Post Code" := Rec."Bill-to Post Code";
+                    Job_L."Bill-to Country/Region Code" := Job_L."Bill-to Country/Region Code";
+                    Job_L."Bill-to Contact No." := Rec."Bill-to Contact No.";
+                    Job_L."Bill-to Contact" := Rec."Bill-to Contact";
+                    Job_L."Ship-to Code" := Rec."Ship-to Code";
+                    Job_L."Ship-to Name" := Rec."Ship-to Name";
+                    Job_L."Ship-to Name 2" := Rec."Ship-to Name 2";
+                    Job_L."Ship-to Address" := Rec."Ship-to Address";
+                    Job_L."Ship-to Address 2" := Rec."Ship-to Address 2";
+                    Job_L."Ship-to City" := Rec."Ship-to City";
+                    Job_L."Ship-to County" := Rec."Ship-to County";
+                    Job_L."Ship-to Post Code" := Rec."Ship-to Post Code";
+                    Job_L."Ship-to Country/Region Code" := Job_L."Ship-to Country/Region Code";
+                    Job_L."Ship-to Contact" := Rec."Ship-to Contact";
+                    Job_L."Payment Method Code" := Rec."Payment Method Code";
+                    Job_L."Payment Terms Code" := Rec."Payment Terms Code";
+
+                    Job_L.Status := Job_L.Status::Open;
+                    Job_L.Modify(true);
+
+                    if Rec.Blocked <> Rec.Blocked::All then begin
+                        Rec.Blocked := Rec.Blocked::All;
+                        Rec.Modify();
+                    end;
+
+                    WorkflowContextValue_L := '';
+                    WorkflowStatusValue_L := '';
+                    if Job_L.Status = Job_L.Status::Open then begin
+                        WorkflowContextValue_L := 'CreateSharePointFolder1';
+                        WorkflowStatusValue_L := 'Offen';
+                    end else begin
+                        WorkflowContextValue_L := 'ExtendSharePointFolder1';
+                        case Job_L.Status of
+                            Job_L.Status::Open:
+                                WorkflowStatusValue_L := 'Offen';
+                            Job_L.Status::Quote:
+                                WorkflowStatusValue_L := 'Angebot';
+                            Job_L.Status::Planning:
+                                WorkflowStatusValue_L := 'Planung';
+                            Job_L.Status::"Gewährleistung":
+                                WorkflowStatusValue_L := 'Gewährleistung';
+                            Job_L.Status::Completed:
+                                WorkflowStatusValue_L := 'Abgeschlossen';
+                            Job_L.Status::Cancelled:
+                                WorkflowStatusValue_L := 'Abgsagt';
+                            Job_L.Status::Invoiced:
+                                WorkflowStatusValue_L := 'Abgerechntet';
+                        end;
+                    end;
+
+                    if WorkflowContextValue_L <> '' then begin
+                        WorkFlowSharePoint.SetRange("Record Id", Job_L.SystemId);
+                        WorkFlowSharePoint.SetRange("Workflow Context", WorkflowContextValue_L);
+                        if NOT WorkFlowSharePoint.FindFirst() then begin
+                            WorkFlowSharePoint.Init();
+                            WorkFlowSharePoint."Record Id" := Job_L.SystemId;
+                            WorkFlowSharePoint."Workflow Context" := WorkflowContextValue_L;
+                            WorkFlowSharePoint.Status := WorkflowStatusValue_L;
+                            WorkFlowSharePoint.Insert();
+                        end;
+                    end;
+
+                    if ProjektNotizen_L.Get(Rec."No.") then begin
+                        ProjektNotizen2_L.Init();
+                        ProjektNotizen2_L."Job No." := Job_L."No.";
+                        ProjektNotizen2_L."Anfrage über1" := ProjektNotizen_L."Anfrage über1";
+                        ProjektNotizen2_L."Anfrage über2" := ProjektNotizen_L."Anfrage über2";
+                        ProjektNotizen2_L."Anfrage über3" := ProjektNotizen_L."Anfrage über3";
+                        ProjektNotizen2_L."Zu beachten1" := ProjektNotizen_L."Zu beachten1";
+                        ProjektNotizen2_L."Zu beachten2" := ProjektNotizen_L."Zu beachten2";
+                        ProjektNotizen2_L."Zu beachten3" := ProjektNotizen_L."Zu beachten3";
+                        ProjektNotizen2_L."Montagegruppe1" := ProjektNotizen_L."Montagegruppe1";
+                        ProjektNotizen2_L."Montagegruppe2" := ProjektNotizen_L."Montagegruppe2";
+                        ProjektNotizen2_L."Montagegruppe3" := ProjektNotizen_L."Montagegruppe3";
+                        ProjektNotizen2_L.Insert();
+                    end;
+                    Message('Das Projekt %1-000 wurde angelegt. Bitte nur auf den Unterprojekten arbeiten.', Rec."No.");
+                end;
+            end;
+        end;
     end;
 }

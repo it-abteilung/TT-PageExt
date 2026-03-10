@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0424, AW0006 // ForNAV settings
 Page 50008 "Objekt List"
 {
-    CardPageID = Objekt;
+    CardPageID = "Object Card";
     PageType = List;
     SourceTable = "Multi Table";
     SourceTableView = sorting(Kennzeichen, Code)
@@ -124,14 +124,14 @@ Page 50008 "Objekt List"
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        if rec.Code = '' then begin
+        if Rec.Code = '' then begin
             SchiffRec.SetRange(Kennzeichen, 'SCHIFF');
             SchiffRec.FindLast();
             SchiffRec.Next(-1);
-            rec.Code := SchiffRec.Code;
+            Rec.Code := SchiffRec.Code;
             repeat
-                rec.Code := IncStr(rec.Code);
-            until not SchiffRec.Get('SCHIFF', rec.Code);
+                Rec.Code := IncStr(rec.Code);
+            until not SchiffRec.Get('SCHIFF', Rec.Code);
         end;
     end;
 

@@ -64,6 +64,25 @@ PageExtension 50049 pageextension50049 extends "Contact List"
             }
 
         }
+        addlast(factboxes)
+        {
+            part("Contact Object Factbox Company"; "Contact Object Factbox")
+            {
+                ApplicationArea = All;
+                Visible = Rec."No." = Rec."Company No.";
+                Enabled = Rec."No." = Rec."Company No.";
+
+                SubPageLink = "Contact Parent No." = FIELD("No.");
+            }
+            part("Contact Object Factbox Person"; "Contact Object Factbox")
+            {
+                ApplicationArea = All;
+                Visible = Rec."No." <> Rec."Company No.";
+                Enabled = Rec."No." <> Rec."Company No.";
+
+                SubPageLink = "Contact No." = FIELD("No.");
+            }
+        }
     }
 
     actions
@@ -154,7 +173,17 @@ PageExtension 50049 pageextension50049 extends "Contact List"
                 RunPageMode = View;
                 RunObject = Page "TT Inter. Log Entries";
             }
+
         }
+
+        modify("Relate&d Contacts")
+        {
+            Promoted = true;
+            PromotedCategory = Process;
+            PromotedIsBig = true;
+        }
+
+        movefirst("C&ontact"; "Relate&d Contacts")
     }
 
     views
@@ -181,6 +210,16 @@ PageExtension 50049 pageextension50049 extends "Contact List"
                 Caption = 'Keine Geschäftsbeziehung';
                 Filters = WHERE("Contact Business Relation" = Const("Contact Business Relation"::None), Type = Const(Company));
             }
+            view(View_Person_Only)
+            {
+                Caption = 'Nur Personen';
+                Filters = WHERE(Type = Const(Person));
+            }
+            view(View_Company_Only)
+            {
+                Caption = 'Nur Unternehmen';
+                Filters = WHERE(Type = Const(Company));
+            }
         }
     }
 
@@ -195,12 +234,12 @@ PageExtension 50049 pageextension50049 extends "Contact List"
         SalespersonPurchaser_L: Record "Salesperson/Purchaser";
     begin
         // G-ERP+
-        CASE rec.Type OF
-            rec.Type::Company:
-                rec.SETRANGE(Type, rec.Type::Company);
-            rec.Type::Person:
-                rec.SETRANGE(Type, rec.Type::Person);
-        END;
+        // CASE rec.Type OF
+        //     rec.Type::Company:
+        //         rec.SETRANGE(Type, rec.Type::Company);
+        //     rec.Type::Person:
+        //         rec.SETRANGE(Type, rec.Type::Person);
+        // END;
         // G-ERP-
 
         SalespersonPurchaser_L.SetRange("User ID", USERID);
